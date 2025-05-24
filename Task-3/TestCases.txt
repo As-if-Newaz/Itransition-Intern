@@ -1,0 +1,13 @@
+(4 identical dice 1,2,3,4,5,6 1,2,3,4,5,6 1,2,3,4,5,6 1,2,3,4,5,6 as well as 3 dice 2,2,4,4,9,9 1,1,6,6,8,8 3,3,5,5,7,7), launch with incorrect parameters (no dice; 2 dice; invalid number of sides; non-integer value in the dice configuration), help table with probabilities (on 3 dice from the example), whole game played with the output of results (at least 2 runs);
+
+1. Run with 4 identical dice 1,2,3,4,5,6 1,2,3,4,5,6 1,2,3,4,5,6 1,2,3,4,5,6 >> dotnet run 1,2,3,4,5,6 1,2,3,4,5,6 1,2,3,4,5,6 1,2,3,4,5,6
+2. Run with 3 dice 2,2,4,4,9,9 1,1,6,6,8,8 3,3,5,5,7,7 >> dotnet run 2,2,4,4,9,9 1,1,6,6,8,8 3,3,5,5,7,7
+3. No Dice >> dotnet run
+4. 2 Dice >> dotnet run 2,2,4,4,9,9 6,8,1,1,8,6
+5. Invalid number of sides >> dotnet run 2,2,4,4,9,9 6,8,1,1,8,6 7,5,3,7
+6. Non Integer value in the dice configuration >> dotnet run A,4,2,g P,?,3,r s,H,a,3
+7. Help table with probabilities >> dotnet run 2,2,4,4,9,9 1,1,6,6,8,8 3,3,5,5,7,7
+   		     Select Toss >> 1 or 0
+                            Help >> H
+8.Full gameplay with 1,2,3,4,5,6 1,2,3,4,5,6 1,2,3,4,5,6 1,2,3,4,5,6 >> dotnet run 1,2,3,4,5,6 1,2,3,4,5,6 1,2,3,4,5,6 1,2,3,4,5,6
+9. Full gameplay with 2,2,4,4,9,9 1,1,6,6,8,8 3,3,5,5,7,7 >> dotnet run 2,2,4,4,9,9 1,1,6,6,8,8 3,3,5,5,7,7

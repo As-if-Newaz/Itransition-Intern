@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "nLTnCesD220=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-3\\Task-3\\Task-3.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Asifk\\.nuget\\packages\\bouncycastle.cryptography\\2.6.1\\bouncycastle.cryptography.2.6.1.nupkg.sha512",
+    "C:\\Users\\Asifk\\.nuget\\packages\\consoletables\\2.6.2\\consoletables.2.6.2.nupkg.sha512",
+    "C:\\Users\\Asifk\\.nuget\\packages\\wcwidth\\1.0.0\\wcwidth.1.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
