@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-3\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|c:\\users\\asifk\\desktop\\itransition\\task-3\\task-3\\tablerenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|solutionrelative:task-3\\tablerenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|c:\\users\\asifk\\desktop\\itransition\\task-3\\task-3\\hash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|solutionrelative:task-3\\hash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|c:\\users\\asifk\\desktop\\itransition\\task-3\\task-3\\fairrandomgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|solutionrelative:task-3\\fairrandomgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|c:\\users\\asifk\\desktop\\itransition\\task-3\\task-3\\gamemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|solutionrelative:task-3\\gamemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|c:\\users\\asifk\\desktop\\itransition\\task-3\\task-3\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|solutionrelative:task-3\\game.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|c:\\users\\asifk\\desktop\\itransition\\task-3\\task-3\\hash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|solutionrelative:task-3\\hash.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|c:\\users\\asifk\\desktop\\itransition\\task-3\\task-3\\dice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|solutionrelative:task-3\\dice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|c:\\users\\asifk\\desktop\\itransition\\task-3\\task-3\\tablerenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|solutionrelative:task-3\\tablerenderer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|c:\\users\\asifk\\desktop\\itransition\\task-3\\task-3\\fairrandomgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|solutionrelative:task-3\\fairrandomgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|c:\\users\\asifk\\desktop\\itransition\\task-3\\task-3\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -29,14 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|c:\\users\\asifk\\desktop\\itransition\\task-3\\task-3\\prompt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|solutionrelative:task-3\\prompt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|c:\\users\\asifk\\desktop\\itransition\\task-3\\task-3\\dice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|solutionrelative:task-3\\dice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|c:\\users\\asifk\\desktop\\itransition\\task-3\\task-3\\gamemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|solutionrelative:task-3\\gamemenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{ADE6A839-81F8-4810-B1C2-FAD752EE4B71}|Task-3\\Task-3.csproj|c:\\users\\asifk\\desktop\\itransition\\task-3\\task-3\\probabilitycalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,11 +54,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "Prompt.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-3\\Task-3\\Prompt.cs",
               "RelativeDocumentMoniker": "Task-3\\Prompt.cs",
@@ -66,8 +66,7 @@
               "RelativeToolTip": "Task-3\\Prompt.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAqwA4AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-24T11:09:33.187Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-24T11:09:33.187Z"
             },
             {
               "$type": "Document",
@@ -79,18 +78,17 @@
               "RelativeToolTip": "Task-3\\Task-3.csproj",
               "ViewState": "AgIAAAQAAAAAAAAAAABRwAsAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-23T19:22:57.555Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-23T19:22:57.555Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "TableRenderer.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-3\\Task-3\\TableRenderer.cs",
               "RelativeDocumentMoniker": "Task-3\\TableRenderer.cs",
               "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-3\\Task-3\\TableRenderer.cs",
               "RelativeToolTip": "Task-3\\TableRenderer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAABCAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-23T15:13:46.098Z",
               "EditorCaption": ""
@@ -105,18 +103,17 @@
               "RelativeToolTip": "Task-3\\ProbabilityCalculator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T15:13:00.405Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-23T15:13:00.405Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
               "Title": "GameMenu.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-3\\Task-3\\GameMenu.cs",
               "RelativeDocumentMoniker": "Task-3\\GameMenu.cs",
               "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-3\\Task-3\\GameMenu.cs",
               "RelativeToolTip": "Task-3\\GameMenu.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAA9wCMAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-23T15:12:29.561Z",
               "EditorCaption": ""
@@ -129,14 +126,14 @@
               "RelativeDocumentMoniker": "Task-3\\Game.cs",
               "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-3\\Task-3\\Game.cs",
               "RelativeToolTip": "Task-3\\Game.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAxwDkAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAA5wDkAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-23T15:12:04.271Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "FairRandomGenerator.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-3\\Task-3\\FairRandomGenerator.cs",
               "RelativeDocumentMoniker": "Task-3\\FairRandomGenerator.cs",
@@ -144,12 +141,11 @@
               "RelativeToolTip": "Task-3\\FairRandomGenerator.cs",
               "ViewState": "AgIAABQAAAAAAAAAAAAIwCEAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T15:11:40.526Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-23T15:11:40.526Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "DiceParser.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-3\\Task-3\\DiceParser.cs",
               "RelativeDocumentMoniker": "Task-3\\DiceParser.cs",
@@ -157,12 +153,11 @@
               "RelativeToolTip": "Task-3\\DiceParser.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T15:11:20.123Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-23T15:11:20.123Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
               "Title": "Dice.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-3\\Task-3\\Dice.cs",
               "RelativeDocumentMoniker": "Task-3\\Dice.cs",
@@ -175,20 +170,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Hash.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-3\\Task-3\\Hash.cs",
               "RelativeDocumentMoniker": "Task-3\\Hash.cs",
               "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-3\\Task-3\\Hash.cs",
               "RelativeToolTip": "Task-3\\Hash.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-23T15:10:09.004Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-3\\Task-3\\Program.cs",
               "RelativeDocumentMoniker": "Task-3\\Program.cs",
@@ -196,8 +191,7 @@
               "RelativeToolTip": "Task-3\\Program.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-23T15:09:44.174Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-23T15:09:44.174Z"
             }
           ]
         }

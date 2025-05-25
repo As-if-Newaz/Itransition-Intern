@@ -9,11 +9,11 @@ namespace Task_3
 {
     public class Hash
     {
-        public const int byteVal = 32;
+        public const int keyLength = 32;
         public byte[] GenerateSecureRandomKey()
         {
             var rng = RandomNumberGenerator.Create();
-            var key = new byte[byteVal];
+            var key = new byte[keyLength];
             rng.GetBytes(key);
             return key;
         }
