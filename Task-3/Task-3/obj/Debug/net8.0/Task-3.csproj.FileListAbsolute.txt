@@ -36,3 +36,4 @@ C:\Users\Asifk\Desktop\Itransition\Task-3\Task-3\obj\Debug\net8.0\refint\Task-3.
 C:\Users\Asifk\Desktop\Itransition\Task-3\Task-3\obj\Debug\net8.0\Task-3.pdb
 C:\Users\Asifk\Desktop\Itransition\Task-3\Task-3\obj\Debug\net8.0\Task-3.genruntimeconfig.cache
 C:\Users\Asifk\Desktop\Itransition\Task-3\Task-3\obj\Debug\net8.0\ref\Task-3.dll
+C:\Users\Asifk\Desktop\Itransition\Task-3\Task-3\obj\Debug\net8.0\Task-3.sourcelink.json

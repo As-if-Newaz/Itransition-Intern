@@ -31,7 +31,7 @@ namespace Task_3
                 if (input == "H") ShowHelp();
                 else if (int.TryParse(input, out int idx) && idx >= 0 && idx < dice.Count && idx != exclude)
                 {
-                    Console.WriteLine("You choose the " + dice[idx] + " dice.");
+                    Console.WriteLine("You choose the " + dice[idx].displayTxt + " dice.");
                     return idx;
                 }
                 Console.WriteLine(Prompt.InvalidSelection);
