@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = UserManagement.BLL
-build_property.ProjectDir = C:\Users\Asifk\Desktop\Itransition\User Management\UserManagement.BLL\
+build_property.ProjectDir = C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.BLL\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

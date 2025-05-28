@@ -1,18 +1,38 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using UserManagement.BLL.Services;
 using UserManagement.DAL;
 using UserManagement.DAL.EntityFramework;
 
-
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("UserManagement_Task-4");
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add JWT Authentication
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+    });
 
 builder.Services.AddScoped<DataAccess>();
 builder.Services.AddScoped<UserServices>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<JwtService>();
 builder.Services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
 builder.Services.AddSession(options =>
     {
@@ -49,9 +69,10 @@ app.UseStaticFiles();
 app.UseSession();
 app.UseRouting();
 
-
+// Add these lines for JWT authentication
+app.UseAuthentication();
 app.UseAuthorization();
-
+    
 // Add the following line before app.Run() to resolve the issue.  
 app.UsePathBase("/");
 app.MapGet("/", context =>

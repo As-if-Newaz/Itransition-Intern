@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "a88miQMBG38=",
+  "dgSpecHash": "M7Xzz5ivXgQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Asifk\\Desktop\\Itransition\\User Management\\UserManagement.BLL\\UserManagement.BLL.csproj",
+  "projectFilePath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.BLL\\UserManagement.BLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Asifk\\.nuget\\packages\\automapper\\10.0.0\\automapper.10.0.0.nupkg.sha512",
     "C:\\Users\\Asifk\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",

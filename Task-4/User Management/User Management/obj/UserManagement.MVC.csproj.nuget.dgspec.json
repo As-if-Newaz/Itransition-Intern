@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Asifk\\Desktop\\Itransition\\User Management\\User Management\\UserManagement.MVC.csproj": {}
+    "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\UserManagement.MVC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Asifk\\Desktop\\Itransition\\User Management\\User Management\\UserManagement.MVC.csproj": {
+    "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\UserManagement.MVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Asifk\\Desktop\\Itransition\\User Management\\User Management\\UserManagement.MVC.csproj",
+        "projectUniqueName": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\UserManagement.MVC.csproj",
         "projectName": "UserManagement.MVC",
-        "projectPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\User Management\\User Management\\UserManagement.MVC.csproj",
+        "projectPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\UserManagement.MVC.csproj",
         "packagesPath": "C:\\Users\\Asifk\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\User Management\\User Management\\obj\\",
+        "outputPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -33,8 +33,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Asifk\\Desktop\\Itransition\\User Management\\UserManagement.BLL\\UserManagement.BLL.csproj": {
-                "projectPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\User Management\\UserManagement.BLL\\UserManagement.BLL.csproj"
+              "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.BLL\\UserManagement.BLL.csproj": {
+                "projectPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.BLL\\UserManagement.BLL.csproj"
               }
             }
           }
@@ -54,6 +54,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.16, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.5, )"
@@ -102,14 +106,14 @@
         }
       }
     },
-    "C:\\Users\\Asifk\\Desktop\\Itransition\\User Management\\UserManagement.BLL\\UserManagement.BLL.csproj": {
+    "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.BLL\\UserManagement.BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Asifk\\Desktop\\Itransition\\User Management\\UserManagement.BLL\\UserManagement.BLL.csproj",
+        "projectUniqueName": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.BLL\\UserManagement.BLL.csproj",
         "projectName": "UserManagement.BLL",
-        "projectPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\User Management\\UserManagement.BLL\\UserManagement.BLL.csproj",
+        "projectPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.BLL\\UserManagement.BLL.csproj",
         "packagesPath": "C:\\Users\\Asifk\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\User Management\\UserManagement.BLL\\obj\\",
+        "outputPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.BLL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -131,8 +135,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Asifk\\Desktop\\Itransition\\User Management\\UserManagement.DAL\\UserManagement.DAL.csproj": {
-                "projectPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\User Management\\UserManagement.DAL\\UserManagement.DAL.csproj"
+              "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\UserManagement.DAL.csproj": {
+                "projectPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\UserManagement.DAL.csproj"
               }
             }
           }
@@ -177,14 +181,14 @@
         }
       }
     },
-    "C:\\Users\\Asifk\\Desktop\\Itransition\\User Management\\UserManagement.DAL\\UserManagement.DAL.csproj": {
+    "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\UserManagement.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Asifk\\Desktop\\Itransition\\User Management\\UserManagement.DAL\\UserManagement.DAL.csproj",
+        "projectUniqueName": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\UserManagement.DAL.csproj",
         "projectName": "UserManagement.DAL",
-        "projectPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\User Management\\UserManagement.DAL\\UserManagement.DAL.csproj",
+        "projectPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\UserManagement.DAL.csproj",
         "packagesPath": "C:\\Users\\Asifk\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\User Management\\UserManagement.DAL\\obj\\",
+        "outputPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
