@@ -1,0 +1,31 @@
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\bin\Debug\net8.0\appsettings.json
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\bin\Debug\net8.0\User Management.staticwebassets.runtime.json
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\bin\Debug\net8.0\User Management.exe
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\bin\Debug\net8.0\User Management.deps.json
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\bin\Debug\net8.0\User Management.runtimeconfig.json
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\bin\Debug\net8.0\User Management.dll
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\bin\Debug\net8.0\User Management.pdb
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\User Management.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\User Management.AssemblyInfoInputs.cache
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\User Management.AssemblyInfo.cs
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\User Management.csproj.CoreCompileInputs.cache
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\User Management.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\User Management.RazorAssemblyInfo.cache
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\User Management.RazorAssemblyInfo.cs
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\User Management.sourcelink.json
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\staticwebassets\msbuild.User Management.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\staticwebassets\msbuild.build.User Management.props
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.User Management.props
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.User Management.props
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\scopedcss\bundle\User Management.styles.css
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\scopedcss\projectbundle\User Management.bundle.scp.css
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\User Management.dll
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\refint\User Management.dll
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\User Management.pdb
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\User Management.genruntimeconfig.cache
+C:\Users\Asifk\Desktop\Itransition\User Management\User Management\obj\Debug\net8.0\ref\User Management.dll

@@ -1,0 +1,84 @@
+﻿@model IEnumerable<UserManagement.BLL.DTOs.UserDTO>
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1>Dashboard</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserPassword)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdatedByUserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdatedAt)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserPassword)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdatedByUserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdatedAt)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

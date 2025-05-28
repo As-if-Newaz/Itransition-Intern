@@ -1,0 +1,56 @@
+﻿@model UserManagement.BLL.DTOs.UserDTO
+
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/RegisterLoginLayout.cshtml";
+}
+
+<div class="container-fluid p-0">
+    <div class="row g-0 h-100">
+        <div class="col-md-6 left-panel">
+            <div class="form-container">
+                <h1 class="app-logo">THE APP</h1>
+                <p>Start your journey</p>
+                <h2>Sign Up to The App</h2>
+                <form asp-action="Register">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="mb-3">
+                        <label asp-for="UserName" class="form-label">Name</label>
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="UserPassword" class="form-label">Password</label>
+                        <input asp-for="UserPassword" class="form-control" type="password" />
+                        <span asp-validation-for="UserPassword" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="UserEmail" class="form-label">Email</label>
+                        <input asp-for="UserEmail" class="form-control" />
+                        <span asp-validation-for="UserEmail" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="UserPhone" class="form-label">Phone</label>
+                        <input asp-for="UserPhone" class="form-control" />
+                        <span asp-validation-for="UserPhone" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="UserDescription" class="form-label">Add a description</label>
+                        <input asp-for="UserDescription" class="form-control" />
+                        <span asp-validation-for="UserDescription" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <input type="submit" value="Sign Up" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6 right-panel"></div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
