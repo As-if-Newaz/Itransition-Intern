@@ -12,5 +12,7 @@ namespace UserManagement.DAL.Interfaces
         User? Authenticate(string email, string password);
         void RecordLogin(int userId); 
         UserActivity? GetLastLogin(int userId);
+
+        IEnumerable<UserActivity> GetAllLoginActivityForUser(int userId);
     }
 }

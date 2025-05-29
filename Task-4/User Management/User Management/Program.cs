@@ -33,6 +33,8 @@ builder.Services.AddScoped<DataAccess>();
 builder.Services.AddScoped<UserServices>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<JwtService>();
+builder.Services.AddScoped<ActivityService>();
+builder.Services.AddHttpContextAccessor(); // Register IHttpContextAccessor
 builder.Services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
 builder.Services.AddSession(options =>
     {

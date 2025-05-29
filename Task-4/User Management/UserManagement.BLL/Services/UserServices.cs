@@ -80,5 +80,24 @@ namespace UserManagement.BLL.Services
             }
             return true;
         }
+
+        public IEnumerable<UserDTO> GetAllWithActivity(ActivityService activityService)
+        {
+            var data = DA.UserCRUDData().Get();
+            var users = GetMapper().Map<List<UserDTO>>(data);
+            foreach (var user in users)
+            {
+                var activities = activityService.GetAllLoginActivityForUser(user.UserId).ToList();
+                user.LastLogin = activities.FirstOrDefault()?.LastLogin;
+
+                // Sparkline: show last 10 logins as bars
+                user.ActivityData = activities
+                    .OrderByDescending(a => a.LastLogin)
+                    .Take(10)
+                    .Select(a => 1)
+                    .ToList();
+            }
+            return users;
+        }
     }
 }

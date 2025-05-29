@@ -1,84 +1,122 @@
-﻿@model IEnumerable<UserManagement.BLL.DTOs.UserDTO>
+﻿@* Status/Error Messages *@
+<div id="statusMessage" class="alert d-none" role="alert"></div>
 
-@{
-    ViewData["Title"] = "Dashboard";
-}
+</br>
+</br>
+@* Toolbar *@
+<div class="mb-2 d-flex align-items-center">
+    
+    <button id="blockBtn" class="btn btn-primary me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Block selected users">
+        Block
+    </button>
+    <button id="unblockBtn" class="btn btn-outline-secondary me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Unblock selected users">
+        Unblock
+    </button>
+    <button id="deleteBtn" class="btn btn-outline-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete selected users">
+        Delete
+    </button>
+</div>
 
-<h1>Dashboard</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+@* Table *@
+<table class="table table-bordered align-middle">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserPassword)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserEmail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserPhone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserDescription)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastUpdatedByUserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastUpdatedAt)
-            </th>
-            <th></th>
+            <th><input type="checkbox" id="selectAll" title="Select/Deselect all"></th>
+            <th>Name</th>
+            <th>Last seen <i class="bi bi-arrow-down"></i></th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserPassword)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserPhone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastUpdatedByUserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastUpdatedAt)
-            </td>
-        </tr>
-}
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td><input type="checkbox" class="select-user" value="@user.UserId" title="Select user"></td>
+                <td>
+                    <div>@user.UserName</div>
+                    <div class="text-muted small">@user.UserEmail</div>
+                    @if (!string.IsNullOrEmpty(user.UserDescription))
+                    {
+                         <div class="text-dark small">@user.UserDescription</div>
+                    }
+                </td>
+                <td>
+                    <div>@user.LastLogin?.ToString("g")</div>
+                </td>
+                <td>@user.UserStatus</td>
+            </tr>
+        }
     </tbody>
 </table>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function() {
+            // Bootstrap tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            // Select all/deselect all
+            $('#selectAll').on('change', function() {
+                $('.select-user').prop('checked', this.checked);
+            });
+
+            // If any checkbox is unchecked, uncheck selectAll
+            $('.select-user').on('change', function() {
+                if (!this.checked) {
+                    $('#selectAll').prop('checked', false);
+                } else if ($('.select-user:checked').length === $('.select-user').length) {
+                    $('#selectAll').prop('checked', true);
+                }
+            });
+
+            function showStatus(message, isSuccess) {
+                var alertClass = isSuccess ? 'alert-success' : 'alert-danger';
+                $('#statusMessage').removeClass('d-none alert-success alert-danger').addClass(alertClass).text(message);
+                setTimeout(function() { $('#statusMessage').addClass('d-none'); }, 3000);
+            }
+
+            function getSelectedUserIds() {
+                var selectedIds = $('.select-user:checked').map(function() { return parseInt($(this).val()); }).get();
+                return selectedIds;
+            }
+
+            function postAction(url, userIds) {
+                if (userIds.length === 0) {
+                    showStatus('Please select at least one user.', false);
+                    return;
+                }
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(userIds),
+                    success: function(response) {
+                        showStatus(response.message, response.success);
+                        if (response.success) {
+                            setTimeout(function() { location.reload(); }, 1200);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        showStatus('An error occurred. Please try again.', false);
+                    }
+                });
+            }
+
+            $('#blockBtn').on('click', function() {
+                postAction('/Dashboard/Block', getSelectedUserIds());
+            });
+            $('#unblockBtn').on('click', function() {
+                postAction('/Dashboard/Unblock', getSelectedUserIds());
+            });
+            $('#deleteBtn').on('click', function() {
+                if (confirm('Are you sure you want to delete the selected users?')) {
+                    postAction('/Dashboard/Delete', getSelectedUserIds());
+                }
+            });
+        });
+    </script>
+}

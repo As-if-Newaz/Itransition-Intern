@@ -44,5 +44,9 @@ namespace UserManagement.BLL.DTOs
         public DateTime? LastUpdatedAt { get; set; }
 
         public virtual ICollection<UserActivity>? UserActivities { get; set; }
+
+        public List<int>? ActivityData { get; set; } = new List<int>();
+
+        public DateTime? LastLogin { get; set; }
     }
 }

@@ -31,6 +31,14 @@ namespace UserManagement.DAL.Repos
             return null;
         }
 
+        public IEnumerable<UserActivity> GetAllLoginActivityForUser(int userId)
+        {
+            return db.UserActivities
+                .Where(a => a.UserId == userId)
+                .OrderByDescending(a => a.LastLogin)
+                .ToList();
+        }
+
         public UserActivity? GetLastLogin(int userId)
         {
             return db.UserActivities
