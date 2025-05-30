@@ -1,4 +1,5 @@
-﻿@model UserManagement.BLL.DTOs.UserDTO
+﻿<link rel="stylesheet" href="~/css/notification.css" />
+@model UserManagement.BLL.DTOs.UserDTO
 @{
     ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/RegisterLoginLayout.cshtml";
@@ -59,4 +60,22 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
+    <script>
+        $(document).ready(function () {
+
+            var statusMessage = '@TempData["StatusMessage"]';
+            var isSuccess = '@TempData["IsSuccess"]';
+
+            if (statusMessage && statusMessage !== '') {
+                showStatus(statusMessage, isSuccess === 'True');
+            }
+            var viewBagStatusMessage = '@ViewBag.StatusMessage';
+            var viewBagIsSuccess = '@ViewBag.IsSuccess';
+            if (viewBagStatusMessage && viewBagStatusMessage !== '') {
+                showStatus(viewBagStatusMessage, viewBagIsSuccess === 'True');
+            }
+
+        });
+    </script>
 }
