@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\UserManagement.MVC.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\wwwroot\\css\\notification.css",
+      "PackagePath": "staticwebassets\\css\\notification.css"
+    },
+    {
       "Id": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\wwwroot\\css\\registerLoginLayout.css",
       "PackagePath": "staticwebassets\\css\\registerLoginLayout.css"
     },

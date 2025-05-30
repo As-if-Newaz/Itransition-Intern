@@ -1,4 +1,5 @@
-﻿@model UserManagement.BLL.DTOs.UserLoginDTO
+﻿<link rel="stylesheet" href="~/css/notification.css" />
+@model UserManagement.BLL.DTOs.UserLoginDTO
 
 @{
     ViewData["Title"] = "Log In";
@@ -25,7 +26,13 @@
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
+                        <a href="/register">Forgot password?</a>
+                    </div>
+                    <div class="mb-3">
                         <input type="submit" value="Login" class="btn btn-primary" />
+                    </div>
+                    <div class="mb-3">
+                        <p class="text-start">Don't have an account? <a href="/register">Sign Up</a></p>
                     </div>
                 </form>
             </div>
@@ -37,4 +44,22 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+
+            var statusMessage = '@TempData["StatusMessage"]';
+            var isSuccess = '@TempData["IsSuccess"]';
+
+            if (statusMessage && statusMessage !== '') {
+                showStatus(statusMessage, isSuccess === 'True');
+            }
+            var viewBagStatusMessage = '@ViewBag.StatusMessage';
+            var viewBagIsSuccess = '@ViewBag.IsSuccess';
+            if (viewBagStatusMessage && viewBagStatusMessage !== '') {
+                 showStatus(viewBagStatusMessage, viewBagIsSuccess === 'True');
+            }
+
+        });
+    </script>
 }

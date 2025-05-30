@@ -9,7 +9,7 @@ namespace UserManagement.DAL.Interfaces
 {
     public interface IUserActivity
     {
-        User? Authenticate(string email, string password);
+        User? Authenticate(string email, string password , out string errorMsg);
         void RecordLogin(int userId); 
         UserActivity? GetLastLogin(int userId);
 

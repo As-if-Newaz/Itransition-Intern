@@ -19,7 +19,7 @@ namespace User_Management.Controllers
             this.activityService = activityService;
         }
 
-        [Logged]
+        [AuthenticatedUser]
         [Route("Dashboard")]
         [HttpGet]
         public IActionResult Dashboard()
@@ -30,6 +30,7 @@ namespace User_Management.Controllers
             return View(users);
         }
 
+        [AuthenticatedUser]
         [HttpPost]
         [Route("Dashboard/Block")]
         public JsonResult Block([FromBody] int[] userIds)
@@ -40,6 +41,7 @@ namespace User_Management.Controllers
             return Json(new { success = result, message = result ? "Users blocked successfully." : "Failed to block users." });
         }
 
+        [AuthenticatedUser]
         [HttpPost]
         [Route("Dashboard/Unblock")]
         public JsonResult Unblock([FromBody] int[] userIds)
@@ -50,6 +52,7 @@ namespace User_Management.Controllers
             return Json(new { success = result, message = result ? "Users unblocked successfully." : "Failed to unblock users." });
         }
 
+        [AuthenticatedUser]
         [HttpPost]
         [Route("Dashboard/Delete")]
         public JsonResult Delete([FromBody] int[] userIds)

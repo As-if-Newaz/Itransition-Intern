@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "T0szd7A1kvq55RtgDH0/tyIHKrwAVaUIM2LstozDmmw=",
+  "Hash": "6Yvh96v7pK66fgba2H8ZR2IMtZEIM/mmDsHexwqzz74=",
   "Source": "UserManagement.MVC",
   "BasePath": "_content/UserManagement.MVC",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\UserManagement.MVC.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\wwwroot\\css\\notification.css",
+      "SourceId": "UserManagement.MVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\wwwroot\\",
+      "BasePath": "_content/UserManagement.MVC",
+      "RelativePath": "css/notification.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\notification.css"
     },
     {
       "Identity": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\wwwroot\\css\\registerLoginLayout.css",

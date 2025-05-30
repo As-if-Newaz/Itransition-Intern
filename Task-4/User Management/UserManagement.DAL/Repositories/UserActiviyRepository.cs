@@ -19,15 +19,22 @@ namespace UserManagement.DAL.Repos
             pw = new PasswordHasher<string>();
         }
 
-        public User? Authenticate(string email, string password)
+        public User? Authenticate(string email, string password, out string errorMsg)
         {
-            var user = db.Users.Where(u => u.UserEmail == email).FirstOrDefault();
-            var passVerification = pw.VerifyHashedPassword("", user.UserPassword, password);
-            if (user != null && passVerification == PasswordVerificationResult.Success)
+            errorMsg = string.Empty;
+            var user = db.Users.Where(u => u.UserEmail == email).FirstOrDefault(); 
+            if (user != null)
             {
-                RecordLogin(user.UserId);
-                return user;
+                var passVerification = pw.VerifyHashedPassword("", user.UserPassword, password);
+                if (passVerification == PasswordVerificationResult.Success)
+                {
+                    RecordLogin(user.UserId);
+                    return user;
+                }
+                errorMsg = "Wrong Password";
+                return null;
             }
+            errorMsg = "User not found!";
             return null;
         }
 

@@ -7,13 +7,15 @@ namespace User_Management.Controllers
 {
     public class AuthController : Controller
     {
-        private readonly AuthService _authService;
-        private readonly JwtService _jwtService;
+        private readonly AuthService authService;
+        private readonly JwtService jwtService;
+        private readonly UserServices userServices;
 
-        public AuthController(AuthService authService, JwtService jwtService)
+        public AuthController(AuthService authService, JwtService jwtService, UserServices userServices)
         {
-            _authService = authService;
-            _jwtService = jwtService;
+            this.authService = authService;
+            this.jwtService = jwtService;
+            this.userServices = userServices;   
         }
 
         public IActionResult Index()
@@ -23,8 +25,12 @@ namespace User_Management.Controllers
 
         [Route("login")]
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string errorMessage = null)
         {
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                TempData["ErrorMsg"] = errorMessage;
+            }
             return View(new UserLoginDTO());
         }
 
@@ -35,17 +41,15 @@ namespace User_Management.Controllers
             if (ModelState.IsValid)
             {
                 string errorMsg;
-                var user = _authService.Authenticate(userLoginDTO, out errorMsg);
+                var user = authService.Authenticate(userLoginDTO, out errorMsg);
                 if (user == null)
                 {
-                    TempData["LoginMessage"] = errorMsg;
+                    TempData["ErrorMsg"] = errorMsg;
                     return View(userLoginDTO);
                 }
-
-                // Generate JWT token
-                var token = _jwtService.GenerateToken(user);
-                
-                // Store token in cookie
+                var token = jwtService.GenerateToken(user);
+                var name = userServices.GetById(user.UserId)?.UserName ?? "User";
+                HttpContext.Response.Cookies.Append("name", name);
                 Response.Cookies.Append("JWTToken", token, new CookieOptions
                 {
                     HttpOnly = true,
@@ -54,19 +58,18 @@ namespace User_Management.Controllers
                     Expires = DateTime.Now.AddHours(3)
                 });
 
-                TempData["LoginMessage"] = "Login Successful!";
+                TempData["SuccessMsg"] = "Login Successful!";
                 return RedirectToAction("Dashboard", "Dashboard");
             }
             return View(userLoginDTO);
         }
-
-        [Logged]
+        [AuthenticatedUser]
         [Route("logout")]
         [HttpPost]
         public IActionResult Logout()
         {
             Response.Cookies.Delete("JWTToken");
-            TempData["LogoutMessage"] = "Logged out successfully!";
+            TempData["SuccessMsg"] = "Logged out successfully!";
             return RedirectToAction("Login", "Auth");
         }
     }

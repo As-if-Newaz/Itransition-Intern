@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UserManagement.DAL.EntityFramework.TableModels;
+using System.ComponentModel;
 
 namespace UserManagement.BLL.DTOs
 {
@@ -20,6 +21,10 @@ namespace UserManagement.BLL.DTOs
         [Required(ErrorMessage = "Password is Required!")]
         [StringLength(50)]
         public string UserPassword { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Please confirm your password")]
+        [Compare("UserPassword", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Invalid email format")]

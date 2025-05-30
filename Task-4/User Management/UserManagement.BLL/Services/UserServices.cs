@@ -40,6 +40,13 @@ namespace UserManagement.BLL.Services
             return DA.UserValidationData().Create(data, out errorMsg);
         }
 
+        public UserDTO? GetById(int userId)
+        {
+            var data = DA.UserCRUDData().Get(userId);
+            if (data == null) return null;
+            return GetMapper().Map<UserDTO>(data);
+        }
+
         public IEnumerable<UserDTO> GetAll()
         {
             var data =  DA.UserCRUDData().Get();

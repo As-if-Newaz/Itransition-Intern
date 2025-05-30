@@ -36,12 +36,13 @@ namespace User_Management.Controllers
                 if (result)
                 {
 
-                    TempData["RegisterMessage"] = "Registered Successfully!";
-                    return View(userDTO);
+                    TempData["SuccessMsg"] = "Registered Successfully!";
+                    return RedirectToAction("Login", "Auth");
                 }
                 else
                 {
-                    TempData["RegisterMessage"] = errorMsg;
+                    TempData["ErrorMsg"] = errorMsg;
+                    return View(userDTO);
                 }
             }
             return View(userDTO);

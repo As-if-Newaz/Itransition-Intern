@@ -8,8 +8,8 @@
 <div class="container-fluid p-0">
     <div class="row g-0 h-100">
         <div class="col-md-6 left-panel">
-            <div class="form-container">
-                <h1 class="app-logo">THE APP</h1>
+            <h1 class="app-logo">THE APP</h1>
+            <div class="form-container">  
                 <p>Start your journey</p>
                 <h2>Sign Up to The App</h2>
                 <form asp-action="Register">
@@ -23,6 +23,11 @@
                         <label asp-for="UserPassword" class="form-label">Password</label>
                         <input asp-for="UserPassword" class="form-control" type="password" />
                         <span asp-validation-for="UserPassword" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ConfirmPassword" class="form-label">Confirm Password</label>
+                        <input asp-for="ConfirmPassword" class="form-control" type="password" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
                         <label asp-for="UserEmail" class="form-label">Email</label>
@@ -41,6 +46,9 @@
                     </div>
                     <div class="mb-3">
                         <input type="submit" value="Sign Up" class="btn btn-primary" />
+                    </div>
+                    <div class="mb-3">
+                        <p class="text-start">Already have an account?? <a href="/login">Sign In</a></p>
                     </div>
                 </form>
             </div>

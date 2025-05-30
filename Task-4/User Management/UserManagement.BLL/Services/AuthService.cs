@@ -31,15 +31,13 @@ namespace UserManagement.BLL.Services
         public UserDTO? Authenticate(UserLoginDTO loginData, out string errorMsg)
         {
             errorMsg = string.Empty;
-            var user = DA.UserActivityData().Authenticate(loginData.UserEmail, loginData.Password);
+            var user = DA.UserActivityData().Authenticate(loginData.UserEmail, loginData.Password, out errorMsg );
             if (user == null)
-            {
-                errorMsg = "Wrong Login Credentials!";
+            {   
                 return null;
             }
             if (user.UserStatus.Equals("Blocked"))
             {
-                errorMsg = "You are currently blocked! Failed to Sign in";
                 return null;
             }
             return GetMapper().Map<UserDTO>(user);
