@@ -20,7 +20,7 @@
 }
 
 .right-panel {
-    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Purple-blue gradient */
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
     height: 100vh;
 }
 
@@ -104,7 +104,6 @@
             text-decoration: underline;
         }
 
-/* Mobile Responsive Styles */
 @media (max-width: 768px) {
     body {
         overflow-y: auto;
@@ -132,7 +131,7 @@
     }
 
     .app-logo {
-        font-size: 2.3em;
+        font-size: 2.5em;
         margin-bottom: 20px;
         margin-left: 0;
         text-align: center;
@@ -150,11 +149,10 @@
 
     .form-control {
         padding: 12px;
-        font-size: 16px; /* Prevents zoom on iOS */
+        font-size: 16px; 
     }
 }
 
-/* Small Mobile Devices */
 @media (max-width: 480px) {
     .form-container {
         padding: 0 5px;
@@ -162,7 +160,7 @@
     }
 
     .app-logo {
-        font-size: 2em;
+        font-size: 2.5em;
         margin-left: 0;
         text-align: center;
     }
