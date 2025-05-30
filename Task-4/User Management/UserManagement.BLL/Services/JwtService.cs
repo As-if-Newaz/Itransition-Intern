@@ -15,7 +15,6 @@ namespace UserManagement.BLL.Services
         {
             this.cfg = configuration;
         }
-
         public string GenerateToken(UserDTO user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(cfg["Jwt:Key"]));

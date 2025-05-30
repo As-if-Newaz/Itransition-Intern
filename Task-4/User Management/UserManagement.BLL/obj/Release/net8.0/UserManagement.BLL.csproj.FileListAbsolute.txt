@@ -1,0 +1,16 @@
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.BLL\bin\Release\net8.0\UserManagement.BLL.deps.json
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.BLL\bin\Release\net8.0\UserManagement.BLL.dll
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.BLL\bin\Release\net8.0\UserManagement.BLL.pdb
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.BLL\bin\Release\net8.0\UserManagement.DAL.dll
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.BLL\bin\Release\net8.0\UserManagement.DAL.pdb
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.BLL\obj\Release\net8.0\UserManagement.BLL.csproj.AssemblyReference.cache
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.BLL\obj\Release\net8.0\UserManagement.BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.BLL\obj\Release\net8.0\UserManagement.BLL.AssemblyInfoInputs.cache
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.BLL\obj\Release\net8.0\UserManagement.BLL.AssemblyInfo.cs
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.BLL\obj\Release\net8.0\UserManagement.BLL.csproj.CoreCompileInputs.cache
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.BLL\obj\Release\net8.0\UserManagement.BLL.sourcelink.json
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.BLL\obj\Release\net8.0\UserMana.6A9E6870.Up2Date
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.BLL\obj\Release\net8.0\UserManagement.BLL.dll
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.BLL\obj\Release\net8.0\refint\UserManagement.BLL.dll
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.BLL\obj\Release\net8.0\UserManagement.BLL.pdb
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.BLL\obj\Release\net8.0\ref\UserManagement.BLL.dll

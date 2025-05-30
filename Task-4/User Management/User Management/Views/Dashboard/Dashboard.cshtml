@@ -1,13 +1,11 @@
 ﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor  
-
-<link rel="stylesheet" href="~/css/notification.css" />  
-@* Main Dashboard View *@  
+<link rel="stylesheet" href="~/css/notification.css" />   
 @await Html.PartialAsync("Notification")  
 <br />  
 <h3>Hi, <b>@HttpContextAccessor.HttpContext.Request.Cookies["name"]?.ToString()</b> </h3>
 <br />
 <br />
-<div class="toolbar mb-3">  
+<div class="navbar navbar-expand-lg navbar-light bg-secondary-subtle">  
    <button data-action="Block" class="btn btn-primary me-2">Block</button>  
    <button data-action="Unblock" class="btn btn-secondary me-2">Unblock</button>  
    <button data-action="Delete" class="btn btn-danger">Delete</button>  

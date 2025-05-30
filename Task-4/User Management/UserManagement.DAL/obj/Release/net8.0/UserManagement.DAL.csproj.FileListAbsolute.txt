@@ -1,0 +1,15 @@
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.DAL\bin\Release\net8.0\UserManagement.DAL.deps.json
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.DAL\bin\Release\net8.0\UserManagement.DAL.runtimeconfig.json
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.DAL\bin\Release\net8.0\UserManagement.DAL.dll
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.DAL\bin\Release\net8.0\UserManagement.DAL.pdb
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.DAL\obj\Release\net8.0\UserManagement.DAL.csproj.AssemblyReference.cache
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.DAL\obj\Release\net8.0\UserManagement.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.DAL\obj\Release\net8.0\UserManagement.DAL.AssemblyInfoInputs.cache
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.DAL\obj\Release\net8.0\UserManagement.DAL.AssemblyInfo.cs
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.DAL\obj\Release\net8.0\UserManagement.DAL.csproj.CoreCompileInputs.cache
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.DAL\obj\Release\net8.0\UserManagement.DAL.sourcelink.json
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.DAL\obj\Release\net8.0\UserManagement.DAL.dll
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.DAL\obj\Release\net8.0\refint\UserManagement.DAL.dll
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.DAL\obj\Release\net8.0\UserManagement.DAL.pdb
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.DAL\obj\Release\net8.0\UserManagement.DAL.genruntimeconfig.cache
+C:\Users\Asifk\Desktop\Itransition\Task-4\User Management\UserManagement.DAL\obj\Release\net8.0\ref\UserManagement.DAL.dll

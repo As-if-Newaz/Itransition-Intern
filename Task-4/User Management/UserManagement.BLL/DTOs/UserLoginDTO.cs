@@ -16,8 +16,7 @@ namespace UserManagement.BLL.DTOs
         [StringLength(100)]
         public string UserEmail { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Password is Required!")]
-        
+        [Required(ErrorMessage = "Password is Required!")]   
         public string Password { get; set; } = string.Empty;
     }
 }

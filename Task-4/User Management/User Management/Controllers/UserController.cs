@@ -7,12 +7,10 @@ namespace User_Management.Controllers
     public class UserController : Controller
     {
         private UserServices userServices;
-
         public UserController(UserServices userServices)
         {
             this.userServices = userServices;
         }
-
         public IActionResult Index()
         {
             return View();

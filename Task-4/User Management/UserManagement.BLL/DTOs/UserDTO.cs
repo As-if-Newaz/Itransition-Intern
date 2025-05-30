@@ -32,6 +32,7 @@ namespace UserManagement.BLL.DTOs
         public string UserEmail { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Please provide phone number")]
+        [Phone(ErrorMessage = "Invalid phone number format!")]
         [StringLength(20)]
         public string UserPhone { get; set; } = string.Empty;
 

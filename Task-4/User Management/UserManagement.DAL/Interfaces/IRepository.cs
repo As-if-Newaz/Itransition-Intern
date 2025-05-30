@@ -9,7 +9,7 @@ namespace UserManagement.DAL.EntityFramework
     {
         IEnumerable<T> Get();
         T? Get(int id);
-        //IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
+
         bool Create(T entity);
         bool Update(T entity);
 

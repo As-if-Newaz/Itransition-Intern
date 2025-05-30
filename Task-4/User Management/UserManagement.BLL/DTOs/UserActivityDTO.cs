@@ -12,7 +12,6 @@ namespace UserManagement.BLL.DTOs
     public class UserActivityDTO
     {
         public int activityId { get; set; }
-
         public DateTime? LastLogin { get; set; }
 
         [Required]

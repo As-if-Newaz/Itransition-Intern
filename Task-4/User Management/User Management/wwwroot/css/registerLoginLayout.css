@@ -20,7 +20,7 @@
 }
 
 .right-panel {
-    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Purple-blue gradient */
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
     height: 100vh;
 }
 
@@ -28,24 +28,27 @@
     max-width: 400px;
     margin-top: 30px;
     width: 100%;
+    padding: 0 15px;
 }
 
 .app-logo {
     font-size: 2.5em;
     color: #1DA1F2;
     margin-left: -400px;
-    margin-top: 00px;
+    margin-top: 0;
     font-weight: bold;
 }
 
 .form-container p {
     color: #666;
     margin-bottom: 5px;
+
 }
 
 .form-container h2 {
     font-size: 1.5em;
     margin-bottom: 20px;
+  
 }
 
 .form-label {
@@ -100,4 +103,71 @@
         .links a:hover {
             text-decoration: underline;
         }
+
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    .left-panel {
+        height: auto;
+        min-height: 100vh;
+        padding: 20px 15px;
+        overflow-y: auto;
+    }
+
+    .right-panel {
+        display: none;
+    }
+
+    .form-container {
+        margin-top: 20px;
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    .app-logo {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .form-container h2 {
+        font-size: 1.3em;
+        text-align: center;
+    }
+
+    .btn-primary {
+        padding: 12px;
+        font-size: 1.1em;
+    }
+
+    .form-control {
+        padding: 12px;
+        font-size: 16px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 0 5px;
+        text-align: center;
+    }
+
+    .app-logo {
+        font-size: 2.5em;
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .form-container h2 {
+        font-size: 1.2em;
+        text-align: center;
+    }
+}
 

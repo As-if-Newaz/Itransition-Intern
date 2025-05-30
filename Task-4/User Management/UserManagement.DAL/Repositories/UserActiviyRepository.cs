@@ -18,7 +18,6 @@ namespace UserManagement.DAL.Repos
         {
             pw = new PasswordHasher<string>();
         }
-
         public User? Authenticate(string email, string password, out string errorMsg)
         {
             errorMsg = string.Empty;
@@ -53,7 +52,6 @@ namespace UserManagement.DAL.Repos
                 .OrderByDescending(a => a.LastLogin)
                 .FirstOrDefault();
         }
-
         public void RecordLogin(int userId)
         {
             var activity = new UserActivity

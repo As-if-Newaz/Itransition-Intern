@@ -57,12 +57,12 @@ namespace User_Management.Controllers
                     SameSite = SameSiteMode.Strict,
                     Expires = DateTime.Now.AddHours(3)
                 });
-
-                TempData["SuccessMsg"] = "Login Successful!";
+                //TempData["SuccessMsg"] = "Login Successful!";
                 return RedirectToAction("Dashboard", "Dashboard");
             }
             return View(userLoginDTO);
         }
+
         [AuthenticatedUser]
         [Route("logout")]
         [HttpPost]

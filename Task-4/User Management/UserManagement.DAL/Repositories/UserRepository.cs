@@ -22,7 +22,6 @@ namespace UserManagement.DAL.Repos
         {
             pw = new PasswordHasher<string>();
         }
-
         public bool Create(User obj, out string errorMsg)
         {
             errorMsg = string.Empty;
@@ -46,7 +45,6 @@ namespace UserManagement.DAL.Repos
             }
             return false;
         }
-
         public bool UpdateUserStatus(int userId, string status)
         {
             var user = Get(userId);

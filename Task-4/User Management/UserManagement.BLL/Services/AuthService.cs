@@ -33,11 +33,13 @@ namespace UserManagement.BLL.Services
             errorMsg = string.Empty;
             var user = DA.UserActivityData().Authenticate(loginData.UserEmail, loginData.Password, out errorMsg );
             if (user == null)
-            {   
+            {
+                errorMsg = "Login Failed!";
                 return null;
             }
             if (user.UserStatus.Equals("Blocked"))
             {
+                errorMsg = "User is blocked!";
                 return null;
             }
             return GetMapper().Map<UserDTO>(user);

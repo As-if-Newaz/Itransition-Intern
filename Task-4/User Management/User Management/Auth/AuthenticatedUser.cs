@@ -19,7 +19,6 @@ namespace User_Management.Auth
                 RedirectToLogin(context, "Please log in to continue.");
                 return;
             }
-
             try
             {
                 var handler = new JwtSecurityTokenHandler();
@@ -53,7 +52,6 @@ namespace User_Management.Auth
                 RedirectToLogin(context, "An error occurred. Please log in again.");
             }
         }
-
         private void RedirectToLogin(AuthorizationFilterContext context, string message)
         {
             context.HttpContext.Response.Cookies.Delete("JWTToken");

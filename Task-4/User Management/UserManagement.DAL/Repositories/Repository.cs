@@ -11,7 +11,6 @@ namespace UserManagement.DAL.EntityFramework
     {
         protected readonly ApplicationDBContext db;
         protected readonly DbSet<T> dbSet;
-
         public Repository(ApplicationDBContext db)
         {
             this.db = db;
@@ -27,11 +26,6 @@ namespace UserManagement.DAL.EntityFramework
         {
             return dbSet.Any(predicate);
         }
-
-        //public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
-        //{
-        //    return dbSet.Where(predicate).ToList();
-        //}
 
         public IEnumerable<T> Get()
         {

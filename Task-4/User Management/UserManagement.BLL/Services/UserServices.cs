@@ -97,7 +97,6 @@ namespace UserManagement.BLL.Services
                 var activities = activityService.GetAllLoginActivityForUser(user.UserId).ToList();
                 user.LastLogin = activities.FirstOrDefault()?.LastLogin;
 
-                // Sparkline: show last 10 logins as bars
                 user.ActivityData = activities
                     .OrderByDescending(a => a.LastLogin)
                     .Take(10)

@@ -9,11 +9,7 @@ using UserManagement.DAL.EntityFramework;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("UserManagement_Task-4");
-
-// Add services to the container.
 builder.Services.AddControllersWithViews();
-
-// Add JWT Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -34,11 +30,11 @@ builder.Services.AddScoped<UserServices>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<JwtService>();
 builder.Services.AddScoped<ActivityService>();
-builder.Services.AddHttpContextAccessor(); // Register IHttpContextAccessor
-builder.Services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
+builder.Services.AddHttpContextAccessor(); 
+builder.Services.AddDistributedMemoryCache(); 
 builder.Services.AddSession(options =>
     {
-        options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
+        options.IdleTimeout = TimeSpan.FromMinutes(30); 
         options.Cookie.HttpOnly = true;
         options.Cookie.IsEssential = true;
     });
@@ -50,19 +46,27 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDBContext>();
- 
-    if (!dbContext.Database.CanConnect())
+    var services = scope.ServiceProvider;
+    try
     {
-        throw new NotImplementedException("Cannot connect to the db");
+        var dbContext = services.GetRequiredService<ApplicationDBContext>();
+        
+        dbContext.Database.Migrate();
+
+        var logger = services.GetRequiredService<ILogger<Program>>();
+
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+       
     }
 }
 
-// Configure the HTTP request pipeline.
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -70,12 +74,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseSession();
 app.UseRouting();
-
-// Add these lines for JWT authentication
 app.UseAuthentication();
 app.UseAuthorization();
-    
-// Add the following line before app.Run() to resolve the issue.  
 app.UsePathBase("/");
 app.MapGet("/", context =>
 {
