@@ -12,9 +12,9 @@ namespace Fake_Book_Generator.Services
         public BookGeneratorService()
         {
             AddcountryFaker("en_US");
-            AddcountryFaker("de");
             AddcountryFaker("ja");
             AddcountryFaker("fr");
+            AddcountryFaker("de");
         }
         private void AddcountryFaker(string country)
         {
