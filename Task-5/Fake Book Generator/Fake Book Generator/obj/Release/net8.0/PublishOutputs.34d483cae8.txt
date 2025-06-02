@@ -1,0 +1,10 @@
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\PubTmp\Out\Fake Book Generator.exe
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\PubTmp\Out\appsettings.Development.json
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\PubTmp\Out\appsettings.json
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\PubTmp\Out\Fake Book Generator.dll
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\PubTmp\Out\Fake Book Generator.deps.json
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\PubTmp\Out\Fake Book Generator.runtimeconfig.json
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\PubTmp\Out\Fake Book Generator.pdb
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\PubTmp\Out\Bogus.dll
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\PubTmp\Out\Faker.Net.6.0.dll
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\PubTmp\Out\de-DE\Faker.Net.6.0.resources.dll

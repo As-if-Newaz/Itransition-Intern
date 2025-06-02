@@ -1,0 +1,36 @@
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\bin\Release\net8.0\appsettings.Development.json
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\bin\Release\net8.0\appsettings.json
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\bin\Release\net8.0\Fake Book Generator.staticwebassets.runtime.json
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\bin\Release\net8.0\Fake Book Generator.exe
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\bin\Release\net8.0\Fake Book Generator.deps.json
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\bin\Release\net8.0\Fake Book Generator.runtimeconfig.json
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\bin\Release\net8.0\Fake Book Generator.dll
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\bin\Release\net8.0\Fake Book Generator.pdb
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\bin\Release\net8.0\Bogus.dll
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\bin\Release\net8.0\Faker.Net.6.0.dll
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\bin\Release\net8.0\de-DE\Faker.Net.6.0.resources.dll
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\Fake Book Generator.csproj.AssemblyReference.cache
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\Fake Book Generator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\Fake Book Generator.AssemblyInfoInputs.cache
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\Fake Book Generator.AssemblyInfo.cs
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\Fake Book Generator.csproj.CoreCompileInputs.cache
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\Fake Book Generator.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\Fake Book Generator.RazorAssemblyInfo.cache
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\Fake Book Generator.RazorAssemblyInfo.cs
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\Fake Book Generator.sourcelink.json
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\staticwebassets.build.json
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\staticwebassets.development.json
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\staticwebassets\msbuild.Fake Book Generator.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\staticwebassets\msbuild.build.Fake Book Generator.props
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\staticwebassets\msbuild.buildMultiTargeting.Fake Book Generator.props
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\staticwebassets\msbuild.buildTransitive.Fake Book Generator.props
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\staticwebassets.pack.json
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\scopedcss\bundle\Fake Book Generator.styles.css
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\scopedcss\projectbundle\Fake Book Generator.bundle.scp.css
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\Fake Boo.8E693CEC.Up2Date
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\Fake Book Generator.dll
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\refint\Fake Book Generator.dll
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\Fake Book Generator.pdb
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\Fake Book Generator.genruntimeconfig.cache
+C:\Users\Asifk\Desktop\Itransition\Task-5\Fake Book Generator\Fake Book Generator\obj\Release\net8.0\ref\Fake Book Generator.dll
