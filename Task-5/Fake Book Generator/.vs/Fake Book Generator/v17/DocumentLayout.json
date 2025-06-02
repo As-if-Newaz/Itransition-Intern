@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-5\\Fake Book Generator\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|c:\\users\\asifk\\desktop\\itransition\\task-5\\fake book generator\\fake book generator\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|solutionrelative:fake book generator\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|c:\\users\\asifk\\desktop\\itransition\\task-5\\fake book generator\\fake book generator\\views\\home\\filterform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|solutionrelative:fake book generator\\views\\home\\filterform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|c:\\users\\asifk\\desktop\\itransition\\task-5\\fake book generator\\fake book generator\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|solutionrelative:fake book generator\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|c:\\users\\asifk\\desktop\\itransition\\task-5\\fake book generator\\fake book generator\\views\\home\\bookstable.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|solutionrelative:fake book generator\\views\\home\\bookstable.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|c:\\users\\asifk\\desktop\\itransition\\task-5\\fake book generator\\fake book generator\\models\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|solutionrelative:fake book generator\\models\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -19,18 +35,6 @@
       "RelativeMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|solutionrelative:fake book generator\\services\\bookgeneratorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|c:\\users\\asifk\\desktop\\itransition\\task-5\\fake book generator\\fake book generator\\views\\home\\bookstable.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|solutionrelative:fake book generator\\views\\home\\bookstable.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|c:\\users\\asifk\\desktop\\itransition\\task-5\\fake book generator\\fake book generator\\views\\home\\filterform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|solutionrelative:fake book generator\\views\\home\\filterform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|c:\\users\\asifk\\desktop\\itransition\\task-5\\fake book generator\\fake book generator\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|solutionrelative:fake book generator\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|c:\\users\\asifk\\desktop\\itransition\\task-5\\fake book generator\\fake book generator\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|solutionrelative:fake book generator\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -45,10 +49,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|c:\\users\\asifk\\desktop\\itransition\\task-5\\fake book generator\\fake book generator\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|solutionrelative:fake book generator\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|c:\\users\\asifk\\desktop\\itransition\\task-5\\fake book generator\\fake book generator\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|solutionrelative:fake book generator\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E4C2FB6E-D16D-40FC-BC1D-A0EFB41F6F36}|Fake Book Generator\\Fake Book Generator.csproj|c:\\users\\asifk\\desktop\\itransition\\task-5\\fake book generator\\fake book generator\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -78,11 +78,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 15,
+          "SelectedChildIndex": 12,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "Error.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-5\\Fake Book Generator\\Fake Book Generator\\Views\\Shared\\Error.cshtml",
               "RelativeDocumentMoniker": "Fake Book Generator\\Views\\Shared\\Error.cshtml",
@@ -90,12 +90,11 @@
               "RelativeToolTip": "Fake Book Generator\\Views\\Shared\\Error.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-02T14:54:06.575Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-02T14:54:06.575Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "_ValidationScriptsPartial.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-5\\Fake Book Generator\\Fake Book Generator\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
               "RelativeDocumentMoniker": "Fake Book Generator\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
@@ -103,38 +102,37 @@
               "RelativeToolTip": "Fake Book Generator\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-02T14:54:05.462Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-02T14:54:05.462Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "FilterForm.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-5\\Fake Book Generator\\Fake Book Generator\\Views\\Home\\FilterForm.cshtml",
               "RelativeDocumentMoniker": "Fake Book Generator\\Views\\Home\\FilterForm.cshtml",
               "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-5\\Fake Book Generator\\Fake Book Generator\\Views\\Home\\FilterForm.cshtml",
               "RelativeToolTip": "Fake Book Generator\\Views\\Home\\FilterForm.cshtml",
-              "ViewState": "AgIAABUAAAAAAAAAAAAAAC4AAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAABMAAAAAAAAAAAAAACQAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-06-02T08:37:51.749Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "BooksTable.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-5\\Fake Book Generator\\Fake Book Generator\\Views\\Home\\BooksTable.cshtml",
               "RelativeDocumentMoniker": "Fake Book Generator\\Views\\Home\\BooksTable.cshtml",
               "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-5\\Fake Book Generator\\Fake Book Generator\\Views\\Home\\BooksTable.cshtml",
               "RelativeToolTip": "Fake Book Generator\\Views\\Home\\BooksTable.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAACsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-06-02T08:37:48.293Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Privacy.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-5\\Fake Book Generator\\Fake Book Generator\\Views\\Home\\Privacy.cshtml",
               "RelativeDocumentMoniker": "Fake Book Generator\\Views\\Home\\Privacy.cshtml",
@@ -142,8 +140,7 @@
               "RelativeToolTip": "Fake Book Generator\\Views\\Home\\Privacy.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-31T18:50:17.478Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-31T18:50:17.478Z"
             },
             {
               "$type": "Document",
@@ -207,7 +204,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-5\\Fake Book Generator\\Fake Book Generator\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Fake Book Generator\\Views\\Shared\\_Layout.cshtml",
@@ -215,38 +212,37 @@
               "RelativeToolTip": "Fake Book Generator\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-31T14:51:56.374Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-31T14:51:56.374Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-5\\Fake Book Generator\\Fake Book Generator\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Fake Book Generator\\Views\\Home\\Index.cshtml",
               "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-5\\Fake Book Generator\\Fake Book Generator\\Views\\Home\\Index.cshtml",
               "RelativeToolTip": "Fake Book Generator\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAADAAAAAAAAAAAAAAAD4AAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-05-31T14:51:23.34Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 0,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-5\\Fake Book Generator\\Fake Book Generator\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Fake Book Generator\\Controllers\\HomeController.cs",
               "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-5\\Fake Book Generator\\Fake Book Generator\\Controllers\\HomeController.cs",
               "RelativeToolTip": "Fake Book Generator\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAAowCwAAABqAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAgwB4AAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-31T14:48:50.457Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "BookGeneratorService.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-5\\Fake Book Generator\\Fake Book Generator\\Services\\BookGeneratorService.cs",
               "RelativeDocumentMoniker": "Fake Book Generator\\Services\\BookGeneratorService.cs",
@@ -254,12 +250,11 @@
               "RelativeToolTip": "Fake Book Generator\\Services\\BookGeneratorService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T14:46:59.729Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-31T14:46:59.729Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "Review.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-5\\Fake Book Generator\\Fake Book Generator\\Models\\Review.cs",
               "RelativeDocumentMoniker": "Fake Book Generator\\Models\\Review.cs",
@@ -267,12 +262,11 @@
               "RelativeToolTip": "Fake Book Generator\\Models\\Review.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T14:45:38.225Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-31T14:45:38.225Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Book.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-5\\Fake Book Generator\\Fake Book Generator\\Models\\Book.cs",
               "RelativeDocumentMoniker": "Fake Book Generator\\Models\\Book.cs",
@@ -285,7 +279,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-5\\Fake Book Generator\\Fake Book Generator\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "Fake Book Generator\\Models\\ErrorViewModel.cs",
@@ -293,8 +287,7 @@
               "RelativeToolTip": "Fake Book Generator\\Models\\ErrorViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T14:44:51.047Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-31T14:44:51.047Z"
             }
           ]
         }

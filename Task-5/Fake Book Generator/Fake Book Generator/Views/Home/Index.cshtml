@@ -6,6 +6,7 @@
     <div class="row g-4">
         <div class="col-md-8 mx-auto">
             <div class="bg-light p-4 rounded">
+                <input type="hidden" id="currentPageCount" value="@ViewData["page"]" />
                 <partial name="FilterForm" />
                 <div id="booksTableContainer">
                     <partial name="BooksTable" model="@((List<Book>)ViewData["books"])" />
@@ -43,6 +44,7 @@
                             tbody.appendChild(clonedRow);
                         });
                         currentPage++;
+                        document.getElementById('currentPageCount').value = currentPage;
                     }
                 })
                 .finally(() => {

@@ -1,8 +1,10 @@
 using Fake_Book_Generator.Models;
 using Fake_Book_Generator.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Diagnostics;
 using System.Text;
+using System.Collections.Generic;
 
 namespace Fake_Book_Generator.Controllers
 {
@@ -22,6 +24,7 @@ namespace Fake_Book_Generator.Controllers
             ViewData["avgLikes"] = avgLikes;
             ViewData["avgReviews"] = avgReviews;
             ViewData["page"] = page;
+            ViewData["currentPage"] = page;
             ViewData["selectedBook"] = selectedBook;
             var startIndex = (page - 1) * 20;
             var books = bookGenerator.GenerateBooks(country, seed, avgLikes, avgReviews, startIndex, 20);
@@ -29,9 +32,15 @@ namespace Fake_Book_Generator.Controllers
             return View();
         }
 
-        public IActionResult ExportToCsv(string country = "en_US", int seed = 0, double avgLikes = 0, double avgReviews = 0)
+        public IActionResult ExportToCsv(string country = "en_US", int seed = 0, double avgLikes = 0, double avgReviews = 0, int page = 1, int totalPages = 1)
         {
-            var books = bookGenerator.GenerateBooks(country, seed, avgLikes, avgReviews, 0, 1000);
+            var books = new List<Book>();
+            for (int currentPage = 1; currentPage <= totalPages; currentPage++)
+            {
+                var startIndex = (currentPage - 1) * 20;
+                var pageBooks = bookGenerator.GenerateBooks(country, seed, avgLikes, avgReviews, startIndex, 20);
+                books.AddRange(pageBooks);
+            }
             
             var csv = new StringBuilder();
             csv.AppendLine("Index,ISBN,Title,Authors,Publisher,Likes,Reviews");           

@@ -1,8 +1,11 @@
 @{
+
     var country = ViewData["country"]?.ToString();
     var seed = ViewData["seed"];
     var avgLikes = ViewData["avgLikes"];
     var avgReviews = ViewData["avgReviews"];
+    var page = ViewData["page"];
+    var currentPage = ViewData["currentPage"];
 }
 
 <form method="get" asp-controller="Home" asp-action="Index" class="d-flex flex-column gap-3 sticky-filter-form">
@@ -32,8 +35,8 @@
             <input type="number" name="avgReviews" id="avgReviews" class="form-control shadow-sm" value="@avgReviews" min="0" step="0.1" onchange="this.form.submit()">
         </div>
         <div class="form-group">
-            <a href="@Url.Action("ExportToCsv", "Home", new { country = country, seed = seed, avgLikes = avgLikes, avgReviews = avgReviews })" 
-               class="btn btn-primary shadow-sm">
+            <a href="@Url.Action("ExportToCsv", "Home", new { country = country, seed = seed, avgLikes = avgLikes, avgReviews = avgReviews, page = page, totalPages = 1})" 
+               class="btn btn-primary shadow-sm" onclick="updateExportLink(this); return false;">
                 <i class="bi bi-download me-1"></i>Export CSV
             </a>
         </div>
@@ -53,3 +56,12 @@
        </table>
 
     </form>
+
+<script>
+    function updateExportLink(link) {
+        const currentPageCount = document.getElementById('currentPageCount').value;
+        const url = new URL(link.href);
+        url.searchParams.set('totalPages', currentPageCount);
+        window.location.href = url.toString();
+    }
+</script>

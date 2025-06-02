@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Fake Book Generator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ddd36dc6d4e70d493f0005423191b0e0130fd37d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+66ce405dd1280dac5e3e3612f42351de17b83995")]
 [assembly: System.Reflection.AssemblyProductAttribute("Fake Book Generator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Fake Book Generator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
