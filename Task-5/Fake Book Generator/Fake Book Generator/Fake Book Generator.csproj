@@ -12,4 +12,10 @@
     <PackageReference Include="Faker.Net" Version="2.0.163" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="Data\books.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
