@@ -1,0 +1,55 @@
+@{
+    var country = ViewData["country"]?.ToString();
+    var seed = ViewData["seed"];
+    var avgLikes = ViewData["avgLikes"];
+    var avgReviews = ViewData["avgReviews"];
+}
+
+<form method="get" asp-controller="Home" asp-action="Index" class="d-flex flex-column gap-3 sticky-filter-form">
+    <div class="d-flex gap-3 align-items-end mb-4 justify-content-center">
+        <div class="form-group" style="min-width: 200px;">
+            <label for="country" class="form-label text-secondary small">Language</label>
+            <select name="country" id="country" class="form-select shadow-sm" onchange="this.form.submit()">
+                <option value="en_US" selected="@(country == "en_US")">English (US)</option>
+                <option value="fr" selected="@(country == "fr")">French (France)</option>
+                <option value="de" selected="@(country == "de")">German (Germany)</option>
+                <option value="ja" selected="@(country == "ja")">Japanese (Japan)</option>         
+            </select>
+        </div>
+        <div class="form-group" style="min-width: 200px;">
+            <label for="seed" class="form-label text-secondary small">Seed</label>
+            <div class="input-group shadow-sm">
+                <input type="number" name="seed" id="seed" class="form-control border-end-0" value="@seed">
+                <a href="?seed=@(new Random().Next(1000000))&avgLikes=@avgLikes&avgReviews=@avgReviews&country=@country" class="btn btn-outline-secondary border-start-0">🔀</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="avgLikes" class="form-label text-secondary small">Likes</label>
+            <input type="range" name="avgLikes" class="form-range" id="avgLikes" min="0" max="10" step="0.1" value="@avgLikes" onchange="this.form.submit()">
+        </div>
+        <div class="form-group" style="min-width: 120px;">
+            <label for="avgReviews" class="form-label text-secondary small">Review</label>
+            <input type="number" name="avgReviews" id="avgReviews" class="form-control shadow-sm" value="@avgReviews" min="0" step="0.1" onchange="this.form.submit()">
+        </div>
+        <div class="form-group">
+            <a href="@Url.Action("ExportToCsv", "Home", new { country = country, seed = seed, avgLikes = avgLikes, avgReviews = avgReviews })" 
+               class="btn btn-primary shadow-sm">
+                <i class="bi bi-download me-1"></i>Export CSV
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-hover align-middle ">
+           <thead class="table-light text-center">
+               <tr>
+                   <th style="width: 50px;">#</th>
+                   <th style="width: 160px;">ISBN</th>
+                <th style="width: 230px;">Title</th>
+                   <th>Author(s)</th>
+                   <th>Publisher</th>
+                   <th style="width: 50px;"></th>
+               </tr>
+           </thead>
+       </table>
+
+    </form>
