@@ -21,7 +21,7 @@ namespace Fake_Book_Generator.Services
             _baseFakers[country] = new Bogus.Faker(country);
             _fakers[country] = new Faker<Book>(country)
                 .RuleFor(b => b.ISBN, f => GenerateISBN(f))
-                .RuleFor(b => b.Title, f => country == "en_US" ? f.Commerce.ProductName() : f.Lorem.Sentence(3, 6))
+                .RuleFor(b => b.Title, f => $"{f.Person.FirstName}'s {f.Random.Word()} {f.Address.County()} ")
                 .RuleFor(b => b.Authors, f => Enumerable.Range(1, f.Random.Number(1, 3))
                     .Select(_ => f.Name.FullName())
                     .ToList())

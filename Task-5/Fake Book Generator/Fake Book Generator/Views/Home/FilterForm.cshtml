@@ -23,7 +23,7 @@
         <div class="form-group" style="min-width: 200px;">
             <label for="seed" class="form-label text-secondary small">Seed</label>
             <div class="input-group shadow-sm">
-                <input type="number" name="seed" id="seed" class="form-control border-end-0" value="@seed" onchange="this.form.submit()">
+                <input type="number" name="seed" id="seed" class="form-control border-end-0" value="@seed">
                 <a href="?seed=@(new Random().Next(1000000))&avgLikes=@avgLikes&avgReviews=@avgReviews&country=@country" class="btn btn-outline-secondary border-start-0">🔀</a>
             </div>
         </div>
