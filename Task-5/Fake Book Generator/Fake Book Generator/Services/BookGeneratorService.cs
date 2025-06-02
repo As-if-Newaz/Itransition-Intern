@@ -1,6 +1,7 @@
-﻿using Bogus;
+﻿// Removed the invalid namespace reference as 'Extensions' does not exist in 'Fake_Book_Generator'
+using Bogus;
 using Fake_Book_Generator.Models;
-
+using System.IO;
 
 namespace Fake_Book_Generator.Services
 {
@@ -8,9 +9,11 @@ namespace Fake_Book_Generator.Services
     {
         private readonly Dictionary<string, Faker<Book>> _fakers = new();
         private readonly Dictionary<string, Bogus.Faker> _baseFakers = new();
+        private readonly List<string> bookTitles;
 
         public BookGeneratorService()
         {
+            this.bookTitles = File.ReadAllLines("Data/books.txt").ToList();
             AddcountryFaker("en_US");
             AddcountryFaker("ja");
             AddcountryFaker("fr");
@@ -21,7 +24,7 @@ namespace Fake_Book_Generator.Services
             _baseFakers[country] = new Bogus.Faker(country);
             _fakers[country] = new Faker<Book>(country)
                 .RuleFor(b => b.ISBN, f => GenerateISBN(f))
-                .RuleFor(b => b.Title, f => country == "en_US" ? $"{f.Person.FirstName}'s {f.Company.Bs()}" : f.Lorem.Sentence())
+                .RuleFor(b => b.Title, f => country == "en_US" ? f.PickRandom(bookTitles) : f.Lorem.Sentence())
                 .RuleFor(b => b.Authors, f => Enumerable.Range(1, f.Random.Number(1, 3))
                     .Select(_ => f.Name.FullName())
                     .ToList())
