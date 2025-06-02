@@ -51,7 +51,7 @@ namespace Fake_Book_Generator.Controllers
                 csv.AppendLine($"{book.Index},{book.ISBN},\"{book.Title}\",\"{authors}\",\"{book.Publisher}\",{book.Likes},{reviews}");
             }
             var bytes = Encoding.UTF8.GetBytes(csv.ToString());
-            return File(bytes, "text/csv","books_export_" +country+ "{DateTime.Now:yyyyMMdd_HHmmss}.csv");
+            return File(bytes, "text/csv","books_export_" +country+ ".csv");
         }
     }
 }
