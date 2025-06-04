@@ -128,7 +128,7 @@
               "RelativeDocumentMoniker": "Fake Book Generator\\Views\\Home\\FilterForm.cshtml",
               "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-5\\Fake Book Generator\\Fake Book Generator\\Views\\Home\\FilterForm.cshtml",
               "RelativeToolTip": "Fake Book Generator\\Views\\Home\\FilterForm.cshtml",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABkAAACJAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA4AAABZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-06-02T08:37:51.749Z",
               "EditorCaption": ""
@@ -263,8 +263,7 @@
               "RelativeToolTip": "Fake Book Generator\\Services\\BookGeneratorService.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAowB8AAABmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-31T14:46:59.729Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-31T14:46:59.729Z"
             },
             {
               "$type": "Document",
