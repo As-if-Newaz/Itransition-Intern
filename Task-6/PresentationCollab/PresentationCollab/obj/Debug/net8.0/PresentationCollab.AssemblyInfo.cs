@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PresentationCollab")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ccc27519f6c46518992c383d0dda3dc9480ae2e0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+523cd6b8283ac9c8cf21397c42533e69502ca5cf")]
 [assembly: System.Reflection.AssemblyProductAttribute("PresentationCollab")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PresentationCollab")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

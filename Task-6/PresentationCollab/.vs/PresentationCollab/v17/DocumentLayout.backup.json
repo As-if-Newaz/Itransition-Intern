@@ -3,6 +3,26 @@
   "WorkspaceRootPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\PresentationCollab\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9CE17D05-2C61-4900-9FAF-B542829B9CD7}|PresentationCollab\\PresentationCollab.csproj|c:\\users\\asifk\\desktop\\itransition\\task-6\\presentationcollab\\presentationcollab\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{9CE17D05-2C61-4900-9FAF-B542829B9CD7}|PresentationCollab\\PresentationCollab.csproj|solutionrelative:presentationcollab\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CE17D05-2C61-4900-9FAF-B542829B9CD7}|PresentationCollab\\PresentationCollab.csproj|c:\\users\\asifk\\desktop\\itransition\\task-6\\presentationcollab\\presentationcollab\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CE17D05-2C61-4900-9FAF-B542829B9CD7}|PresentationCollab\\PresentationCollab.csproj|solutionrelative:presentationcollab\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CE17D05-2C61-4900-9FAF-B542829B9CD7}|PresentationCollab\\PresentationCollab.csproj|c:\\users\\asifk\\desktop\\itransition\\task-6\\presentationcollab\\presentationcollab\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CE17D05-2C61-4900-9FAF-B542829B9CD7}|PresentationCollab\\PresentationCollab.csproj|solutionrelative:presentationcollab\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CE17D05-2C61-4900-9FAF-B542829B9CD7}|PresentationCollab\\PresentationCollab.csproj|c:\\users\\asifk\\desktop\\itransition\\task-6\\presentationcollab\\presentationcollab\\services\\presentatonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CE17D05-2C61-4900-9FAF-B542829B9CD7}|PresentationCollab\\PresentationCollab.csproj|solutionrelative:presentationcollab\\services\\presentatonservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CE17D05-2C61-4900-9FAF-B542829B9CD7}|PresentationCollab\\PresentationCollab.csproj|c:\\users\\asifk\\desktop\\itransition\\task-6\\presentationcollab\\presentationcollab\\services\\ipresentationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CE17D05-2C61-4900-9FAF-B542829B9CD7}|PresentationCollab\\PresentationCollab.csproj|solutionrelative:presentationcollab\\services\\ipresentationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9CE17D05-2C61-4900-9FAF-B542829B9CD7}|PresentationCollab\\PresentationCollab.csproj|c:\\users\\asifk\\desktop\\itransition\\task-6\\presentationcollab\\presentationcollab\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9CE17D05-2C61-4900-9FAF-B542829B9CD7}|PresentationCollab\\PresentationCollab.csproj|solutionrelative:presentationcollab\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -26,11 +46,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\PresentationCollab\\PresentationCollab\\appsettings.json",
+              "RelativeDocumentMoniker": "PresentationCollab\\appsettings.json",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\PresentationCollab\\PresentationCollab\\appsettings.json",
+              "RelativeToolTip": "PresentationCollab\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-05T08:38:12.648Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\PresentationCollab\\PresentationCollab\\Program.cs",
+              "RelativeDocumentMoniker": "PresentationCollab\\Program.cs",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\PresentationCollab\\PresentationCollab\\Program.cs",
+              "RelativeToolTip": "PresentationCollab\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAABVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-05T08:36:25.041Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\PresentationCollab\\PresentationCollab\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "PresentationCollab\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\PresentationCollab\\PresentationCollab\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "PresentationCollab\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-05T07:53:49.302Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IPresentationService.cs",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\PresentationCollab\\PresentationCollab\\Services\\IPresentationService.cs",
+              "RelativeDocumentMoniker": "PresentationCollab\\Services\\IPresentationService.cs",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\PresentationCollab\\PresentationCollab\\Services\\IPresentationService.cs",
+              "RelativeToolTip": "PresentationCollab\\Services\\IPresentationService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-05T07:44:36.657Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "PresentatonService.cs",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\PresentationCollab\\PresentationCollab\\Services\\PresentatonService.cs",
+              "RelativeDocumentMoniker": "PresentationCollab\\Services\\PresentatonService.cs",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\PresentationCollab\\PresentationCollab\\Services\\PresentatonService.cs",
+              "RelativeToolTip": "PresentationCollab\\Services\\PresentatonService.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAowBQAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-05T07:43:59.089Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\PresentationCollab\\PresentationCollab\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "PresentationCollab\\Models\\ErrorViewModel.cs",
@@ -38,11 +123,12 @@
               "RelativeToolTip": "PresentationCollab\\Models\\ErrorViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T14:36:52.233Z"
+              "WhenOpened": "2025-06-04T14:36:52.233Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "Slide.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\PresentationCollab\\PresentationCollab\\Models\\Slide.cs",
               "RelativeDocumentMoniker": "PresentationCollab\\Models\\Slide.cs",
@@ -50,11 +136,12 @@
               "RelativeToolTip": "PresentationCollab\\Models\\Slide.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T14:36:32.389Z"
+              "WhenOpened": "2025-06-04T14:36:32.389Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "Presentation.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\PresentationCollab\\PresentationCollab\\Models\\Presentation.cs",
               "RelativeDocumentMoniker": "PresentationCollab\\Models\\Presentation.cs",
@@ -62,11 +149,12 @@
               "RelativeToolTip": "PresentationCollab\\Models\\Presentation.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T14:35:55.747Z"
+              "WhenOpened": "2025-06-04T14:35:55.747Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\PresentationCollab\\PresentationCollab\\Models\\User.cs",
               "RelativeDocumentMoniker": "PresentationCollab\\Models\\User.cs",
