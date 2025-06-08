@@ -7,70 +7,79 @@ window.startDrawingInContainer = function(container, slideId, username) {
     var connectionLoadCanvas;
 
     function startDrawing() {
-        const settings = {
-            wheelEventsEnabled: 'only-if-focused',
-        };
-        editor = new jsdraw.Editor(container, settings);
-        const toolbar = editor.addToolbar();
+        try {
+            const settings = {
+                wheelEventsEnabled: 'only-if-focused',
+                tools: {
+                    pen: {
+                        enabled: true,
+                        sizes: [1],
+                        defaultSize: 1,
+                        maxSize: 1
+                    }
+                }
+            };
+            editor = new jsdraw.Editor(container, settings);
+            const toolbar = editor.addToolbar();
 
-        toolbar.addExitButton(() => {
-            editor.remove();
-        });
+            toolbar.addActionButton('Save', async () => {
+                try {
+                    await saveNewSvg();
+                    editor.remove();
+                    startDrawing();
+                } catch (error) {
+                    console.error('Error during sync:', error);
+                    toastr.error('Failed to sync slide');
+                }
+            });
 
-        toolbar.addActionButton('|Sync|', async () => {
-            try {
-                await saveNewSvg();
-                editor.remove();
-                startDrawing();
-            } catch (error) {
-                console.error('Error during sync:', error);
-                toastr.error('Failed to sync slide');
-            }
-        });
+            toolbar.addActionButton('Download⬇️', () => {
+                var jpgDataUrl = editor.toDataURL();
+                download(jpgDataUrl, `drawing-${slideId}.jpg`);
+            });
 
-        toolbar.addActionButton('|Download|', () => {
-            var jpgDataUrl = editor.toDataURL();
-            download(jpgDataUrl, `drawing-${slideId}.jpg`);
-        });
+            editor.getRootElement().style.height = '95vh';
+            editor.getRootElement().style.border = '2px solid gray';
+            editor.getRootElement().style.background = '#fff';
 
-        editor.getRootElement().style.height = '95vh';
-        editor.getRootElement().style.border = '2px solid gray';
+            const addToHistory = false;
+            editor.dispatch(editor.setBackgroundStyle({
+                autoresize: true,
+            }), addToHistory);
 
-        const addToHistory = false;
-        editor.dispatch(editor.setBackgroundStyle({
-            autoresize: true,
-        }), addToHistory);
+            getExistingSvg();
 
-        getExistingSvg();
+            editor.notifier.on(jsdraw.EditorEventType.CommandDone, (evt) => {
+                if (evt.kind !== jsdraw.EditorEventType.CommandDone) {
+                    throw new Error('Incorrect event type');
+                }
 
-        editor.notifier.on(jsdraw.EditorEventType.CommandDone, (evt) => {
-            if (evt.kind !== jsdraw.EditorEventType.CommandDone) {
-                throw new Error('Incorrect event type');
-            }
+                if (evt.command instanceof jsdraw.SerializableCommand) {
+                    postToServer(JSON.stringify({
+                        command: evt.command.serialize()
+                    }));
+                } else {
+                    console.log('!', evt.command, 'instanceof jsdraw.SerializableCommand');
+                }
+            });
 
-            if (evt.command instanceof jsdraw.SerializableCommand) {
+            editor.notifier.on(jsdraw.EditorEventType.CommandUndone, (evt) => {
+                if (evt.kind !== jsdraw.EditorEventType.CommandUndone) {
+                    return;
+                }
+
+                if (!(evt.command instanceof jsdraw.SerializableCommand)) {
+                    console.log('Not serializable!', evt.command);
+                    return;
+                }
+
                 postToServer(JSON.stringify({
-                    command: evt.command.serialize()
+                    command: jsdraw.invertCommand(evt.command).serialize()
                 }));
-            } else {
-                console.log('!', evt.command, 'instanceof jsdraw.SerializableCommand');
-            }
-        });
-
-        editor.notifier.on(jsdraw.EditorEventType.CommandUndone, (evt) => {
-            if (evt.kind !== jsdraw.EditorEventType.CommandUndone) {
-                return;
-            }
-
-            if (!(evt.command instanceof jsdraw.SerializableCommand)) {
-                console.log('Not serializable!', evt.command);
-                return;
-            }
-
-            postToServer(JSON.stringify({
-                command: jsdraw.invertCommand(evt.command).serialize()
-            }));
-        });
+            });
+        } catch (error) {
+            console.error('Error initializing editor:', error);
+        }
     }
 
     function startCommentConnection() {

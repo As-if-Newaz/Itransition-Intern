@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tbO2vxMT9Ug=",
+  "dgSpecHash": "mzT/L1nBnFo=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Presentation Collab.csproj",
+  "projectFilePath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Presentation Collab.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Asifk\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Asifk\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

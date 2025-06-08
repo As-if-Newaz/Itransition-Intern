@@ -199,10 +199,7 @@ namespace Presentation_Collab.Controllers
                 return Json(new { success = false, message = "Slide not found" });
             }
 
-            // Delete the slide
             db.Slides.Remove(slide);
-
-            // Update order of remaining slides
             var remainingSlides = presentation.Slides
                 .Where(s => s.Id != request.SlideId)
                 .OrderBy(s => s.Order)
@@ -260,7 +257,6 @@ namespace Presentation_Collab.Controllers
                     return Json(new { success = false, message = "User not found" });
                 }
 
-                // Convert string role to enum
                 if (Enum.TryParse<UserRole>(request.NewRole.ToString(), out UserRole role))
                 {
                     user.Role = role;
@@ -282,7 +278,7 @@ namespace Presentation_Collab.Controllers
         {
             public int PresentationId { get; set; }
             public string Username { get; set; }
-            public string NewRole { get; set; }  // Changed from UserRole to string
+            public string NewRole { get; set; } 
         }
 
         [HttpGet]
@@ -330,10 +326,8 @@ namespace Presentation_Collab.Controllers
                     return Json(new { success = false, message = "Only the creator can delete this presentation" });
                 }
 
-                // Delete all slides first
                 db.Slides.RemoveRange(presentation.Slides);
-                
-                // Delete the presentation
+
                 db.Presentation.Remove(presentation);
                 await db.SaveChangesAsync();
 

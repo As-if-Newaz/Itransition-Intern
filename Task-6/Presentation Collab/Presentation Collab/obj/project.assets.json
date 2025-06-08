@@ -8310,11 +8310,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Presentation Collab.csproj",
+      "projectUniqueName": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Presentation Collab.csproj",
       "projectName": "Presentation Collab",
-      "projectPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Presentation Collab.csproj",
+      "projectPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Presentation Collab.csproj",
       "packagesPath": "C:\\Users\\Asifk\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\obj\\",
+      "outputPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

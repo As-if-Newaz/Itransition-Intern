@@ -9,7 +9,6 @@
 @Html.AntiForgeryToken()
 
 <div class="presentation-container">
-    <!-- Left Panel - Slides -->
     <div class="slides-panel">
         <h3>Slides</h3>
         <div class="slides-list" id="slides-list">
@@ -60,16 +59,13 @@
         </div>
     </div>
 
-    <!-- Main Content - Drawing Canvas -->
     <div class="main-content">
         <div id="canvas-container">
-            <div id="presentation-content">
-                <!-- Presentation content will be rendered here -->
+            <div id="presentation-content" style="width: 100%; height: 100%;">
             </div>
         </div>
     </div>
 
-    <!-- Right Panel - Users -->
     <div class="users-panel">
         <h3>Connected Users</h3>
         <div id="users-list">
@@ -106,7 +102,14 @@
             currentSlideId = slideId;
             const container = document.getElementById('presentation-content');
             container.innerHTML = '';
-            window.startDrawingInContainer(container, slideId, username);
+            setTimeout(() => {
+                try {
+                    window.startDrawingInContainer(container, slideId, username);
+                } catch (error) {
+                    console.error('Error initializing drawing editor:', error);
+                    showNotification('Failed to initialize drawing editor', true);
+                }
+            }, 100);
         }
 
         function selectSlide(slideId) {
@@ -189,7 +192,6 @@
                 
                 if (result.success) {
                     showNotification(`Updated ${username}'s role to ${newRole}`);
-                    // Update the UI to reflect the new role
                     const userItem = document.querySelector(`.user-item[data-nickname="${username}"]`);
                     if (userItem) {
                         const roleBadge = userItem.querySelector('.role-badge');
@@ -231,10 +233,8 @@
 
                 const result = await response.json();
                 if (result.success) {
-                    // Remove the slide from the UI
                     activeSlide.remove();
-                    
-                    // Update slide numbers for remaining slides
+
                     const slides = document.querySelectorAll('.slide-thumbnail');
                     slides.forEach((slide, index) => {
                         slide.setAttribute('data-slide-number', index + 1);
@@ -244,7 +244,6 @@
                         }
                     });
 
-                    // Select the first slide if available
                     const firstSlide = document.querySelector('.slide-thumbnail');
                     if (firstSlide) {
                         selectSlide(firstSlide.getAttribute('data-slide-id'));
@@ -259,8 +258,6 @@
                 showNotification("Failed to delete slide", true);
             }
         }
-
-        // Initialize everything when the page loads
         document.addEventListener('DOMContentLoaded', async () => {
             const firstSlide = document.querySelector('.slide-thumbnail');
             if (firstSlide) {

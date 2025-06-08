@@ -224,6 +224,29 @@
             if (e.key === 'Escape' && document.fullscreenElement) {
                 document.exitFullscreen();
             }
+
+            // Only handle slide navigation in presentation mode
+            if (document.fullscreenElement) {
+                const slides = document.querySelectorAll('.slide-thumbnail');
+                const currentSlide = document.querySelector('.slide-thumbnail.active');
+                const currentIndex = Array.from(slides).indexOf(currentSlide);
+
+                if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    if (currentIndex < slides.length - 1) {
+                        const nextSlide = slides[currentIndex + 1];
+                        const nextSlideId = nextSlide.getAttribute('data-slide-id');
+                        selectSlide(nextSlideId);
+                    }
+                } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    if (currentIndex > 0) {
+                        const prevSlide = slides[currentIndex - 1];
+                        const prevSlideId = prevSlide.getAttribute('data-slide-id');
+                        selectSlide(prevSlideId);
+                    }
+                }
+            }
         });
     </script>
     
