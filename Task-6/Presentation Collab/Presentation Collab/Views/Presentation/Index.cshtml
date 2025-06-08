@@ -1,0 +1,170 @@
+﻿@model List<Presentation_Collab.Models.Presentation>
+@{
+    ViewData["Title"] = "Presentations";
+    Layout = "PresentationLayout";
+    var currentUser = Context.Session.GetString("UserNickname");
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Presentations</h1>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            No presentations found. Create your first presentation to get started!
+        </div>
+    }
+    else
+    {
+        <div class="toolbar mb-3 p-3 bg-light rounded">
+            <div class="d-flex gap-2">
+                <a asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Create New Presentation
+                </a>
+                <button id="joinSelectedBtn" class="btn btn-success" disabled onclick="joinSelectedPresentation()">
+                    <i class="bi bi-box-arrow-in-right"></i> Join Selected Presentation
+                </button>
+                <button id="deleteSelectedBtn" class="btn btn-danger" disabled onclick="deleteSelectedPresentation()">
+                    <i class="bi bi-trash"></i> Delete Selected Presentation
+                </button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Created By</th>
+                        <th>Created Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var presentation in Model)
+                    {
+                        <tr class="presentation-row" 
+                            data-id="@presentation.Id" 
+                            data-creator="@presentation.CreatorName"
+                            onclick="selectPresentation(this)">
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-file-earmark-slides me-2"></i>
+                                    @presentation.Title
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-person me-2"></i>
+                                    @presentation.CreatorName
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-clock me-2"></i>
+                                    @presentation.CreatedAt.ToString("g")
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+<style>
+    .presentation-row {
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+    
+    .presentation-row:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .presentation-row.selected {
+        background-color: #e9ecef;
+    }
+</style>
+
+@section Scripts {
+    <script>
+        // Remove the Present button since it's not needed on the index page
+        document.addEventListener('DOMContentLoaded', function() {
+            const presentBtn = document.querySelector('.present-btn');
+            if (presentBtn) {
+                presentBtn.style.display = 'none';
+            }
+        });
+
+        function selectPresentation(row) {
+            // Remove selected class from all rows
+            document.querySelectorAll('.presentation-row').forEach(r => {
+                r.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked row
+            row.classList.add('selected');
+            
+            // Enable join button
+            document.getElementById('joinSelectedBtn').disabled = false;
+
+            // Enable/disable delete button based on creator
+            const deleteBtn = document.getElementById('deleteSelectedBtn');
+            const creator = row.dataset.creator;
+            const currentUser = '@currentUser';
+            deleteBtn.disabled = creator !== currentUser;
+        }
+
+        function joinSelectedPresentation() {
+            const selectedRow = document.querySelector('.presentation-row.selected');
+            if (selectedRow) {
+                const presentationId = selectedRow.dataset.id;
+                window.location.href = `/Presentation/Edit/${presentationId}`;
+            }
+        }
+
+        async function deleteSelectedPresentation() {
+            const selectedRow = document.querySelector('.presentation-row.selected');
+            if (!selectedRow) return;
+
+            const presentationId = selectedRow.dataset.id;
+            const presentationTitle = selectedRow.querySelector('td:first-child').textContent.trim();
+
+            if (!confirm(`Are you sure you want to delete "${presentationTitle}"?`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/Presentation/DeletePresentation/${presentationId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    }
+                });
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    selectedRow.remove();
+                    showNotification('Presentation deleted successfully');
+                    
+                    // If no presentations left, reload the page to show the empty state
+                    if (document.querySelectorAll('.presentation-row').length === 0) {
+                        window.location.reload();
+                    }
+                } else {
+                    showNotification(result.message || 'Failed to delete presentation', true);
+                }
+            } catch (error) {
+                console.error('Error deleting presentation:', error);
+                showNotification('Failed to delete presentation', true);
+            }
+        }
+    </script>
+}
+
+

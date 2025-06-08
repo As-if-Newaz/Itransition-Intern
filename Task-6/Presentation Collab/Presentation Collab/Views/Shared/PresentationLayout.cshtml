@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Collaborative Presentation</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/presentation.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        .presentation-header {
+            background: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            z-index: 1000;
+            position: relative;
+        }
+        
+        .presentation-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .present-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .present-btn:hover {
+            background: #45a049;
+        }
+        
+        .exit-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+        
+        .exit-btn:hover {
+            background: #da190b;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #2196F3;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+        
+        .presentation-content {
+            height: calc(100vh - 60px);
+            overflow: hidden;
+        }
+        
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .presentation-header {
+                padding: 0.5rem;
+                height: 50px;
+            }
+            
+            .presentation-title {
+                font-size: 1rem;
+            }
+            
+            .header-actions {
+                gap: 0.5rem;
+            }
+            
+            .present-btn, .exit-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .presentation-content {
+                height: calc(100vh - 50px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="presentation-header">
+        <div class="d-flex align-items-center">
+            <h1 class="presentation-title">@ViewData["Title"]</h1>
+        </div>
+        
+        <div class="header-actions">
+            <div class="user-info">
+                <div class="user-avatar">
+                    @(Context.Session.GetString("UserNickname")?.Substring(0, 1).ToUpper() ?? "U")
+                </div>
+                <span>@Context.Session.GetString("UserNickname")</span>
+            </div>
+            
+            <button class="present-btn" onclick="enterPresentMode()">
+                Present
+            </button>
+            
+            <a href="@(ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? Url.Action("Exit", "Presentation") : Url.Action("Index", "Presentation"))" class="exit-btn">
+                Exit
+            </a>
+        </div>
+    </header>
+    
+    <main class="presentation-content">
+        @RenderBody()
+    </main>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    
+    <script>
+        // Configure toastr
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "3000"
+        };
+
+        function enterPresentMode() {
+            const presentationContainer = document.querySelector('.presentation-container');
+            const slidesPanel = document.querySelector('.slides-panel');
+            const usersPanel = document.querySelector('.users-panel');
+            const toolbar = document.querySelector('.editing-toolbar');
+            const header = document.querySelector('.presentation-header');
+            
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+                header.style.display = 'flex';
+                slidesPanel.style.display = 'flex';
+                usersPanel.style.display = 'block';
+                toolbar.style.display = 'flex';
+                document.querySelector('.present-btn').innerHTML = 'Present';
+            } else {
+                document.documentElement.requestFullscreen();
+                header.style.display = 'none';
+                slidesPanel.style.display = 'none';
+                usersPanel.style.display = 'none';
+                toolbar.style.display = 'none';
+                document.querySelector('.present-btn').innerHTML = 'Exit Present';
+            }
+        }
+        
+        // Handle fullscreen change events
+        document.addEventListener('fullscreenchange', function() {
+            if (!document.fullscreenElement) {
+                const header = document.querySelector('.presentation-header');
+                const slidesPanel = document.querySelector('.slides-panel');
+                const usersPanel = document.querySelector('.users-panel');
+                const toolbar = document.querySelector('.editing-toolbar');
+                
+                if (header) header.style.display = 'flex';
+                if (slidesPanel) slidesPanel.style.display = 'flex';
+                if (usersPanel) usersPanel.style.display = 'block';
+                if (toolbar) toolbar.style.display = 'flex';
+                
+                const presentBtn = document.querySelector('.present-btn');
+                if (presentBtn) presentBtn.innerHTML = 'Present';
+            }
+        });
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // F5 or F11 for presentation mode
+            if (e.key === 'F5' || e.key === 'F11') {
+                e.preventDefault();
+                enterPresentMode();
+            }
+            
+            // Escape to exit presentation mode
+            if (e.key === 'Escape' && document.fullscreenElement) {
+                document.exitFullscreen();
+            }
+        });
+    </script>
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

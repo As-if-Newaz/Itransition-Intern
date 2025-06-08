@@ -1,0 +1,460 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\views\\presentation\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\views\\presentation\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\views\\presentation\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\views\\presentation\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\views\\presentation\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\views\\presentation\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\views\\home\\slide.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\views\\home\\slide.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\wwwroot\\js\\loadjsdraw.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\wwwroot\\js\\loadjsdraw.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\controllers\\presentationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\controllers\\presentationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\wwwroot\\js\\signalr.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\wwwroot\\js\\signalr.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\views\\shared\\presentationlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\views\\shared\\presentationlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\models\\slide.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\models\\slide.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\models\\presentation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\models\\presentation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\views\\presentation\\viewslides.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\views\\presentation\\viewslides.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\views\\presentation\\slide.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\views\\presentation\\slide.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\hubs\\presentationhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\hubs\\presentationhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Migrations\\20250607202422_initdbb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Presentation Collab\\Migrations\\20250607202422_initdbb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\views\\shared\\_notification.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\views\\shared\\_notification.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\presentation collab\\presentation collab\\migrations\\20250607210242_initdb3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\migrations\\20250607210242_initdb3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 8,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Presentation\\Create.cshtml",
+              "RelativeDocumentMoniker": "Presentation Collab\\Views\\Presentation\\Create.cshtml",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Presentation\\Create.cshtml",
+              "RelativeToolTip": "Presentation Collab\\Views\\Presentation\\Create.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T17:55:17.608Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Privacy.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Home\\Privacy.cshtml",
+              "RelativeDocumentMoniker": "Presentation Collab\\Views\\Home\\Privacy.cshtml",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Home\\Privacy.cshtml",
+              "RelativeToolTip": "Presentation Collab\\Views\\Home\\Privacy.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T17:55:14.449Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PresentationLayout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Shared\\PresentationLayout.cshtml",
+              "RelativeDocumentMoniker": "Presentation Collab\\Views\\Shared\\PresentationLayout.cshtml",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Shared\\PresentationLayout.cshtml",
+              "RelativeToolTip": "Presentation Collab\\Views\\Shared\\PresentationLayout.cshtml",
+              "ViewState": "AgIAACQAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-07T21:04:35.679Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "20250607210242_initdb3.cs",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Migrations\\20250607210242_initdb3.cs",
+              "RelativeDocumentMoniker": "Presentation Collab\\Migrations\\20250607210242_initdb3.cs",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Migrations\\20250607210242_initdb3.cs",
+              "RelativeToolTip": "Presentation Collab\\Migrations\\20250607210242_initdb3.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T21:02:42.33Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Presentation\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Presentation Collab\\Views\\Presentation\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Presentation\\Edit.cshtml",
+              "RelativeToolTip": "Presentation Collab\\Views\\Presentation\\Edit.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-07T21:00:39.633Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ViewSlides.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Presentation\\ViewSlides.cshtml",
+              "RelativeDocumentMoniker": "Presentation Collab\\Views\\Presentation\\ViewSlides.cshtml",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Presentation\\ViewSlides.cshtml",
+              "RelativeToolTip": "Presentation Collab\\Views\\Presentation\\ViewSlides.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-07T20:42:52.272Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Presentation Collab\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Presentation Collab\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAA1wCAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T20:29:31.653Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Slide.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Presentation\\Slide.cshtml",
+              "RelativeDocumentMoniker": "Presentation Collab\\Views\\Presentation\\Slide.cshtml",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Presentation\\Slide.cshtml",
+              "RelativeToolTip": "Presentation Collab\\Views\\Presentation\\Slide.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-07T20:28:26.459Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Presentation\\Index.cshtml",
+              "RelativeDocumentMoniker": "Presentation Collab\\Views\\Presentation\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Presentation\\Index.cshtml",
+              "RelativeToolTip": "Presentation Collab\\Views\\Presentation\\Index.cshtml",
+              "ViewState": "AgIAAI0AAAAAAAAAAAAAAKkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-07T20:27:31.589Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "20250607202422_initdbb.cs",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Migrations\\20250607202422_initdbb.cs",
+              "RelativeDocumentMoniker": "Presentation Collab\\Migrations\\20250607202422_initdbb.cs",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Migrations\\20250607202422_initdbb.cs",
+              "RelativeToolTip": "Presentation Collab\\Migrations\\20250607202422_initdbb.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T20:24:22.203Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "Presentation Collab\\Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "Presentation Collab\\Models\\ErrorViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T20:18:48.267Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Presentation Collab\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Models\\User.cs",
+              "RelativeToolTip": "Presentation Collab\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T20:17:53.542Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Presentation.cs",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Models\\Presentation.cs",
+              "RelativeDocumentMoniker": "Presentation Collab\\Models\\Presentation.cs",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Models\\Presentation.cs",
+              "RelativeToolTip": "Presentation Collab\\Models\\Presentation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T20:17:38.573Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Presentation Collab\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Presentation Collab\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAABgAAAAAAAAAAIBJwCYAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-07T20:06:14.275Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "site.js",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\wwwroot\\js\\site.js",
+              "RelativeDocumentMoniker": "Presentation Collab\\wwwroot\\js\\site.js",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\wwwroot\\js\\site.js",
+              "RelativeToolTip": "Presentation Collab\\wwwroot\\js\\site.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-06-07T20:04:30.255Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "signalr.js",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\wwwroot\\js\\signalr.js",
+              "RelativeDocumentMoniker": "Presentation Collab\\wwwroot\\js\\signalr.js",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\wwwroot\\js\\signalr.js",
+              "RelativeToolTip": "Presentation Collab\\wwwroot\\js\\signalr.js",
+              "ViewState": "AgIAAGgMAAAAAAAAAAAtwHoMAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-06-07T19:21:16.495Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\appsettings.json",
+              "RelativeDocumentMoniker": "Presentation Collab\\appsettings.json",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\appsettings.json",
+              "RelativeToolTip": "Presentation Collab\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-07T19:12:14.82Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Program.cs",
+              "RelativeDocumentMoniker": "Presentation Collab\\Program.cs",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Program.cs",
+              "RelativeToolTip": "Presentation Collab\\Program.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAAtwDUAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T19:11:53.681Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "_Notification.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Shared\\_Notification.cshtml",
+              "RelativeDocumentMoniker": "Presentation Collab\\Views\\Shared\\_Notification.cshtml",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Shared\\_Notification.cshtml",
+              "RelativeToolTip": "Presentation Collab\\Views\\Shared\\_Notification.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-07T19:11:13.829Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Presentation Collab\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Presentation Collab\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAmwA4AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-07T19:10:20.095Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Slide.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Home\\Slide.cshtml",
+              "RelativeDocumentMoniker": "Presentation Collab\\Views\\Home\\Slide.cshtml",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Views\\Home\\Slide.cshtml",
+              "RelativeToolTip": "Presentation Collab\\Views\\Home\\Slide.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-07T19:09:49.973Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "loadJsDraw.js",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\wwwroot\\js\\loadJsDraw.js",
+              "RelativeDocumentMoniker": "Presentation Collab\\wwwroot\\js\\loadJsDraw.js",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\wwwroot\\js\\loadJsDraw.js",
+              "RelativeToolTip": "Presentation Collab\\wwwroot\\js\\loadJsDraw.js",
+              "ViewState": "AgIAALwAAAAAAAAAAAAAACMAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2025-06-07T19:08:42.751Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ApplicationDBContext.cs",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\ApplicationDBContext.cs",
+              "RelativeDocumentMoniker": "Presentation Collab\\ApplicationDBContext.cs",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\ApplicationDBContext.cs",
+              "RelativeToolTip": "Presentation Collab\\ApplicationDBContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T19:05:05.776Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PresentationController.cs",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Controllers\\PresentationController.cs",
+              "RelativeDocumentMoniker": "Presentation Collab\\Controllers\\PresentationController.cs",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Controllers\\PresentationController.cs",
+              "RelativeToolTip": "Presentation Collab\\Controllers\\PresentationController.cs",
+              "ViewState": "AgIAAMIAAAAAAAAAAAAnwCYBAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T19:04:32.389Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "PresentationHub.cs",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Hubs\\PresentationHub.cs",
+              "RelativeDocumentMoniker": "Presentation Collab\\Hubs\\PresentationHub.cs",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Hubs\\PresentationHub.cs",
+              "RelativeToolTip": "Presentation Collab\\Hubs\\PresentationHub.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T19:02:04.895Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Slide.cs",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Models\\Slide.cs",
+              "RelativeDocumentMoniker": "Presentation Collab\\Models\\Slide.cs",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Presentation Collab\\Presentation Collab\\Models\\Slide.cs",
+              "RelativeToolTip": "Presentation Collab\\Models\\Slide.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-07T18:59:52.491Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    body { margin: 0; }
+    .home-center {
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .home-center-inner {
+        margin-top: 15vh;
+        width: 100%;
+        max-width: 700px;
+    }
+    @@media (max-width: 768px) {
+        .home-center-inner {
+            margin-top: 8vh;
+        }
+    }
+</style>
+
+<div class="home-center">
+    <div class="home-center-inner text-center">
+        <h1 class="display-4 mb-4" style="white-space: nowrap; font-size: 3.5rem;">Collaborative Presentation</h1>
+        <form asp-action="Join" method="post">
+            <div class="form-group d-flex">
+                <input type="text" name="nickname" class="form-control form-control-lg"
+                       placeholder="Enter your nickname" required>
+                <button type="submit" class="btn btn-primary btn-lg ms-lg-3">Join</button>
+            </div>
+        </form>
+    </div>
+</div>

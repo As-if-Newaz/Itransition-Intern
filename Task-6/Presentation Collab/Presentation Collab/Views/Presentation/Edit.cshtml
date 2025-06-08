@@ -1,0 +1,272 @@
+﻿@model Presentation
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "PresentationLayout";
+}
+
+<link rel="stylesheet" href="~/css/presentation-edit.css" asp-append-version="true" />
+
+@Html.AntiForgeryToken()
+
+<div class="presentation-container">
+    <!-- Left Panel - Slides -->
+    <div class="slides-panel">
+        <h3>Slides</h3>
+        <div class="slides-list" id="slides-list">
+            @if (Model.Slides != null && Model.Slides.Any())
+            {
+                @foreach (var slide in Model.Slides.OrderBy(s => s.Order))
+                {
+                    <div class="slide-thumbnail @(slide.Order == 1 ? "active" : "")"
+                         data-slide-id="@slide.Id"
+                         data-slide-number="@slide.Order"
+                         onclick="selectSlide(@slide.Id)">
+                        @if (slide.SvgData != null && slide.SvgData.Length > 0)
+                        {
+                            var svgDataBase64 = Convert.ToBase64String(slide.SvgData);
+                            var svgDataUri = $"data:image/svg+xml;base64,{svgDataBase64}";
+                            <img src="@svgDataUri" alt="Slide @slide.Order" style="width:100%;height:100%;object-fit:contain;" />
+                        }
+                        else
+                        {
+                            <div class="loading">Slide @slide.Order</div>
+                        }
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="slide-thumbnail active"
+                     data-slide-id="1"
+                     data-slide-number="1"
+                     onclick="selectSlide(1)">
+                    <div class="loading">Slide 1</div>
+                </div>
+            }
+        </div>
+        @{
+            var currentUserNickname = Context.Session.GetString("UserNickname");
+        }
+        <div class="slide-actions">
+            @if (Model.CreatorName == currentUserNickname)
+            {
+                <button class="btn btn-primary" onclick="addNewSlide()">
+                    <i class="fas fa-plus"></i> Add Slide
+                </button>
+                <button class="btn btn-danger" onclick="deleteSelectedSlide()">
+                    <i class="fas fa-trash"></i> Delete Slide
+                </button>
+            }
+        </div>
+    </div>
+
+    <!-- Main Content - Drawing Canvas -->
+    <div class="main-content">
+        <div id="canvas-container">
+            <div id="presentation-content">
+                <!-- Presentation content will be rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Panel - Users -->
+    <div class="users-panel">
+        <h3>Connected Users</h3>
+        <div id="users-list">
+            @foreach (var user in Model.ConnectedUsers)
+            {
+                <div class="user-item" data-nickname="@user.Name">
+                    <span class="user-name">@user.Name</span>
+                    @if (Model.CreatorName == currentUserNickname && user.Name != currentUserNickname)
+                    {
+                        <select class="role-selector" data-user="@user.Name" onchange="updateUserRole('@user.Name', this.value)">
+                            <option value="Viewer" selected="@(user.Role == UserRole.Viewer)">Viewer</option>
+                            <option value="Editor" selected=@(user.Role == UserRole.Editor)>Editor</option>
+                        </select>
+                    }
+                    else
+                    {
+                        <span class="role-badge @user.Role.ToString().ToLower()">@user.Role</span>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/js-draw@1.20.3/dist/bundle.min.js"></script>
+    <script src="~/js/loadJsDraw.js"></script>
+    <script src="~/js/signalr.js"></script>
+    <script>
+        let currentSlideId = null;
+        const username = "@Context.Session.GetString("UserNickname")";
+
+        function loadSlideEditor(slideId) {
+            currentSlideId = slideId;
+            const container = document.getElementById('presentation-content');
+            container.innerHTML = '';
+            window.startDrawingInContainer(container, slideId, username);
+        }
+
+        function selectSlide(slideId) {
+            document.querySelectorAll('.slide-thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+            document.querySelector(`[data-slide-id="${slideId}"]`).classList.add('active');
+            loadSlideEditor(slideId);
+        }
+
+        function showNotification(message, isError = false) {
+            const notification = document.createElement('div');
+            notification.style.position = 'fixed';
+            notification.style.top = '20px';
+            notification.style.right = '20px';
+            notification.style.padding = '10px 20px';
+            notification.style.borderRadius = '4px';
+            notification.style.color = 'white';
+            notification.style.backgroundColor = isError ? '#f44336' : '#4CAF50';
+            notification.style.zIndex = '1000';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        async function addNewSlide() {
+            try {
+                const response = await fetch("/Presentation/AddSlide", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ 
+                        presentationId: parseInt('@Model.Id'),
+                        isBlank: false
+                    })
+                });
+                const result = await response.json();
+                if (result.success) {
+                    const slidesList = document.getElementById('slides-list');
+                    const newSlide = document.createElement('div');
+                    newSlide.className = 'slide-thumbnail';
+                    newSlide.setAttribute('data-slide-id', result.slideId);
+                    newSlide.setAttribute('data-slide-number', result.order);
+                    newSlide.onclick = () => selectSlide(result.slideId);
+                    newSlide.innerHTML = `<div class="loading">Slide ${result.order}</div>`;
+                    slidesList.appendChild(newSlide);
+                    selectSlide(result.slideId);
+                    showNotification('Slide added successfully!');
+                } else {
+                    showNotification(result.message || "Failed to add new slide", true);
+                }
+            } catch (error) {
+                console.error("Error adding slide:", error);
+                showNotification("Failed to add new slide", true);
+            }
+        }
+
+        async function updateUserRole(username, newRole) {
+            try {
+                const requestData = {
+                    presentationId: @Model.Id,
+                    username: username,
+                    newRole: newRole.toString()
+                };
+                
+                console.log('Sending request:', requestData);
+                
+                const response = await fetch("/Presentation/UpdateUserRole", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "RequestVerificationToken": document.querySelector('input[name="__RequestVerificationToken"]').value
+                    },
+                    body: JSON.stringify(requestData)
+                });
+                
+                const result = await response.json();
+                console.log('Response:', result);
+                
+                if (result.success) {
+                    showNotification(`Updated ${username}'s role to ${newRole}`);
+                    // Update the UI to reflect the new role
+                    const userItem = document.querySelector(`.user-item[data-nickname="${username}"]`);
+                    if (userItem) {
+                        const roleBadge = userItem.querySelector('.role-badge');
+                        if (roleBadge) {
+                            roleBadge.className = `role-badge ${newRole.toLowerCase()}`;
+                            roleBadge.textContent = newRole;
+                        }
+                    }
+                } else {
+                    showNotification(result.message || "Failed to update user role", true);
+                }
+            } catch (error) {
+                console.error("Error updating user role:", error);
+                showNotification("Failed to update user role", true);
+            }
+        }
+
+        async function deleteSelectedSlide() {
+            const activeSlide = document.querySelector('.slide-thumbnail.active');
+            if (!activeSlide) {
+                showNotification("No slide selected", true);
+                return;
+            }
+
+            const slideId = activeSlide.getAttribute('data-slide-id');
+            const slideNumber = activeSlide.getAttribute('data-slide-number');
+
+            try {
+                const response = await fetch("/Presentation/DeleteSlide", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        slideId: parseInt(slideId),
+                        presentationId: @Model.Id
+                    })
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    // Remove the slide from the UI
+                    activeSlide.remove();
+                    
+                    // Update slide numbers for remaining slides
+                    const slides = document.querySelectorAll('.slide-thumbnail');
+                    slides.forEach((slide, index) => {
+                        slide.setAttribute('data-slide-number', index + 1);
+                        const loadingDiv = slide.querySelector('.loading');
+                        if (loadingDiv) {
+                            loadingDiv.textContent = `Slide ${index + 1}`;
+                        }
+                    });
+
+                    // Select the first slide if available
+                    const firstSlide = document.querySelector('.slide-thumbnail');
+                    if (firstSlide) {
+                        selectSlide(firstSlide.getAttribute('data-slide-id'));
+                    }
+
+                    showNotification('Slide deleted successfully!');
+                } else {
+                    showNotification(result.message || "Failed to delete slide", true);
+                }
+            } catch (error) {
+                console.error("Error deleting slide:", error);
+                showNotification("Failed to delete slide", true);
+            }
+        }
+
+        // Initialize everything when the page loads
+        document.addEventListener('DOMContentLoaded', async () => {
+            const firstSlide = document.querySelector('.slide-thumbnail');
+            if (firstSlide) {
+                selectSlide(firstSlide.getAttribute('data-slide-id'));
+            }
+        });
+    </script>
+}
+

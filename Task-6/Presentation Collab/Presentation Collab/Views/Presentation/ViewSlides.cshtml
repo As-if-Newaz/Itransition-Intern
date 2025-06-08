@@ -1,0 +1,94 @@
+﻿@model List<Slide>
+@{
+    string svgDataUri = string.Empty;
+}
+
+<style>
+    img {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 5px;
+    }
+
+        img:hover {
+            box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+        }
+</style>
+
+<div class="container">
+    <h2 class="mt-2">Presentation Collaborator <span class="text-muted"></span></h2>
+    <div class="row">
+        <div class="mt-2 d-inline-flex">
+            <button class="btn btn-success" id="btnCreateNew"><i class="bi bi-plus-square"></i> Start New Slide</button>
+        </div>
+    </div>
+
+
+    @if (Model != null && Model.Count() > 0)
+    {
+        <div class="d-flex flex-column align-items-center mt-3">
+            <h5>Existing Slides</h5>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-4 d-flex justify-content-center">
+                <table class="table table-bordered border-secondary">
+                    <tbody>
+                        @foreach (var Slide in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="/Slide/@Slide.Id" class="text-decoration-none">
+                                        @if (Slide.SvgData != null && Slide.SvgData.Length > 0)
+                                        {
+                                            var svgDataBase64 = Convert.ToBase64String(Slide.SvgData);
+                                            svgDataUri = $"data:image/svg+xml;base64,{svgDataBase64}";
+                                        }
+                                        else
+                                        {
+                                            svgDataUri = "https://placehold.co/240x150/white/white";
+                                        }
+                                        <img src="@svgDataUri" alt="Slide SVG" width="240" height="150" />
+                                        &nbsp; Drawing @Slide.Id
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="d-flex flex-column align-items-center mt-lg-4">
+            <h5>No existing Slides!</h5>
+        </div>
+    }
+</div>
+
+<script>
+    $(document).ready(function() {
+        console.log("Document ready");
+        $('#btnCreateNew').click(function () {
+            console.log("Button clicked");
+            $.ajax({
+                url: "/Slide/create",
+                type: "POST",
+                success: function (response) {
+                    console.log("Response received:", response);
+                    if (response.success) {
+                        toastr.success("New Slide created!");
+                        window.location.href = "/Slide/" + response.SlideId;
+                    }
+                    if (!response.success) {
+                        toastr.error("Server error! Try again later");
+                    }
+                },
+                error: function (error) {
+                    console.log("Error:", error);
+                    toastr.error("Server error! Try again later");
+                }
+            });
+        });
+    });
+</script>
