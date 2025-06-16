@@ -1,0 +1,11 @@
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms\obj\Release\net8.0\PubTmp\Out\Iforms.MVC.exe
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms\obj\Release\net8.0\PubTmp\Out\appsettings.Development.json
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms\obj\Release\net8.0\PubTmp\Out\appsettings.json
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms\obj\Release\net8.0\PubTmp\Out\Iforms.MVC.dll
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms\obj\Release\net8.0\PubTmp\Out\Iforms.MVC.deps.json
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms\obj\Release\net8.0\PubTmp\Out\Iforms.MVC.runtimeconfig.json
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms\obj\Release\net8.0\PubTmp\Out\Iforms.MVC.pdb
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms\obj\Release\net8.0\PubTmp\Out\Iforms.BLL.dll
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms\obj\Release\net8.0\PubTmp\Out\Iforms.DAL.dll
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms\obj\Release\net8.0\PubTmp\Out\Iforms.BLL.pdb
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms\obj\Release\net8.0\PubTmp\Out\Iforms.DAL.pdb

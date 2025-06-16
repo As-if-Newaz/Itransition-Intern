@@ -1,0 +1,16 @@
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.BLL\bin\Debug\net8.0\Iforms.BLL.deps.json
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.BLL\bin\Debug\net8.0\Iforms.BLL.dll
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.BLL\bin\Debug\net8.0\Iforms.BLL.pdb
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.BLL\bin\Debug\net8.0\Iforms.DAL.dll
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.BLL\bin\Debug\net8.0\Iforms.DAL.pdb
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.BLL\obj\Debug\net8.0\Iforms.BLL.csproj.AssemblyReference.cache
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.BLL\obj\Debug\net8.0\Iforms.BLL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.BLL\obj\Debug\net8.0\Iforms.BLL.AssemblyInfoInputs.cache
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.BLL\obj\Debug\net8.0\Iforms.BLL.AssemblyInfo.cs
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.BLL\obj\Debug\net8.0\Iforms.BLL.csproj.CoreCompileInputs.cache
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.BLL\obj\Debug\net8.0\Iforms.BLL.sourcelink.json
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.BLL\obj\Debug\net8.0\Iforms.BLL.csproj.Up2Date
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.BLL\obj\Debug\net8.0\Iforms.BLL.dll
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.BLL\obj\Debug\net8.0\refint\Iforms.BLL.dll
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.BLL\obj\Debug\net8.0\Iforms.BLL.pdb
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.BLL\obj\Debug\net8.0\ref\Iforms.BLL.dll

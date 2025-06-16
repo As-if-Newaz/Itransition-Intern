@@ -1,0 +1,55 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Iforms.MVC/1.0.0": {
+        "dependencies": {
+          "Iforms.BLL": "1.0.0"
+        },
+        "runtime": {
+          "Iforms.MVC.dll": {}
+        }
+      },
+      "Iforms.BLL/1.0.0": {
+        "dependencies": {
+          "Iforms.DAL": "1.0.0"
+        },
+        "runtime": {
+          "Iforms.BLL.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Iforms.DAL/1.0.0": {
+        "runtime": {
+          "Iforms.DAL.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Iforms.MVC/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Iforms.BLL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Iforms.DAL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

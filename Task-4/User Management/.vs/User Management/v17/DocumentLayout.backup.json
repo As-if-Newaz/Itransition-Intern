@@ -3,20 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CE9FEDD1-9B74-4D34-940A-43A3DF0C734C}|User Management\\UserManagement.MVC.csproj|c:\\users\\asifk\\desktop\\itransition\\task-4\\user management\\user management\\views\\user\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CE9FEDD1-9B74-4D34-940A-43A3DF0C734C}|User Management\\UserManagement.MVC.csproj|solutionrelative:user management\\views\\user\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CE9FEDD1-9B74-4D34-940A-43A3DF0C734C}|User Management\\UserManagement.MVC.csproj|c:\\users\\asifk\\desktop\\itransition\\task-4\\user management\\user management\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{CE9FEDD1-9B74-4D34-940A-43A3DF0C734C}|User Management\\UserManagement.MVC.csproj|solutionrelative:user management\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{DD6CA447-FD93-4A4C-8463-9945B6E15E52}|UserManagement.DAL\\UserManagement.DAL.csproj|c:\\users\\asifk\\desktop\\itransition\\task-4\\user management\\usermanagement.dal\\repositories\\useractiviyrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD6CA447-FD93-4A4C-8463-9945B6E15E52}|UserManagement.DAL\\UserManagement.DAL.csproj|solutionrelative:usermanagement.dal\\repositories\\useractiviyrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DD6CA447-FD93-4A4C-8463-9945B6E15E52}|UserManagement.DAL\\UserManagement.DAL.csproj|c:\\users\\asifk\\desktop\\itransition\\task-4\\user management\\usermanagement.dal\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{DD6CA447-FD93-4A4C-8463-9945B6E15E52}|UserManagement.DAL\\UserManagement.DAL.csproj|solutionrelative:usermanagement.dal\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DD6CA447-FD93-4A4C-8463-9945B6E15E52}|UserManagement.DAL\\UserManagement.DAL.csproj|c:\\users\\asifk\\desktop\\itransition\\task-4\\user management\\usermanagement.dal\\repositories\\useractiviyrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DD6CA447-FD93-4A4C-8463-9945B6E15E52}|UserManagement.DAL\\UserManagement.DAL.csproj|solutionrelative:usermanagement.dal\\repositories\\useractiviyrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DD6CA447-FD93-4A4C-8463-9945B6E15E52}|UserManagement.DAL\\UserManagement.DAL.csproj|c:\\users\\asifk\\desktop\\itransition\\task-4\\user management\\usermanagement.dal\\entityframework\\tablemodels\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DD6CA447-FD93-4A4C-8463-9945B6E15E52}|UserManagement.DAL\\UserManagement.DAL.csproj|solutionrelative:usermanagement.dal\\entityframework\\tablemodels\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE9FEDD1-9B74-4D34-940A-43A3DF0C734C}|User Management\\UserManagement.MVC.csproj|c:\\users\\asifk\\desktop\\itransition\\task-4\\user management\\user management\\usermanagement.mvc.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{CE9FEDD1-9B74-4D34-940A-43A3DF0C734C}|User Management\\UserManagement.MVC.csproj|solutionrelative:user management\\usermanagement.mvc.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE9FEDD1-9B74-4D34-940A-43A3DF0C734C}|User Management\\UserManagement.MVC.csproj|c:\\users\\asifk\\desktop\\itransition\\task-4\\user management\\user management\\views\\user\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CE9FEDD1-9B74-4D34-940A-43A3DF0C734C}|User Management\\UserManagement.MVC.csproj|solutionrelative:user management\\views\\user\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CE9FEDD1-9B74-4D34-940A-43A3DF0C734C}|User Management\\UserManagement.MVC.csproj|c:\\users\\asifk\\desktop\\itransition\\task-4\\user management\\user management\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{CE9FEDD1-9B74-4D34-940A-43A3DF0C734C}|User Management\\UserManagement.MVC.csproj|solutionrelative:user management\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CE9FEDD1-9B74-4D34-940A-43A3DF0C734C}|User Management\\UserManagement.MVC.csproj|c:\\users\\asifk\\desktop\\itransition\\task-4\\user management\\user management\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -91,10 +99,6 @@
       "RelativeMoniker": "D:0:0:{DD6CA447-FD93-4A4C-8463-9945B6E15E52}|UserManagement.DAL\\UserManagement.DAL.csproj|solutionrelative:usermanagement.dal\\entityframework\\tablemodels\\useractivity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DD6CA447-FD93-4A4C-8463-9945B6E15E52}|UserManagement.DAL\\UserManagement.DAL.csproj|c:\\users\\asifk\\desktop\\itransition\\task-4\\user management\\usermanagement.dal\\entityframework\\tablemodels\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DD6CA447-FD93-4A4C-8463-9945B6E15E52}|UserManagement.DAL\\UserManagement.DAL.csproj|solutionrelative:usermanagement.dal\\entityframework\\tablemodels\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CE9FEDD1-9B74-4D34-940A-43A3DF0C734C}|User Management\\UserManagement.MVC.csproj|c:\\users\\asifk\\desktop\\itransition\\task-4\\user management\\user management\\auth\\authenticateduser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CE9FEDD1-9B74-4D34-940A-43A3DF0C734C}|User Management\\UserManagement.MVC.csproj|solutionrelative:user management\\auth\\authenticateduser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -155,10 +159,6 @@
       "RelativeMoniker": "D:0:0:{BBDE8E21-BDD0-4A5D-8B01-745BCDFFE417}|UserManagement.BLL\\UserManagement.BLL.csproj|solutionrelative:usermanagement.bll\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CE9FEDD1-9B74-4D34-940A-43A3DF0C734C}|User Management\\UserManagement.MVC.csproj|c:\\users\\asifk\\desktop\\itransition\\task-4\\user management\\user management\\usermanagement.mvc.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{CE9FEDD1-9B74-4D34-940A-43A3DF0C734C}|User Management\\UserManagement.MVC.csproj|solutionrelative:user management\\usermanagement.mvc.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CE9FEDD1-9B74-4D34-940A-43A3DF0C734C}|User Management\\UserManagement.MVC.csproj|c:\\users\\asifk\\desktop\\itransition\\task-4\\user management\\user management\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{CE9FEDD1-9B74-4D34-940A-43A3DF0C734C}|User Management\\UserManagement.MVC.csproj|solutionrelative:user management\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -186,11 +186,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 22,
+          "SelectedChildIndex": 32,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "AuthenticatedUser.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\Auth\\AuthenticatedUser.cs",
               "RelativeDocumentMoniker": "User Management\\Auth\\AuthenticatedUser.cs",
@@ -202,7 +202,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "notification.css",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\wwwroot\\css\\notification.css",
               "RelativeDocumentMoniker": "User Management\\wwwroot\\css\\notification.css",
@@ -214,7 +214,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "site.css",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\wwwroot\\css\\site.css",
               "RelativeDocumentMoniker": "User Management\\wwwroot\\css\\site.css",
@@ -226,7 +226,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "ActivityService.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.BLL\\Services\\ActivityService.cs",
               "RelativeDocumentMoniker": "UserManagement.BLL\\Services\\ActivityService.cs",
@@ -238,7 +238,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "UserActivityDTO.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.BLL\\DTOs\\UserActivityDTO.cs",
               "RelativeDocumentMoniker": "UserManagement.BLL\\DTOs\\UserActivityDTO.cs",
@@ -250,7 +250,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 12,
               "Title": "JwtService.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.BLL\\Services\\JwtService.cs",
               "RelativeDocumentMoniker": "UserManagement.BLL\\Services\\JwtService.cs",
@@ -286,7 +286,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "Dashboard.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\Views\\Dashboard\\Dashboard.cshtml",
               "RelativeDocumentMoniker": "User Management\\Views\\Dashboard\\Dashboard.cshtml",
@@ -298,7 +298,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "Error.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\Views\\Shared\\Error.cshtml",
               "RelativeDocumentMoniker": "User Management\\Views\\Shared\\Error.cshtml",
@@ -310,7 +310,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 5,
               "Title": "Login.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\Views\\Auth\\Login.cshtml",
               "RelativeDocumentMoniker": "User Management\\Views\\Auth\\Login.cshtml",
@@ -318,12 +318,11 @@
               "RelativeToolTip": "User Management\\Views\\Auth\\Login.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-28T07:14:13.62Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-28T07:14:13.62Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "User Management\\Controllers\\AuthController.cs",
@@ -335,7 +334,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 14,
               "Title": "DashboardController.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\Controllers\\DashboardController.cs",
               "RelativeDocumentMoniker": "User Management\\Controllers\\DashboardController.cs",
@@ -347,7 +346,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 17,
               "Title": "20250527192453_UsersTableUpdated.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\Migrations\\20250527192453_UsersTableUpdated.cs",
               "RelativeDocumentMoniker": "UserManagement.DAL\\Migrations\\20250527192453_UsersTableUpdated.cs",
@@ -359,7 +358,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "Notification.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\Views\\Shared\\Notification.cshtml",
               "RelativeDocumentMoniker": "User Management\\Views\\Shared\\Notification.cshtml",
@@ -383,7 +382,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "_ValidationScriptsPartial.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
               "RelativeDocumentMoniker": "User Management\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
@@ -395,7 +394,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "RegisterLoginLayout.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\Views\\Shared\\RegisterLoginLayout.cshtml",
               "RelativeDocumentMoniker": "User Management\\Views\\Shared\\RegisterLoginLayout.cshtml",
@@ -407,7 +406,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "User Management\\Views\\Shared\\_Layout.cshtml",
@@ -415,12 +414,11 @@
               "RelativeToolTip": "User Management\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-05-27T17:04:05.418Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-27T17:04:05.418Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 35,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "User Management\\Views\\_ViewStart.cshtml",
@@ -432,7 +430,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "_ViewImports.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\Views\\_ViewImports.cshtml",
               "RelativeDocumentMoniker": "User Management\\Views\\_ViewImports.cshtml",
@@ -444,7 +442,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "registerLoginLayout.css",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\wwwroot\\css\\registerLoginLayout.css",
               "RelativeDocumentMoniker": "User Management\\wwwroot\\css\\registerLoginLayout.css",
@@ -456,7 +454,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Register.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\Views\\User\\Register.cshtml",
               "RelativeDocumentMoniker": "User Management\\Views\\User\\Register.cshtml",
@@ -469,7 +467,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "User Management\\Controllers\\UserController.cs",
@@ -481,7 +479,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 38,
               "Title": "UserDTO.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.BLL\\DTOs\\UserDTO.cs",
               "RelativeDocumentMoniker": "UserManagement.BLL\\DTOs\\UserDTO.cs",
@@ -493,7 +491,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 11,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.BLL\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "UserManagement.BLL\\Services\\AuthService.cs",
@@ -505,7 +503,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 13,
               "Title": "UserServices.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.BLL\\Services\\UserServices.cs",
               "RelativeDocumentMoniker": "UserManagement.BLL\\Services\\UserServices.cs",
@@ -517,7 +515,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "UserLoginDTO.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.BLL\\DTOs\\UserLoginDTO.cs",
               "RelativeDocumentMoniker": "UserManagement.BLL\\DTOs\\UserLoginDTO.cs",
@@ -537,11 +535,12 @@
               "RelativeToolTip": "UserManagement.BLL\\UserManagement.BLL.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-27T13:34:05.951Z"
+              "WhenOpened": "2025-05-27T13:34:05.951Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 18,
               "Title": "IUserActivity.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\Interfaces\\IUserActivity.cs",
               "RelativeDocumentMoniker": "UserManagement.DAL\\Interfaces\\IUserActivity.cs",
@@ -553,7 +552,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 19,
               "Title": "IUser.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\Interfaces\\IUser.cs",
               "RelativeDocumentMoniker": "UserManagement.DAL\\Interfaces\\IUser.cs",
@@ -565,7 +564,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 15,
               "Title": "DataAccess.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\DataAccess.cs",
               "RelativeDocumentMoniker": "UserManagement.DAL\\DataAccess.cs",
@@ -577,33 +576,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "UserActiviyRepository.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\Repositories\\UserActiviyRepository.cs",
               "RelativeDocumentMoniker": "UserManagement.DAL\\Repositories\\UserActiviyRepository.cs",
               "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\Repositories\\UserActiviyRepository.cs",
               "RelativeToolTip": "UserManagement.DAL\\Repositories\\UserActiviyRepository.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAADUAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAACEAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-25T18:28:41.757Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\Repositories\\UserRepository.cs",
               "RelativeDocumentMoniker": "UserManagement.DAL\\Repositories\\UserRepository.cs",
               "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\Repositories\\UserRepository.cs",
               "RelativeToolTip": "UserManagement.DAL\\Repositories\\UserRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAA6AAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABgAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-25T18:28:27.188Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 16,
               "Title": "Repository.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\Repositories\\Repository.cs",
               "RelativeDocumentMoniker": "UserManagement.DAL\\Repositories\\Repository.cs",
@@ -615,7 +614,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 20,
               "Title": "IRepository.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\Interfaces\\IRepository.cs",
               "RelativeDocumentMoniker": "UserManagement.DAL\\Interfaces\\IRepository.cs",
@@ -627,7 +626,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 21,
               "Title": "IApplicationDBContext.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\EntityFramework\\IApplicationDBContext.cs",
               "RelativeDocumentMoniker": "UserManagement.DAL\\EntityFramework\\IApplicationDBContext.cs",
@@ -639,7 +638,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 36,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\appsettings.json",
               "RelativeDocumentMoniker": "User Management\\appsettings.json",
@@ -659,11 +658,12 @@
               "RelativeToolTip": "UserManagement.DAL\\UserManagement.DAL.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-25T16:43:12.782Z"
+              "WhenOpened": "2025-05-25T16:43:12.782Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 3,
               "Title": "UserManagement.MVC.csproj",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\UserManagement.MVC.csproj",
               "RelativeDocumentMoniker": "User Management\\UserManagement.MVC.csproj",
@@ -671,11 +671,12 @@
               "RelativeToolTip": "User Management\\UserManagement.MVC.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-25T16:42:33.747Z"
+              "WhenOpened": "2025-05-25T16:42:33.747Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 37,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\User Management\\Program.cs",
               "RelativeDocumentMoniker": "User Management\\Program.cs",
@@ -687,7 +688,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 23,
               "Title": "UserActivity.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\EntityFramework\\TableModels\\UserActivity.cs",
               "RelativeDocumentMoniker": "UserManagement.DAL\\EntityFramework\\TableModels\\UserActivity.cs",
@@ -699,19 +700,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 2,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\EntityFramework\\TableModels\\User.cs",
               "RelativeDocumentMoniker": "UserManagement.DAL\\EntityFramework\\TableModels\\User.cs",
               "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\EntityFramework\\TableModels\\User.cs",
               "RelativeToolTip": "UserManagement.DAL\\EntityFramework\\TableModels\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-25T15:32:01.844Z"
+              "WhenOpened": "2025-05-25T15:32:01.844Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 22,
               "Title": "ApplicationDBContext.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-4\\User Management\\UserManagement.DAL\\EntityFramework\\ApplicationDBContext.cs",
               "RelativeDocumentMoniker": "UserManagement.DAL\\EntityFramework\\ApplicationDBContext.cs",

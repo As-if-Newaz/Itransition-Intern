@@ -1,0 +1,12 @@
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\bin\Debug\net8.0\Iforms.DAL.deps.json
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\bin\Debug\net8.0\Iforms.DAL.dll
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\bin\Debug\net8.0\Iforms.DAL.pdb
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\obj\Debug\net8.0\Iforms.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\obj\Debug\net8.0\Iforms.DAL.AssemblyInfoInputs.cache
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\obj\Debug\net8.0\Iforms.DAL.AssemblyInfo.cs
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\obj\Debug\net8.0\Iforms.DAL.csproj.CoreCompileInputs.cache
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\obj\Debug\net8.0\Iforms.DAL.sourcelink.json
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\obj\Debug\net8.0\Iforms.DAL.dll
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\obj\Debug\net8.0\refint\Iforms.DAL.dll
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\obj\Debug\net8.0\Iforms.DAL.pdb
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\obj\Debug\net8.0\ref\Iforms.DAL.dll
