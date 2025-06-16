@@ -10,3 +10,6 @@ C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\obj\Debug\net
 C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\obj\Debug\net8.0\refint\Iforms.DAL.dll
 C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\obj\Debug\net8.0\Iforms.DAL.pdb
 C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\obj\Debug\net8.0\ref\Iforms.DAL.dll
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\bin\Debug\net8.0\Iforms.DAL.runtimeconfig.json
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\obj\Debug\net8.0\Iforms.DAL.csproj.AssemblyReference.cache
+C:\Users\Asifk\Desktop\Itransition\Final Project\Iforms\Iforms.DAL\obj\Debug\net8.0\Iforms.DAL.genruntimeconfig.cache

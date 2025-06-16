@@ -1,12 +1,37 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Final Project\\Iforms\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|c:\\users\\asifk\\desktop\\itransition\\final project\\iforms\\iforms.dal\\iforms.dal.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\iforms.dal.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Iforms.DAL",
+              "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Iforms.DAL.csproj",
+              "RelativeDocumentMoniker": "Iforms.DAL\\Iforms.DAL.csproj",
+              "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Iforms.DAL.csproj",
+              "RelativeToolTip": "Iforms.DAL\\Iforms.DAL.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-16T07:45:44.841Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

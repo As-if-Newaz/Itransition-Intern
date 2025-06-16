@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Iforms.MVC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5dbe38d917b2c5f0c89a465228cf1ba3aba08b87")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+628e5d0df3df55937462d3530fc73340f4816b53")]
 [assembly: System.Reflection.AssemblyProductAttribute("Iforms.MVC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Iforms.MVC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
