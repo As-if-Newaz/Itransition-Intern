@@ -15,8 +15,8 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
         [Required, Column(TypeName = "VARCHAR"), StringLength(50)]
         public string Action { get; set; }
 
-        [Required, Column(TypeName = "VARCHAR"), StringLength(150)]
-        public string Details { get; set; }
+        [Column(TypeName = "VARCHAR"), StringLength(150)]
+        public string? Details { get; set; }
 
         [Required]
         public DateTime PerformedAt { get; set; }
