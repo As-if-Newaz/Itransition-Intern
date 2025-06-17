@@ -37,11 +37,6 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
         [Required]
         public DateTime CreatedAt { get; set; }
 
-        public DateTime? UpdatedAt { get; set; }
-
-        [Column(TypeName = "VARCHAR"), StringLength(100)]
-        public string? UpdatedBy { get; set; }
-
         public virtual ICollection<Template> CreatedTemplates { get; set; }
         public  virtual ICollection<Form> FilledForms { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
