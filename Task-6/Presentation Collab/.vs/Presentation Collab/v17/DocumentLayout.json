@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\task-6\\presentation collab\\presentation collab\\controllers\\presentationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\controllers\\presentationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\task-6\\presentation collab\\presentation collab\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\task-6\\presentation collab\\presentation collab\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\task-6\\presentation collab\\presentation collab\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\task-6\\presentation collab\\presentation collab\\controllers\\presentationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\controllers\\presentationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\task-6\\presentation collab\\presentation collab\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -91,10 +95,6 @@
       "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\views\\shared\\presentationlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\task-6\\presentation collab\\presentation collab\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|c:\\users\\asifk\\desktop\\itransition\\task-6\\presentation collab\\presentation collab\\hubs\\presentationhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0B7A0424-B2D5-45B5-BC0E-2F178B6C6623}|Presentation Collab\\Presentation Collab.csproj|solutionrelative:presentation collab\\hubs\\presentationhub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -117,11 +117,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 19,
+          "SelectedChildIndex": 24,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "ApplicationDBContextModelSnapshot.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Migrations\\ApplicationDBContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "Presentation Collab\\Migrations\\ApplicationDBContextModelSnapshot.cs",
@@ -133,7 +133,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "20250608100754_UpdatePresentationStringLengths.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Migrations\\20250608100754_UpdatePresentationStringLengths.cs",
               "RelativeDocumentMoniker": "Presentation Collab\\Migrations\\20250608100754_UpdatePresentationStringLengths.cs",
@@ -145,7 +145,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Views\\Presentation\\Create.cshtml",
               "RelativeDocumentMoniker": "Presentation Collab\\Views\\Presentation\\Create.cshtml",
@@ -157,7 +157,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "Privacy.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Views\\Home\\Privacy.cshtml",
               "RelativeDocumentMoniker": "Presentation Collab\\Views\\Home\\Privacy.cshtml",
@@ -169,7 +169,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "PresentationLayout.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Views\\Shared\\PresentationLayout.cshtml",
               "RelativeDocumentMoniker": "Presentation Collab\\Views\\Shared\\PresentationLayout.cshtml",
@@ -181,7 +181,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "20250607210242_initdb3.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Migrations\\20250607210242_initdb3.cs",
               "RelativeDocumentMoniker": "Presentation Collab\\Migrations\\20250607210242_initdb3.cs",
@@ -193,7 +193,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Views\\Presentation\\Edit.cshtml",
               "RelativeDocumentMoniker": "Presentation Collab\\Views\\Presentation\\Edit.cshtml",
@@ -205,7 +205,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "ViewSlides.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Views\\Presentation\\ViewSlides.cshtml",
               "RelativeDocumentMoniker": "Presentation Collab\\Views\\Presentation\\ViewSlides.cshtml",
@@ -217,19 +217,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 1,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Presentation Collab\\Controllers\\HomeController.cs",
               "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Controllers\\HomeController.cs",
               "RelativeToolTip": "Presentation Collab\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAA1wCAAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T20:29:31.653Z"
+              "WhenOpened": "2025-06-07T20:29:31.653Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Slide.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Views\\Presentation\\Slide.cshtml",
               "RelativeDocumentMoniker": "Presentation Collab\\Views\\Presentation\\Slide.cshtml",
@@ -241,7 +242,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Views\\Presentation\\Index.cshtml",
               "RelativeDocumentMoniker": "Presentation Collab\\Views\\Presentation\\Index.cshtml",
@@ -264,7 +265,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "Presentation Collab\\Models\\ErrorViewModel.cs",
@@ -276,7 +277,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Models\\User.cs",
               "RelativeDocumentMoniker": "Presentation Collab\\Models\\User.cs",
@@ -288,7 +289,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Presentation.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Models\\Presentation.cs",
               "RelativeDocumentMoniker": "Presentation Collab\\Models\\Presentation.cs",
@@ -300,7 +301,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Presentation Collab\\Views\\Shared\\_Layout.cshtml",
@@ -324,7 +325,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "signalr.js",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\wwwroot\\js\\signalr.js",
               "RelativeDocumentMoniker": "Presentation Collab\\wwwroot\\js\\signalr.js",
@@ -336,7 +337,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\appsettings.json",
               "RelativeDocumentMoniker": "Presentation Collab\\appsettings.json",
@@ -348,7 +349,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Program.cs",
               "RelativeDocumentMoniker": "Presentation Collab\\Program.cs",
@@ -373,7 +374,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Presentation Collab\\Views\\Home\\Index.cshtml",
@@ -385,7 +386,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "loadJsDraw.js",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\wwwroot\\js\\loadJsDraw.js",
               "RelativeDocumentMoniker": "Presentation Collab\\wwwroot\\js\\loadJsDraw.js",
@@ -397,7 +398,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "ApplicationDBContext.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\ApplicationDBContext.cs",
               "RelativeDocumentMoniker": "Presentation Collab\\ApplicationDBContext.cs",
@@ -409,15 +410,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "PresentationController.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Controllers\\PresentationController.cs",
               "RelativeDocumentMoniker": "Presentation Collab\\Controllers\\PresentationController.cs",
               "ToolTip": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Controllers\\PresentationController.cs",
               "RelativeToolTip": "Presentation Collab\\Controllers\\PresentationController.cs",
-              "ViewState": "AgIAAKQAAAAAAAAAAAAAwDUBAABAAAAAAAAAAA==",
+              "ViewState": "AgIAAAwBAAAAAAAAAAAUwDUBAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T19:04:32.389Z"
+              "WhenOpened": "2025-06-07T19:04:32.389Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -433,7 +435,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "Slide.cs",
               "DocumentMoniker": "C:\\Users\\Asifk\\Desktop\\Itransition\\Task-6\\Presentation Collab\\Presentation Collab\\Models\\Slide.cs",
               "RelativeDocumentMoniker": "Presentation Collab\\Models\\Slide.cs",
