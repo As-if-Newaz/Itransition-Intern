@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Iforms.DAL.Interfaces
 {
-    public interface IUser : Irepository<User>
+    public interface IUser : IRepository<User>
     {
         bool Create(User obj, out string errorMsg);
         User? Authenticate(string email, string password, out string errorMsg);
-        AuditLog? GetLastLogin(int userId);
-        bool BlockUser(int userId, string status);
+        bool BlockUser(int userId);
+        bool UnblockUser(int userId);
 
     }
 }

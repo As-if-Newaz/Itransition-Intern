@@ -41,7 +41,7 @@ namespace Iforms.DAL.Repositories
                 errorMsg = "Internal server error";
                 return false;
             }
-            return false;
+            
         }
 
         public User? Authenticate(string email, string password, out string errorMsg)
@@ -53,7 +53,6 @@ namespace Iforms.DAL.Repositories
                 var passVerification = pw.VerifyHashedPassword("", user.PasswordHash, password);
                 if (passVerification == PasswordVerificationResult.Success)
                 {
-                    RecordLogin(user.Id);
                     return user;
                 }
                 errorMsg = "Wrong Password";
@@ -63,7 +62,7 @@ namespace Iforms.DAL.Repositories
             return null;
         }
 
-        public bool BlockUser(int userId, string status)
+        public bool BlockUser(int userId)
         {
             var user = Get(userId);
             if (user != null)
@@ -74,22 +73,21 @@ namespace Iforms.DAL.Repositories
             return false;
         }
 
+        public bool UnblockUser(int userId)
+        {
+            var user = Get(userId);
+            if (user != null)
+            {
+                user.IsBlocked = false;
+                return Update(user);
+            }
+            return false;
+        }
+
         public AuditLog? GetLastLogin(int userId)
         {
             return db.AuditLogs.FirstOrDefault(u => u.PerformedById == userId && u.Action == "Login");
         }
 
-        public void RecordLogin(int userId)
-        {
-            var auditLog = new AuditLog
-            {
-                Action = "Login",
-                PerformedById = userId,
-                PerformedAt = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc)
-            };
-            db.AuditLogs.Add(auditLog);
-            db.SaveChanges();
-
-        }
     }
 }

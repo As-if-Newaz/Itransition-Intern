@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Iforms.DAL.Interfaces
 {
-    public interface Irepository<T> where T : class
+    public interface IRepository<T> where T : class
     {
         IEnumerable<T> GetAll();
         T? Get(int id);

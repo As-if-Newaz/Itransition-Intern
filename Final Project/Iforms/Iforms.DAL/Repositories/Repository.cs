@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Iforms.DAL.Repositories
 {
-    internal class Repository<T> : Irepository<T> where T : class
+    internal class Repository<T> : IRepository<T> where T : class
     {
         protected readonly ApplicationDBContext db;
         protected readonly DbSet<T> dbSet;
