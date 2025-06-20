@@ -15,6 +15,11 @@ namespace Iforms.DAL.Repositories
         {
         }
 
+        public IEnumerable<AuditLog>? GetAuditByUserId(int userId)
+        {
+            return db.AuditLogs.Where(u => u.PerformedById == userId);
+        }
+
         public bool RecordLog(int userId, string Action, string? Details)
         {
             var auditLog = new AuditLog

@@ -33,7 +33,8 @@ namespace Iforms.DAL.Repositories
             }
             catch (DbUpdateException ex)
             {
-                errorMsg = "Email is already registered!";
+                //errorMsg = "Email is already registered!";
+                errorMsg = ex.ToString();
                 return false;
             }
             catch (Exception ex)
@@ -41,7 +42,6 @@ namespace Iforms.DAL.Repositories
                 errorMsg = "Internal server error";
                 return false;
             }
-            
         }
 
         public User? Authenticate(string email, string password, out string errorMsg)
@@ -67,7 +67,7 @@ namespace Iforms.DAL.Repositories
             var user = Get(userId);
             if (user != null)
             {
-                user.IsBlocked = true;
+                user.UserStatus = UserStatus.Blocked;
                 return Update(user);
             }
             return false;
@@ -78,7 +78,7 @@ namespace Iforms.DAL.Repositories
             var user = Get(userId);
             if (user != null)
             {
-                user.IsBlocked = false;
+                user.UserStatus = UserStatus.Active;
                 return Update(user);
             }
             return false;

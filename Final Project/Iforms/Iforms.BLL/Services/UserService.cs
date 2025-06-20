@@ -32,8 +32,11 @@ namespace Iforms.BLL.Services
         public bool Register(UserDTO obj, out string errorMsg)
         {
             errorMsg = string.Empty;
+            obj.UserRole = UserRole.User;
+            obj.PreferredLanguage = Language.English;
+            obj.PreferredTheme = Theme.Light;
             obj.CreatedAt = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
-            obj.IsBlocked = false;
+            obj.UserStatus = UserStatus.Inactive;
             var data = GetMapper().Map<User>(obj);
             return DA.UserData().Create(data, out errorMsg);
         }

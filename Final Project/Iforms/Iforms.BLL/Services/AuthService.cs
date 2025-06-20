@@ -37,13 +37,12 @@ namespace Iforms.BLL.Services
                 errorMsg = "Login Failed!";
                 return null;
             }
-            if (user.IsBlocked == true)
+            if (user.UserStatus.Equals(UserStatus.Blocked))
             {
                 errorMsg = "User is blocked!";
                 DA.AuditLogData().RecordLog(user.Id, "Blocked Login Attempt", "Block user attempted login");
                 return null;
             }
-            DA.AuditLogData().RecordLog(user.Id, "Login", "User logged in successfully");
             return GetMapper().Map<UserDTO>(user);
 
         }

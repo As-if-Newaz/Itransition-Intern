@@ -10,5 +10,7 @@ namespace Iforms.DAL.Interfaces
     public interface IAuditLog : IRepository<AuditLog>
     {
         bool RecordLog(int userId, string Action, string? Details);
+
+        IEnumerable<AuditLog>? GetAuditByUserId(int userId);
     }
 }

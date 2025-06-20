@@ -351,3 +351,4 @@ D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\Iforms.MVC.
 D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\Iforms.MVC.genruntimeconfig.cache
 D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\ref\Iforms.MVC.dll
 D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\AutoMapper.dll
+D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

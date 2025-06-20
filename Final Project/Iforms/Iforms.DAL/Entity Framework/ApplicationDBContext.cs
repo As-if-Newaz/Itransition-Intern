@@ -27,5 +27,74 @@ namespace Iforms.DAL.Entity_Framework
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
         {
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Forms: Cascade on Template, Restrict on User
+            modelBuilder.Entity<Form>()
+                .HasOne(f => f.Template)
+                .WithMany(t => t.Forms)
+                .HasForeignKey(f => f.TemplateId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Form>()
+                .HasOne(f => f.FilledBy)
+                .WithMany(u => u.FilledForms)
+                .HasForeignKey(f => f.FilledById)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Comments: Cascade on Template, Restrict on User
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.Template)
+                .WithMany(t => t.Comments)
+                .HasForeignKey(c => c.TemplateId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.CreatedBy)
+                .WithMany(u => u.Comments)
+                .HasForeignKey(c => c.CreatedById)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Likes: Cascade on Template, Restrict on User
+            modelBuilder.Entity<Like>()
+                .HasOne(l => l.Template)
+                .WithMany(t => t.Likes)
+                .HasForeignKey(l => l.TemplateId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Like>()
+                .HasOne(l => l.User)
+                .WithMany(u => u.Likes)
+                .HasForeignKey(l => l.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // TemplateAccesses: Cascade on Template, Restrict on User
+            modelBuilder.Entity<TemplateAccess>()
+                .HasOne(ta => ta.Template)
+                .WithMany(t => t.TemplateAccesses)
+                .HasForeignKey(ta => ta.TemplateId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<TemplateAccess>()
+                .HasOne(ta => ta.User)
+                .WithMany(u => u.AccessibleTemplates)
+                .HasForeignKey(ta => ta.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Answers: Cascade on Form, Restrict on Question
+            modelBuilder.Entity<Answer>()
+            .HasOne(a => a.Form)
+            .WithMany(f => f.Answers)
+            .HasForeignKey(a => a.FormId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Answer>()
+                .HasOne(a => a.Question)
+                .WithMany(q => q.Answers)
+                .HasForeignKey(a => a.QuestionId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+        }
     }
 }

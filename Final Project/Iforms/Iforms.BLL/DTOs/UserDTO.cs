@@ -20,8 +20,10 @@ namespace Iforms.BLL.DTOs
 
         [Required(ErrorMessage = "Password is Required!")]
         public string PasswordHash { get; set; }
+        [Required]
         public UserRole UserRole { get; set; }
-        public bool IsBlocked { get; set; }
+        [Required]
+        public UserStatus UserStatus { get; set; }
         public Language? PreferredLanguage { get; set; }
         public Theme? PreferredTheme { get; set; }
         public DateTime CreatedAt { get; set; }

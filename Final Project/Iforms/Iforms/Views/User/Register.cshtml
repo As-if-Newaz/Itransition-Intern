@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="~/css/notification.css" />
+@model Iforms.BLL.DTOs.UserDTO
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/RegisterLoginLayout.cshtml";
+}
+<div class="container-fluid p-0">
+    <div class="row g-0 h-100">
+        <div class="col-md-6 left-panel">
+            <h1 class="app-logo">THE APP</h1>
+            <div class="form-container">
+                <p>Start your journey</p>
+                <h2>Sign Up to The App</h2>
+                <form asp-action="Register">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="mb-3">
+                        <label asp-for="UserName" class="form-label">Name</label>
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="UserEmail" class="form-label">Email</label>
+                        <input asp-for="UserEmail" class="form-control" />
+                        <span asp-validation-for="UserEmail" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="PasswordHash" class="form-label">Password</label>
+                        <input asp-for="PasswordHash" class="form-control" type="password" />
+                        <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input name="confirmPassword" id="confirmPassword" class="form-control" type="password" />
+                    </div>
+                    <div class="mb-3">
+                        <input type="submit" value="Sign Up" class="btn btn-primary" />
+                    </div>
+                    <div class="mb-3">
+                        <p class="text-start">Already have an account?? <a href="/login">Sign In</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6 right-panel"></div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function () {
+
+            var statusMessage = '@TempData["StatusMessage"]';
+            var isSuccess = '@TempData["IsSuccess"]';
+
+            if (statusMessage && statusMessage !== '') {
+                showStatus(statusMessage, isSuccess === 'True');
+            }
+            var viewBagStatusMessage = '@ViewBag.StatusMessage';
+            var viewBagIsSuccess = '@ViewBag.IsSuccess';
+            if (viewBagStatusMessage && viewBagStatusMessage !== '') {
+                showStatus(viewBagStatusMessage, viewBagIsSuccess === 'True');
+            }
+
+        });
+    </script>
+}

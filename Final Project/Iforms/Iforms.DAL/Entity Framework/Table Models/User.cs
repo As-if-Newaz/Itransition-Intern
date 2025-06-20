@@ -23,37 +23,53 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
         [Required]
         public string PasswordHash { get; set; }
 
-        [Required, Column(TypeName = "VARCHAR")]
+        [Required]
         public UserRole UserRole { get; set; }
 
-        public bool IsBlocked { get; set; }
+        [Required]
+        public UserStatus UserStatus { get; set; }
 
         [Required]
-        public Language PreferredLanguage { get; set; } = Language.English;
+        public Language PreferredLanguage { get; set; }
 
         [Required]
-        public Theme PreferredTheme { get; set; } = Theme.Light;
+        public Theme PreferredTheme { get; set; } 
 
         [Required]
         public DateTime CreatedAt { get; set; }
 
         public virtual ICollection<Template> CreatedTemplates { get; set; }
-        public  virtual ICollection<Form> FilledForms { get; set; }
+        public virtual ICollection<Form> FilledForms { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Like> Likes { get; set; }
-        public  virtual ICollection<TemplateAccess> AccessibleTemplates { get; set; }
-    }
+        public virtual ICollection<TemplateAccess> AccessibleTemplates { get; set; }
 
+        public User()
+        {
+            CreatedTemplates = new List<Template>();
+            FilledForms = new List<Form>();
+            Comments = new List<Comment>();
+            Likes = new List<Like>();
+            AccessibleTemplates = new List<TemplateAccess>();
+        }
+    }
     public enum UserRole
     {
         Admin,
         User,
     }
 
+    public enum UserStatus
+    {
+        Active,
+        Inactive,
+        Blocked
+    }
+
     public enum Language
     {
         English,
-        Polish 
+        Polish
     }
 
     public enum Theme
@@ -61,4 +77,7 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
         Light,
         Dark
     }
+
+
+
 }
