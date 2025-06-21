@@ -36,8 +36,8 @@ namespace Iforms.MVC.Controllers
                 var result = userServices.Register(userDTO, out errorMsg);
                 if (result)
                 {
-                    string subject = "Your Verification Code";
-                    string body = $"Your verification code is: {userDTO.EmailVerificationCode}";
+                    string subject = "Verification Code for Iforms";
+                    string body = $"Your verification code for Iforms registration is: {userDTO.EmailVerificationCode}";
                     await emailService.SendEmailAsync(userDTO.UserEmail, subject, body);
                     TempData["SuccessMsg"] = "Registered Successfully! Please check your email for the verification code.";
                     return RedirectToAction("VerifyEmail", "User", new { email = userDTO.UserEmail });

@@ -1,52 +1,48 @@
-﻿﻿body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.container-fluid {
+﻿﻿html{
     height: 100%;
 }
-
-.left-panel {
-    background-color: #fff;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #6a11cb, #2575fc) !important;
+    color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    padding: 20px;
-}
-
-.right-panel {
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
-    height: 100vh;
 }
 
 .form-container {
     max-width: 400px;
     margin-top: 30px;
     width: 100%;
-    padding: 0 15px;
+    padding: 40px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .app-logo {
     font-size: 2.5em;
-    color: #1DA1F2;
-    margin-left: -400px;
+    color: #fff;
     margin-top: 0;
     font-weight: bold;
+    text-align: center;
 }
 
 .form-container p {
     color: #666;
     margin-bottom: 5px;
+    text-align: center;
 }
 
 .form-container h2 {
     font-size: 1.5em;
     margin-bottom: 20px;
+    text-align: center;
+    color: #333;
 }
 
 .form-label {
@@ -59,14 +55,21 @@
     border-radius: 4px;
     padding: 10px;
     width: 100%;
+    background-color: #f7f7f7;
+    color: #333;
+    border-color: #ddd;
 }
+
+    .form-control::placeholder {
+        color: #999;
+    }
 
 .form-check {
     margin-bottom: 15px;
 }
 
 .form-check-label {
-    color: #333;
+    color: #fff;
 }
 
 .btn-primary {
@@ -92,34 +95,22 @@
     margin-top: 10px;
 }
 
-    .links a {
+    .links a, .form-container a {
         color: #1DA1F2;
         text-decoration: none;
         font-size: 0.9em;
     }
 
-        .links a:hover {
+        .links a:hover, .form-container a:hover {
             text-decoration: underline;
         }
 
 @media (max-width: 768px) {
     body {
         overflow-y: auto;
-    }
-
-    .row {
-        flex-direction: column;
-    }
-
-    .left-panel {
-        height: auto;
-        min-height: 100vh;
-        padding: 20px 15px;
-        overflow-y: auto;
-    }
-
-    .right-panel {
-        display: none;
+        display: block;
+        padding-top: 40px;
+        padding-bottom: 40px;
     }
 
     .form-container {
@@ -131,7 +122,6 @@
     .app-logo {
         font-size: 2.5em;
         margin-bottom: 20px;
-        margin-left: 0;
         text-align: center;
     }
 
@@ -159,7 +149,6 @@
 
     .app-logo {
         font-size: 2.5em;
-        margin-left: 0;
         text-align: center;
     }
 

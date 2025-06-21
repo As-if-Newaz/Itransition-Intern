@@ -1,21 +1,27 @@
+<link rel="stylesheet" href="~/css/notification.css" />
 @{
-    ViewBag.Title = "Verify Email";
+    ViewData["Title"] = "Verify Email";
+    Layout = "~/Views/Shared/RegisterLoginLayout.cshtml";
     var email = ViewBag.Email as string;
 }
-<h2>Verify Your Email</h2>
-@if (TempData["ErrorMsg"] != null)
-{
-    <div class="alert alert-danger">@TempData["ErrorMsg"]</div>
-}
-@if (TempData["SuccessMsg"] != null)
-{
-    <div class="alert alert-success">@TempData["SuccessMsg"]</div>
-}
-<form asp-action="VerifyEmail" asp-controller="User" method="post">
-    <input type="hidden" name="email" value="@email" />
-    <div class="form-group">
-        <label for="code">Verification Code</label>
-        <input type="text" class="form-control" id="code" name="code" required />
-    </div>
-    <button type="submit" class="btn btn-primary">Verify</button>
-</form> 
+<h1 class="app-logo">Iforms</h1>
+<div class="form-container">
+    <p>Just one more step</p>
+    <h2>Verify Your Email</h2>
+    <p>A code has been sent to your email address</p>
+    <form asp-action="VerifyEmail" asp-controller="User" method="post">
+        <input type="hidden" name="email" value="@email" />
+        <div class="mb-3">
+            <label for="code" class="form-label">Verification Code</label>
+            <input type="text" class="form-control" id="code" name="code" required placeholder="Enter your code" />
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary w-100">Verify</button>
+        </div>
+    </form>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+} 

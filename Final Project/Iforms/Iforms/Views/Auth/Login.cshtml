@@ -4,39 +4,31 @@
     ViewData["Title"] = "Log In";
     Layout = "~/Views/Shared/RegisterLoginLayout.cshtml";
 }
-<div class="container-fluid p-0">
-    <div class="row g-0 h-100">
-        <div class="col-md-6 left-panel">
-            <h1 class="app-logo">THE APP</h1>
-            <div class="form-container">
-                <p>Start your journey</p>
-                <h2>Sign in to The App</h2>
-                <form asp-action="Login">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="mb-3">
-                        <label asp-for="UserEmail" class="form-label">Email</label>
-                        <input asp-for="UserEmail" class="form-control" placeholder="Email" />
-                        <span asp-validation-for="UserEmail" class="text-danger"></span>
-                    </div>
-                    <div class="mb-3">
-                        <label asp-for="Password" class="form-label">Password</label>
-                        <input asp-for="Password" class="form-control" type="password" placeholder="password" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                    <div class="mb-3">
-                        <a href="/register">Forgot password?</a>
-                    </div>
-                    <div class="mb-3">
-                        <input type="submit" value="Login" class="btn btn-primary" />
-                    </div>
-                    <div class="mb-3">
-                        <p class="text-start">Don't have an account? <a href="/register">Sign Up</a></p>
-                    </div>
-                </form>
-            </div>
+<h1 class="app-logo">Iforms</h1>
+<div class="form-container">
+    <h2>Sign in to The App</h2>
+    <form asp-action="Login">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="mb-3">
+            <label asp-for="UserEmail" class="form-label">Email</label>
+            <input asp-for="UserEmail" class="form-control" placeholder="Email" />
+            <span asp-validation-for="UserEmail" class="text-danger"></span>
         </div>
-        <div class="col-md-6 right-panel"></div>
-    </div>
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label">Password</label>
+            <input asp-for="Password" class="form-control" type="password" placeholder="password" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <a href="/register">Forgot password?</a>
+        </div>
+        <div class="mb-3">
+            <input type="submit" value="Login" class="btn btn-primary" />
+        </div>
+        <div class="mb-3">
+            <p class="text-start">Don't have an account? <a href="/register">Sign Up</a></p>
+        </div>
+    </form>
 </div>
 @section Scripts {
     @{
