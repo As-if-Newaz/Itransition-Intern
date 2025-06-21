@@ -336,9 +336,7 @@ D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\Iforms.MVC.
 D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\rjimswa.dswa.cache.json
 D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
-D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\scopedcss\bundle\Iforms.MVC.styles.css
-D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\scopedcss\projectbundle\Iforms.MVC.bundle.scp.css
 D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\staticwebassets.build.json
 D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\staticwebassets.build.json.cache
 D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\staticwebassets.development.json

@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "User Dashboard";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<link rel="stylesheet" href="~/css/notification.css" />
+@await Html.PartialAsync("Notification")
+<br />
+<h3>Hi, <b>@HttpContextAccessor.HttpContext.Request.Cookies["name"]?.ToString()</b> </h3>
+<br />
+<h2>Welcome to the User Dashboard</h2>

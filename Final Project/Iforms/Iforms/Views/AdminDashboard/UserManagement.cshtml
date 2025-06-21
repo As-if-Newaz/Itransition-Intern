@@ -1,0 +1,89 @@
+@{
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor  
+<link rel="stylesheet" href="~/css/notification.css" />   
+@await Html.PartialAsync("Notification")  
+<h2>Manage Users</h2>
+<div class="navbar navbar-expand-lg navbar-light bg-secondary-subtle">
+    <button data-action="Block" class="btn btn-outline-primary me-2"><i class="bi bi-lock-fill"></i> Block</button>
+    <button data-action="Unblock" class="btn btn-outline-primary me-2"><i class="bi bi-unlock-fill"></i></button>
+    <button data-action="Delete" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
+</div>
+
+<table class="table table-bordered">  
+   <thead>  
+       <tr>  
+           <th><input type="checkbox" id="selectAll" title="Select/Deselect all"></th>  
+           <th>Name</th>  
+           <th>Role</th>
+           <th>Registered at</th>  
+           <th>Status</th>  
+       </tr>  
+   </thead>  
+   <tbody>  
+       @foreach (var user in Model)  
+       {  
+           <tr>  
+               <td><input type="checkbox" class="select-user" value="@user.Id"></td>  
+               <td>  
+                   <div>@user.UserName</div>  
+                   <div class="text-muted small">@user.UserEmail</div>    
+               </td>
+               <td>@user.UserRole</td>
+               <td>@user.CreatedAt.ToString("g")</td>  
+               <td>@user.UserStatus</td>  
+           </tr>  
+       }  
+   </tbody>  
+</table>  
+
+@section Scripts {  
+   <script src="~/lib/jquery/dist/jquery.min.js"></script>  
+   <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>  
+   <script>  
+       document.addEventListener('DOMContentLoaded', () => {  
+           const selectAll = document.getElementById('selectAll');  
+           const userCheckboxes = document.querySelectorAll('.select-user');  
+
+           selectAll.addEventListener('change', () => {  
+               userCheckboxes.forEach(cb => cb.checked = selectAll.checked);  
+           });  
+
+           document.querySelectorAll('[data-action]').forEach(btn => {  
+               btn.addEventListener('click', async () => {  
+                   const action = btn.dataset.action;  
+                   const userIds = [...document.querySelectorAll('.select-user:checked')]  
+                       .map(el => parseInt(el.value));  
+
+                   if (!userIds.length) {  
+                       toastr.error('Please select at least one user.');  
+                       return;  
+                   }  
+
+                   if (action === 'Delete' && !confirm(`Confirm ${action} selected users?`)) {  
+                       return;  
+                   }  
+
+                   try {  
+                       const response = await fetch(`/AdminDashboard/UserManagement/${action}`, {  
+                           method: 'POST',  
+                           headers: { 'Content-Type': 'application/json' },  
+                           body: JSON.stringify(userIds)  
+                       });  
+
+                       const result = await response.json();  
+                       if (result.success) {  
+                           toastr.success(result.message);  
+                           setTimeout(() => location.reload(), 1000);  
+                       } else {  
+                           toastr.error(result.message);  
+                       }  
+                   } catch {  
+                       toastr.error('Action failed. Please try again.');  
+                   }  
+               });  
+           });  
+       });  
+   </script>  
+}

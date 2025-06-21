@@ -2,7 +2,7 @@
 
 namespace Iforms.MVC.Controllers
 {
-    public class UserDashboard : Controller
+    public class PublicDashboardController : Controller
     {
         public IActionResult Index()
         {

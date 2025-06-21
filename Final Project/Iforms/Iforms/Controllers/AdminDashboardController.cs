@@ -42,7 +42,7 @@ namespace Iforms.MVC.Controllers
             var result = userServices.BlockUsers(userIds);
             if (result)
             {
-                auditLogService.RecordLog(int.Parse(HttpContext.Request.Cookies["LoggedId"]), "Blocked Users", userIds.ToString());
+                auditLogService.RecordLog(int.Parse(HttpContext.Request.Cookies["LoggedId"]), "Blocked Users", string.Join(", ", userIds));
                 return Json(new { success = true, message = "Users blocked successfully." });
             }
             else
@@ -60,7 +60,7 @@ namespace Iforms.MVC.Controllers
             var result = userServices.UnblockUsers(userIds);
             if (result)
             {
-                auditLogService.RecordLog(int.Parse(HttpContext.Request.Cookies["LoggedId"]), "Unblocked Users", userIds.ToString());
+                auditLogService.RecordLog(int.Parse(HttpContext.Request.Cookies["LoggedId"]), "Unblocked Users", string.Join(", ", userIds));
                 return Json(new { success = true, message = "Users unblocked successfully." });
             }
             else
@@ -78,7 +78,7 @@ namespace Iforms.MVC.Controllers
             var result = userServices.DeleteUsers(userIds);
             if (result)
             {
-                auditLogService.RecordLog(int.Parse(HttpContext.Request.Cookies["LoggedId"]), "Deleted Users", userIds.ToString());
+                auditLogService.RecordLog(int.Parse(HttpContext.Request.Cookies["LoggedId"]), "Deleted Users", string.Join(", ", userIds));
                 return Json(new { success = true, message = "Users deleted successfully." });
             }
             else
@@ -99,7 +99,6 @@ namespace Iforms.MVC.Controllers
             return View(user);
         }
 
-       
         [HttpPost("UserManagement/Update")]
         public JsonResult Update([FromBody] UserDTO userDto)
         {

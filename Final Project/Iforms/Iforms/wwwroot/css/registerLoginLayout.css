@@ -24,14 +24,6 @@ body {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-.app-logo {
-    font-size: 2.5em;
-    color: #fff;
-    margin-top: 0;
-    font-weight: bold;
-    text-align: center;
-}
-
 .form-container p {
     color: #666;
     margin-bottom: 5px;
@@ -119,12 +111,6 @@ body {
         text-align: center;
     }
 
-    .app-logo {
-        font-size: 2.5em;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-
     .form-container h2 {
         font-size: 1.3em;
         text-align: center;
@@ -132,7 +118,7 @@ body {
 
     .btn-primary {
         padding: 12px;
-        font-size: 1.1em;
+        font-size: 16px;
     }
 
     .form-control {
@@ -144,11 +130,6 @@ body {
 @media (max-width: 480px) {
     .form-container {
         padding: 0 5px;
-        text-align: center;
-    }
-
-    .app-logo {
-        font-size: 2.5em;
         text-align: center;
     }
 

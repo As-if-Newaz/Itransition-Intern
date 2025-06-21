@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Iforms.BLL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c1b7ed88b7c55ea722bb8bb9ecfee502e91d91b2")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1842a167b2d7cabecf350fe5b043d968314143f6")]
 [assembly: System.Reflection.AssemblyProductAttribute("Iforms.BLL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Iforms.BLL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
