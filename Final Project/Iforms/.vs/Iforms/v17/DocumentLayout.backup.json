@@ -3,16 +3,80 @@
   "WorkspaceRootPath": "D:\\Projects\\Itransition\\Final Project\\Iforms\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\entity framework\\table models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\entity framework\\table models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\entity framework\\table models\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\entity framework\\table models\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\interfaces\\ianswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\interfaces\\ianswer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\interfaces\\iapplicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\interfaces\\iapplicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\interfaces\\iauditlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\interfaces\\iauditlog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\interfaces\\icomment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\interfaces\\icomment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\interfaces\\iform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\interfaces\\iform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\interfaces\\ilike.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\interfaces\\ilike.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\interfaces\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\interfaces\\irepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\interfaces\\itag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\interfaces\\itag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\interfaces\\itemplate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\interfaces\\itemplate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\interfaces\\itemplateaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\interfaces\\itemplateaccess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\interfaces\\itemplatetag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\interfaces\\itemplatetag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\interfaces\\itopic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\interfaces\\itopic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\interfaces\\iuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\interfaces\\iuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\interfaces\\iquestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\interfaces\\iquestion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AD3DAB51-39B4-4F2F-8492-C7094E6BA4DE}|Iforms\\Iforms.MVC.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms\\controllers\\userdashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AD3DAB51-39B4-4F2F-8492-C7094E6BA4DE}|Iforms\\Iforms.MVC.csproj|solutionrelative:iforms\\controllers\\userdashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{AD3DAB51-39B4-4F2F-8492-C7094E6BA4DE}|Iforms\\Iforms.MVC.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms\\views\\userdashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{AD3DAB51-39B4-4F2F-8492-C7094E6BA4DE}|Iforms\\Iforms.MVC.csproj|solutionrelative:iforms\\views\\userdashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AD3DAB51-39B4-4F2F-8492-C7094E6BA4DE}|Iforms\\Iforms.MVC.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms\\views\\admindashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{AD3DAB51-39B4-4F2F-8492-C7094E6BA4DE}|Iforms\\Iforms.MVC.csproj|solutionrelative:iforms\\views\\admindashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AD3DAB51-39B4-4F2F-8492-C7094E6BA4DE}|Iforms\\Iforms.MVC.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms\\controllers\\userdashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AD3DAB51-39B4-4F2F-8492-C7094E6BA4DE}|Iforms\\Iforms.MVC.csproj|solutionrelative:iforms\\controllers\\userdashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{AD3DAB51-39B4-4F2F-8492-C7094E6BA4DE}|Iforms\\Iforms.MVC.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms\\wwwroot\\css\\layout.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
@@ -75,20 +139,12 @@
       "RelativeMoniker": "D:0:0:{AD3DAB51-39B4-4F2F-8492-C7094E6BA4DE}|Iforms\\Iforms.MVC.csproj|solutionrelative:iforms\\views\\auth\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\entity framework\\table models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\entity framework\\table models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{AD3DAB51-39B4-4F2F-8492-C7094E6BA4DE}|Iforms\\Iforms.MVC.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms\\views\\user\\verifyemail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{AD3DAB51-39B4-4F2F-8492-C7094E6BA4DE}|Iforms\\Iforms.MVC.csproj|solutionrelative:iforms\\views\\user\\verifyemail.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5C5647BF-ACEF-4E7D-A5B6-ECEC0C6C9107}|Iforms.BLL\\Iforms.BLL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.bll\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5C5647BF-ACEF-4E7D-A5B6-ECEC0C6C9107}|Iforms.BLL\\Iforms.BLL.csproj|solutionrelative:iforms.bll\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\entity framework\\table models\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\entity framework\\table models\\answer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\repositories\\repository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -101,10 +157,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\repositories\\auditlogrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\repositories\\auditlogrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\interfaces\\iuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\interfaces\\iuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5C5647BF-ACEF-4E7D-A5B6-ECEC0C6C9107}|Iforms.BLL\\Iforms.BLL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.bll\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -126,11 +178,180 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 40,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 13,
+              "Title": "ITopic.cs",
+              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\ITopic.cs",
+              "RelativeDocumentMoniker": "Iforms.DAL\\Interfaces\\ITopic.cs",
+              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\ITopic.cs",
+              "RelativeToolTip": "Iforms.DAL\\Interfaces\\ITopic.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T19:02:32.935Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ITemplateTag.cs",
+              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\ITemplateTag.cs",
+              "RelativeDocumentMoniker": "Iforms.DAL\\Interfaces\\ITemplateTag.cs",
+              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\ITemplateTag.cs",
+              "RelativeToolTip": "Iforms.DAL\\Interfaces\\ITemplateTag.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T19:02:06.816Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ITemplateAccess.cs",
+              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\ITemplateAccess.cs",
+              "RelativeDocumentMoniker": "Iforms.DAL\\Interfaces\\ITemplateAccess.cs",
+              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\ITemplateAccess.cs",
+              "RelativeToolTip": "Iforms.DAL\\Interfaces\\ITemplateAccess.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T19:01:15.968Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ITemplate.cs",
+              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\ITemplate.cs",
+              "RelativeDocumentMoniker": "Iforms.DAL\\Interfaces\\ITemplate.cs",
+              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\ITemplate.cs",
+              "RelativeToolTip": "Iforms.DAL\\Interfaces\\ITemplate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T18:59:54.813Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ITag.cs",
+              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\ITag.cs",
+              "RelativeDocumentMoniker": "Iforms.DAL\\Interfaces\\ITag.cs",
+              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\ITag.cs",
+              "RelativeToolTip": "Iforms.DAL\\Interfaces\\ITag.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T18:59:17.526Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "IQuestion.cs",
+              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\IQuestion.cs",
+              "RelativeDocumentMoniker": "Iforms.DAL\\Interfaces\\IQuestion.cs",
+              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\IQuestion.cs",
+              "RelativeToolTip": "Iforms.DAL\\Interfaces\\IQuestion.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T18:58:51.519Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IForm.cs",
+              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\IForm.cs",
+              "RelativeDocumentMoniker": "Iforms.DAL\\Interfaces\\IForm.cs",
+              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\IForm.cs",
+              "RelativeToolTip": "Iforms.DAL\\Interfaces\\IForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T18:58:02.875Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IComment.cs",
+              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\IComment.cs",
+              "RelativeDocumentMoniker": "Iforms.DAL\\Interfaces\\IComment.cs",
+              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\IComment.cs",
+              "RelativeToolTip": "Iforms.DAL\\Interfaces\\IComment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T18:57:25.126Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ILike.cs",
+              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\ILike.cs",
+              "RelativeDocumentMoniker": "Iforms.DAL\\Interfaces\\ILike.cs",
+              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\ILike.cs",
+              "RelativeToolTip": "Iforms.DAL\\Interfaces\\ILike.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T18:56:59.623Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "IRepository.cs",
+              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\IRepository.cs",
+              "RelativeDocumentMoniker": "Iforms.DAL\\Interfaces\\IRepository.cs",
+              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\IRepository.cs",
+              "RelativeToolTip": "Iforms.DAL\\Interfaces\\IRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T18:54:46.549Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IAuditLog.cs",
+              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\IAuditLog.cs",
+              "RelativeDocumentMoniker": "Iforms.DAL\\Interfaces\\IAuditLog.cs",
+              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\IAuditLog.cs",
+              "RelativeToolTip": "Iforms.DAL\\Interfaces\\IAuditLog.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T18:54:37.146Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IApplicationDBContext.cs",
+              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\IApplicationDBContext.cs",
+              "RelativeDocumentMoniker": "Iforms.DAL\\Interfaces\\IApplicationDBContext.cs",
+              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\IApplicationDBContext.cs",
+              "RelativeToolTip": "Iforms.DAL\\Interfaces\\IApplicationDBContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T18:54:34.842Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "IAnswer.cs",
+              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\IAnswer.cs",
+              "RelativeDocumentMoniker": "Iforms.DAL\\Interfaces\\IAnswer.cs",
+              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\IAnswer.cs",
+              "RelativeToolTip": "Iforms.DAL\\Interfaces\\IAnswer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T18:54:32.634Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Views\\UserDashboard\\Index.cshtml",
               "RelativeDocumentMoniker": "Iforms\\Views\\UserDashboard\\Index.cshtml",
@@ -143,7 +364,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 19,
               "Title": "layout.css",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\wwwroot\\css\\layout.css",
               "RelativeDocumentMoniker": "Iforms\\wwwroot\\css\\layout.css",
@@ -156,7 +377,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 26,
               "Title": "AdminLayout.cshtml",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Views\\Shared\\AdminLayout.cshtml",
               "RelativeDocumentMoniker": "Iforms\\Views\\Shared\\AdminLayout.cshtml",
@@ -168,7 +389,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 20,
               "Title": "UserManagement.cshtml",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Views\\AdminDashboard\\UserManagement.cshtml",
               "RelativeDocumentMoniker": "Iforms\\Views\\AdminDashboard\\UserManagement.cshtml",
@@ -180,7 +401,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 23,
               "Title": "PublicDashboardController.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Controllers\\PublicDashboardController.cs",
               "RelativeDocumentMoniker": "Iforms\\Controllers\\PublicDashboardController.cs",
@@ -192,7 +413,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 27,
               "Title": "RegisterLoginLayout.cshtml",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Views\\Shared\\RegisterLoginLayout.cshtml",
               "RelativeDocumentMoniker": "Iforms\\Views\\Shared\\RegisterLoginLayout.cshtml",
@@ -204,7 +425,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 32,
               "Title": "site.css",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\wwwroot\\css\\site.css",
               "RelativeDocumentMoniker": "Iforms\\wwwroot\\css\\site.css",
@@ -216,7 +437,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 29,
               "Title": "registerLoginLayout.css",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\wwwroot\\css\\registerLoginLayout.css",
               "RelativeDocumentMoniker": "Iforms\\wwwroot\\css\\registerLoginLayout.css",
@@ -228,7 +449,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 31,
               "Title": "notification.css",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\wwwroot\\css\\notification.css",
               "RelativeDocumentMoniker": "Iforms\\wwwroot\\css\\notification.css",
@@ -240,7 +461,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 25,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Iforms\\Views\\Shared\\_Layout.cshtml",
@@ -252,7 +473,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 18,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Views\\AdminDashboard\\Index.cshtml",
               "RelativeDocumentMoniker": "Iforms\\Views\\AdminDashboard\\Index.cshtml",
@@ -265,7 +486,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 21,
               "Title": "AdminDashboardController.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Controllers\\AdminDashboardController.cs",
               "RelativeDocumentMoniker": "Iforms\\Controllers\\AdminDashboardController.cs",
@@ -277,7 +498,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 22,
               "Title": "AuthController.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Iforms\\Controllers\\AuthController.cs",
@@ -289,7 +510,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 34,
               "Title": "VerifyEmail.cshtml",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Views\\User\\VerifyEmail.cshtml",
               "RelativeDocumentMoniker": "Iforms\\Views\\User\\VerifyEmail.cshtml",
@@ -301,7 +522,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 30,
               "Title": "Register.cshtml",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Views\\User\\Register.cshtml",
               "RelativeDocumentMoniker": "Iforms\\Views\\User\\Register.cshtml",
@@ -313,7 +534,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 33,
               "Title": "Login.cshtml",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Views\\Auth\\Login.cshtml",
               "RelativeDocumentMoniker": "Iforms\\Views\\Auth\\Login.cshtml",
@@ -325,7 +546,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 1,
               "Title": "Answer.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Entity Framework\\Table Models\\Answer.cs",
               "RelativeDocumentMoniker": "Iforms.DAL\\Entity Framework\\Table Models\\Answer.cs",
@@ -333,11 +554,12 @@
               "RelativeToolTip": "Iforms.DAL\\Entity Framework\\Table Models\\Answer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-21T10:24:25.852Z"
+              "WhenOpened": "2025-06-21T10:24:25.852Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 36,
               "Title": "Repository.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Repositories\\Repository.cs",
               "RelativeDocumentMoniker": "Iforms.DAL\\Repositories\\Repository.cs",
@@ -349,7 +571,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 38,
               "Title": "AuditLogRepository.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Repositories\\AuditLogRepository.cs",
               "RelativeDocumentMoniker": "Iforms.DAL\\Repositories\\AuditLogRepository.cs",
@@ -361,19 +583,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 14,
               "Title": "IUser.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\IUser.cs",
               "RelativeDocumentMoniker": "Iforms.DAL\\Interfaces\\IUser.cs",
               "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Interfaces\\IUser.cs",
               "RelativeToolTip": "Iforms.DAL\\Interfaces\\IUser.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAArAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-21T08:13:00.111Z"
+              "WhenOpened": "2025-06-21T08:13:00.111Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 16,
               "Title": "UserDashboardController.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Controllers\\UserDashboardController.cs",
               "RelativeDocumentMoniker": "Iforms\\Controllers\\UserDashboardController.cs",
@@ -386,7 +609,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 24,
               "Title": "UserController.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Iforms\\Controllers\\UserController.cs",
@@ -398,7 +621,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 40,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Program.cs",
               "RelativeDocumentMoniker": "Iforms\\Program.cs",
@@ -410,7 +633,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 35,
               "Title": "EmailService.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.BLL\\Services\\EmailService.cs",
               "RelativeDocumentMoniker": "Iforms.BLL\\Services\\EmailService.cs",
@@ -422,7 +645,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 28,
               "Title": "UserDTO.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.BLL\\DTOs\\UserDTO.cs",
               "RelativeDocumentMoniker": "Iforms.BLL\\DTOs\\UserDTO.cs",
@@ -434,7 +657,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 39,
               "Title": "UserService.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.BLL\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "Iforms.BLL\\Services\\UserService.cs",
@@ -446,7 +669,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 41,
               "Title": "20250620172156_initdb.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Migrations\\20250620172156_initdb.cs",
               "RelativeDocumentMoniker": "Iforms.DAL\\Migrations\\20250620172156_initdb.cs",
@@ -458,19 +681,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 0,
               "Title": "User.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Entity Framework\\Table Models\\User.cs",
               "RelativeDocumentMoniker": "Iforms.DAL\\Entity Framework\\Table Models\\User.cs",
               "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Entity Framework\\Table Models\\User.cs",
               "RelativeToolTip": "Iforms.DAL\\Entity Framework\\Table Models\\User.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAgwCgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwBkAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-20T17:20:38.511Z"
+              "WhenOpened": "2025-06-20T17:20:38.511Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 37,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Repositories\\UserRepository.cs",
               "RelativeDocumentMoniker": "Iforms.DAL\\Repositories\\UserRepository.cs",
