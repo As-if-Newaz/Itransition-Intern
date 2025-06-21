@@ -5,6 +5,7 @@ using Iforms.DAL.Entity_Framework.Table_Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +38,14 @@ namespace Iforms.BLL.Services
             obj.PreferredTheme = Theme.Light;
             obj.CreatedAt = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
             obj.UserStatus = UserStatus.Inactive;
+            byte[] bytes = new byte[4];
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(bytes);
+            }
+            int code = Math.Abs(BitConverter.ToInt32(bytes, 0)) % 1000000;
+            obj.EmailVerificationCode = code.ToString("D6");
+            obj.EmailVerificationExpiry = DateTime.UtcNow.AddMinutes(5);
             var data = GetMapper().Map<User>(obj);
             return DA.UserData().Create(data, out errorMsg);
         }
@@ -52,7 +61,16 @@ namespace Iforms.BLL.Services
         {
             var data = DA.UserData().GetAll();
             return GetMapper().Map<List<UserDTO>>(data);
+        }
 
+        public UserDTO? GetUserByEmail(string email)
+        {
+            var user = DA.UserData().GetByEmail(email);
+            if (user == null)
+            {
+                return null;
+            }
+            return GetMapper().Map<UserDTO>(user);
         }
 
         public bool BlockUsers(int[] userIds)
@@ -104,9 +122,6 @@ namespace Iforms.BLL.Services
                 return false;
             }
             return DA.UserData().Update(data);
-
         }
-
-       
     }
 }

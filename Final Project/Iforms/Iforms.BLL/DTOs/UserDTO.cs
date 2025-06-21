@@ -27,5 +27,7 @@ namespace Iforms.BLL.DTOs
         public Language? PreferredLanguage { get; set; }
         public Theme? PreferredTheme { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string? EmailVerificationCode { get; set; }
+        public DateTime? EmailVerificationExpiry { get; set; }
     }
 }

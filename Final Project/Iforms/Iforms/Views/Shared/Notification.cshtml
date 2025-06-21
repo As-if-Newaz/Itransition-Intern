@@ -1,8 +1,20 @@
-
-﻿@if (TempData["SuccessMsg"] != null)
+@if (TempData["SuccessMsg"] != null || TempData["ErrorMsg"] != null)
 {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr.options = {
+            "positionClass": "toast-center",
+            "closeButton": true,
+            "progressBar": true,
+            "escapeHtml": true,
+            "timeOut": "5000"
+        };
+    </script>
+}
+
+@if (TempData["SuccessMsg"] != null)
+{
     <script type="text/javascript">
         toastr.success('@TempData["SuccessMsg"]');
     </script>
@@ -10,8 +22,6 @@
 
 @if (TempData["ErrorMsg"] != null)
 {
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script type="text/javascript">
         toastr.error('@TempData["ErrorMsg"]');
     </script>

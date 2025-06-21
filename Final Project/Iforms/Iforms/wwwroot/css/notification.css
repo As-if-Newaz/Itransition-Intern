@@ -1,5 +1,4 @@
-﻿﻿
-#toast-container {
+﻿﻿#toast-container {
     position: fixed;
     top: 5%;
     left: 50%;
@@ -15,6 +14,8 @@
     min-width: 320px;
     opacity: 1;
     pointer-events: auto;
+    display: flex;
+    align-items: center;
 }
 
 #toast-container > .toast-success,
@@ -43,8 +44,20 @@
     font-size: 16px;
     line-height: 1.5;
     color: white;
+    margin-left: 50px;
+    display: inline-block;
 }
 
 .toast-progress {
     height: 4px;
+}
+
+.toast-center {
+    top: 7% !important;
+    left: 50% !important;
+    bottom: auto !important;
+    right: auto !important;
+    transform: translate(-50%, -50%) !important;
+    position: fixed !important;
+    z-index: 99999 !important;
 }

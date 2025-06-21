@@ -1,0 +1,21 @@
+@{
+    ViewBag.Title = "Verify Email";
+    var email = ViewBag.Email as string;
+}
+<h2>Verify Your Email</h2>
+@if (TempData["ErrorMsg"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMsg"]</div>
+}
+@if (TempData["SuccessMsg"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMsg"]</div>
+}
+<form asp-action="VerifyEmail" asp-controller="User" method="post">
+    <input type="hidden" name="email" value="@email" />
+    <div class="form-group">
+        <label for="code">Verification Code</label>
+        <input type="text" class="form-control" id="code" name="code" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Verify</button>
+</form> 

@@ -33,8 +33,7 @@ namespace Iforms.DAL.Repositories
             }
             catch (DbUpdateException ex)
             {
-                //errorMsg = "Email is already registered!";
-                errorMsg = ex.ToString();
+                errorMsg = "Email is already registered!";
                 return false;
             }
             catch (Exception ex)
@@ -89,5 +88,9 @@ namespace Iforms.DAL.Repositories
             return db.AuditLogs.FirstOrDefault(u => u.PerformedById == userId && u.Action == "Login");
         }
 
+        public User? GetByEmail(string email)
+        {
+            return dbSet.AsNoTracking().FirstOrDefault(u => u.UserEmail == email);
+        }
     }
 }

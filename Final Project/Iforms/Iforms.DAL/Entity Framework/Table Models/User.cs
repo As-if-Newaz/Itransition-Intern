@@ -38,6 +38,9 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
         [Required]
         public DateTime CreatedAt { get; set; }
 
+        public string? EmailVerificationCode { get; set; }
+        public DateTime? EmailVerificationExpiry { get; set; }
+
         public virtual ICollection<Template> CreatedTemplates { get; set; }
         public virtual ICollection<Form> FilledForms { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }

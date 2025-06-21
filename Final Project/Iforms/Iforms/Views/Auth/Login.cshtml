@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="~/css/notification.css" />
+﻿<link rel="stylesheet" href="~/css/notification.css" />
 @model Iforms.BLL.DTOs.UserLoginDTO
 @{
     ViewData["Title"] = "Log In";
@@ -42,22 +42,4 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-
-    <script>
-        $(document).ready(function () {
-
-            var statusMessage = '@TempData["StatusMessage"]';
-            var isSuccess = '@TempData["IsSuccess"]';
-
-            if (statusMessage && statusMessage !== '') {
-                showStatus(statusMessage, isSuccess === 'True');
-            }
-            var viewBagStatusMessage = '@ViewBag.StatusMessage';
-            var viewBagIsSuccess = '@ViewBag.IsSuccess';
-            if (viewBagStatusMessage && viewBagStatusMessage !== '') {
-                 showStatus(viewBagStatusMessage, viewBagIsSuccess === 'True');
-            }
-
-        });
-    </script>
 }

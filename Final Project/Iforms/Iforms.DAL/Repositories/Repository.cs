@@ -45,7 +45,7 @@ namespace Iforms.DAL.Repositories
 
         public IEnumerable<T> GetAll()
         {
-            return dbSet.ToList();
+            return dbSet.AsNoTracking().ToList();
         }
 
         public bool Update(T entity)
