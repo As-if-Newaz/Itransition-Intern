@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Iforms.DAL.Entity_Framework.Table_Models.Enums;
 
 namespace Iforms.DAL.Entity_Framework.Table_Models
 {
@@ -14,15 +15,5 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
 
     }
 
-    public enum TopicType
-    {
-        Quiz,
-        Submission,
-        Poll,
-        Survey,
-        Feedback,
-        Registration,
-        Event,
-        Other
-    }
+    
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using static Iforms.DAL.Entity_Framework.Table_Models.Enums;
 
 namespace Iforms.DAL.Entity_Framework.Table_Models
 {
@@ -56,31 +57,5 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
             AccessibleTemplates = new List<TemplateAccess>();
         }
     }
-    public enum UserRole
-    {
-        Admin,
-        User,
-    }
-
-    public enum UserStatus
-    {
-        Active,
-        Inactive,
-        Blocked
-    }
-
-    public enum Language
-    {
-        English,
-        Polish
-    }
-
-    public enum Theme
-    {
-        Light,
-        Dark
-    }
-
-
 
 }

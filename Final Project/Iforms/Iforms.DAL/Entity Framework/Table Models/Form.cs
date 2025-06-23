@@ -29,5 +29,12 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
         public virtual Template Template { get; set; }
 
         public virtual ICollection<Answer> Answers { get; set; }
+
+
+        public Form()
+        {
+            Answers = new List<Answer>();
+        }
     }
+    
 }

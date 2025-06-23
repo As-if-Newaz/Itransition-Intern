@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using static Iforms.DAL.Entity_Framework.Table_Models.Enums;
 
 namespace Iforms.MVC.Authentication
 {

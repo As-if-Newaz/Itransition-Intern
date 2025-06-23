@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Iforms.DAL.Entity_Framework.Table_Models.Enums;
 
 namespace Iforms.DAL.Entity_Framework.Table_Models
 {
@@ -30,15 +31,12 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
         public virtual Template Template { get; set; }
 
         public virtual ICollection<Answer> Answers { get; set; }
+
+        public Question()
+        {
+            Answers = new List<Answer>();
+        }
     }
 
-    public enum QuestionType
-    {
-        Text,
-        Number,
-        Date,
-        SingleChoice,
-        MultipleChoice,
-        FileUpload
-    }
+
 }

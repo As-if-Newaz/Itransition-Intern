@@ -44,6 +44,16 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
         public virtual ICollection<Like> Likes { get; set; }
         public virtual ICollection<TemplateTag> TemplateTags { get; set; }
         public virtual ICollection<TemplateAccess> TemplateAccesses { get; set; }
+
+        public Template()
+        {
+            Questions = new List<Question>();
+            Forms = new List<Form>();
+            Comments = new List<Comment>();
+            Likes = new List<Like>();
+            TemplateTags = new List<TemplateTag>();
+            TemplateAccesses = new List<TemplateAccess>();
+        }
     }
 
 

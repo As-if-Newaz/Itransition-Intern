@@ -3,6 +3,7 @@ using Iforms.BLL.Services;
 using Iforms.DAL.Entity_Framework.Table_Models;
 using Iforms.MVC.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using static Iforms.DAL.Entity_Framework.Table_Models.Enums;
 
 namespace Iforms.MVC.Controllers
 {

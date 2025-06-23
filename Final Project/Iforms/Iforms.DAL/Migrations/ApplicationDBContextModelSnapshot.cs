@@ -218,7 +218,7 @@ namespace Iforms.DAL.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("VARCHAR");
 
                     b.HasKey("Id");
 
