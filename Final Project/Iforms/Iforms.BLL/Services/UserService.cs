@@ -77,7 +77,7 @@ namespace Iforms.BLL.Services
         {
             foreach (var userId in userIds)
             {
-                if (!DA.UserData().BlockUser(userId))
+                if (!DA.UserData().UpdateUserStatus(userId , UserStatus.Blocked))
                 {
                     return false;
                 }
@@ -89,7 +89,7 @@ namespace Iforms.BLL.Services
         {
             foreach (var userId in userIds)
             {
-                if (!DA.UserData().UnblockUser(userId))
+                if (!DA.UserData().UpdateUserStatus(userId, UserStatus.Active))
                 {
                     return false;
                 }

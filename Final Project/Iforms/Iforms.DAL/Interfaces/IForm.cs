@@ -9,5 +9,10 @@ namespace Iforms.DAL.Interfaces
 {
     public interface IForm : IRepository<Form>
     {
+        IEnumerable<Form> GetUserForms(int userId);
+        IEnumerable<Form> GetTemplateForms(int templateId);
+        Form? GetFormWithDetails(int id);
+        bool CanUserAccessForm(int formId, int userId);
+        bool CanUserManageForm(int formId, int userId);
     }
 }

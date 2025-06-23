@@ -9,5 +9,8 @@ namespace Iforms.DAL.Interfaces
 {
     public interface IQuestion : IRepository<Question>
     {
+        IEnumerable<Question> GetByTemplateId(int templateId);
+        bool ReorderQuestions(int templateId, Dictionary<int, int> questionOrders);
+        int GetNextDisplayOrder(int templateId);
     }
 }

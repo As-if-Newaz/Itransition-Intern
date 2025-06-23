@@ -53,5 +53,12 @@ namespace Iforms.DAL.Repositories
             dbSet.Update(entity);
             return db.SaveChanges() > 0;
         }
+
+        public int Count(Expression<Func<T, bool>>? predicate = null)
+        {
+            if (predicate == null)
+                return dbSet.Count();
+            return dbSet.Count(predicate);
+        }
     }
 }

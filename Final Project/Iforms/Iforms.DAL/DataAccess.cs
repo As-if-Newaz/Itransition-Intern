@@ -22,9 +22,60 @@ namespace Iforms.DAL
         {
             return new UserRepository(db);
         }
+        public IAnswer AnswerData()
+        {
+            return new AnswerRepository(db);
+        }
+
         public IAuditLog AuditLogData()
         {
             return new AuditLogRepository(db);
         }
+
+        public IComment CommentData()
+        {
+            return new CommentRepository(db);
+        }
+
+        public IForm FormData()
+        {
+            return new FormRepository(db);
+        }
+
+        public ILike LikeData()
+        { 
+            return new LikeRepository(db); 
+        }
+
+        public IQuestion QuestionData()
+        {
+            return new QuestionRepository(db);
+        }
+
+        public ITag TagData()
+        {
+            return new TagRepository(db);
+        }
+
+        public ITemplate TemplateData()
+        {
+            return new TemplateRepository(db);
+        }
+
+        public ITemplateAccess TemplateAccessData()
+        {
+            return new TemplateAccessRepository(db);
+        }
+
+        public ITemplateTag TemplateTagData()
+        {
+            return new TemplateTagRepository(db);
+        }
+
+        public ITopic TopicData()
+        {
+            return new TopicRepository(db);
+        }
+
     }
 }

@@ -16,5 +16,7 @@ namespace Iforms.DAL.Interfaces
         bool Delete(T entity);
         //bool Exists(Expression<Func<T, bool>> predicate);
 
+        public int Count(Expression<Func<T, bool>>? predicate = null);
+
     }
 }

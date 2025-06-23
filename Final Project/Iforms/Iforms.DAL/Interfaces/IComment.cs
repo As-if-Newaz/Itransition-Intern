@@ -9,5 +9,7 @@ namespace Iforms.DAL.Interfaces
 {
     public interface IComment : IRepository<Comment>
     {
+        IEnumerable<Comment> GetTemplateComments(int templateId);
+        bool CanUserDeleteComment(int commentId, int userId);
     }
 }

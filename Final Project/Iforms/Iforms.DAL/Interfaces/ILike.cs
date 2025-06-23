@@ -9,5 +9,6 @@ namespace Iforms.DAL.Interfaces
 {
     public interface ILike : IRepository<Like>
     {
+        IEnumerable<Like> GetTemplateLikes(int templateId);
     }
 }

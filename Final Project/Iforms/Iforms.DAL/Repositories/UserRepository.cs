@@ -61,28 +61,6 @@ namespace Iforms.DAL.Repositories
             return null;
         }
 
-        public bool BlockUser(int userId)
-        {
-            var user = Get(userId);
-            if (user != null)
-            {
-                user.UserStatus = UserStatus.Blocked;
-                return Update(user);
-            }
-            return false;
-        }
-
-        public bool UnblockUser(int userId)
-        {
-            var user = Get(userId);
-            if (user != null)
-            {
-                user.UserStatus = UserStatus.Active;
-                return Update(user);
-            }
-            return false;
-        }
-
         public AuditLog? GetLastLogin(int userId)
         {
             return db.AuditLogs.FirstOrDefault(u => u.PerformedById == userId && u.Action == "Login");
@@ -91,6 +69,47 @@ namespace Iforms.DAL.Repositories
         public User? GetByEmail(string email)
         {
             return dbSet.AsNoTracking().FirstOrDefault(u => u.UserEmail == email);
+        }
+
+        public IEnumerable<User> SearchUsers(string searchTerm)
+        {
+            return dbSet.Where(u => u.UserName.Contains(searchTerm) || u.UserEmail.Contains(searchTerm))
+                       .AsNoTracking()
+                       .ToList();
+        }
+
+        public bool UpdateUserStatus(int userId, UserStatus status)
+        {
+            var user = Get(userId);
+            if (user != null)
+            {
+                user.UserStatus = status;
+                return Update(user);
+            }
+            return false;
+        }
+
+        public bool UpdateUserRole(int userId, UserRole role)
+        {
+            var user = Get(userId);
+            if (user != null)
+            {
+                user.UserRole = role;
+                return Update(user);
+            }
+            return false;
+        }
+
+        public bool UpdatePreferences(int userId, Language language, Theme theme)
+        {
+            var user = Get(userId);
+            if (user != null)
+            {
+                user.PreferredLanguage = language;
+                user.PreferredTheme = theme;
+                return Update(user);
+            }
+            return false;
         }
     }
 }
