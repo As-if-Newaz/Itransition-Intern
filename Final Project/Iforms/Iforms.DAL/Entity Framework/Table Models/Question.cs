@@ -25,6 +25,11 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
         public int QuestionOrder { get; set; }
 
         [Required]
+        public bool ShowInResultsTable { get; set; }
+
+        public IEnumerable<string>? Options { get; set; } 
+
+        [Required]
         public int TemplateId { get; set; }
 
         [ForeignKey("TemplateId")]

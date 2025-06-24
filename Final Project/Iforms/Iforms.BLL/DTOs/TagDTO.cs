@@ -13,7 +13,5 @@ namespace Iforms.BLL.DTOs
 
         [Required, StringLength(50)]
         public string Name { get; set; }
-
-        public virtual List<TemplateTagDTO>? TemplateTags { get; set; }
     }
 }

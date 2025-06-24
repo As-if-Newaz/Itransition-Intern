@@ -80,7 +80,7 @@ namespace Iforms.BLL.Services
         {
             foreach (var userId in userIds)
             {
-                if (!DA.UserData().UpdateUserStatus(userId , UserStatus.Blocked))
+                if (UpdateUserStatus(userId , UserStatus.Blocked))
                 {
                     return false;
                 }
@@ -92,7 +92,7 @@ namespace Iforms.BLL.Services
         {
             foreach (var userId in userIds)
             {
-                if (!DA.UserData().UpdateUserStatus(userId, UserStatus.Active))
+                if (UpdateUserStatus(userId, UserStatus.Active))
                 {
                     return false;
                 }
@@ -125,6 +125,22 @@ namespace Iforms.BLL.Services
                 return false;
             }
             return DA.UserData().Update(data);
+        }
+
+        public bool UpdateUserStatus(int userId, UserStatus status)
+        {
+            var user = DA.UserData().Get(userId);
+            if (user == null)
+            {
+                return false;
+            }
+            user.UserStatus = status;
+            return UpdateUser(GetMapper().Map<UserDTO>(user));
+        }
+        public IEnumerable<UserDTO> SearchUsers(string searchTerm)
+        {
+            var users = DA.UserData().SearchUsers(searchTerm);
+            return GetMapper().Map<List<UserDTO>>(users);
         }
     }
 }

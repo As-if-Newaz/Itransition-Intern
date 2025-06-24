@@ -17,6 +17,13 @@ namespace Iforms.DAL.Repositories
         {
         }
 
+        Template ITemplate.Create(Template template)
+        {
+            db.Templates.Add(template);
+            db.SaveChanges();
+            return template;
+        }
+
         public IEnumerable<Template> GetPublicTemplates()
         {
             return db.Templates
@@ -167,5 +174,7 @@ namespace Iforms.DAL.Repositories
 
             return template.CreatedById == userId;
         }
+
+
     }
 }

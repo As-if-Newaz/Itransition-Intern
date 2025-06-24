@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Iforms.DAL.Entity_Framework.Table_Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,5 +18,6 @@ namespace Iforms.BLL.DTOs
 
         [Required]
         public int UserId { get; set; }
+
     }
 }

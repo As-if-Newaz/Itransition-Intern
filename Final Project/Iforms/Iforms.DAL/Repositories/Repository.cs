@@ -60,5 +60,10 @@ namespace Iforms.DAL.Repositories
                 return dbSet.Count();
             return dbSet.Count(predicate);
         }
+
+        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
+        {
+            return dbSet.Where(predicate).AsNoTracking().ToList();
+        }
     }
 }

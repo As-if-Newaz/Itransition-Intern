@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Iforms.DAL.Entity_Framework.Table_Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Iforms.BLL.DTOs
 {
-    public class TemplateDTO
+    public class TemplateDetailedDTO
     {
         public int Id { get; set; }
 
@@ -34,5 +34,11 @@ namespace Iforms.BLL.DTOs
 
         public bool IsLikedByCurrentUser { get; set; }
 
+        public virtual List<QuestionDTO> Questions { get; set; }
+        public virtual List<FormDTO> Forms { get; set; }
+        public virtual List<CommentDTO> Comments { get; set; }
+        public virtual List<LikeDTO> Likes { get; set; }
+        public virtual List<TagDTO> TemplateTags { get; set; }
+        public virtual List<UserDTO> TemplateAccesses { get; set; }
     }
 }

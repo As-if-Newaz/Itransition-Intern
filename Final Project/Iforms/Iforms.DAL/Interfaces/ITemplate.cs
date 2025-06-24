@@ -9,6 +9,7 @@ namespace Iforms.DAL.Interfaces
 {
     public interface ITemplate : IRepository<Template>
     {
+        new Template Create(Template template);
         IEnumerable<Template> GetPublicTemplates();
         IEnumerable<Template> GetUserTemplates(int userId);
         IEnumerable<Template> GetAccessibleTemplates(int userId);

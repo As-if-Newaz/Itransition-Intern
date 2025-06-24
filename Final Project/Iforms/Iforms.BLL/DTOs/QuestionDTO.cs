@@ -27,6 +27,8 @@ namespace Iforms.BLL.DTOs
         [Required]
         public int TemplateId { get; set; }
 
+        public List<string> Options { get; set; } = new();
+
         public virtual List<AnswerDTO>? Answers { get; set; }
     }
 }

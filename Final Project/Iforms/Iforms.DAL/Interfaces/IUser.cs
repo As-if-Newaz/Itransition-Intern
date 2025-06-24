@@ -15,8 +15,5 @@ namespace Iforms.DAL.Interfaces
         AuditLog? GetLastLogin(int userId);
         User? GetByEmail(string email);
         IEnumerable<User> SearchUsers(string searchTerm);
-        bool UpdateUserStatus(int userId, UserStatus status);
-        bool UpdateUserRole(int userId, UserRole role);
-        bool UpdatePreferences(int userId, Language language, Theme theme);
     }
 }
