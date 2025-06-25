@@ -23,18 +23,6 @@ namespace Iforms.DAL.Repositories
                 .AsNoTracking()
                 .ToList();
         }
-
-        public IEnumerable<Tag> GetTagCloud(int count)
-        {
-            return db.Tags
-                .Include(t => t.TemplateTags)
-                .Where(t => t.TemplateTags.Any())
-                .OrderByDescending(t => t.TemplateTags.Count)
-                .Take(count)
-                .AsNoTracking()
-                .ToList();
-        }
-
         public IEnumerable<Tag> SearchTags(string searchTerm)
         {
             return dbSet.Where(t => t.Name.Contains(searchTerm))

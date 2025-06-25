@@ -27,8 +27,8 @@ namespace Iforms.BLL.Services
             {
                 cfg.CreateMap<Template, TemplateDTO>();
                 cfg.CreateMap<TemplateDTO, Template>();
-                cfg.CreateMap<Template, TemplateDetailedDTO>();
-                cfg.CreateMap<TemplateDetailedDTO, Template>();
+                cfg.CreateMap<Template, TemplateExtendedDTO>();
+                cfg.CreateMap<TemplateExtendedDTO, Template>();
                 cfg.CreateMap<TagDTO, Tag>();
                 cfg.CreateMap<Tag, TagDTO>();
                 cfg.CreateMap<TemplateTagDTO, TemplateTag>();
@@ -41,7 +41,7 @@ namespace Iforms.BLL.Services
             return new Mapper(config);
         }
 
-        public bool Create(TemplateDetailedDTO createTemplateDto, int createdById)
+        public bool Create(TemplateExtendedDTO createTemplateDto, int createdById)
         {
             var data = GetMapper().Map<Template>(createTemplateDto);
             var result = DA.TemplateData().Create(data);
@@ -71,11 +71,11 @@ namespace Iforms.BLL.Services
             return templateDto;
         }
 
-        public TemplateDetailedDTO? GetTemplateDetailedById(int id, int? currentUserId = null)
+        public TemplateExtendedDTO? GetTemplateDetailedById(int id, int? currentUserId = null)
         {
             var template = DA.TemplateData().GetTemplateWithDetails(id);
             if (template == null) return null;
-            var templateDto = GetMapper().Map<TemplateDetailedDTO>(template);
+            var templateDto = GetMapper().Map<TemplateExtendedDTO>(template);
             templateDto.IsLikedByCurrentUser = currentUserId.HasValue &&
                 template.Likes.Any(l => l.UserId == currentUserId.Value);
             return templateDto;
@@ -91,15 +91,16 @@ namespace Iforms.BLL.Services
             return DA.TemplateData().Delete(template);
         }
 
-        public bool Update(int id, TemplateDetailedDTO updateTemplateDto, int currentUserId)
+        public bool Update(int id, TemplateExtendedDTO updateTemplateDto, int currentUserId)
         {
             if (!DA.TemplateData().CanUserManageTemplate(id, currentUserId))
                 return false;
 
-            var template = DA.TemplateData().Get(id);
-            if (template == null) return false;
+            var template = DA.TemplateData().Exists(t => t.Id == id);
+            if (template == false) return false;
 
-            if (DA.TemplateData().Update(template))
+            var data = GetMapper().Map<Template>(updateTemplateDto);
+            if (DA.TemplateData().Update(data))
             {
                 UpdateTemplateTags(id, updateTemplateDto.TemplateTags);
                 UpdateAccessibleUsers(id, updateTemplateDto.TemplateAccesses, updateTemplateDto.IsPublic);

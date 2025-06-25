@@ -14,7 +14,7 @@ namespace Iforms.DAL.Interfaces
         bool Create(T entity);
         bool Update(T entity);
         bool Delete(T entity);
-        //bool Exists(Expression<Func<T, bool>> predicate);
+        bool Exists(Expression<Func<T, bool>> predicate);
         IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
         public int Count(Expression<Func<T, bool>>? predicate = null);
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Iforms.BLL.DTOs
 {
-    public class TemplateDetailedDTO
+    public class TemplateExtendedDTO
     {
         public int Id { get; set; }
 
