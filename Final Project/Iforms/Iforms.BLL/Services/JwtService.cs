@@ -28,7 +28,10 @@ namespace Iforms.BLL.Services
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.UserEmail),
-                new Claim(ClaimTypes.Name, user.UserName)
+                new Claim(ClaimTypes.Name, user.UserName),
+                new(ClaimTypes.Role, user.UserRole.ToString()),
+                new("PreferredLanguage", user.PreferredLanguage.ToString()),
+                new("PreferredTheme", user.PreferredTheme.ToString())
             };
 
             var token = new JwtSecurityToken(

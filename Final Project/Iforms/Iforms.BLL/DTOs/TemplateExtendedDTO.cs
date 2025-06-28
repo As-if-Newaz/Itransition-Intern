@@ -10,6 +10,17 @@ namespace Iforms.BLL.DTOs
 {
     public class TemplateExtendedDTO
     {
+        public TemplateExtendedDTO()
+        {
+            Topic = new TopicDTO();
+            Questions = new List<QuestionDTO>();
+            Forms = new List<FormDTO>();
+            Comments = new List<CommentDTO>();
+            Likes = new List<LikeDTO>();
+            TemplateTags = new List<TagDTO>();
+            TemplateAccesses = new List<UserDTO>();
+        }
+
         public int Id { get; set; }
 
         [Required, StringLength(150)]
@@ -29,16 +40,15 @@ namespace Iforms.BLL.DTOs
         [Required]
         public int CreatedById { get; set; }
 
-        [Required]
-        public int TopicId { get; set; }
+        public TopicDTO Topic { get; set; }
 
         public bool IsLikedByCurrentUser { get; set; }
 
-        public virtual List<QuestionDTO> Questions { get; set; }
-        public virtual List<FormDTO> Forms { get; set; }
-        public virtual List<CommentDTO> Comments { get; set; }
-        public virtual List<LikeDTO> Likes { get; set; }
-        public virtual List<TagDTO> TemplateTags { get; set; }
-        public virtual List<UserDTO> TemplateAccesses { get; set; }
+        public List<QuestionDTO> Questions { get; set; }
+        public List<FormDTO> Forms { get; set; }
+        public List<CommentDTO> Comments { get; set; }
+        public List<LikeDTO> Likes { get; set; }
+        public List<TagDTO> TemplateTags { get; set; }
+        public List<UserDTO> TemplateAccesses { get; set; }
     }
 }

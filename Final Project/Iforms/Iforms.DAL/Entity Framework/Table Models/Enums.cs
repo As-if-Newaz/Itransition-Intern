@@ -32,19 +32,6 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
             Light,
             Dark
         }
-
-        public enum TopicType
-        {
-            Quiz,
-            Submission,
-            Poll,
-            Survey,
-            Feedback,
-            Registration,
-            Event,
-            Other
-        }
-
         public enum QuestionType
         {
             Text,

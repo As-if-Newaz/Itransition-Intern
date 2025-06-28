@@ -1,4 +1,4 @@
-@if (TempData["SuccessMsg"] != null || TempData["ErrorMsg"] != null)
+@if (TempData["SuccessMsg"] != null || TempData["ErrorMsg"] != null || TempData["InfoMsg"] != null || TempData["WarningMsg"] != null)
 {
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
@@ -25,5 +25,19 @@
 {
     <script type="text/javascript">
         toastr.error('@TempData["ErrorMsg"]');
+    </script>
+}
+
+@if (TempData["InfoMsg"] != null)
+{
+    <script type="text/javascript">
+        toastr.info('@TempData["InfoMsg"]');
+    </script>
+}
+
+@if (TempData["WarningMsg"] != null)
+{
+    <script type="text/javascript">
+        toastr.warning('@TempData["WarningMsg"]');
     </script>
 }

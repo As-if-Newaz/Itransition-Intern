@@ -78,5 +78,39 @@ namespace Iforms.DAL.Repositories
                        .AsNoTracking()
                        .ToList();
         }
+
+        public bool UpdateUserStatus(int userId, UserStatus status)
+        {
+            var user = Get(userId);
+            if (user != null)
+            {
+                user.UserStatus = status;
+                return Update(user);
+            }
+            return false;
+        }
+
+        public bool UpdateUserRole(int userId, UserRole role)
+        {
+            var user = Get(userId);
+            if (user != null)
+            {
+                user.UserRole = role;
+                return Update(user);
+            }
+            return false;
+        }
+
+        public bool UpdatePreferences(int userId, Language language, Theme theme)
+        {
+            var user = Get(userId);
+            if (user != null)
+            {
+                user.PreferredLanguage = language;
+                user.PreferredTheme = theme;
+                return Update(user);
+            }
+            return false;
+        }
     }
 }

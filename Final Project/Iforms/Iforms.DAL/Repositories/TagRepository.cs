@@ -41,5 +41,16 @@ namespace Iforms.DAL.Repositories
             }
             return tag;
         }
+
+        public IEnumerable<Tag> GetTagCloud(int count)
+        {
+            return db.Tags
+                .Include(t => t.TemplateTags)
+                .Where(t => t.TemplateTags.Any())
+                .OrderByDescending(t => t.TemplateTags.Count)
+                .Take(count)
+                .AsNoTracking()
+                .ToList();
+        }
     }
 }

@@ -181,6 +181,9 @@ namespace Iforms.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Options")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("QuestionDescription")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -196,6 +199,9 @@ namespace Iforms.DAL.Migrations
 
                     b.Property<int>("QuestionType")
                         .HasColumnType("int");
+
+                    b.Property<bool>("ShowInResultsTable")
+                        .HasColumnType("bit");
 
                     b.Property<int>("TemplateId")
                         .HasColumnType("int");
@@ -245,6 +251,7 @@ namespace Iforms.DAL.Migrations
                         .HasColumnType("VARCHAR");
 
                     b.Property<string>("ImageUrl")
+                        .HasMaxLength(500)
                         .HasColumnType("VARCHAR");
 
                     b.Property<bool>("IsPublic")
@@ -321,8 +328,10 @@ namespace Iforms.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
+                    b.Property<string>("TopicType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("VARCHAR");
 
                     b.HasKey("Id");
 

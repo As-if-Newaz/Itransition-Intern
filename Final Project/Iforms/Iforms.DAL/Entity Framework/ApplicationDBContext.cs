@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace Iforms.DAL.Entity_Framework
 {
@@ -30,6 +31,18 @@ namespace Iforms.DAL.Entity_Framework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configure Question Options as JSON
+            modelBuilder.Entity<Question>()
+                .Property(q => q.Options)
+                .HasConversion(
+                    v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
+                    v => JsonSerializer.Deserialize<IEnumerable<string>>(v, (JsonSerializerOptions?)null) ?? new List<string>()
+                )
+                .Metadata.SetValueComparer(new Microsoft.EntityFrameworkCore.ChangeTracking.ValueComparer<IEnumerable<string>>(
+                    (c1, c2) => c1.SequenceEqual(c2),
+                    c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
+                    c => c.ToList()));
+
             // Forms: Cascade on Template, Restrict on User
             modelBuilder.Entity<Form>()
                 .HasOne(f => f.Template)

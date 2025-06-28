@@ -9,5 +9,6 @@ namespace Iforms.DAL.Interfaces
 {
     public interface ITopic : IRepository<Topic>
     {
+      //  Topic? GetOrCreateTopic(string topicName);
     }
 }

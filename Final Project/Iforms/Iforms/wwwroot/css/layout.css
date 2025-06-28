@@ -12,6 +12,11 @@
 
 .navbar-gradient {
     background: linear-gradient(135deg, #6a11cb, #2575fc) !important;
+    min-height: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .logout-btn {
@@ -121,4 +126,54 @@ body {
 
 .btn-glass:last-child {
     border-right: none !important;
+}
+
+.navbar .navbar-nav .btn-glass {
+    margin-left: 0;
+    margin-right: 10px;
+    margin-top: 12px;
+}
+
+.navbar .container-fluid {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    padding-top: 6px;
+    padding-bottom: 4px;
+}
+
+.app-logo {
+    align-self: flex-start;
+    margin-bottom: 0;
+    margin-top: 8px;
+    margin-left: 50px;
+    font-size: 1.75rem;
+    font-weight: bold;
+}
+
+.button-bar {
+    background: linear-gradient(135deg, #6a11cb, #2575fc) !important;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    margin-bottom: 0;
+    margin-top: -12px;
+    border: none;
+    width: 100vw;
+    position: relative;
+    left: 0;
+    box-sizing: border-box;
+}
+
+.button-bar .btn-glass {
+    border-right: none !important;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+}
+
+.template-content-area {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 2rem;
+    margin-bottom: 2rem;
 } 

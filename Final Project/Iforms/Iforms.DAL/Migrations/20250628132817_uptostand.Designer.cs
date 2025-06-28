@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Iforms.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250620155854_initdb6")]
-    partial class initdb6
+    [Migration("20250628132817_uptostand")]
+    partial class uptostand
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -184,6 +184,9 @@ namespace Iforms.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Options")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("QuestionDescription")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -199,6 +202,9 @@ namespace Iforms.DAL.Migrations
 
                     b.Property<int>("QuestionType")
                         .HasColumnType("int");
+
+                    b.Property<bool>("ShowInResultsTable")
+                        .HasColumnType("bit");
 
                     b.Property<int>("TemplateId")
                         .HasColumnType("int");
@@ -221,7 +227,7 @@ namespace Iforms.DAL.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("VARCHAR");
 
                     b.HasKey("Id");
 
@@ -248,6 +254,7 @@ namespace Iforms.DAL.Migrations
                         .HasColumnType("VARCHAR");
 
                     b.Property<string>("ImageUrl")
+                        .HasMaxLength(500)
                         .HasColumnType("VARCHAR");
 
                     b.Property<bool>("IsPublic")
@@ -324,8 +331,10 @@ namespace Iforms.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
+                    b.Property<string>("TopicType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("VARCHAR");
 
                     b.HasKey("Id");
 
@@ -341,6 +350,12 @@ namespace Iforms.DAL.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EmailVerificationCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("EmailVerificationExpiry")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PasswordHash")
@@ -363,9 +378,8 @@ namespace Iforms.DAL.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("VARCHAR");
 
-                    b.Property<string>("UserRole")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR");
+                    b.Property<int>("UserRole")
+                        .HasColumnType("int");
 
                     b.Property<int>("UserStatus")
                         .HasColumnType("int");

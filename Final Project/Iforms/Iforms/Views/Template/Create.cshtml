@@ -1,0 +1,601 @@
+﻿@{
+    ViewData["Title"] = "Create Template";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<link rel="stylesheet" href="~/css/notification.css" />
+<style>
+    .topic-result {
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    
+    .topic-result:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .topic-result:last-child {
+        border-bottom: none !important;
+    }
+    
+    #topicSearchResults {
+        top: 100%;
+        left: 0;
+        right: 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .select-topic-btn {
+        font-size: 0.8rem;
+        padding: 0.25rem 0.5rem;
+    }
+    
+    #addNewTopicBtn {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+    
+    /* Custom Modal Styles - No Backdrop */
+    .custom-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .custom-modal-dialog {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        max-width: 500px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .custom-modal-content {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .custom-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .custom-modal-title {
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 500;
+    }
+    
+    .custom-modal-body {
+        padding: 1rem;
+        flex: 1;
+    }
+    
+    .custom-modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5rem;
+        padding: 1rem;
+        border-top: 1px solid #dee2e6;
+    }
+    
+    .btn-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6c757d;
+    }
+    
+    .btn-close:hover {
+        color: #000;
+    }
+</style>
+@await Html.PartialAsync("Notification")
+
+@model Iforms.BLL.DTOs.TemplateExtendedDTO
+
+<div class="container mt-4">
+    <h2>Create a New Template</h2>
+    <div class="template-content-area">
+        <form id="templateForm" asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label">Title</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label">Description</label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ImageUrl" class="form-label">Image URL</label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="mb-3 form-check">
+                <input asp-for="IsPublic" class="form-check-input" />
+                <label asp-for="IsPublic" class="form-check-label">Is Public</label>
+                <span asp-validation-for="IsPublic" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Topic <span class="text-danger">*</span></label>
+                <div class="position-relative">
+                    <input type="text" class="form-control" id="topicSearch" placeholder="Search and select a topic for your template..." required />
+                    <input type="hidden" id="selectedTopicId" name="Topic.Id" />
+                    <input type="hidden" id="selectedTopicType" name="Topic.TopicType" />
+                    <div id="topicSearchResults" class="position-absolute w-100 bg-white border rounded shadow-sm" style="z-index: 1000; display: none; max-height: 200px; overflow-y: auto;"></div>
+                    <div class="invalid-feedback" id="topicValidationMessage" style="display: none;">
+                        Please select a topic for your template.
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <h4>Questions</h4>
+            <div id="questionsList" class="mb-3"></div>
+            <button type="button" class="btn btn-outline-primary mb-3" id="addQuestionBtn">+ Add Question</button>
+            <hr />
+            <h4>Share with Users</h4>
+            <div id="shareUsers" class="mb-3">
+                <input type="text" class="form-control mb-2" id="userSearch" placeholder="Search users to share..." />
+                <div id="selectedUsers"></div>
+            </div>
+            <button type="submit" class="btn btn-success">Publish Template</button>
+        </form>
+    </div>
+</div>
+
+<!-- Topic Creation Modal -->
+<div id="topicModal" class="custom-modal" style="display: none;">
+    <div class="custom-modal-dialog">
+        <div class="custom-modal-content">
+            <div class="custom-modal-header">
+                <h5 class="custom-modal-title">Create New Topic</h5>
+                <button type="button" class="btn-close" id="closeTopicModal" aria-label="Close">&times;</button>
+            </div>
+            <div class="custom-modal-body">
+                <form id="topicForm">
+                    <div class="mb-3">
+                        <label for="newTopicType" class="form-label">Topic Type</label>
+                        <input type="text" class="form-control" id="newTopicType" required />
+                    </div>
+                </form>
+            </div>
+            <div class="custom-modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelTopicBtn">Cancel</button>
+                <button type="button" class="btn btn-primary" id="createTopicBtn">Create Topic</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script>
+        let questions = [];
+        let questionId = 0;
+        const questionsList = document.getElementById('questionsList');
+        const addQuestionBtn = document.getElementById('addQuestionBtn');
+        const templateForm = document.getElementById('templateForm');
+        const topicSearch = document.getElementById('topicSearch');
+        const topicSearchResults = document.getElementById('topicSearchResults');
+        const selectedTopicId = document.getElementById('selectedTopicId');
+        const selectedTopicType = document.getElementById('selectedTopicType');
+
+        // QuestionType enum values
+        const questionTypes = [
+            { value: 'Text', label: 'Text' },
+            { value: 'Number', label: 'Number' },
+            { value: 'Date', label: 'Date' },
+            { value: 'SingleChoice', label: 'Single Choice' },
+            { value: 'MultipleChoice', label: 'Multiple Choice' },
+            { value: 'FileUpload', label: 'File Upload' }
+        ];
+
+        // SignalR setup
+        const connection = new signalR.HubConnectionBuilder().withUrl("/questionHub").build();
+        connection.start().catch(err => {
+            console.error('SignalR connection failed:', err);
+        });
+        connection.on("QuestionAdded", q => addQuestionUI(q, false));
+        connection.on("QuestionOrderUpdated", qs => renderQuestions(qs, false));
+
+        // Topic search functionality
+        let searchTimeout;
+        
+        function showTopicModal() {
+            const modal = document.getElementById('topicModal');
+            modal.style.display = 'flex';
+            // Focus on the input field
+            setTimeout(() => {
+                document.getElementById('newTopicType').focus();
+            }, 100);
+        }
+        
+        function hideTopicModal() {
+            const modal = document.getElementById('topicModal');
+            modal.style.display = 'none';
+            // Clear the input
+            document.getElementById('newTopicType').value = '';
+        }
+        
+        // Add event listeners for modal close buttons
+        document.getElementById('closeTopicModal').addEventListener('click', hideTopicModal);
+        document.getElementById('cancelTopicBtn').addEventListener('click', hideTopicModal);
+        
+        // Close modal when clicking outside
+        document.getElementById('topicModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideTopicModal();
+            }
+        });
+        
+        topicSearch.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            const term = this.value.trim();
+            
+            if (term.length < 2) {
+                topicSearchResults.style.display = 'none';
+                return;
+            }
+
+            searchTimeout = setTimeout(async () => {
+                try {
+                    const response = await fetch(`/Template/SearchTopics?term=${encodeURIComponent(term)}`);
+                    const topics = await response.json();
+                    
+                    if (topics.length > 0) {
+                        const resultsHtml = topics.map(topic => 
+                            `<div class="p-2 border-bottom topic-result" data-id="${topic.id}" data-type="${topic.topicType}">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>${topic.topicType}</span>
+                                    <button type="button" class="btn btn-sm btn-outline-primary select-topic-btn">Select</button>
+                                </div>
+                            </div>`
+                        ).join('') + 
+                        `<div class="p-2 border-top">
+                            <button type="button" class="btn btn-sm btn-success w-100" id="addNewTopicBtn">
+                                + Create New Topic: "${term}"
+                            </button>
+                        </div>`;
+                        
+                        topicSearchResults.innerHTML = resultsHtml;
+                        topicSearchResults.style.display = 'block';
+                        
+                        // Add event listeners for topic selection
+                        document.querySelectorAll('.select-topic-btn').forEach(btn => {
+                            btn.addEventListener('click', function() {
+                                const topicResult = this.closest('.topic-result');
+                                const topicId = topicResult.dataset.id;
+                                const topicType = topicResult.dataset.type;
+                                
+                                selectedTopicId.value = topicId;
+                                selectedTopicType.value = topicType;
+                                topicSearch.value = topicType;
+                                topicSearchResults.style.display = 'none';
+                                
+                                // Clear validation error
+                                const topicValidationMessage = document.getElementById('topicValidationMessage');
+                                topicValidationMessage.style.display = 'none';
+                                topicSearch.classList.remove('is-invalid');
+                                topicSearch.classList.add('is-valid');
+                            });
+                        });
+                        
+                        // Add event listener for create new topic button
+                        document.getElementById('addNewTopicBtn').addEventListener('click', function() {
+                            document.getElementById('newTopicType').value = term;
+                            
+                            // Clean up any existing modals first
+                            hideTopicModal();
+                            
+                            showTopicModal();
+                        });
+                    } else {
+                        topicSearchResults.innerHTML = `
+                            <div class="p-2 border-top">
+                                <button type="button" class="btn btn-sm btn-success w-100" id="addNewTopicBtn">
+                                    + Create New Topic: "${term}"
+                                </button>
+                            </div>`;
+                        topicSearchResults.style.display = 'block';
+                        
+                        document.getElementById('addNewTopicBtn').addEventListener('click', function() {
+                            document.getElementById('newTopicType').value = term;
+                            
+                            // Clean up any existing modals first
+                            hideTopicModal();
+                            
+                            showTopicModal();
+                        });
+                    }
+                } catch (error) {
+                    console.error('Error searching topics:', error);
+                }
+            }, 300);
+        });
+
+        // Hide search results when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!topicSearch.contains(e.target) && !topicSearchResults.contains(e.target)) {
+                topicSearchResults.style.display = 'none';
+            }
+        });
+
+        // Topic creation functionality
+        document.getElementById('createTopicBtn').addEventListener('click', async function() {
+            const topicType = document.getElementById('newTopicType').value.trim();
+            
+            if (!topicType) {
+                alert('Please enter a topic type');
+                return;
+            }
+
+            try {
+                const response = await fetch('/Template/CreateTopic', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ topicType: topicType })
+                });
+
+                const result = await response.json();
+                
+                if (response.ok && result.success) {
+                    // Refresh the search to get the new topic
+                    topicSearch.dispatchEvent(new Event('input'));
+                    
+                    // Close the modal properly
+                    hideTopicModal();
+                    
+                    // Show success message
+                    alert('Topic created successfully!');
+                } else {
+                    alert(result.message || 'Failed to create topic');
+                }
+            } catch (error) {
+                console.error('Error creating topic:', error);
+                alert('Error creating topic');
+            }
+        });
+
+        addQuestionBtn.onclick = function() {
+            const q = { id: ++questionId, text: '', type: 'MultipleChoice', options: ['Option 1'] };
+            questions.push(q);
+            addQuestionUI(q, true);
+            connection.invoke("AddQuestion", q);
+        };
+
+        function addQuestionUI(q, local = true) {
+            const qDiv = document.createElement('div');
+            qDiv.className = 'card mb-2 question-card';
+            qDiv.setAttribute('data-id', q.id);
+            
+            // Generate options for the dropdown
+            const optionsHtml = questionTypes.map(type => 
+                `<option value="${type.value}" ${q.type === type.value ? 'selected' : ''}>${type.label}</option>`
+            ).join('');
+
+            // Generate options inputs
+            const optionsInputs = q.options.map((option, index) => 
+                `<input type="text" class="form-control mb-1 option-input" value="${option}" data-option-index="${index}" />`
+            ).join('');
+
+            qDiv.innerHTML = `
+                <div class="card-body">
+                    <input type="text" class="form-control mb-2 question-title" placeholder="Untitled Question" value="${q.text || ''}" />
+                    <select class="form-select mb-2 question-type">
+                        ${optionsHtml}
+                    </select>
+                    <div class="options-list mb-2">
+                        ${optionsInputs}
+                        <button type="button" class="btn btn-sm btn-outline-secondary add-option-btn">+ Add option</button>
+                    </div>
+                    <button type="button" class="btn btn-danger btn-sm remove-question-btn">Delete</button>
+                </div>`;
+            questionsList.appendChild(qDiv);
+            if (local) {
+                questions.push(q);
+            }
+
+            // Add option button functionality
+            qDiv.querySelector('.add-option-btn').onclick = function() {
+                const optionsList = qDiv.querySelector('.options-list');
+                const newOptionIndex = qDiv.querySelectorAll('.option-input').length;
+                const newOptionInput = document.createElement('input');
+                newOptionInput.type = 'text';
+                newOptionInput.className = 'form-control mb-1 option-input';
+                newOptionInput.setAttribute('data-option-index', newOptionIndex);
+                newOptionInput.value = `Option ${newOptionIndex + 1}`;
+                
+                // Insert before the add button
+                const addButton = qDiv.querySelector('.add-option-btn');
+                optionsList.insertBefore(newOptionInput, addButton);
+                
+                // Update the question's options array
+                const questionIndex = questions.findIndex(question => question.id === q.id);
+                if (questionIndex !== -1) {
+                    questions[questionIndex].options.push(`Option ${newOptionIndex + 1}`);
+                }
+            };
+
+            // Remove question functionality
+            qDiv.querySelector('.remove-question-btn').onclick = function() {
+                questions = questions.filter(x => x.id !== q.id);
+                qDiv.remove();
+            };
+
+            // Update question data when inputs change
+            qDiv.querySelector('.question-title').oninput = function() {
+                const questionIndex = questions.findIndex(question => question.id === q.id);
+                if (questionIndex !== -1) {
+                    questions[questionIndex].text = this.value;
+                }
+            };
+
+            qDiv.querySelector('.question-type').onchange = function() {
+                const questionIndex = questions.findIndex(question => question.id === q.id);
+                if (questionIndex !== -1) {
+                    questions[questionIndex].type = this.value;
+                }
+            };
+
+            // Update options when option inputs change
+            qDiv.querySelectorAll('.option-input').forEach(input => {
+                input.oninput = function() {
+                    const questionIndex = questions.findIndex(question => question.id === q.id);
+                    if (questionIndex !== -1) {
+                        const optionIndex = parseInt(this.getAttribute('data-option-index'));
+                        questions[questionIndex].options[optionIndex] = this.value;
+                    }
+                };
+            });
+        }
+
+        function renderQuestions(qs, local = true) {
+            questionsList.innerHTML = '';
+            (qs || questions).forEach(q => addQuestionUI(q, false));
+        }
+
+        // Enable drag-and-drop reordering with SortableJS
+        const sortable = new Sortable(questionsList, {
+            animation: 150,
+            handle: '.card-body',
+            onEnd: function (evt) {
+                // Update questions array order
+                const newOrder = Array.from(questionsList.children).map(div => {
+                    const id = parseInt(div.getAttribute('data-id'));
+                    return questions.find(q => q.id === id);
+                });
+                questions = newOrder;
+                connection.invoke("UpdateQuestionOrder", questions);
+            }
+        });
+
+        // Form submission
+        templateForm.onsubmit = function(e) {
+            e.preventDefault();
+            
+            console.log('Form submission started');
+            
+            // Validate topic selection
+            if (!selectedTopicId.value || !selectedTopicType.value) {
+                const topicValidationMessage = document.getElementById('topicValidationMessage');
+                topicValidationMessage.style.display = 'block';
+                topicSearch.classList.add('is-invalid');
+                return false;
+            } else {
+                const topicValidationMessage = document.getElementById('topicValidationMessage');
+                topicValidationMessage.style.display = 'none';
+                topicSearch.classList.remove('is-invalid');
+            }
+            
+            // Update all question data from the UI
+            questions.forEach((question, index) => {
+                const questionDiv = questionsList.querySelector(`[data-id="${question.id}"]`);
+                if (questionDiv) {
+                    question.text = questionDiv.querySelector('.question-title').value;
+                    question.type = questionDiv.querySelector('.question-type').value;
+                    
+                    // Update options
+                    question.options = [];
+                    questionDiv.querySelectorAll('.option-input').forEach(input => {
+                        question.options.push(input.value);
+                    });
+                }
+            });
+
+            console.log('Questions updated:', questions);
+
+            // Create hidden inputs for questions
+            questions.forEach((question, index) => {
+                // Remove existing hidden inputs for this question
+                const existingInputs = templateForm.querySelectorAll(`[name^="Questions[${index}]"]`);
+                existingInputs.forEach(input => input.remove());
+
+                // Create new hidden inputs
+                const questionTitleInput = document.createElement('input');
+                questionTitleInput.type = 'hidden';
+                questionTitleInput.name = `Questions[${index}].QuestionTitle`;
+                questionTitleInput.value = question.text;
+
+                const questionDescInput = document.createElement('input');
+                questionDescInput.type = 'hidden';
+                questionDescInput.name = `Questions[${index}].QuestionDescription`;
+                questionDescInput.value = question.text; // Using title as description for now
+
+                const questionTypeInput = document.createElement('input');
+                questionTypeInput.type = 'hidden';
+                questionTypeInput.name = `Questions[${index}].QuestionType`;
+                questionTypeInput.value = question.type;
+
+                const questionOrderInput = document.createElement('input');
+                questionOrderInput.type = 'hidden';
+                questionOrderInput.name = `Questions[${index}].QuestionOrder`;
+                questionOrderInput.value = index;
+
+                const showInResultsInput = document.createElement('input');
+                showInResultsInput.type = 'hidden';
+                showInResultsInput.name = `Questions[${index}].ShowInResultsTable`;
+                showInResultsInput.value = 'true';
+
+                // Add options as JSON string
+                const optionsInput = document.createElement('input');
+                optionsInput.type = 'hidden';
+                optionsInput.name = `Questions[${index}].Options`;
+                optionsInput.value = JSON.stringify(question.options);
+
+                templateForm.appendChild(questionTitleInput);
+                templateForm.appendChild(questionDescInput);
+                templateForm.appendChild(questionTypeInput);
+                templateForm.appendChild(questionOrderInput);
+                templateForm.appendChild(showInResultsInput);
+                templateForm.appendChild(optionsInput);
+            });
+
+            console.log('Form prepared for submission');
+            
+            try {
+                // Submit the form
+                templateForm.submit();
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('Error submitting form. Please try again.');
+            }
+        };
+
+        // User search (AJAX to /Template/SearchUsers)
+        document.getElementById('userSearch').oninput = async function() {
+            const term = this.value;
+            if (term.length < 2) return;
+            const res = await fetch(`/Template/SearchUsers?term=${encodeURIComponent(term)}`);
+            const users = await res.json();
+            const selectedUsers = document.getElementById('selectedUsers');
+            selectedUsers.innerHTML = users.map(u => `<span class='badge bg-primary m-1'>${u.name} (${u.email})</span>`).join('');
+        };
+    </script>
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

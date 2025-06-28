@@ -1,4 +1,5 @@
-﻿using Iforms.BLL.Services;
+﻿using Azure;
+using Iforms.BLL.Services;
 using Iforms.DAL.Entity_Framework.Table_Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -41,11 +42,29 @@ namespace Iforms.MVC.Authentication
                 var userService = context.HttpContext.RequestServices.GetRequiredService<UserService>();
 
                 var user = userService.GetById(int.Parse(userId));
-                if (user == null || user.UserStatus.Equals(UserStatus.Blocked) || user.UserRole != UserRole.User)
+                if (user == null || user.UserStatus.Equals(UserStatus.Blocked))
                 {
                     RedirectToLogin(context, "Invalid Session, Please log in again");
                     return;
                 }
+                if (user.UserRole != UserRole.User)
+                {
+                    context.Result = new RedirectToActionResult("Index", "Home", new { errorMessage = "Access Denied" });
+                    return;
+                }
+
+                // Set up the User claims for the controller to access
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                    new Claim(ClaimTypes.Email, user.UserEmail),
+                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(ClaimTypes.Role, user.UserRole.ToString())
+                };
+
+                var identity = new ClaimsIdentity(claims, "JWT");
+                var principal = new ClaimsPrincipal(identity);
+                context.HttpContext.User = principal;
             }
             catch
             {
@@ -55,6 +74,11 @@ namespace Iforms.MVC.Authentication
         private void RedirectToLogin(AuthorizationFilterContext context, string message)
         {
             context.HttpContext.Response.Cookies.Delete("JWTToken");
+            context.HttpContext.Response.Cookies.Delete("LoggedId");
+            context.HttpContext.Response.Cookies.Delete("name");
+            context.HttpContext.Response.Cookies.Delete("Role");
+            context.HttpContext.Response.Cookies.Delete("Theme");
+            context.HttpContext.Response.Cookies.Delete("Language");
             var redirectResult = new RedirectToActionResult("Login", "Auth", new { errorMessage = message });
             context.Result = redirectResult;
         }

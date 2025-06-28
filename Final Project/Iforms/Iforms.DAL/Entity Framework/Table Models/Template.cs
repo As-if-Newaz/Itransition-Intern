@@ -18,7 +18,7 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
         [Required, Column(TypeName = "VARCHAR"), StringLength(200)]
         public string Description { get; set; }
 
-        [Column(TypeName = "VARCHAR")]
+        [Column(TypeName = "VARCHAR"), StringLength(500)]
         public string? ImageUrl { get; set; }
 
         [Required]

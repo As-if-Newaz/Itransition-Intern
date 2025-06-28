@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Iforms.BLL.DTOs;
+using Iforms.MVC.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,11 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<JwtService>();
 builder.Services.AddScoped<AuditLogService>();
 builder.Services.AddScoped<EmailService>();
+builder.Services.AddScoped<TemplateService>();
+builder.Services.AddScoped<CommentService>();
+builder.Services.AddScoped<FormService>();
+builder.Services.AddScoped<TagService>();
+builder.Services.AddScoped<QuestionService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -42,6 +48,7 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<IApplicationDBContext, ApplicationDBContext>(options =>
     options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Iforms.DAL")));
@@ -68,11 +75,12 @@ app.UseAuthorization();
 app.UsePathBase("/");
 app.MapGet("/", context =>
 {
-    context.Response.Redirect("/login");
+    context.Response.Redirect("/Home/Index");
     return Task.CompletedTask;
 });
 app.MapControllerRoute(
    name: "default",
    pattern: "{controller=Auth}/{action=Login}/{id?}");
+app.MapHub<QuestionHub>("/questionHub");
 
 app.Run();

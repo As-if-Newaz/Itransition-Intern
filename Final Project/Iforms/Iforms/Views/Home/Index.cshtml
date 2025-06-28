@@ -1,8 +1,37 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<link rel="stylesheet" href="~/css/notification.css" />
+@await Html.PartialAsync("Notification")
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+ <h2>Popular Tags</h2>
+<ul>
+    @foreach (var tag in Model.TagCloud)
+    {
+        <li>@tag.Name</li>
+    }
+</ul>
+<h2>Latest Templates</h2>
+<ul>
+    @foreach (var template in Model.LatestTemplates)
+    {
+        <li>@template.Title</li>
+    }
+</ul>
+
+<h2>Popular Templates</h2>
+<ul>
+    @foreach (var template in Model.PopularTemplates)
+    {
+        <li>@template.Title</li>
+    }
+</ul>
 </div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

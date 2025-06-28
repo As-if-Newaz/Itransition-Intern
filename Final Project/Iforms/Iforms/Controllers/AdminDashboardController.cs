@@ -2,6 +2,7 @@
 using Iforms.BLL.Services;
 using Iforms.MVC.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using static Iforms.DAL.Entity_Framework.Table_Models.Enums;
 
 namespace Iforms.MVC.Controllers
 {
@@ -69,7 +70,40 @@ namespace Iforms.MVC.Controllers
             }
         }
 
-        
+        [HttpPost("UserManagement/Activate")]
+        public JsonResult Activate([FromBody] int[] userIds)
+        {
+            if (userIds == null || userIds.Length == 0)
+                return Json(new { success = false, message = "No users selected." });
+            var result = userServices.ActivateUsers(userIds);
+            if (result)
+            {
+                auditLogService.RecordLog(int.Parse(HttpContext.Request.Cookies["LoggedId"]), "Activated Users", string.Join(", ", userIds));
+                return Json(new { success = true, message = "Users Activated successfully." });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to Activate users." });
+            }
+        }
+        [HttpPost("UserManagement/Inactivate")]
+        public JsonResult Inactivate([FromBody] int[] userIds)
+        {
+            if (userIds == null || userIds.Length == 0)
+                return Json(new { success = false, message = "No users selected." });
+            var result = userServices.InactivateUsers(userIds);
+            if (result)
+            {
+                auditLogService.RecordLog(int.Parse(HttpContext.Request.Cookies["LoggedId"]), "Inactivated Users", string.Join(", ", userIds));
+                return Json(new { success = true, message = "Users Inactivated successfully." });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to Inactivate users." });
+            }
+        }
+
+
         [HttpPost("UserManagement/Delete")]
         public JsonResult Delete([FromBody] int[] userIds)
         {
@@ -113,6 +147,20 @@ namespace Iforms.MVC.Controllers
             else
             {
                 return Json(new { success = false, message = "Failed to update user" });
+            }
+        }
+
+        [HttpPost("UserManagement/UpdateRole")]
+        public JsonResult UpdateRole(int userId, UserRole role)
+        {
+            var result = userServices.UpdateUserRole(userId, role);
+            if (result)
+            {
+                return Json(new { success = true, message = "User role updated successfully." });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to update user role." });
             }
         }
     }

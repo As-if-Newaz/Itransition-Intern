@@ -46,5 +46,11 @@ namespace Iforms.BLL.Services
             return DA.CommentData().Delete(comment);
         }
 
+        public IEnumerable<CommentDTO> GetTemplateComments(int templateId)
+        {
+            var comments = DA.CommentData().GetTemplateComments(templateId);
+            return GetMapper().Map<List<CommentDTO>>(comments);
+        }
+
     }
 }

@@ -28,20 +28,32 @@ namespace Iforms.BLL.Services
                 cfg.CreateMap<Template, TemplateDTO>();
                 cfg.CreateMap<TemplateDTO, Template>();
                 cfg.CreateMap<Template, TemplateExtendedDTO>();
-                cfg.CreateMap<TemplateExtendedDTO, Template>();
+                cfg.CreateMap<TemplateExtendedDTO, Template>()
+                    .ForMember(dest => dest.TopicId, opt => opt.MapFrom(src => src.Topic.Id))
+                    .ForMember(dest => dest.Topic, opt => opt.Ignore())
+                    .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                    .ForMember(dest => dest.Questions, opt => opt.Ignore())
+                    .ForMember(dest => dest.Forms, opt => opt.Ignore())
+                    .ForMember(dest => dest.Comments, opt => opt.Ignore())
+                    .ForMember(dest => dest.Likes, opt => opt.Ignore())
+                    .ForMember(dest => dest.TemplateTags, opt => opt.Ignore())
+                    .ForMember(dest => dest.TemplateAccesses, opt => opt.Ignore());
                 cfg.CreateMap<TagDTO, Tag>();
                 cfg.CreateMap<Tag, TagDTO>();
                 cfg.CreateMap<TemplateTagDTO, TemplateTag>();
                 cfg.CreateMap<TemplateAccessDTO, TemplateAccess>(); 
                 cfg.CreateMap<TopicDTO, Topic>();
-
-
-
+                cfg.CreateMap<Topic, TopicDTO>();
+                cfg.CreateMap<QuestionDTO, Question>()
+                    .ForMember(dest => dest.Template, opt => opt.Ignore())
+                    .ForMember(dest => dest.Answers, opt => opt.Ignore())
+                    .ForMember(dest => dest.Options, opt => opt.MapFrom(src => src.Options ?? new List<string>()));
+                cfg.CreateMap<Question, QuestionDTO>();
             });
             return new Mapper(config);
         }
 
-        public bool Create(TemplateExtendedDTO createTemplateDto, int createdById)
+        public Template? Create(TemplateExtendedDTO createTemplateDto, int createdById)
         {
             var data = GetMapper().Map<Template>(createTemplateDto);
             var result = DA.TemplateData().Create(data);
@@ -54,7 +66,13 @@ namespace Iforms.BLL.Services
                     AddAccessibleUsers(result.Id, createTemplateDto.TemplateAccesses);
                 }
 
-                return result != null;
+                // Create questions for the template
+                if (createTemplateDto.Questions != null && createTemplateDto.Questions.Any())
+                {
+                    CreateQuestionsForTemplate(result.Id, createTemplateDto.Questions, createdById);
+                }
+
+                return result;
             }
 
             throw new InvalidOperationException("Failed to create template");
@@ -208,6 +226,21 @@ namespace Iforms.BLL.Services
             }
         }
 
+        private void CreateQuestionsForTemplate(int templateId, List<QuestionDTO> questions, int createdById)
+        {
+            foreach (var questionDto in questions)
+            {
+                questionDto.TemplateId = templateId;
+                Console.WriteLine($"Creating question: {questionDto.QuestionTitle}, Options: {string.Join(", ", questionDto.Options)}");
+                var question = GetMapper().Map<Question>(questionDto);
+                var result = DA.QuestionData().Create(question);
+                if (!result)
+                {
+                    Console.WriteLine($"Failed to create question: {questionDto.QuestionTitle}");
+                }
+            }
+        }
+
         public TemplateSearchResultDTO Search(TemplateSearchDTO searchDto, int? currentUserId = null)
         {
             var templates = DA.TemplateData().SearchTemplates(searchDto.SearchTerm ?? "", GetMapper().Map<Topic>(searchDto.Topic), searchDto.Tags);
@@ -276,6 +309,36 @@ namespace Iforms.BLL.Services
                 };
                 return DA.LikeData().Create(like);
             }
+        }
+
+        public List<TopicDTO> GetAllTopics()
+        {
+            var topics = DA.TopicData().GetAll();
+            if (topics == null || !topics.Any())
+            {
+                return new List<TopicDTO>();
+            }
+            return GetMapper().Map<List<TopicDTO>>(topics);
+        }
+
+        public List<TopicDTO> SearchTopics(string searchTerm)
+        {
+            var topics = DA.TopicData().GetAll();
+            if (topics == null || !topics.Any())
+            {
+                return new List<TopicDTO>();
+            }
+
+            var filteredTopics = topics.Where(t => 
+                t.TopicType.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+            
+            return GetMapper().Map<List<TopicDTO>>(filteredTopics);
+        }
+
+        public bool AddNewTopic(TopicDTO topicDto)
+        {
+            var topic = GetMapper().Map<Topic>(topicDto);
+            return DA.TopicData().Create(topic);
         }
     }
 }

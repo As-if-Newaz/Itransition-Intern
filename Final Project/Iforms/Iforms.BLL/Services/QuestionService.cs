@@ -86,14 +86,14 @@ namespace Iforms.BLL.Services
 
             return DA.QuestionData().Delete(question);
         }
-        //public bool ReorderQuestions(int templateId, QuestionDTO reorderDto, int currentUserId)
-        //{
-        //    if (!templateService.CanUserManageTemplate(templateId, currentUserId))
-        //        throw new UnauthorizedAccessException("User cannot manage this template");
+        public bool ReorderQuestions( TemplateExtendedDTO templateDto, int currentUserId)
+        {
+            if (!templateService.CanUserManageTemplate(templateDto.Id, currentUserId))
+                throw new UnauthorizedAccessException("User cannot manage this template");
 
-        //    var questionOrders = reorderDto.Questions.ToDictionary(q => q.Id, q => q.DisplayOrder);
-        //    return DA.QuestionData().ReorderQuestions(templateId, questionOrders);
-        //}
+            var questionOrders = templateDto.Questions.ToDictionary(q => q.Id, q => q.QuestionOrder);
+            return DA.QuestionData().ReorderQuestions(templateDto.Id, questionOrders);
+        }
     }
 
 }

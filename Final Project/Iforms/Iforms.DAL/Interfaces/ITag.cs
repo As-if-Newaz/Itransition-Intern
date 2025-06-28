@@ -10,7 +10,7 @@ namespace Iforms.DAL.Interfaces
     public interface ITag : IRepository<Tag>
     {
         IEnumerable<Tag> GetTagsWithUsageCount();
-       // IEnumerable<Tag> GetTagCloud(int count);
+        IEnumerable<Tag> GetTagCloud(int count);
         IEnumerable<Tag> SearchTags(string searchTerm);
         Tag? GetOrCreateTag(string tagName);
     }

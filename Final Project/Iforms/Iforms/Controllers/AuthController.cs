@@ -50,6 +50,9 @@ namespace Iforms.MVC.Controllers
                 //var name = userServices.GetById(user.Id)?.UserName ?? "User";
                 HttpContext.Response.Cookies.Append("LoggedId", user.Id.ToString());
                 HttpContext.Response.Cookies.Append("name", user.UserName);
+                HttpContext.Response.Cookies.Append("Role", user.UserRole.ToString());
+                HttpContext.Response.Cookies.Append("Theme", user.PreferredTheme.ToString());
+                HttpContext.Response.Cookies.Append("Language" , user.PreferredLanguage.ToString());
                 Response.Cookies.Append("JWTToken", token, new CookieOptions
                 {
                     HttpOnly = true,
@@ -57,7 +60,17 @@ namespace Iforms.MVC.Controllers
                     SameSite = SameSiteMode.Strict,
                     Expires = DateTime.Now.AddHours(3)
                 });
-                if(user.UserRole == UserRole.Admin)
+                if(user.UserStatus == UserStatus.Inactive)
+                {
+                    TempData["ErrorMsg"] = "Your account is inactive. Please verify your email.";
+                    return RedirectToAction("VerifyEmail", "User");
+                }
+                else if(user.UserStatus == UserStatus.Blocked)
+                {
+                    TempData["ErrorMsg"] = "Your account is blocked. Please contact support.";
+                    return View(userLoginDTO);
+                }
+                if (user.UserRole == UserRole.Admin)
                 {
                     auditLogService.RecordLog(user.Id, "Admin Login", "Admin logged in successfully");
                     //TempData["SuccessMsg"] = "Logged in successfully!";
@@ -72,16 +85,20 @@ namespace Iforms.MVC.Controllers
             }
             return View(userLoginDTO);
         }
-
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         [Route("logout")]
         [HttpPost]
         public IActionResult Logout()
         {
             auditLogService.RecordLog(int.Parse(HttpContext.Request.Cookies["LoggedId"]), "Logout", "User logged out successfully");
             Response.Cookies.Delete("JWTToken");
+            Response.Cookies.Delete("LoggedId");
+            Response.Cookies.Delete("name");
+            Response.Cookies.Delete("Role");
+            Response.Cookies.Delete("Theme");
+            Response.Cookies.Delete("Language");
             TempData["SuccessMsg"] = "Logged out successfully!";
-            return RedirectToAction("Login", "Auth");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

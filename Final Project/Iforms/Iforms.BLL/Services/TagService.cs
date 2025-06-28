@@ -41,5 +41,11 @@ namespace Iforms.BLL.Services
             var tags = DA.TagData().SearchTags(searchTerm);
             return GetMapper().Map<List<TagDTO>>(tags);
         }
+
+        public IEnumerable<TagDTO> GetTagCloud(int count = 20)
+        {
+            var tags = DA.TagData().GetTagCloud(count);
+            return GetMapper().Map<List<TagDTO>>(tags);
+        }
     }
 }

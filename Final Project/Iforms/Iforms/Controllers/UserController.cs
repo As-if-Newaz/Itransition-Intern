@@ -1,6 +1,7 @@
 ﻿using Iforms.BLL.DTOs;
 using Iforms.BLL.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using static Iforms.DAL.Entity_Framework.Table_Models.Enums;
 
 namespace Iforms.MVC.Controllers
@@ -87,6 +88,54 @@ namespace Iforms.MVC.Controllers
             userServices.UpdateUser(user);
             TempData["SuccessMsg"] = "Email verified! You can now log in.";
             return RedirectToAction("Login", "Auth");
+        }
+
+        [HttpGet]
+        [Route("profile")]
+        public IActionResult Profile()
+        {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Auth");
+
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
+            var user = userServices.GetById(userId);
+
+            if (user == null)
+                return NotFound();
+
+            var model = new UserPreferencesDTO
+            {
+                PreferredLanguage = (Language)user.PreferredLanguage,
+                PreferredTheme = (Theme)user.PreferredTheme
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [Route("profile")]
+        public IActionResult Profile(UserPreferencesDTO preferences)
+        {
+            if (!User.Identity.IsAuthenticated)
+                return RedirectToAction("Login", "Auth");
+
+            if (ModelState.IsValid)
+            {
+                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
+                var result = userServices.UpdatePreferences(userId, preferences);
+
+                if (result)
+                {
+                    TempData["SuccessMsg"] = "Preferences updated successfully!";
+                    return RedirectToAction("Profile");
+                }
+                else
+                {
+                    TempData["ErrorMsg"] = "Failed to update preferences.";
+                }
+            }
+
+            return View(preferences);
         }
     }
 }

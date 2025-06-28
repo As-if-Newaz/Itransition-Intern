@@ -80,7 +80,7 @@ namespace Iforms.BLL.Services
         {
             foreach (var userId in userIds)
             {
-                if (UpdateUserStatus(userId , UserStatus.Blocked))
+                if (!UpdateUserStatus(userId , UserStatus.Blocked))
                 {
                     return false;
                 }
@@ -92,7 +92,31 @@ namespace Iforms.BLL.Services
         {
             foreach (var userId in userIds)
             {
-                if (UpdateUserStatus(userId, UserStatus.Active))
+                if (!UpdateUserStatus(userId, UserStatus.Active))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool ActivateUsers(int[] userIds)
+        {
+            foreach (var userId in userIds)
+            {
+                if (!UpdateUserStatus(userId, UserStatus.Active))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public bool InactivateUsers(int[] userIds)
+        {
+            foreach (var userId in userIds)
+            {
+                if (!UpdateUserStatus(userId, UserStatus.Inactive))
                 {
                     return false;
                 }
@@ -129,15 +153,19 @@ namespace Iforms.BLL.Services
 
         public bool UpdateUserStatus(int userId, UserStatus status)
         {
-            var user = DA.UserData().Get(userId);
-            if (user == null)
-            {
-                return false;
-            }
-            user.UserStatus = status;
-            return UpdateUser(GetMapper().Map<UserDTO>(user));
+            return DA.UserData().UpdateUserStatus(userId, status);
         }
-        public IEnumerable<UserDTO> SearchUsers(string searchTerm)
+
+        public bool UpdateUserRole(int userId, UserRole role)
+        {
+            return DA.UserData().UpdateUserRole(userId, role);
+        }
+
+        public bool UpdatePreferences(int userId, UserPreferencesDTO preferences)
+        {
+            return DA.UserData().UpdatePreferences(userId, preferences.PreferredLanguage, preferences.PreferredTheme);
+        }
+        public List<UserDTO> SearchUsers(string searchTerm)
         {
             var users = DA.UserData().SearchUsers(searchTerm);
             return GetMapper().Map<List<UserDTO>>(users);

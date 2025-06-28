@@ -341,7 +341,6 @@ D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\staticwebas
 D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\staticwebassets.build.json.cache
 D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\staticwebassets.development.json
 D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\Iforms.MVC.csproj.Up2Date
 D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\Iforms.MVC.dll
 D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\refint\Iforms.MVC.dll
@@ -350,3 +349,9 @@ D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\Iforms.MVC.
 D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\ref\Iforms.MVC.dll
 D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\AutoMapper.dll
 D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\Microsoft.AspNetCore.Http.Connections.Client.dll
+D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.dll
+D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.Core.dll
+D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
+D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

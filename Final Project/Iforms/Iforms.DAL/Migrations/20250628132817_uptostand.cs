@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Iforms.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class initdb4 : Migration
+    public partial class uptostand : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,7 @@ namespace Iforms.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    Name = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -30,7 +30,7 @@ namespace Iforms.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Type = table.Column<int>(type: "int", nullable: false)
+                    TopicType = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,11 +46,13 @@ namespace Iforms.DAL.Migrations
                     UserName = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: false),
                     UserEmail = table.Column<string>(type: "VARCHAR(100)", maxLength: 100, nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserRole = table.Column<string>(type: "VARCHAR", nullable: false),
-                    UserStatus = table.Column<string>(type: "VARCHAR(50)", maxLength: 50, nullable: false),
+                    UserRole = table.Column<int>(type: "int", nullable: false),
+                    UserStatus = table.Column<int>(type: "int", nullable: false),
                     PreferredLanguage = table.Column<int>(type: "int", nullable: false),
                     PreferredTheme = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EmailVerificationCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailVerificationExpiry = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -87,7 +89,7 @@ namespace Iforms.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "VARCHAR(150)", maxLength: 150, nullable: false),
                     Description = table.Column<string>(type: "VARCHAR(200)", maxLength: 200, nullable: false),
-                    ImageUrl = table.Column<string>(type: "VARCHAR", nullable: true),
+                    ImageUrl = table.Column<string>(type: "VARCHAR(500)", maxLength: 500, nullable: true),
                     IsPublic = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedById = table.Column<int>(type: "int", nullable: false),
@@ -202,6 +204,8 @@ namespace Iforms.DAL.Migrations
                     QuestionDescription = table.Column<string>(type: "VARCHAR(150)", maxLength: 150, nullable: false),
                     QuestionType = table.Column<int>(type: "int", nullable: false),
                     QuestionOrder = table.Column<int>(type: "int", nullable: false),
+                    ShowInResultsTable = table.Column<bool>(type: "bit", nullable: false),
+                    Options = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TemplateId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
