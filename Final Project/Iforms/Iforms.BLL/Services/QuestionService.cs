@@ -29,7 +29,10 @@ namespace Iforms.BLL.Services
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Question, QuestionDTO>();
+                cfg.CreateMap<Question, QuestionDTO>()
+                    .ForMember(dest => dest.Options, opt => opt.MapFrom(src => src.Options != null ? src.Options.ToList() : new List<string>()));
+                cfg.CreateMap<QuestionDTO, Question>()
+                    .ForMember(dest => dest.Options, opt => opt.MapFrom(src => src.Options ?? new List<string>()));
                 cfg.CreateMap<UserDTO, User>();
 
             });

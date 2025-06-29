@@ -35,7 +35,7 @@ namespace Iforms.DAL.Repositories
 
         public bool Exists(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return dbSet.Any(predicate);
         }
 
         public T? Get(int id)

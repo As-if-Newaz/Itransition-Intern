@@ -42,10 +42,10 @@
                     else if (role == "User")  
                     {  
                         // User buttons  
-                        <a href="@Url.Action("Index", "Home")" class="btn btn-glass">Home</a>  
-                        <a href="@Url.Action("Create", "Template")" class="btn btn-glass">Create Template</a>  
-                        <button class="btn btn-glass">Manage Templates</button>  
-                        <button class="btn btn-glass">Manage Admin Applications</button>  
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-glass">Home</a>
+                        <a href="@Url.Action("BrowseTemplates", "Template")" class="btn btn-glass">Browse Templates</a>
+                        <a href="@Url.Action("Create", "Template")" class="btn btn-glass">Create Template</a>
+                        <a href="@Url.Action("UserTemplates", "UserDashboard")" class="btn btn-glass">Manage Templates</a>
                         <button class="btn btn-glass">Manage Activity Logs</button>  
                     }  
                     else  

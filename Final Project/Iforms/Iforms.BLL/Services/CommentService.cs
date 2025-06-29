@@ -21,7 +21,8 @@ namespace Iforms.BLL.Services
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Comment, CommentDTO>();
+                cfg.CreateMap<Comment, CommentDTO>()
+                    .ForMember(dest => dest.CreatedByUserName, opt => opt.MapFrom(src => src.CreatedBy != null ? src.CreatedBy.UserName : null));
                 cfg.CreateMap<CommentDTO, Comment>();
                 cfg.CreateMap<User, UserDTO>();
 

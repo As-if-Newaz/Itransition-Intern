@@ -32,7 +32,10 @@ namespace Iforms.BLL.Services
                 cfg.CreateMap<AnswerDTO, Answer>();
                 cfg.CreateMap<User, UserDTO>();
                 cfg.CreateMap<Template, TemplateDTO>();
-                cfg.CreateMap<Question, QuestionDTO>();
+                cfg.CreateMap<Question, QuestionDTO>()
+                    .ForMember(dest => dest.Options, opt => opt.MapFrom(src => src.Options != null ? src.Options.ToList() : new List<string>()));
+                cfg.CreateMap<QuestionDTO, Question>()
+                    .ForMember(dest => dest.Options, opt => opt.MapFrom(src => src.Options ?? new List<string>()));
             });
             return new Mapper(config);
         }
@@ -100,6 +103,7 @@ namespace Iforms.BLL.Services
         {
             return DA.FormData().CanUserManageForm(formId, userId);
         }
+
 
     }
 }

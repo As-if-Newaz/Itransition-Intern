@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Create Template";
+    ViewData["Title"] = "Edit Template";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -175,12 +175,12 @@
 
 @model Iforms.BLL.DTOs.TemplateExtendedDTO
 
-<div class="container mt-4">  
-    </br>
+<div class="container mt-4">
+    <h2>Edit Template</h2>
     <div class="template-content-area">
-        <h2>Create a New Template</h2>
-        <form id="templateForm" asp-action="Create" method="post">
+        <form id="templateForm" asp-action="Edit" method="post">
             @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="mb-3">
                 <label asp-for="Title" class="form-label">Title</label>
@@ -208,8 +208,8 @@
                     <select class="form-select" id="topicSelect" required>
                         <option value="">Select a topic for your template...</option>
                     </select>
-                    <input type="hidden" id="selectedTopicId" name="Topic.Id" />
-                    <input type="hidden" id="selectedTopicType" name="Topic.TopicType" />
+                    <input type="hidden" id="selectedTopicId" name="Topic.Id" value="@Model.Topic?.Id" />
+                    <input type="hidden" id="selectedTopicType" name="Topic.TopicType" value="@Model.Topic?.TopicType" />
                     <div class="invalid-feedback" id="topicValidationMessage" style="display: none;">
                         Please select a topic for your template.
                     </div>
@@ -217,7 +217,9 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Template Tags</label>
-                <input type="text" class="form-control" id="templateTags" name="TemplateTagsInput" placeholder="Enter tags separated by commas (e.g., survey, feedback, research)" />
+                <input type="text" class="form-control" id="templateTags" name="TemplateTagsInput" 
+                       value="@(Model.TemplateTags != null ? string.Join(", ", Model.TemplateTags.Select(t => t.Name)) : "")" 
+                       placeholder="Enter tags separated by commas (e.g., survey, feedback, research)" />
                 <div class="form-text">Enter tags separated by commas to help categorize your template</div>
             </div>
             <hr />
@@ -234,7 +236,8 @@
                 <div id="selectedUsers" class="selected-users-container"></div>
                 <input type="hidden" id="selectedUserIds" name="SelectedUserIds" />
             </div>
-            <button type="submit" class="btn btn-success">Publish Template</button>
+            <button type="submit" class="btn btn-success">Update Template</button>
+            <a href="@Url.Action("Details", new { id = Model.Id })" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </div>
@@ -275,6 +278,39 @@
         const topicSelect = document.getElementById('topicSelect');
         const selectedTopicId = document.getElementById('selectedTopicId');
         const selectedTopicType = document.getElementById('selectedTopicType');
+
+        // Initialize questions from model data
+        @if (Model.Questions != null && Model.Questions.Any())
+        {
+            <text>
+            questions = @Html.Raw(Json.Serialize(Model.Questions.Select((q, index) => new {
+                id = q.Id > 0 ? q.Id : index + 1,
+                text = q.QuestionTitle,
+                type = q.QuestionType.ToString(),
+                options = q.Options ?? new List<string> { "Option 1" },
+                order = q.QuestionOrder
+            })));
+            questionId = questions.length > 0 ? Math.max(...questions.map(q => q.id)) : 0;
+            console.log('Questions loaded from model:', questions);
+            // Ensure options are arrays, not JSON strings or arrays with a single JSON string
+            questions.forEach(q => {
+                if (typeof q.options === 'string') {
+                    try {
+                        q.options = JSON.parse(q.options);
+                    } catch (e) {
+                        q.options = [];
+                    }
+                }
+                if (Array.isArray(q.options) && q.options.length === 1 && typeof q.options[0] === 'string' && q.options[0].trim().startsWith('[')) {
+                    try {
+                        q.options = JSON.parse(q.options[0]);
+                    } catch (e) {
+                        // leave as is
+                    }
+                }
+            });
+            </text>
+        }
 
         // QuestionType enum values
         const questionTypes = [
@@ -322,13 +358,40 @@
                 addNewOption.style.color = '#28a745';
                 topicSelect.appendChild(addNewOption);
                 
+                // Set the current topic if it exists
+                const currentTopicType = selectedTopicType.value;
+                if (currentTopicType) {
+                    topicSelect.value = currentTopicType;
+                    topicSelect.classList.add('is-valid');
+                }
+                
             } catch (error) {
                 console.error('Error loading topics:', error);
             }
         }
         
         // Load topics when page loads
-        document.addEventListener('DOMContentLoaded', loadTopics);
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTopics();
+            // Render existing questions
+            renderQuestions(questions, false);
+
+            // Initialize selected users from model if available
+            @if (Model.TemplateAccesses != null && Model.TemplateAccesses.Any())
+            {
+                <text>
+                selectedUsers = @Html.Raw(Json.Serialize(Model.TemplateAccesses.Select(u => new {
+                    id = u.Id,
+                    name = u.UserName,
+                    email = u.UserEmail
+                })));
+                </text>
+            }
+            console.log('Selected users on load:', selectedUsers);
+            updateSelectedUsersDisplay();
+
+            // ... rest of your DOMContentLoaded code ...
+        });
         
         function showTopicModal() {
             const modal = document.getElementById('topicModal');
@@ -363,8 +426,8 @@
             if (selectedValue === 'add_new') {
                 // Show modal for creating new topic
                 showTopicModal();
-                // Reset the select to empty
-                this.value = '';
+                // Reset the select to current value
+                this.value = selectedTopicType.value || '';
                 return;
             }
             
@@ -590,6 +653,11 @@
                 existingInputs.forEach(input => input.remove());
 
                 // Create new hidden inputs
+                const questionIdInput = document.createElement('input');
+                questionIdInput.type = 'hidden';
+                questionIdInput.name = `Questions[${index}].Id`;
+                questionIdInput.value = question.id;
+
                 const questionTitleInput = document.createElement('input');
                 questionTitleInput.type = 'hidden';
                 questionTitleInput.name = `Questions[${index}].QuestionTitle`;
@@ -621,6 +689,7 @@
                 optionsInput.name = `Questions[${index}].Options`;
                 optionsInput.value = JSON.stringify(question.options);
 
+                templateForm.appendChild(questionIdInput);
                 templateForm.appendChild(questionTitleInput);
                 templateForm.appendChild(questionDescInput);
                 templateForm.appendChild(questionTypeInput);
@@ -716,7 +785,7 @@
         function displaySuggestions(users) {
             // Filter out already selected users
             const availableUsers = users.filter(user => 
-                !selectedUsers.some(selected => selected.id === user.id)
+                !selectedUsers.some(selected => selected.id === parseInt(user.id))
             );
             
             if (availableUsers.length === 0) {
@@ -774,14 +843,17 @@
         }
         
         function selectUser(userId, userName, userEmail) {
+            // Convert userId to number for consistent type handling
+            const userIdNum = parseInt(userId);
+            
             // Check if user is already selected
-            if (selectedUsers.some(user => user.id === userId)) {
+            if (selectedUsers.some(user => user.id === userIdNum)) {
                 return;
             }
             
             // Add user to selected users
             selectedUsers.push({
-                id: userId,
+                id: userIdNum,
                 name: userName,
                 email: userEmail
             });
@@ -798,12 +870,18 @@
         }
         
         function removeUser(userId) {
-            selectedUsers = selectedUsers.filter(user => user.id !== userId);
+            // Convert userId to number for proper comparison
+            const userIdNum = parseInt(userId);
+            console.log('Removing user with ID:', userId, 'converted to:', userIdNum);
+            console.log('Selected users before removal:', selectedUsers);
+            selectedUsers = selectedUsers.filter(user => user.id !== userIdNum);
+            console.log('Selected users after removal:', selectedUsers);
             updateSelectedUsersDisplay();
             updateSelectedUserIdsInput();
         }
         
         function updateSelectedUsersDisplay() {
+            console.log('Updating selected users display. Count:', selectedUsers.length);
             if (selectedUsers.length === 0) {
                 selectedUsersContainer.innerHTML = '<div class="no-users-message">No users selected for sharing</div>';
             } else {
@@ -814,15 +892,13 @@
                     </div>
                 `).join('');
             }
+            console.log('Display updated. HTML:', selectedUsersContainer.innerHTML);
         }
         
         function updateSelectedUserIdsInput() {
             const userIds = selectedUsers.map(user => user.id);
             selectedUserIdsInput.value = userIds.join(',');
         }
-        
-        // Initialize selected users display
-        updateSelectedUsersDisplay();
     </script>
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

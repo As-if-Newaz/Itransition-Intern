@@ -74,13 +74,13 @@ namespace Iforms.MVC.Controllers
                 {
                     auditLogService.RecordLog(user.Id, "Admin Login", "Admin logged in successfully");
                     //TempData["SuccessMsg"] = "Logged in successfully!";
-                    return RedirectToAction("Index", "AdminDashboard");
+                    return RedirectToAction("Index", "Home");
                 }
                 else if(user.UserRole == UserRole.User)
                 {
                     auditLogService.RecordLog(user.Id, "User Login", "User logged in successfully");
                     //TempData["SuccessMsg"] = "Logged in successfully!";
-                    return RedirectToAction("Index", "UserDashboard");
+                    return RedirectToAction("Index", "Home");
                 }
             }
             return View(userLoginDTO);

@@ -27,7 +27,9 @@ namespace Iforms.BLL.Services
             {
                 cfg.CreateMap<Template, TemplateDTO>();
                 cfg.CreateMap<TemplateDTO, Template>();
-                cfg.CreateMap<Template, TemplateExtendedDTO>();
+                cfg.CreateMap<Template, TemplateExtendedDTO>()
+                    .ForMember(dest => dest.TemplateTags, opt => opt.MapFrom(src => src.TemplateTags.Select(tt => tt.Tag)))
+                    .ForMember(dest => dest.TemplateAccesses, opt => opt.MapFrom(src => src.TemplateAccesses.Select(ta => ta.User)));
                 cfg.CreateMap<TemplateExtendedDTO, Template>()
                     .ForMember(dest => dest.TopicId, opt => opt.MapFrom(src => src.Topic.Id))
                     .ForMember(dest => dest.Topic, opt => opt.Ignore())
@@ -44,11 +46,13 @@ namespace Iforms.BLL.Services
                 cfg.CreateMap<TemplateAccessDTO, TemplateAccess>(); 
                 cfg.CreateMap<TopicDTO, Topic>();
                 cfg.CreateMap<Topic, TopicDTO>();
+                cfg.CreateMap<User, UserDTO>();
                 cfg.CreateMap<QuestionDTO, Question>()
                     .ForMember(dest => dest.Template, opt => opt.Ignore())
                     .ForMember(dest => dest.Answers, opt => opt.Ignore())
                     .ForMember(dest => dest.Options, opt => opt.MapFrom(src => src.Options ?? new List<string>()));
-                cfg.CreateMap<Question, QuestionDTO>();
+                cfg.CreateMap<Question, QuestionDTO>()
+                    .ForMember(dest => dest.Options, opt => opt.MapFrom(src => src.Options != null ? src.Options.ToList() : new List<string>()));
             });
             return new Mapper(config);
         }
@@ -96,6 +100,28 @@ namespace Iforms.BLL.Services
             var templateDto = GetMapper().Map<TemplateExtendedDTO>(template);
             templateDto.IsLikedByCurrentUser = currentUserId.HasValue &&
                 template.Likes.Any(l => l.UserId == currentUserId.Value);
+
+            // Map shared users (TemplateAccesses) to UserDTOs
+            if (template.TemplateAccesses != null && template.TemplateAccesses.Any())
+            {
+                templateDto.TemplateAccesses = template.TemplateAccesses
+                    .Where(ta => ta.User != null)
+                    .Select(ta => new UserDTO
+                    {
+                        Id = ta.User.Id,
+                        UserName = ta.User.UserName,
+                        UserEmail = ta.User.UserEmail,
+                        UserRole = (Iforms.DAL.Entity_Framework.Table_Models.Enums.UserRole)ta.User.UserRole,
+                        UserStatus = (Iforms.DAL.Entity_Framework.Table_Models.Enums.UserStatus)ta.User.UserStatus,
+                        CreatedAt = ta.User.CreatedAt
+                    })
+                    .ToList();
+            }
+            else
+            {
+                templateDto.TemplateAccesses = new List<UserDTO>();
+            }
+
             return templateDto;
         }
         public bool Delete(int id, int currentUserId)
@@ -114,14 +140,26 @@ namespace Iforms.BLL.Services
             if (!DA.TemplateData().CanUserManageTemplate(id, currentUserId))
                 return false;
 
-            var template = DA.TemplateData().Exists(t => t.Id == id);
-            if (template == false) return false;
+            var existingTemplate = DA.TemplateData().Get(id);
+            if (existingTemplate == null) return false;
 
-            var data = GetMapper().Map<Template>(updateTemplateDto);
-            if (DA.TemplateData().Update(data))
+            // Update the existing template with new values
+            existingTemplate.Title = updateTemplateDto.Title;
+            existingTemplate.Description = updateTemplateDto.Description;
+            existingTemplate.ImageUrl = updateTemplateDto.ImageUrl;
+            existingTemplate.IsPublic = updateTemplateDto.IsPublic;
+            existingTemplate.TopicId = updateTemplateDto.Topic.Id;
+
+            if (DA.TemplateData().Update(existingTemplate))
             {
                 UpdateTemplateTags(id, updateTemplateDto.TemplateTags);
                 UpdateAccessibleUsers(id, updateTemplateDto.TemplateAccesses, updateTemplateDto.IsPublic);
+                
+                // Update questions for the template
+                if (updateTemplateDto.Questions != null && updateTemplateDto.Questions.Any())
+                {
+                    UpdateQuestionsForTemplate(id, updateTemplateDto.Questions, currentUserId);
+                }
 
                 return true;
             }
@@ -339,6 +377,53 @@ namespace Iforms.BLL.Services
         {
             var topic = GetMapper().Map<Topic>(topicDto);
             return DA.TopicData().Create(topic);
+        }
+
+        private void UpdateQuestionsForTemplate(int templateId, List<QuestionDTO> questions, int currentUserId)
+        {
+            // Get existing questions for this template
+            var existingQuestions = DA.QuestionData().GetByTemplateId(templateId).ToList();
+            
+            // Remove questions that are no longer in the updated list
+            foreach (var existingQuestion in existingQuestions)
+            {
+                if (!questions.Any(q => q.Id == existingQuestion.Id))
+                {
+                    DA.QuestionData().Delete(existingQuestion);
+                }
+            }
+            
+            // Update or create questions
+            foreach (var questionDto in questions)
+            {
+                questionDto.TemplateId = templateId;
+                
+                if (questionDto.Id > 0)
+                {
+                    // Update existing question
+                    var existingQuestion = existingQuestions.FirstOrDefault(q => q.Id == questionDto.Id);
+                    if (existingQuestion != null)
+                    {
+                        existingQuestion.QuestionTitle = questionDto.QuestionTitle;
+                        existingQuestion.QuestionDescription = questionDto.QuestionDescription;
+                        existingQuestion.QuestionType = questionDto.QuestionType;
+                        existingQuestion.QuestionOrder = questionDto.QuestionOrder;
+                        existingQuestion.Options = questionDto.Options?.ToList();
+                        DA.QuestionData().Update(existingQuestion);
+                    }
+                }
+                else
+                {
+                    // Create new question
+                    Console.WriteLine($"Creating question: {questionDto.QuestionTitle}, Options: {string.Join(", ", questionDto.Options)}");
+                    var question = GetMapper().Map<Question>(questionDto);
+                    var result = DA.QuestionData().Create(question);
+                    if (!result)
+                    {
+                        Console.WriteLine($"Failed to create question: {questionDto.QuestionTitle}");
+                    }
+                }
+            }
         }
     }
 }

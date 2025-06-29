@@ -4,8 +4,6 @@
 }
 
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor  
-<link rel="stylesheet" href="~/css/notification.css" />   
-@await Html.PartialAsync("Notification")  
 <br />  
 <h3>Hi, <b>@HttpContextAccessor.HttpContext.Request.Cookies["name"]?.ToString()</b> </h3>
 <br />

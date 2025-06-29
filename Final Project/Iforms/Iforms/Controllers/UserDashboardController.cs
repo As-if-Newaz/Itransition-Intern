@@ -1,4 +1,6 @@
 ﻿using Iforms.BLL.Services;
+using Iforms.BLL.DTOs;
+using Iforms.MVC.Authentication;
 using Iforms.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -14,28 +16,40 @@ namespace Iforms.MVC.Controllers
             this.templateService = templateService;
             this.tagService = tagService;
         }
-        public IActionResult Index()
+
+        [AuthenticatedUser]
+        [HttpGet]
+        public IActionResult UserTemplates(int page = 1)
         {
-            var currentUserId = GetCurrentUserId();
-
-            var latestTemplates = templateService.GetLatestTemplates(10, currentUserId);
-            var popularTemplates = templateService.GetMostPopularTemplates(5, currentUserId);
-            var tagCloud = tagService.GetTagCloud();
-
-            var model = new HomeViewModel
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdString) || !int.TryParse(userIdString, out var userId))
             {
-                LatestTemplates = latestTemplates.ToList(),
-                PopularTemplates = popularTemplates.ToList(),
-                TagCloud = tagCloud.ToList()
+                return RedirectToAction("Login", "Account");
+            }
+
+            var pageSize = 10;
+            var allTemplates = templateService.GetUserTemplates(userId, userId).ToList();
+            var totalCount = allTemplates.Count;
+            var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
+            
+            // Ensure page is within valid range
+            page = Math.Max(1, Math.Min(page, totalPages > 0 ? totalPages : 1));
+            
+            var templates = allTemplates
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            var viewModel = new UserTemplatesViewModel
+            {
+                Templates = templates,
+                CurrentPage = page,
+                TotalPages = totalPages,
+                TotalCount = totalCount,
+                PageSize = pageSize
             };
 
-            return View(model);
-        }
-
-        private int? GetCurrentUserId()
-        {
-            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            return int.TryParse(userIdClaim, out var userId) ? userId : null;
+            return View(viewModel);
         }
     }
 }
