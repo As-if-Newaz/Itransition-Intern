@@ -38,8 +38,6 @@ namespace Iforms.BLL.Services
                 cfg.CreateMap<UserDTO, User>();
                 cfg.CreateMap<Template, TemplateDTO>();
                 cfg.CreateMap<TemplateDTO, Template>();
-                cfg.CreateMap<Template, TemplateExtendedDTO>();
-                cfg.CreateMap<TemplateExtendedDTO, Template>();
                 cfg.CreateMap<Question, QuestionDTO>()
                     .ForMember(dest => dest.Options, opt => opt.MapFrom(src => src.Options != null ? src.Options.ToList() : new List<string>()));
                 cfg.CreateMap<QuestionDTO, Question>()

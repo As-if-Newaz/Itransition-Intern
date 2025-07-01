@@ -25,12 +25,11 @@ namespace Iforms.BLL.Services
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Template, TemplateDTO>();
-                cfg.CreateMap<TemplateDTO, Template>();
-                cfg.CreateMap<Template, TemplateExtendedDTO>()
+                cfg.CreateMap<Template, TemplateDTO>()
                     .ForMember(dest => dest.TemplateTags, opt => opt.MapFrom(src => src.TemplateTags.Select(tt => tt.Tag)))
-                    .ForMember(dest => dest.TemplateAccesses, opt => opt.MapFrom(src => src.TemplateAccesses.Select(ta => ta.User)));
-                cfg.CreateMap<TemplateExtendedDTO, Template>()
+                    .ForMember(dest => dest.TemplateAccesses, opt => opt.MapFrom(src => src.TemplateAccesses.Select(ta => ta.User)))
+                    .ForMember(dest => dest.Topic, opt => opt.MapFrom(src => src.Topic));
+                cfg.CreateMap<TemplateDTO, Template>()
                     .ForMember(dest => dest.TopicId, opt => opt.MapFrom(src => src.Topic.Id))
                     .ForMember(dest => dest.Topic, opt => opt.Ignore())
                     .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
@@ -82,7 +81,7 @@ namespace Iforms.BLL.Services
             return new Mapper(config);
         }
 
-        public Template? Create(TemplateExtendedDTO createTemplateDto, int createdById)
+        public Template? Create(TemplateDTO createTemplateDto, int createdById)
         {
             var data = GetMapper().Map<Template>(createTemplateDto);
             var result = DA.TemplateData().Create(data);
@@ -118,11 +117,11 @@ namespace Iforms.BLL.Services
             return templateDto;
         }
 
-        public TemplateExtendedDTO? GetTemplateDetailedById(int id, int? currentUserId = null)
+        public TemplateDTO? GetTemplateDetailedById(int id, int? currentUserId = null)
         {
             var template = DA.TemplateData().GetTemplateWithDetails(id);
             if (template == null) return null;
-            var templateDto = GetMapper().Map<TemplateExtendedDTO>(template);
+            var templateDto = GetMapper().Map<TemplateDTO>(template);
             templateDto.IsLikedByCurrentUser = currentUserId.HasValue &&
                 template.Likes.Any(l => l.UserId == currentUserId.Value);
 
@@ -166,7 +165,7 @@ namespace Iforms.BLL.Services
             return true;
         }
 
-        public bool Update(int id, TemplateExtendedDTO updateTemplateDto, int currentUserId)
+        public bool Update(int id, TemplateDTO updateTemplateDto, int currentUserId)
         {
             if (!DA.TemplateData().CanUserManageTemplate(id, currentUserId))
                 return false;

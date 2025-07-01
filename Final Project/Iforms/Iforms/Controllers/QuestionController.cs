@@ -77,7 +77,7 @@ namespace Iforms.MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Reorder([FromBody] TemplateExtendedDTO reorderDto)
+        public IActionResult Reorder([FromBody] TemplateDTO reorderDto)
         {
             var currentUserId = GetCurrentUserId();
             questionService.ReorderQuestions(reorderDto, currentUserId);

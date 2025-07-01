@@ -89,7 +89,7 @@ namespace Iforms.BLL.Services
 
             return DA.QuestionData().Delete(question);
         }
-        public bool ReorderQuestions( TemplateExtendedDTO templateDto, int currentUserId)
+        public bool ReorderQuestions(TemplateDTO templateDto, int currentUserId)
         {
             if (!templateService.CanUserManageTemplate(templateDto.Id, currentUserId))
                 throw new UnauthorizedAccessException("User cannot manage this template");

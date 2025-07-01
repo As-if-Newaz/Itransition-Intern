@@ -58,12 +58,12 @@ namespace Iforms.MVC.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View(new TemplateExtendedDTO());
+            return View(new TemplateDTO());
         }
 
         [AuthenticatedUser]
         [HttpPost]
-        public IActionResult Create(TemplateExtendedDTO model)
+        public IActionResult Create(TemplateDTO model)
         {
             var templateImage = Request.Form.Files["TemplateImage"];
             if (templateImage != null && templateImage.Length > 0)
@@ -243,7 +243,7 @@ namespace Iforms.MVC.Controllers
 
         [AuthenticatedUser]
         [HttpPost]
-        public IActionResult Edit(TemplateExtendedDTO model)
+        public IActionResult Edit(TemplateDTO model)
         {
             var templateImage = Request.Form.Files["TemplateImage"];
             if (templateImage != null && templateImage.Length > 0)

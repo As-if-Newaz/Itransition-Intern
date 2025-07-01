@@ -25,7 +25,7 @@ namespace Iforms.BLL.DTOs
         public virtual List<AnswerDTO>? Answers { get; set; }
         
         // Navigation properties for details view
-        public virtual TemplateExtendedDTO? Template { get; set; }
+        public virtual TemplateDTO? Template { get; set; }
         public virtual UserDTO? FilledBy { get; set; }
     }
 }
