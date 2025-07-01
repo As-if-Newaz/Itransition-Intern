@@ -267,6 +267,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
     <script>
+        // Generate a unique client ID for this session
+        const clientId = Math.random().toString(36).substring(2);
         let questions = [];
         let questionId = 0;
         const questionsList = document.getElementById('questionsList');
@@ -291,8 +293,19 @@
         connection.start().catch(err => {
             console.error('SignalR connection failed:', err);
         });
-        connection.on("QuestionAdded", q => addQuestionUI(q, false));
-        connection.on("QuestionOrderUpdated", qs => renderQuestions(qs, false));
+        connection.on("QuestionAdded", q => {
+            console.log('[SignalR] Received QuestionAdded:', q, 'my clientId:', clientId);
+            if (q.clientId !== clientId) {
+                addQuestionUI(q, false);
+            } else {
+                console.log('[SignalR] Ignored own QuestionAdded event');
+            }
+        });
+        connection.on("QuestionOrderUpdated", data => {
+            if (data.clientId !== clientId) {
+                renderQuestions(data.questions, false);
+            }
+        });
 
         // Topic dropdown functionality
         // Load all topics into dropdown
@@ -436,13 +449,15 @@
         });
 
         addQuestionBtn.onclick = function() {
-            const q = { id: ++questionId, text: '', type: 'MultipleChoice', options: ['Option 1'] };
+            const q = { id: ++questionId, text: '', type: 'MultipleChoice', options: ['Option 1'], clientId };
+            console.log('[AddQuestionBtn] Adding question locally:', q);
             questions.push(q);
             addQuestionUI(q, true);
             connection.invoke("AddQuestion", q);
         };
 
         function addQuestionUI(q, local = true) {
+            console.log('[addQuestionUI] Called for question:', q, 'local:', local);
             const qDiv = document.createElement('div');
             qDiv.className = 'card mb-2 question-card';
             qDiv.setAttribute('data-id', q.id);
@@ -470,9 +485,6 @@
                     <button type="button" class="btn btn-danger btn-sm remove-question-btn">Delete</button>
                 </div>`;
             questionsList.appendChild(qDiv);
-            if (local) {
-                questions.push(q);
-            }
 
             // Add option button functionality
             qDiv.querySelector('.add-option-btn').onclick = function() {
@@ -526,9 +538,15 @@
                     }
                 };
             });
+
+            // At the end of addQuestionUI, log the number of question cards
+            setTimeout(() => {
+                console.log('Number of .question-card elements:', document.querySelectorAll('.question-card').length);
+            }, 0);
         }
 
         function renderQuestions(qs, local = true) {
+            console.log('[renderQuestions] Called with', (qs || questions).length, 'questions. local:', local);
             questionsList.innerHTML = '';
             (qs || questions).forEach(q => addQuestionUI(q, false));
         }
@@ -544,7 +562,7 @@
                     return questions.find(q => q.id === id);
                 });
                 questions = newOrder;
-                connection.invoke("UpdateQuestionOrder", questions);
+                connection.invoke("UpdateQuestionOrder", { questions, clientId });
             }
         });
 
@@ -648,6 +666,19 @@
         const userSuggestions = document.getElementById('userSuggestions');
         const selectedUsersContainer = document.getElementById('selectedUsers');
         const selectedUserIdsInput = document.getElementById('selectedUserIds');
+        
+        // Initialize selected users from model if available (for postback/validation errors)
+        @if (Model.TemplateAccesses != null && Model.TemplateAccesses.Any())
+        {
+            <text>
+            selectedUsers = @Html.Raw(Json.Serialize(Model.TemplateAccesses.Select(u => new {
+                id = u.Id,
+                name = u.UserName,
+                email = u.UserEmail
+            })));
+            </text>
+        }
+        updateSelectedUsersDisplay();
         
         // Debounced search function
         userSearch.addEventListener('input', function() {
@@ -820,9 +851,6 @@
             const userIds = selectedUsers.map(user => user.id);
             selectedUserIdsInput.value = userIds.join(',');
         }
-        
-        // Initialize selected users display
-        updateSelectedUsersDisplay();
     </script>
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

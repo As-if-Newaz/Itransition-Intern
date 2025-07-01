@@ -1,0 +1,427 @@
+﻿@model Iforms.MVC.Models.BrowseTemplatesViewModel
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Templates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var currentUserId = ViewBag.CurrentUserId != null ? (int)ViewBag.CurrentUserId : 0;
+}
+
+<style>
+    .browse-templates-container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin: 20px 0;
+    }
+
+    .templates-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        .templates-table th, .templates-table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+            vertical-align: middle;
+        }
+
+        .templates-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .templates-table tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+            .templates-table tbody tr:hover {
+                background-color: #f8f9fa;
+            }
+
+    .template-title-link {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .template-title-link:hover {
+            text-decoration: underline;
+        }
+
+    .status-badge {
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    .status-public {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .status-private {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    .dropdown-toggle-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        border-radius: 0;
+        min-width: 28px;
+        min-height: 28px;
+        color: #adb5bd;
+        transition: none;
+    }
+
+        .dropdown-toggle-arrow:focus,
+        .dropdown-toggle-arrow:active,
+        .dropdown-toggle-arrow:hover {
+            outline: none;
+            background: none !important;
+            box-shadow: none !important;
+            border: none !important;
+            color: #868e96;
+        }
+
+        .dropdown-toggle-arrow .fa-chevron-down {
+            font-size: 1.5rem;
+            transition: transform 0.2s;
+        }
+
+        .dropdown-toggle-arrow.open .fa-chevron-down {
+            transform: rotate(-180deg);
+        }
+
+    .template-details-row {
+        display: none;
+        background: #f9f9f9;
+    }
+
+        .template-details-row.open {
+            display: table-row;
+        }
+
+    .comments-section {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .comment {
+        border-bottom: 1px solid #e0e0e0;
+        padding: 6px 0;
+    }
+
+    .likes-section {
+        margin-top: 10px;
+        color: #007bff;
+        font-weight: 500;
+    }
+</style>
+
+<div class="browse-templates-container">
+    <div class="navbar navbar-expand-lg navbar-light bg-secondary-subtle mb-3">
+        <button id="deleteTemplatesBtn" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+    </div>
+    <h2>Templates</h2>
+    <table class="templates-table">
+        <thead>
+            <tr>
+                <th><input type="checkbox" id="selectAllTemplates" title="Select/Deselect all"></th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Created At</th>
+                <th>Created By</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Templates.Count; i++)
+            {
+                var template = Model.Templates[i];
+                var templateId = template.Id;
+                var isPublic = template.IsPublic;
+                var createdBy = Model.CreatedByNames.ContainsKey(templateId) ? Model.CreatedByNames[templateId] : "Unknown";
+                var comments = Model.Comments.ContainsKey(templateId) ? Model.Comments[templateId] : new List<Iforms.BLL.DTOs.CommentDTO>();
+                var likes = Model.LikesCount.ContainsKey(templateId) ? Model.LikesCount[templateId] : 0;
+                <tr class="template-row" data-index="@i" style="cursor:pointer;">
+                    <td><input type="checkbox" class="select-template" value="@template.Id" onclick="event.stopPropagation();"></td>
+                    <td>
+                        <a href="@Url.Action("Edit", "Template", new { id = template.Id })" class="template-title-link">@template.Title</a>
+                    </td>
+                    <td>@template.Description</td>
+                    <td>
+                        <span class="status-badge @(isPublic ? "status-public" : "status-private")">
+                            @(isPublic ? "Public" : "Private")
+                        </span>
+                    </td>
+                    <td>@template.CreatedAt.ToString("MMM dd, yyyy")</td>
+                    <td>@createdBy</td>
+                    <td class="text-center">
+                        <button type="button" class="dropdown-toggle-arrow" onclick="toggleDetails(@i, event)" id="dropdown-btn-@i">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr class="template-details-row" id="details-row-@i">
+                    <td colspan="7">
+                        <div class="bg-white border rounded p-3 mb-2">
+                            <h4 class="mb-1">@template.Title</h4>
+                            <div class="text-muted mb-1">
+                                by @createdBy
+                            </div>
+                            <div class="text-muted mb-2">
+                                @template.CreatedAt.ToString("MMM dd, yyyy")
+                            </div>
+                        </div>
+                        @if (HttpContextAccessor.HttpContext.Request.Cookies["Role"] != null)
+                        {
+                            <div class="d-flex gap-2 mb-2 align-items-center">
+                                <button class="btn btn-outline-primary btn-sm like-btn" data-template-id="@template.Id" id="like-btn-@template.Id">
+                                    <i class="fas fa-thumbs-up"></i> <span class="like-text">@(template.IsLikedByCurrentUser ? "Unlike" : "Like")</span>
+                                </button>
+                                <span class="badge rounded-pill bg-primary" id="likes-count-@template.Id">@likes likes</span>
+                                <span class="badge rounded-pill bg-secondary" id="comments-count-@template.Id">@comments.Count comments</span>
+                            </div>
+                            <div class="input-group mb-2">
+                                <input type="text" class="form-control comment-input" placeholder="Add a comment..." id="comment-input-@template.Id">
+                                <button class="btn btn-outline-secondary submit-comment-btn" type="button" data-template-id="@template.Id" id="submit-comment-btn-@template.Id">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        }
+                        <div id="comments-list-@template.Id">
+                            @if (comments.Count > 0)
+                            {
+                                foreach (var comment in comments)
+                                {
+                                    <div class="card mb-2" id="comment-@comment.Id">
+                                        <div class="card-body p-3 d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <div>@comment.Content</div>
+                                                <div class="text-muted mt-2" style="font-size: 0.95em;">
+                                                    <em>— @(comment.CreatedByUserName ?? "User")</em>
+                                                </div>
+                                            </div>
+                                            @if (comment.CreatedById == currentUserId && HttpContextAccessor.HttpContext.Request.Cookies["Role"] != null)
+                                            {
+                                                <button class="btn btn-sm btn-danger delete-comment-btn" data-comment-id="@comment.Id" data-template-id="@template.Id">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    const currentUserId = @currentUserId;
+
+    function toggleDetails(index, event) {
+        event.stopPropagation();
+        var button = document.getElementById('dropdown-btn-' + index);
+        var detailsRow = document.getElementById('details-row-' + index);
+        var isOpen = detailsRow.classList.contains('open');
+        if (isOpen) {
+            detailsRow.classList.remove('open');
+            button.classList.remove('open');
+        } else {
+            detailsRow.classList.add('open');
+            button.classList.add('open');
+        }
+    }
+    // Make row clickable to go to details
+    document.querySelectorAll('.template-row').forEach(function(row) {
+        row.addEventListener('click', function(e) {
+            if (!e.target.classList.contains('dropdown-toggle-arrow')) {
+                var link = row.querySelector('.template-title-link');
+                if (link) {
+                    window.location = link.href;
+                }
+            }
+        });
+    });
+</script>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        // SignalR connection setup for templateHub
+        const templateConnection = new signalR.HubConnectionBuilder().withUrl("/templateHub").build();
+        templateConnection.start().catch(err => console.error('SignalR connection failed:', err));
+
+        // Listen for new comments
+        templateConnection.on("ReceiveComment", function(templateId, comment) {
+            const commentsList = document.getElementById(`comments-list-${templateId}`);
+            if (commentsList) {
+                const commentCard = document.createElement('div');
+                commentCard.className = 'card mb-2';
+                commentCard.id = `comment-${comment.id}`;
+                let deleteBtnHtml = '';
+                if (comment.createdById == currentUserId) {
+                    deleteBtnHtml = `<button class=\"btn btn-sm btn-danger delete-comment-btn\" data-comment-id=\"${comment.id}\" data-template-id=\"${templateId}\"><i class=\"fas fa-trash\"></i></button>`;
+                }
+                commentCard.innerHTML = `
+                    <div class=\"card-body p-3 d-flex justify-content-between align-items-center\">
+                        <div>
+                            <div>${comment.content}</div>
+                            <div class=\"text-muted mt-2\" style=\"font-size: 0.95em;\">
+                                <em>— ${comment.createdByUserName || 'User'}</em>
+                            </div>
+                        </div>
+                        ${deleteBtnHtml}
+                    </div>
+                `;
+                commentsList.appendChild(commentCard);
+            }
+        });
+
+        // Listen for like updates
+        templateConnection.on("ReceiveLike", function(templateId, likesCount, isLiked, userId) {
+            const likesCountSpan = document.getElementById(`likes-count-${templateId}`);
+            if (likesCountSpan) {
+                likesCountSpan.textContent = `${likesCount} likes`;
+            }
+            // Update like button for the current user
+            if (userId == currentUserId) {
+                const likeBtn = document.getElementById(`like-btn-${templateId}`);
+                if (likeBtn) {
+                    const likeText = likeBtn.querySelector('.like-text');
+                    if (likeText) {
+                        likeText.textContent = isLiked ? 'Unlike' : 'Like';
+                    }
+                }
+            }
+        });
+
+        // Like button click handler (immediate toggle)
+        document.querySelectorAll('.like-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const templateId = this.getAttribute('data-template-id');
+                const likeText = this.querySelector('.like-text');
+                const likesCountSpan = document.getElementById(`likes-count-${templateId}`);
+                const currentLikes = parseInt(likesCountSpan.textContent) || 0;
+
+                if (likeText.textContent === 'Like') {
+                    likeText.textContent = 'Unlike';
+                    likesCountSpan.textContent = `${currentLikes + 1} likes`;
+                } else {
+                    likeText.textContent = 'Like';
+                    likesCountSpan.textContent = `${currentLikes - 1} likes`;
+                }
+                fetch(`/Template/ToggleLike/${templateId}`, { method: 'POST' });
+            });
+        });
+
+        // Submit comment handler
+        document.querySelectorAll('.submit-comment-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const templateId = this.getAttribute('data-template-id');
+                const input = document.getElementById(`comment-input-${templateId}`);
+                const content = input.value.trim();
+                if (!content) return;
+
+                // Update comment count immediately
+                const commentsCountSpan = document.getElementById(`comments-count-${templateId}`);
+                const currentComments = parseInt(commentsCountSpan.textContent) || 0;
+                commentsCountSpan.textContent = `${currentComments + 1} comments`;
+
+                fetch(`/Template/AddComment?templateId=${templateId}&content=${encodeURIComponent(content)}`, { method: 'POST' })
+                    .then(() => { input.value = ''; });
+            });
+        });
+
+        // Delete comment handler
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.delete-comment-btn')) {
+                const btn = e.target.closest('.delete-comment-btn');
+                const commentId = btn.getAttribute('data-comment-id');
+                const templateId = btn.getAttribute('data-template-id');
+
+                // Update comment count immediately
+                const commentsCountSpan = document.getElementById(`comments-count-${templateId}`);
+                const currentComments = parseInt(commentsCountSpan.textContent) || 0;
+                commentsCountSpan.textContent = `${currentComments - 1} comments`;
+
+                fetch(`/Template/DeleteComment/${commentId}`, { method: 'POST' })
+                    .then(response => {
+                        if (response.ok) {
+                            const commentCard = document.getElementById(`comment-${commentId}`);
+                            if (commentCard) commentCard.remove();
+                        } else {
+                            // Revert count if deletion failed
+                            commentsCountSpan.textContent = `${currentComments} comments`;
+                        }
+                    })
+                    .catch(() => {
+                        // Revert count if request failed
+                        commentsCountSpan.textContent = `${currentComments} comments`;
+                    });
+            }
+        });
+
+        // --- Template Deletion Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectAll = document.getElementById('selectAllTemplates');
+            const deleteBtn = document.getElementById('deleteTemplatesBtn');
+
+            selectAll.addEventListener('change', () => {
+                document.querySelectorAll('.select-template').forEach(cb => cb.checked = selectAll.checked);
+            });
+
+            deleteBtn.addEventListener('click', async () => {
+                const templateIds = [...document.querySelectorAll('.select-template:checked')]
+                    .map(el => parseInt(el.value));
+
+                if (!templateIds.length) {
+                    if (window.toastr) toastr.error('Please select at least one template.');
+                    else alert('Please select at least one template.');
+                    return;
+                }
+
+                if (!confirm('Are you sure you want to delete the selected templates?')) {
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/Template/DeleteTemplates', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(templateIds)
+                    });
+                    const result = await response.json();
+                    if (result.success) {
+                        if (window.toastr) toastr.success(result.message);
+                        setTimeout(() => location.reload(), 1000);
+                    } else {
+                        if (window.toastr) toastr.error(result.message);
+                        else alert(result.message);
+                    }
+                } catch {
+                    if (window.toastr) toastr.error('Action failed. Please try again.');
+                    else alert('Action failed. Please try again.');
+                }
+            });
+        });
+    </script>
+}

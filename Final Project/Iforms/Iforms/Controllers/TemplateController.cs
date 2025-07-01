@@ -106,6 +106,61 @@ namespace Iforms.MVC.Controllers
                 Console.WriteLine($"Processed template tags from input: {string.Join(", ", tagNames)}");
             }
             
+            // Process selected user IDs from form input (for Create)
+            var selectedUserIdsInput = Request.Form["SelectedUserIds"].ToString();
+            if (!string.IsNullOrWhiteSpace(selectedUserIdsInput))
+            {
+                var userIds = selectedUserIdsInput.Split(',')
+                    .Select(id => id.Trim())
+                    .Where(id => !string.IsNullOrWhiteSpace(id))
+                    .Select(int.Parse)
+                    .ToList();
+
+                // Fetch full user info for display in the view (for Create)
+                model.TemplateAccesses = userIds
+                    .Select(userId => userService.GetById(userId))
+                    .Where(u => u != null)
+                    .ToList();
+            }
+            else
+            {
+                model.TemplateAccesses = new List<UserDTO>();
+            }
+            
+            // Process questions from form input
+            var questions = new List<QuestionDTO>();
+            var questionIndex = 0;
+            while (Request.Form.ContainsKey($"Questions[{questionIndex}].QuestionTitle"))
+            {
+                var questionIdStr = Request.Form[$"Questions[{questionIndex}].Id"].ToString();
+                var questionTitle = Request.Form[$"Questions[{questionIndex}].QuestionTitle"].ToString();
+                var questionTypeStr = Request.Form[$"Questions[{questionIndex}].QuestionType"].ToString();
+                var questionOrder = int.Parse(Request.Form[$"Questions[{questionIndex}].QuestionOrder"].ToString());
+                var optionsJson = Request.Form[$"Questions[{questionIndex}].Options"].ToString();
+                
+                // Parse question type string to enum
+                if (Enum.TryParse<Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType>(questionTypeStr, out var questionType))
+                {
+                    var questionDto = new QuestionDTO
+                    {
+                        Id = int.TryParse(questionIdStr, out var id) ? id : 0,
+                        QuestionTitle = questionTitle,
+                        QuestionDescription = questionTitle, // Using title as description for now
+                        QuestionType = questionType,
+                        QuestionOrder = questionOrder,
+                        TemplateId = model.Id,
+                        Options = !string.IsNullOrEmpty(optionsJson) ? 
+                            System.Text.Json.JsonSerializer.Deserialize<List<string>>(optionsJson) ?? new List<string>() : 
+                            new List<string>()
+                    };
+                    questions.Add(questionDto);
+                }
+                questionIndex++;
+            }
+            model.Questions = questions;
+            Console.WriteLine($"Processed {questions.Count} questions");
+            Console.WriteLine("Question titles being submitted: " + string.Join(", ", model.Questions.Select(q => q.QuestionTitle)));
+            
             if (!ModelState.IsValid)
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
@@ -121,6 +176,7 @@ namespace Iforms.MVC.Controllers
 
             try
             {
+                Console.WriteLine("Calling templateService.Create with questions: " + string.Join(", ", model.Questions.Select(q => q.QuestionTitle)));
                 var template = templateService.Create(model, currentUserId);
                 if (template != null)
                 {
