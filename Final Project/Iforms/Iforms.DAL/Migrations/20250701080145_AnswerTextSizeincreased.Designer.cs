@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Iforms.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250628201502_ficx1")]
-    partial class ficx1
+    [Migration("20250701080145_AnswerTextSizeincreased")]
+    partial class AnswerTextSizeincreased
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,7 +37,8 @@ namespace Iforms.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FileUrl")
-                        .HasColumnType("VARCHAR");
+                        .HasMaxLength(512)
+                        .HasColumnType("VARCHAR(512)");
 
                     b.Property<int>("FormId")
                         .HasColumnType("int");
@@ -48,10 +49,11 @@ namespace Iforms.DAL.Migrations
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("SignleChoice")
-                        .HasColumnType("bit");
+                    b.Property<int?>("SignleChoice")
+                        .HasColumnType("int");
 
                     b.Property<string>("Text")
+                        .HasMaxLength(512)
                         .HasColumnType("VARCHAR");
 
                     b.HasKey("Id");

@@ -178,7 +178,7 @@
 <div class="container mt-4">
     <h2>Edit Template</h2>
     <div class="template-content-area">
-        <form id="templateForm" asp-action="Edit" method="post">
+        <form id="templateForm" asp-action="Edit" method="post" enctype="multipart/form-data">
             @Html.AntiForgeryToken()
             <input type="hidden" asp-for="Id" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -193,8 +193,18 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="ImageUrl" class="form-label">Image URL</label>
-                <input asp-for="ImageUrl" class="form-control" />
+                <label for="TemplateImage" class="form-label">Template Image</label>
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <div id="image-container" class="text-center mb-2">
+                        <img src="@Model.ImageUrl" alt="Template Image" style="max-width: 200px; max-height: 200px; display: inline-block;" />
+                        <br />
+                        <button type="button" id="deleteImageBtn" class="btn btn-sm btn-danger mt-1">Delete Image</button>
+                    </div>
+                    <p class="form-text text-center">Current image. Upload a new one to replace it.</p>
+                }
+                <input type="file" name="TemplateImage" class="form-control" accept="image/*" />
+                <input type="hidden" asp-for="ImageUrl" id="imageUrlInput" />
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
             <div class="mb-3 form-check">
@@ -237,7 +247,7 @@
                 <input type="hidden" id="selectedUserIds" name="SelectedUserIds" />
             </div>
             <button type="submit" class="btn btn-success">Update Template</button>
-            <a href="@Url.Action("Details", new { id = Model.Id })" class="btn btn-secondary">Cancel</a>
+            <a href="@Url.Action("UserTemplates", "UserDashboard")" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </div>
@@ -341,12 +351,12 @@
                 const topicSelect = document.getElementById('topicSelect');
                 topicSelect.innerHTML = '<option value="">Select a topic for your template...</option>';
                 
-                // Add existing topics
+                // Add existing topics (use id as value, topicType as text, and store topicType in data-type)
                 topics.forEach(topic => {
                     const option = document.createElement('option');
-                    option.value = topic.topicType;
+                    option.value = topic.id;
                     option.textContent = topic.topicType;
-                    option.dataset.id = topic.id;
+                    option.dataset.type = topic.topicType;
                     topicSelect.appendChild(option);
                 });
                 
@@ -358,13 +368,6 @@
                 addNewOption.style.color = '#28a745';
                 topicSelect.appendChild(addNewOption);
                 
-                // Set the current topic if it exists
-                const currentTopicType = selectedTopicType.value;
-                if (currentTopicType) {
-                    topicSelect.value = currentTopicType;
-                    topicSelect.classList.add('is-valid');
-                }
-                
             } catch (error) {
                 console.error('Error loading topics:', error);
             }
@@ -372,9 +375,66 @@
         
         // Load topics when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            loadTopics();
+            loadTopics().then(() => {
+                const selectedTopicId = document.getElementById('selectedTopicId');
+                const selectedTopicType = document.getElementById('selectedTopicType');
+                const topicSelect = document.getElementById('topicSelect');
+                const currentTopicId = selectedTopicId.value;
+                console.log('currentTopicId:', currentTopicId, 'options:', Array.from(topicSelect.options).map(o => o.value));
+                if (currentTopicId) {
+                    // Ensure both are strings for comparison
+                    topicSelect.value = String(currentTopicId);
+                    // Find the option and set selected if needed
+                    for (let i = 0; i < topicSelect.options.length; i++) {
+                        if (topicSelect.options[i].value === String(currentTopicId)) {
+                            topicSelect.selectedIndex = i;
+                            selectedTopicType.value = topicSelect.options[i].dataset.type;
+                            topicSelect.classList.add('is-valid');
+                            break;
+                        }
+                    }
+                }
+            });
+
             // Render existing questions
             renderQuestions(questions, false);
+
+            const deleteImageBtn = document.getElementById('deleteImageBtn');
+            if (deleteImageBtn) {
+                deleteImageBtn.addEventListener('click', async function() {
+                    if (!confirm('Are you sure you want to delete the template image?')) {
+                        return;
+                    }
+
+                    const templateId = @Model.Id;
+                    try {
+                        const response = await fetch(`/Template/DeleteImage/${templateId}`, {
+                            method: 'POST',
+                            headers: {
+                                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                            }
+                        });
+
+                        const result = await response.json();
+                        if (result.success) {
+                            const imageContainer = document.getElementById('image-container');
+                            if (imageContainer) {
+                                imageContainer.style.display = 'none';
+                            }
+                            const imageUrlInput = document.getElementById('imageUrlInput');
+                            if (imageUrlInput) {
+                                imageUrlInput.value = '';
+                            }
+                            alert('Image deleted successfully.');
+                        } else {
+                            alert(result.message || 'Failed to delete image.');
+                        }
+                    } catch (error) {
+                        console.error('Error deleting image:', error);
+                        alert('An error occurred while deleting the image.');
+                    }
+                });
+            }
 
             // Initialize selected users from model if available
             @if (Model.TemplateAccesses != null && Model.TemplateAccesses.Any())
@@ -421,23 +481,17 @@
         });
         
         topicSelect.addEventListener('change', function() {
-            const selectedValue = this.value;
-            
-            if (selectedValue === 'add_new') {
+            const selectedOption = this.options[this.selectedIndex];
+            if (this.value === 'add_new') {
                 // Show modal for creating new topic
                 showTopicModal();
                 // Reset the select to current value
-                this.value = selectedTopicType.value || '';
+                this.value = selectedTopicId.value || '';
                 return;
             }
-            
-            if (selectedValue) {
-                const selectedOption = this.options[this.selectedIndex];
-                const topicId = selectedOption.dataset.id;
-                
-                selectedTopicId.value = topicId;
-                selectedTopicType.value = selectedValue;
-                
+            if (this.value) {
+                selectedTopicId.value = this.value;
+                selectedTopicType.value = selectedOption.dataset.type;
                 // Clear validation error
                 const topicValidationMessage = document.getElementById('topicValidationMessage');
                 topicValidationMessage.style.display = 'none';

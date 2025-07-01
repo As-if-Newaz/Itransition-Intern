@@ -34,7 +34,8 @@ namespace Iforms.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FileUrl")
-                        .HasColumnType("VARCHAR");
+                        .HasMaxLength(512)
+                        .HasColumnType("VARCHAR(512)");
 
                     b.Property<int>("FormId")
                         .HasColumnType("int");
@@ -45,10 +46,11 @@ namespace Iforms.DAL.Migrations
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("SignleChoice")
-                        .HasColumnType("bit");
+                    b.Property<int?>("SignleChoice")
+                        .HasColumnType("int");
 
                     b.Property<string>("Text")
+                        .HasMaxLength(512)
                         .HasColumnType("VARCHAR");
 
                     b.HasKey("Id");

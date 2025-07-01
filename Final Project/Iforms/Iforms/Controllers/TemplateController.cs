@@ -17,6 +17,7 @@ namespace Iforms.MVC.Controllers
         private readonly QuestionService questionService;
         private readonly CommentService commentService;
         private readonly UserService userService;
+        private readonly AuditLogService auditLogService;
         private readonly IHubContext<TemplateHub> hubContext;
 
 
@@ -25,13 +26,16 @@ namespace Iforms.MVC.Controllers
             QuestionService questionService,
             CommentService commentService,
             UserService userService,
-            IHubContext<TemplateHub> hubContext)
+            IHubContext<TemplateHub> hubContext,
+            AuditLogService auditLogService)
         {
             this.templateService = templateService;
             this.questionService = questionService;
             this.commentService = commentService;
             this.userService = userService;
             this.hubContext = hubContext;
+            this.auditLogService = auditLogService;
+
         }
 
         public IActionResult Details(int id)
@@ -61,6 +65,21 @@ namespace Iforms.MVC.Controllers
         [HttpPost]
         public IActionResult Create(TemplateExtendedDTO model)
         {
+            var templateImage = Request.Form.Files["TemplateImage"];
+            if (templateImage != null && templateImage.Length > 0)
+            {
+                var imageUrl = ImageService.UploadTemplateImage(templateImage);
+                if (!string.IsNullOrEmpty(imageUrl))
+                {
+                    model.ImageUrl = imageUrl;
+                }
+                else
+                {
+                    ModelState.AddModelError("", "There was an error uploading the image. Please try again.");
+                    return View(model);
+                }
+            }
+            
             // Debug information
             Console.WriteLine($"Title: {model.Title}");
             Console.WriteLine($"Description: {model.Description}");
@@ -105,7 +124,7 @@ namespace Iforms.MVC.Controllers
                 var template = templateService.Create(model, currentUserId);
                 if (template != null)
                 {
-                    return RedirectToAction("Details", new { id = template.Id });
+                    return RedirectToAction("UserTemplates", "UserDashboard");
                 }
             }
             catch (Exception ex)
@@ -170,6 +189,21 @@ namespace Iforms.MVC.Controllers
         [HttpPost]
         public IActionResult Edit(TemplateExtendedDTO model)
         {
+            var templateImage = Request.Form.Files["TemplateImage"];
+            if (templateImage != null && templateImage.Length > 0)
+            {
+                var newImageUrl = ImageService.UploadTemplateImage(templateImage, model.ImageUrl);
+                if (!string.IsNullOrEmpty(newImageUrl))
+                {
+                    model.ImageUrl = newImageUrl;
+                }
+                else
+                {
+                    ModelState.AddModelError("", "There was an error uploading the new image. Please try again.");
+                    return View(model);
+                }
+            }
+            
             // Debug information
             Console.WriteLine($"Title: {model.Title}");
             Console.WriteLine($"Description: {model.Description}");
@@ -272,18 +306,6 @@ namespace Iforms.MVC.Controllers
             return RedirectToAction("Details", new { id = model.Id });
         }
 
-        [AuthenticatedUser]
-        [HttpPost]
-        public IActionResult Delete(int id)
-        {
-            var currentUserId = GetCurrentUserId()!.Value;
-            var success = templateService.Delete(id, currentUserId);
-
-            if (!success)
-                return NotFound();
-
-            return RedirectToAction("Index", "UserDashboard");
-        }
 
         [AuthenticatedUser]
         [HttpPost]
@@ -346,6 +368,43 @@ namespace Iforms.MVC.Controllers
             if (!success)
                 return Forbid();
             return Ok();
+        }
+
+        [AuthenticatedUser]
+        [HttpPost]
+        public IActionResult DeleteImage(int id)
+        {
+            var currentUserId = GetCurrentUserId();
+            if (currentUserId == null)
+            {
+                return Unauthorized();
+            }
+
+            if (!templateService.CanUserManageTemplate(id, currentUserId.Value))
+            {
+                return Forbid();
+            }
+
+            var template = templateService.GetTemplateDetailedById(id, currentUserId.Value);
+            if (template == null || string.IsNullOrEmpty(template.ImageUrl))
+            {
+                return Json(new { success = false, message = "Image not found or already deleted." });
+            }
+            var imageUrlToDelete = template.ImageUrl;
+
+            var deleteSuccess = ImageService.DeleteImage(imageUrlToDelete);
+
+            if (!deleteSuccess)
+            {
+                return Json(new { success = false, message = "Failed to delete image from storage. Please try again." });
+            }
+
+            var updateSuccess = templateService.UpdateImageUrl(id, null, currentUserId.Value);
+            if (updateSuccess)
+            {
+                return Json(new { success = true });
+            }
+            return Json(new { success = false, message = "Image was deleted from storage, but the template could not be updated." });
         }
 
         [HttpGet]
@@ -442,10 +501,66 @@ namespace Iforms.MVC.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
+        public IActionResult Search(string q, int? topicId = null, string tags = null, int page = 1)
+        {
+            var currentUserId = GetCurrentUserId();
+            var searchDto = new TemplateSearchDTO
+            {
+                SearchTerm = q,
+                Page = page,
+                PageSize = 10,
+                SortBy = "createdAt",
+                SortDescending = true,
+                Tags = !string.IsNullOrWhiteSpace(tags) ? tags.Split(',').Select(t => t.Trim()).ToList() : new List<string>()
+            };
+            if (topicId.HasValue)
+            {
+                searchDto.Topic = new TopicDTO { Id = topicId.Value };
+            }
+            var results = templateService.Search(searchDto, currentUserId);
+            // Get CreatedBy names
+            var createdByNames = results.ToDictionary(t => t.Id, t => userService.GetById(t.CreatedById)?.UserName ?? "Unknown");
+            // Get comments and likes count
+            var commentsDict = results.ToDictionary(
+                t => t.Id,
+                t => commentService.GetTemplateComments(t.Id).ToList()
+            );
+            var likesDict = results.ToDictionary(t => t.Id, t => t.IsLikedByCurrentUser ? 1 : 0); // You may want to get actual like counts if needed
+            var viewModel = new Iforms.MVC.Models.BrowseTemplatesViewModel
+            {
+                Templates = results,
+                CreatedByNames = createdByNames,
+                Comments = commentsDict,
+                LikesCount = likesDict
+            };
+            ViewBag.CurrentUserId = currentUserId;
+            ViewBag.SearchTerm = q;
+            return View("BrowseTemplates", viewModel);
+        }
+
         private int? GetCurrentUserId()
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             return int.TryParse(userIdClaim, out var userId) ? userId : null;
+        }
+
+        [AuthenticatedAdminorUser]
+        [HttpPost("Template/DeleteTemplates")]
+        public JsonResult DeleteTemplates([FromBody] int[] templateIds)
+        {
+            if (templateIds == null || templateIds.Length == 0)
+                return Json(new { success = false, message = "No Templates selected." });
+            var result = templateService.DeleteTemplates(templateIds);
+            if (result)
+            {
+                auditLogService.RecordLog(int.Parse(HttpContext.Request.Cookies["LoggedId"]), "Deleted Templates", string.Join(", ", templateIds));
+                return Json(new { success = true, message = "Templates successfully." });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete Templates" });
+            }
         }
     }
 }

@@ -109,6 +109,7 @@ namespace Iforms.DAL.Repositories
         public Template? GetTemplateWithDetails(int id)
         {
             return db.Templates
+                .Include(t => t.Topic)
                 .Include(t => t.CreatedBy)
                 .Include(t => t.Questions.OrderBy(q => q.QuestionOrder))
                 .Include(t => t.TemplateTags)
@@ -157,16 +158,38 @@ namespace Iforms.DAL.Repositories
 
         public bool CanUserAccessTemplate(int templateId, int? userId)
         {
+            Console.WriteLine($"[TemplateRepository.CanUserAccessTemplate] TemplateId: {templateId}, UserId: {userId}");
+            
             var template = db.Templates
                 .Include(t => t.TemplateAccesses)
                 .FirstOrDefault(t => t.Id == templateId);
 
-            if (template == null) return false;
-            if (template.IsPublic) return true;
-            if (!userId.HasValue) return false;
+            if (template == null) 
+            {
+                Console.WriteLine($"[TemplateRepository.CanUserAccessTemplate] Template {templateId} not found");
+                return false;
+            }
+            
+            Console.WriteLine($"[TemplateRepository.CanUserAccessTemplate] Template found: Id={template.Id}, Title={template.Title}, IsPublic={template.IsPublic}, CreatedById={template.CreatedById}");
+            
+            if (template.IsPublic) 
+            {
+                Console.WriteLine($"[TemplateRepository.CanUserAccessTemplate] Template {templateId} is public - access granted");
+                return true;
+            }
+            
+            if (!userId.HasValue) 
+            {
+                Console.WriteLine($"[TemplateRepository.CanUserAccessTemplate] Template {templateId} is not public and user is not authenticated - access denied");
+                return false;
+            }
 
-            return template.CreatedById == userId.Value ||
-                   template.TemplateAccesses.Any(ta => ta.UserId == userId.Value);
+            var hasAccess = template.CreatedById == userId.Value ||
+                           template.TemplateAccesses.Any(ta => ta.UserId == userId.Value);
+            
+            Console.WriteLine($"[TemplateRepository.CanUserAccessTemplate] Template {templateId} access check: CreatedById={template.CreatedById}, UserId={userId}, HasAccess={hasAccess}");
+            
+            return hasAccess;
         }
 
         public bool CanUserManageTemplate(int templateId, int userId)

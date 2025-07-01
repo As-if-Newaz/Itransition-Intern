@@ -17,6 +17,13 @@ namespace Iforms.DAL.Repositories
         {
         }
 
+        public Form Create(Form form)
+        {
+            db.Forms.Add(form);
+            db.SaveChanges();
+            return form;
+        }
+
         public IEnumerable<Form> GetUserForms(int userId)
         {
             return db.Forms

@@ -1,6 +1,7 @@
 @model Iforms.MVC.Models.BrowseTemplatesViewModel
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 @{
-    ViewData["Title"] = "Browse Templates";
+    ViewData["Title"] = "Templates";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var currentUserId = ViewBag.CurrentUserId != null ? (int)ViewBag.CurrentUserId : 0;
 }
@@ -111,7 +112,7 @@
 </style>
 
 <div class="browse-templates-container">
-    <h2>Browse Templates</h2>
+    <h2>Templates</h2>
     <table class="templates-table">
         <thead>
             <tr>
@@ -134,7 +135,7 @@
                 var likes = Model.LikesCount.ContainsKey(templateId) ? Model.LikesCount[templateId] : 0;
             <tr class="template-row" data-index="@i" style="cursor:pointer;">
                 <td>
-                    <a href="@Url.Action("Details", "Template", new { id = template.Id })" class="template-title-link">@template.Title</a>
+                    <a href="@Url.Action("Fill", "Form", new { id = template.Id })" class="template-title-link">@template.Title</a>
                 </td>
                 <td>@template.Description</td>
                 <td>
@@ -161,19 +162,22 @@
                             @template.CreatedAt.ToString("MMM dd, yyyy")
                         </div>
                     </div>
-                    <div class="d-flex gap-2 mb-2 align-items-center">
-                        <button class="btn btn-outline-primary btn-sm like-btn" data-template-id="@template.Id" id="like-btn-@template.Id">
-                            <i class="fas fa-thumbs-up"></i> <span class="like-text">@(template.IsLikedByCurrentUser ? "Unlike" : "Like")</span>
-                        </button>
-                        <span class="badge rounded-pill bg-primary" id="likes-count-@template.Id">@likes likes</span>
-                        <span class="badge rounded-pill bg-secondary" id="comments-count-@template.Id">@comments.Count comments</span>
-                    </div>
-                    <div class="input-group mb-2">
-                        <input type="text" class="form-control comment-input" placeholder="Add a comment..." id="comment-input-@template.Id">
-                        <button class="btn btn-outline-secondary submit-comment-btn" type="button" data-template-id="@template.Id" id="submit-comment-btn-@template.Id">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </div>
+                    @if (HttpContextAccessor.HttpContext.Request.Cookies["Role"] != null)
+                    {
+                        <div class="d-flex gap-2 mb-2 align-items-center">
+                            <button class="btn btn-outline-primary btn-sm like-btn" data-template-id="@template.Id" id="like-btn-@template.Id">
+                                <i class="fas fa-thumbs-up"></i> <span class="like-text">@(template.IsLikedByCurrentUser ? "Unlike" : "Like")</span>
+                            </button>
+                            <span class="badge rounded-pill bg-primary" id="likes-count-@template.Id">@likes likes</span>
+                            <span class="badge rounded-pill bg-secondary" id="comments-count-@template.Id">@comments.Count comments</span>
+                        </div>
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control comment-input" placeholder="Add a comment..." id="comment-input-@template.Id">
+                            <button class="btn btn-outline-secondary submit-comment-btn" type="button" data-template-id="@template.Id" id="submit-comment-btn-@template.Id">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    }
                     <div id="comments-list-@template.Id">
                     @if (comments.Count > 0)
                     {
@@ -187,7 +191,7 @@
                                             <em>— @(comment.CreatedByUserName ?? "User")</em>
                                         </div>
                                     </div>
-                                    @if (comment.CreatedById == currentUserId)
+                                    @if (comment.CreatedById == currentUserId && HttpContextAccessor.HttpContext.Request.Cookies["Role"] != null)
                                     {
                                         <button class="btn btn-sm btn-danger delete-comment-btn" data-comment-id="@comment.Id" data-template-id="@template.Id">
                                             <i class="fas fa-trash"></i>
@@ -265,12 +269,6 @@
                 `;
                 commentsList.appendChild(commentCard);
             }
-            // Optionally update comments count
-            const commentsCount = document.getElementById(`comments-count-${templateId}`);
-            if (commentsCount) {
-                let current = parseInt(commentsCount.textContent) || 0;
-                commentsCount.textContent = `${current + 1} comments`;
-            }
         });
 
         // Listen for like updates
@@ -296,10 +294,15 @@
             btn.addEventListener('click', function() {
                 const templateId = this.getAttribute('data-template-id');
                 const likeText = this.querySelector('.like-text');
+                const likesCountSpan = document.getElementById(`likes-count-${templateId}`);
+                const currentLikes = parseInt(likesCountSpan.textContent) || 0;
+                
                 if (likeText.textContent === 'Like') {
                     likeText.textContent = 'Unlike';
+                    likesCountSpan.textContent = `${currentLikes + 1} likes`;
                 } else {
                     likeText.textContent = 'Like';
+                    likesCountSpan.textContent = `${currentLikes - 1} likes`;
                 }
                 fetch(`/Template/ToggleLike/${templateId}`, { method: 'POST' });
             });
@@ -312,6 +315,12 @@
                 const input = document.getElementById(`comment-input-${templateId}`);
                 const content = input.value.trim();
                 if (!content) return;
+                
+                // Update comment count immediately
+                const commentsCountSpan = document.getElementById(`comments-count-${templateId}`);
+                const currentComments = parseInt(commentsCountSpan.textContent) || 0;
+                commentsCountSpan.textContent = `${currentComments + 1} comments`;
+                
                 fetch(`/Template/AddComment?templateId=${templateId}&content=${encodeURIComponent(content)}`, { method: 'POST' })
                     .then(() => { input.value = ''; });
             });
@@ -323,12 +332,25 @@
                 const btn = e.target.closest('.delete-comment-btn');
                 const commentId = btn.getAttribute('data-comment-id');
                 const templateId = btn.getAttribute('data-template-id');
+                
+                // Update comment count immediately
+                const commentsCountSpan = document.getElementById(`comments-count-${templateId}`);
+                const currentComments = parseInt(commentsCountSpan.textContent) || 0;
+                commentsCountSpan.textContent = `${currentComments - 1} comments`;
+                
                 fetch(`/Template/DeleteComment/${commentId}`, { method: 'POST' })
                     .then(response => {
                         if (response.ok) {
                             const commentCard = document.getElementById(`comment-${commentId}`);
                             if (commentCard) commentCard.remove();
+                        } else {
+                            // Revert count if deletion failed
+                            commentsCountSpan.textContent = `${currentComments} comments`;
                         }
+                    })
+                    .catch(() => {
+                        // Revert count if request failed
+                        commentsCountSpan.textContent = `${currentComments} comments`;
                     });
             }
         });

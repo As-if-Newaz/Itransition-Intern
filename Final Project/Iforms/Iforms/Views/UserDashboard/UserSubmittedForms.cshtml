@@ -1,0 +1,184 @@
+@using Iforms.BLL.DTOs
+@{
+    ViewData["Title"] = "My Submitted Forms";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var forms = ViewBag.Forms as List<FormDTO>;
+    var currentPage = (int)ViewBag.CurrentPage;
+    var totalPages = (int)ViewBag.TotalPages;
+    var totalCount = (int)ViewBag.TotalCount;
+    var pageSize = (int)ViewBag.PageSize;
+    var hasPreviousPage = (bool)ViewBag.HasPreviousPage;
+    var hasNextPage = (bool)ViewBag.HasNextPage;
+}
+
+<div class="submitted-forms-container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">My Submitted Forms</h2>
+        <a href="@Url.Action("UserTemplates", "UserDashboard")" class="btn btn-primary">Manage Templates</a>
+    </div>
+
+    @* --- Add toolbar for bulk actions above the table --- *@
+    <div class="navbar navbar-expand-lg navbar-light bg-secondary-subtle mb-3">
+        <button id="deleteFormsBtn" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+    </div>
+
+    @if (forms == null || !forms.Any())
+    {
+        <div class="no-forms">You have not submitted any forms yet.</div>
+    }
+    else
+    {
+        <table class="forms-table">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="selectAllForms" title="Select/Deselect all"></th>
+                    <th>Form ID</th>
+                    <th>Template</th>
+                    <th>Submitted At</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var form in forms)
+            {
+                <tr class="clickable-row" data-href="@Url.Action("Edit", "Form", new { id = form.Id })">
+                    <td><input type="checkbox" class="select-form" value="@form.Id" onclick="event.stopPropagation();"></td>
+                    <td class="form-id">@form.Id</td>
+                    <td>@form.Template?.Title</td>
+                    <td>@form.FilledAt.ToLocalTime().ToString("g")</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <div class="pagination-container">
+            <span class="pagination-info">Page @currentPage of @totalPages</span>
+            <a class="page-link @(hasPreviousPage ? "" : "disabled")" href="@Url.Action("UserSubmittedForms", new { page = currentPage - 1 })">Previous</a>
+            <a class="page-link @(hasNextPage ? "" : "disabled")" href="@Url.Action("UserSubmittedForms", new { page = currentPage + 1 })">Next</a>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // clickable row logic
+            document.querySelectorAll('.clickable-row').forEach(function (row) {
+                row.addEventListener('click', function () {
+                    window.location = row.getAttribute('data-href');
+                });
+                row.style.cursor = 'pointer';
+            });
+
+            // bulk select/delete logic
+            const selectAll = document.getElementById('selectAllForms');
+            const formCheckboxes = document.querySelectorAll('.select-form');
+            const deleteBtn = document.getElementById('deleteFormsBtn');
+
+            selectAll.addEventListener('change', () => {
+                formCheckboxes.forEach(cb => cb.checked = selectAll.checked);
+            });
+
+            deleteBtn.addEventListener('click', async () => {
+                const formIds = [...document.querySelectorAll('.select-form:checked')]
+                    .map(el => parseInt(el.value));
+
+                if (!formIds.length) {
+                    toastr.error('Please select at least one form.');
+                    return;
+                }
+
+                if (!confirm('Are you sure you want to delete the selected forms?')) {
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/Form/DeleteForms', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(formIds)
+                    });
+                    const result = await response.json();
+                    if (result.success) {
+                        toastr.success(result.message);
+                        setTimeout(() => location.reload(), 1000);
+                    } else {
+                        toastr.error(result.message);
+                    }
+                } catch {
+                    toastr.error('Action failed. Please try again.');
+                }
+            });
+        });
+    </script>
+}
+
+<style>
+    .submitted-forms-container {
+        background-color: #fff;
+        padding: 24px 24px 16px 24px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        margin-bottom: 32px;
+    }
+    .forms-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    .forms-table th, .forms-table td {
+        padding: 12px;
+        border-bottom: 1px solid #dee2e6;
+        text-align: left;
+    }
+    .forms-table th {
+        background-color: #f8f9fa;
+        font-weight: 600;
+    }
+    .forms-table tbody tr:hover {
+        background-color: #e6f2ff;
+    }
+    .form-id {
+        font-weight: 500;
+        color: #007bff;
+    }
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        gap: 10px;
+    }
+    .pagination-info {
+        color: #6c757d;
+        font-size: 14px;
+    }
+    .page-link {
+        display: inline-block;
+        padding: 8px 12px;
+        margin: 0 2px;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        text-decoration: none;
+        color: #007bff;
+        background-color: white;
+        transition: all 0.2s ease;
+    }
+    .page-link:hover {
+        background-color: #e9ecef;
+        border-color: #adb5bd;
+        text-decoration: none;
+        color: #0056b3;
+    }
+    .page-link.disabled {
+        color: #6c757d;
+        pointer-events: none;
+        background-color: #e9ecef;
+        border-color: #dee2e6;
+    }
+    .no-forms {
+        text-align: center;
+        padding: 40px;
+        color: #6c757d;
+    }
+</style> 

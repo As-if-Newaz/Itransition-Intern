@@ -12,14 +12,14 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
     {
         public int Id { get; set; }
 
-        [Column(TypeName = "VARCHAR")]
+        [Column(TypeName = "VARCHAR"), StringLength(512)]
         public string? Text { get; set; }
 
         public int? Number { get; set; }
 
-        public bool? SignleChoice { get; set; }
+        public int? SignleChoice { get; set; }
 
-        [Column(TypeName = "VARCHAR")]
+        [Column(TypeName = "VARCHAR(512)"), StringLength(512)]
         public string? FileUrl { get; set; }
 
         public DateTime? Date { get; set; }

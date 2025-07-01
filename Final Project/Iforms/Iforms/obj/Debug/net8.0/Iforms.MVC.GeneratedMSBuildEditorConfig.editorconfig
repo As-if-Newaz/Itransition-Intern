@@ -40,6 +40,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Projects/Itransition/Final Project/Iforms/Iforms/Views/Form/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Itransition/Final Project/Iforms/Iforms/Views/Form/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Itransition/Final Project/Iforms/Iforms/Views/Form/Fill.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRm9ybVxGaWxsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Projects/Itransition/Final Project/Iforms/Iforms/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -82,6 +94,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Projects/Itransition/Final Project/Iforms/Iforms/Views/Template/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVtcGxhdGVcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Itransition/Final Project/Iforms/Iforms/Views/UserDashboard/TemplateFormResponses.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckRhc2hib2FyZFxUZW1wbGF0ZUZvcm1SZXNwb25zZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Itransition/Final Project/Iforms/Iforms/Views/UserDashboard/UserSubmittedForms.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckRhc2hib2FyZFxVc2VyU3VibWl0dGVkRm9ybXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Itransition/Final Project/Iforms/Iforms/Views/UserDashboard/UserTemplateResponses.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckRhc2hib2FyZFxVc2VyVGVtcGxhdGVSZXNwb25zZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Projects/Itransition/Final Project/Iforms/Iforms/Views/UserDashboard/UserTemplates.cshtml]

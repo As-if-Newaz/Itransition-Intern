@@ -179,7 +179,7 @@
     </br>
     <div class="template-content-area">
         <h2>Create a New Template</h2>
-        <form id="templateForm" asp-action="Create" method="post">
+        <form id="templateForm" asp-action="Create" method="post" enctype="multipart/form-data">
             @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="mb-3">
@@ -193,8 +193,8 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="ImageUrl" class="form-label">Image URL</label>
-                <input asp-for="ImageUrl" class="form-control" />
+                <label for="TemplateImage" class="form-label">Template Image</label>
+                <input type="file" name="TemplateImage" class="form-control" accept="image/*" />
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
             <div class="mb-3 form-check">

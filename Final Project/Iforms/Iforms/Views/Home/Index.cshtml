@@ -4,30 +4,189 @@
 }
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
+<style>
+    .tag-button {
+        display: inline-block;
+        padding: 6px 18px;
+        border-radius: 999px;
+        background: #fff;
+        color: #222;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        text-decoration: none;
+        font-weight: 500;
+        transition: box-shadow 0.2s, border 0.2s, background 0.2s, color 0.2s;
+    }
+    .tag-button:hover {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+        border: 1.5px solid #007bff;
+        background: #f0f8ff;
+        color: #007bff;
+        text-decoration: none;
+    }
+    .templates-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+    .templates-table th, .templates-table td {
+        padding: 12px;
+        border-bottom: 1px solid #dee2e6;
+        vertical-align: middle;
+    }
+    .templates-table th {
+        background-color: #f8f9fa;
+        font-weight: 600;
+        color: #495057;
+    }
+    .templates-table tbody tr {
+        transition: background-color 0.2s ease;
+        cursor: pointer;
+    }
+    .templates-table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+    .template-title-link {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    .template-title-link:hover {
+        text-decoration: underline;
+    }
+    .status-badge {
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+    .status-public {
+        background-color: #d4edda;
+        color: #155724;
+    }
+    .status-private {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+    .template-list-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin: 20px auto;
+        max-width: 1100px;
+    }
+</style>
+
 <div class="text-center">
  <h2>Popular Tags</h2>
 <ul>
     @foreach (var tag in Model.TagCloud)
     {
-        <li>@tag.Name</li>
-    }
-</ul>
-<h2>Latest Templates</h2>
-<ul>
-    @foreach (var template in Model.LatestTemplates)
-    {
-        <li>@template.Title</li>
+        <li style="display:inline-block; margin: 0 8px 8px 0; list-style:none;">
+            <a href="#" class="tag-button">
+                @tag.Name
+            </a>
+        </li>
     }
 </ul>
 
-<h2>Popular Templates</h2>
-<ul>
-    @foreach (var template in Model.PopularTemplates)
-    {
-        <li>@template.Title</li>
-    }
-</ul>
+<h2>Latest Templates</h2>
+<div class="template-list-container">
+<table class="templates-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Created At</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.LatestTemplates.Count; i++)
+        {
+            var template = Model.LatestTemplates[i];
+            var isPublic = template.IsPublic;
+            var isLoggedIn = HttpContextAccessor.HttpContext.Request.Cookies["Role"] != null;
+        <tr class="template-row" data-href="@(isLoggedIn ? Url.Action("Fill", "Form", new { id = template.Id }) : null)">
+            <td>
+                @if (isLoggedIn)
+                {
+                    <a href="@Url.Action("Fill", "Form", new { id = template.Id })" class="template-title-link">@template.Title</a>
+                }
+                else
+                {
+                    @template.Title
+                }
+            </td>
+            <td>@template.Description</td>
+            <td>
+                <span class="status-badge @(isPublic ? "status-public" : "status-private")">
+                    @(isPublic ? "Public" : "Private")
+                </span>
+            </td>
+            <td>@template.CreatedAt.ToString("MMM dd, yyyy")</td>
+        </tr>
+        }
+    </tbody>
+</table>
 </div>
+
+<h2>Popular Templates</h2>
+<div class="template-list-container">
+<table class="templates-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Created At</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.PopularTemplates.Count; i++)
+        {
+            var template = Model.PopularTemplates[i];
+            var isPublic = template.IsPublic;
+            var isLoggedIn = HttpContextAccessor.HttpContext.Request.Cookies["Role"] != null;
+        <tr class="template-row" data-href="@(isLoggedIn ? Url.Action("Fill", "Form", new { id = template.Id }) : null)">
+            <td>
+                @if (isLoggedIn)
+                {
+                    <a href="@Url.Action("Fill", "Form", new { id = template.Id })" class="template-title-link">@template.Title</a>
+                }
+                else
+                {
+                    @template.Title
+                }
+            </td>
+            <td>@template.Description</td>
+            <td>
+                <span class="status-badge @(isPublic ? "status-public" : "status-private")">
+                    @(isPublic ? "Public" : "Private")
+                </span>
+            </td>
+            <td>@template.CreatedAt.ToString("MMM dd, yyyy")</td>
+        </tr>
+        }
+    </tbody>
+</table>
+</div>
+</div>
+<script>
+    document.querySelectorAll('.template-row').forEach(function(row) {
+        var href = row.getAttribute('data-href');
+        if (href) {
+            row.addEventListener('click', function(e) {
+                // Only trigger if not clicking a link
+                if (!e.target.closest('a')) {
+                    window.location = href;
+                }
+            });
+        }
+    });
+</script>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

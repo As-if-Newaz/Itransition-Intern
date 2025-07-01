@@ -355,3 +355,4 @@ D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\Microsoft.A
 D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
 D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\CloudinaryDotNet.dll

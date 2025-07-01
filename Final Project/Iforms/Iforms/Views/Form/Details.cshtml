@@ -1,0 +1,185 @@
+@{
+    ViewData["Title"] = "Form Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Iforms.BLL.DTOs.FormDTO
+
+<style>
+    .form-details-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+    
+    .form-header {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 10px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .form-title {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-meta {
+        display: flex;
+        gap: 1rem;
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+    
+    .answer-card {
+        background: white;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    
+    .question-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #f8f9fa;
+    }
+    
+    .answer-content {
+        background: #f8f9fa;
+        padding: 1rem;
+        border-radius: 6px;
+        border-left: 4px solid #28a745;
+    }
+    
+    .answer-text {
+        font-size: 1rem;
+        color: #495057;
+        margin: 0;
+    }
+    
+    .answer-number {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #007bff;
+    }
+    
+    .answer-date {
+        font-size: 1rem;
+        color: #6c757d;
+    }
+    
+    .answer-file {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #007bff;
+        text-decoration: none;
+    }
+    
+    .answer-file:hover {
+        text-decoration: underline;
+    }
+    
+    .success-message {
+        background: #d4edda;
+        color: #155724;
+        padding: 1rem;
+        border-radius: 6px;
+        margin-bottom: 2rem;
+        border: 1px solid #c3e6cb;
+    }
+    
+    .back-button {
+        background: #6c757d;
+        border: none;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 6px;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.2s ease;
+    }
+    
+    .back-button:hover {
+        background: #5a6268;
+        color: white;
+        text-decoration: none;
+    }
+</style>
+
+<div class="form-details-container">
+    <div class="form-header">
+        <h1 class="form-title">@Model.Template?.Title</h1>
+        <div class="form-meta">
+            <span><i class="fas fa-calendar"></i> Submitted: @Model.FilledAt.ToString("MMM dd, yyyy 'at' HH:mm")</span>
+            <span><i class="fas fa-user"></i> Submitted by: @Model.FilledBy?.UserName</span>
+        </div>
+    </div>
+
+    @if (Model.Answers != null && Model.Answers.Any())
+    {
+        @foreach (var answer in Model.Answers.OrderBy(a => a.Question?.QuestionOrder))
+        {
+            <div class="answer-card">
+                <div class="question-title">
+                    @answer.Question?.QuestionTitle
+                </div>
+                <div class="answer-content">
+                    @if (!string.IsNullOrEmpty(answer.Text))
+                    {
+                        <p class="answer-text">@answer.Text</p>
+                    }
+                    @if (answer.Number.HasValue)
+                    {
+                        <p class="answer-number">@answer.Number.Value</p>
+                    }
+                    @if (answer.Date.HasValue)
+                    {
+                        <p class="answer-date">@answer.Date.Value.ToString("MMM dd, yyyy")</p>
+                    }
+                    @if (answer.SignleChoice.HasValue)
+                    {
+                        <p class="answer-text">
+                            @if (answer.Question?.Options != null && answer.Question.Options.Any())
+                            {
+                                var optionIndex = answer.SignleChoice.Value;
+                                if (optionIndex >= 0 && optionIndex < answer.Question.Options.Count)
+                                {
+                                    @answer.Question.Options[optionIndex]
+                                }
+                            }
+                        </p>
+                    }
+                    @if (!string.IsNullOrEmpty(answer.FileUrl))
+                    {
+                        <img src="@answer.FileUrl" alt="Uploaded Image" style="max-width: 300px; max-height: 300px; display: block; margin: 0.5rem 0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);" />
+                    }
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="answer-card">
+            <div class="answer-content">
+                <p class="answer-text">No answers found for this form.</p>
+            </div>
+        </div>
+    }
+
+    <div class="text-center mt-4">
+        <a href="@Url.Action("Index", "Home")" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Back to Dashboard
+        </a>
+    </div>
+</div> 

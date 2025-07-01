@@ -1,0 +1,275 @@
+@model Iforms.MVC.Models.UserTemplatesViewModel
+@{
+    ViewData["Title"] = "Template Responses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<style>
+    .user-templates-container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin: 20px 0;
+    }
+
+    .templates-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .templates-table th {
+        background-color: #f8f9fa;
+        padding: 12px;
+        text-align: left;
+        border-bottom: 2px solid #dee2e6;
+        font-weight: 600;
+        color: #495057;
+    }
+
+    .templates-table td {
+        padding: 12px;
+        border-bottom: 1px solid #dee2e6;
+        vertical-align: middle;
+    }
+
+    .templates-table tbody tr {
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    .templates-table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .template-title {
+        font-weight: 500;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .template-title:hover {
+        text-decoration: underline;
+    }
+
+    .status-badge {
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+
+    .status-public {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    .status-private {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    .response-count-badge {
+        background-color: #17a2b8;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        gap: 10px;
+    }
+
+    .pagination-info {
+        color: #6c757d;
+        font-size: 14px;
+    }
+
+    .page-link {
+        display: inline-block;
+        padding: 8px 12px;
+        margin: 0 2px;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        text-decoration: none;
+        color: #007bff;
+        background-color: white;
+        transition: all 0.2s ease;
+    }
+
+    .page-link:hover {
+        background-color: #e9ecef;
+        border-color: #adb5bd;
+        text-decoration: none;
+        color: #0056b3;
+    }
+
+    .page-link.active {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: white;
+    }
+
+    .page-link.disabled {
+        color: #6c757d;
+        pointer-events: none;
+        background-color: #e9ecef;
+        border-color: #dee2e6;
+    }
+
+    .no-templates {
+        text-align: center;
+        padding: 40px;
+        color: #6c757d;
+    }
+
+    .view-responses-btn {
+        display: inline-block;
+        padding: 6px 12px;
+        background-color: #17a2b8;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 12px;
+        transition: background-color 0.2s ease;
+    }
+
+    .view-responses-btn:hover {
+        background-color: #138496;
+        color: white;
+        text-decoration: none;
+    }
+</style>
+
+<div class="user-templates-container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Template Responses</h2>
+        <a href="@Url.Action("UserTemplates", "UserDashboard")" class="btn btn-secondary">
+            <i class="fas fa-list"></i> View All Templates
+        </a>
+    </div>
+
+    @if (!Model.Templates.Any())
+    {
+        <div class="no-templates">
+            <h4>No template responses found</h4>
+            <p>You haven't received any form responses for your templates yet.</p>
+            <a href="@Url.Action("UserTemplates", "UserDashboard")" class="btn btn-primary">
+                <i class="fas fa-list"></i> View All Templates
+            </a>
+        </div>
+    }
+    else
+    {
+        <table class="templates-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Created At</th>
+                    <th>Status</th>
+                    @* <th>Response Count</th> *@
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var template in Model.Templates)
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("TemplateFormResponses", "UserDashboard", new { templateId = template.Id })" class="template-title">
+                                @template.Title
+                            </a>
+                        </td>
+                        <td>@template.CreatedAt.ToString("MMM dd, yyyy")</td>
+                        <td>
+                            <span class="status-badge @(template.IsPublic ? "status-public" : "status-private")">
+                                @(template.IsPublic ? "Public" : "Private")
+                            </span>
+                        </td>
+                        <td>
+                            @if (!string.IsNullOrEmpty(template.Description))
+                            {
+                                <span title="@template.Description">
+                                    @(template.Description.Length > 50 ? template.Description.Substring(0, 50) + "..." : template.Description)
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="text-muted">No description</span>
+                            }
+                        </td>
+                        <td>
+                            <a href="@Url.Action("TemplateFormResponses", "UserDashboard", new { templateId = template.Id })" class="view-responses-btn">
+                                <i class="fas fa-eye"></i> View Responses
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @if (Model.TotalPages > 1)
+        {
+            <div class="pagination-container">
+                <div class="pagination-info">
+                    Showing @(((Model.CurrentPage - 1) * Model.PageSize) + 1) to @Math.Min(Model.CurrentPage * Model.PageSize, Model.TotalCount) of @Model.TotalCount templates with responses
+                </div>
+                
+                <div class="pagination">
+                    @if (Model.HasPreviousPage)
+                    {
+                        <a href="@Url.Action("UserTemplateResponses", new { page = Model.CurrentPage - 1 })" class="page-link">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="page-link disabled">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </span>
+                    }
+
+                    @{
+                        var startPage = Math.Max(1, Model.CurrentPage - 2);
+                        var endPage = Math.Min(Model.TotalPages, Model.CurrentPage + 2);
+                    }
+
+                    @for (int i = startPage; i <= endPage; i++)
+                    {
+                        if (i == Model.CurrentPage)
+                        {
+                            <span class="page-link active">@i</span>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("UserTemplateResponses", new { page = i })" class="page-link">@i</a>
+                        }
+                    }
+
+                    @if (Model.HasNextPage)
+                    {
+                        <a href="@Url.Action("UserTemplateResponses", new { page = Model.CurrentPage + 1 })" class="page-link">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="page-link disabled">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </span>
+                    }
+                </div>
+            </div>
+        }
+    }
+</div> 

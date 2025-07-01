@@ -53,6 +53,31 @@ namespace Iforms.BLL.Services
                     .ForMember(dest => dest.Options, opt => opt.MapFrom(src => src.Options ?? new List<string>()));
                 cfg.CreateMap<Question, QuestionDTO>()
                     .ForMember(dest => dest.Options, opt => opt.MapFrom(src => src.Options != null ? src.Options.ToList() : new List<string>()));
+                
+                // Add missing mappings for Form, Comment, and Like
+                cfg.CreateMap<Form, FormDTO>()
+                    .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => src.Answers));
+                cfg.CreateMap<FormDTO, Form>()
+                    .ForMember(dest => dest.Template, opt => opt.Ignore())
+                    .ForMember(dest => dest.FilledBy, opt => opt.Ignore())
+                    .ForMember(dest => dest.Answers, opt => opt.Ignore());
+                
+                cfg.CreateMap<Comment, CommentDTO>()
+                    .ForMember(dest => dest.CreatedByUserName, opt => opt.MapFrom(src => src.CreatedBy != null ? src.CreatedBy.UserName : null));
+                cfg.CreateMap<CommentDTO, Comment>()
+                    .ForMember(dest => dest.Template, opt => opt.Ignore())
+                    .ForMember(dest => dest.CreatedBy, opt => opt.Ignore());
+                
+                cfg.CreateMap<Like, LikeDTO>();
+                cfg.CreateMap<LikeDTO, Like>()
+                    .ForMember(dest => dest.Template, opt => opt.Ignore())
+                    .ForMember(dest => dest.User, opt => opt.Ignore());
+                
+                // Add Answer mappings
+                cfg.CreateMap<Answer, AnswerDTO>();
+                cfg.CreateMap<AnswerDTO, Answer>()
+                    .ForMember(dest => dest.Form, opt => opt.Ignore())
+                    .ForMember(dest => dest.Question, opt => opt.Ignore());
             });
             return new Mapper(config);
         }
@@ -124,15 +149,21 @@ namespace Iforms.BLL.Services
 
             return templateDto;
         }
-        public bool Delete(int id, int currentUserId)
+        public bool DeleteTemplates(int[] templateIds)
         {
-            if (!DA.TemplateData().CanUserManageTemplate(id, currentUserId))
-                return false;
-
-            var template = DA.TemplateData().Get(id);
-            if (template == null) return false;
-
-            return DA.TemplateData().Delete(template);
+            foreach (var templateId in templateIds)
+            {
+                var template = DA.TemplateData().Get(templateId);
+                if (template == null)
+                {
+                    return false;
+                }
+                if (!DA.TemplateData().Delete(template))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public bool Update(int id, TemplateExtendedDTO updateTemplateDto, int currentUserId)
@@ -182,6 +213,16 @@ namespace Iforms.BLL.Services
             var templates = DA.TemplateData().GetUserTemplates(userId);
             return MapTemplatesWithLikes(templates, currentUserId);
         }
+        //public IEnumerable<TemplateExtendedDTO> GetUserExtendedTemplates(int userId, int? currentUserId = null)
+        //{
+        //    var templates = DA.TemplateData().GetUserTemplates(userId);
+        //    return templates.Select(t =>
+        //    {
+        //        var dto = GetMapper().Map<TemplateExtendedDTO>(t);
+        //        dto.IsLikedByCurrentUser = currentUserId.HasValue && t.Likes.Any(l => l.UserId == currentUserId.Value);
+        //        return dto;
+        //    });
+        //}
 
         public IEnumerable<TemplateDTO> GetLatestTemplates(int count = 10, int? currentUserId = null)
         {
@@ -279,7 +320,7 @@ namespace Iforms.BLL.Services
             }
         }
 
-        public TemplateSearchResultDTO Search(TemplateSearchDTO searchDto, int? currentUserId = null)
+        public List<TemplateDTO> Search(TemplateSearchDTO searchDto, int? currentUserId = null)
         {
             var templates = DA.TemplateData().SearchTemplates(searchDto.SearchTerm ?? "", GetMapper().Map<Topic>(searchDto.Topic), searchDto.Tags);
 
@@ -318,14 +359,7 @@ namespace Iforms.BLL.Services
 
             var templateDtos = MapTemplatesWithLikes(pagedTemplates, currentUserId);
 
-            return new TemplateSearchResultDTO
-            {
-                Templates = templateDtos.ToList(),
-                TotalCount = totalCount,
-                Page = searchDto.Page,
-                PageSize = searchDto.PageSize,
-                TotalPages = (int)Math.Ceiling((double)totalCount / searchDto.PageSize)
-            };
+            return templateDtos.ToList();
         }
 
         public bool ToggleLike(int templateId, int userId)
@@ -424,6 +458,22 @@ namespace Iforms.BLL.Services
                     }
                 }
             }
+        }
+
+        public bool UpdateImageUrl(int templateId, string? imageUrl, int currentUserId)
+        {
+            var template = DA.TemplateData().Get(templateId);
+            if (template == null) return false;
+            if (!DA.TemplateData().CanUserManageTemplate(templateId, currentUserId)) return false;
+            template.ImageUrl = imageUrl;
+            return DA.TemplateData().Update(template);
+        }
+
+        public IEnumerable<TemplateDTO> GetAllTemplates()
+        {
+            var templates = DA.TemplateData().GetAll();
+
+            return GetMapper().Map<List<TemplateDTO>>(templates);
         }
     }
 }

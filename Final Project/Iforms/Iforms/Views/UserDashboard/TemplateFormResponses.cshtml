@@ -1,0 +1,310 @@
+@{
+    ViewData["Title"] = "Form Responses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+    var template = ViewBag.Template as Iforms.BLL.DTOs.TemplateDTO;
+    var forms = ViewBag.Forms as List<Iforms.BLL.DTOs.FormDTO>;
+    var currentPage = (int)ViewBag.CurrentPage;
+    var totalPages = (int)ViewBag.TotalPages;
+    var totalCount = (int)ViewBag.TotalCount;
+    var pageSize = (int)ViewBag.PageSize;
+    var hasPreviousPage = (bool)ViewBag.HasPreviousPage;
+    var hasNextPage = (bool)ViewBag.HasNextPage;
+}
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<style>
+    .form-responses-container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin: 20px 0;
+    }
+
+    .template-header {
+        background-color: #f8f9fa;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        border-left: 4px solid #007bff;
+    }
+
+    .template-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #495057;
+        margin-bottom: 5px;
+    }
+
+    .template-description {
+        color: #6c757d;
+        margin-bottom: 10px;
+    }
+
+    .template-meta {
+        display: flex;
+        gap: 20px;
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+
+    .forms-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .forms-table th {
+        background-color: #f8f9fa;
+        padding: 12px;
+        text-align: left;
+        border-bottom: 2px solid #dee2e6;
+        font-weight: 600;
+        color: #495057;
+    }
+
+    .forms-table td {
+        padding: 12px;
+        border-bottom: 1px solid #dee2e6;
+        vertical-align: middle;
+    }
+
+    .forms-table tbody tr {
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    .forms-table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .form-id {
+        font-weight: 500;
+        color: #007bff;
+    }
+
+    .user-name {
+        font-weight: 500;
+        color: #495057;
+    }
+
+    .date-badge {
+        background-color: #e9ecef;
+        color: #495057;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+        gap: 10px;
+    }
+
+    .pagination-info {
+        color: #6c757d;
+        font-size: 14px;
+    }
+
+    .page-link {
+        display: inline-block;
+        padding: 8px 12px;
+        margin: 0 2px;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        text-decoration: none;
+        color: #007bff;
+        background-color: white;
+        transition: all 0.2s ease;
+    }
+
+    .page-link:hover {
+        background-color: #e9ecef;
+        border-color: #adb5bd;
+        text-decoration: none;
+        color: #0056b3;
+    }
+
+    .page-link.active {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: white;
+    }
+
+    .page-link.disabled {
+        color: #6c757d;
+        pointer-events: none;
+        background-color: #e9ecef;
+        border-color: #dee2e6;
+    }
+
+    .no-forms {
+        text-align: center;
+        padding: 40px;
+        color: #6c757d;
+    }
+
+    .view-form-btn {
+        display: inline-block;
+        padding: 6px 12px;
+        background-color: #28a745;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 12px;
+        transition: background-color 0.2s ease;
+    }
+
+    .view-form-btn:hover {
+        background-color: #218838;
+        color: white;
+        text-decoration: none;
+    }
+
+    .back-btn {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #6c757d;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.2s ease;
+    }
+
+    .back-btn:hover {
+        background-color: #5a6268;
+        color: white;
+        text-decoration: none;
+    }
+</style>
+
+<div class="form-responses-container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Form Responses</h2>
+        <a href="@Url.Action("UserTemplateResponses", "UserDashboard")" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Templates
+        </a>
+    </div>
+
+    @if (template != null)
+    {
+        <div class="template-header">
+            <div class="template-title">@template.Title</div>
+            @if (!string.IsNullOrEmpty(template.Description))
+            {
+                <div class="template-description">@template.Description</div>
+            }
+            <div class="template-meta">
+                <span><i class="fas fa-calendar"></i> Created: @template.CreatedAt.ToString("MMM dd, yyyy")</span>
+                <span><i class="fas fa-users"></i> Total Responses: @totalCount</span>
+                <span><i class="fas fa-eye"></i> Status: @(template.IsPublic ? "Public" : "Private")</span>
+            </div>
+        </div>
+    }
+
+    @if (forms == null || !forms.Any())
+    {
+        <div class="no-forms">
+            <h4>No form responses found</h4>
+            <p>This template hasn't received any responses yet.</p>
+            <a href="@Url.Action("UserTemplateResponses", "UserDashboard")" class="btn btn-primary">
+                <i class="fas fa-arrow-left"></i> Back to Templates
+            </a>
+        </div>
+    }
+    else
+    {
+        <table class="forms-table">
+            <thead>
+                <tr>
+                    <th>Response ID</th>
+                    <th>Submitted By</th>
+                    <th>Submitted Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var form in forms)
+                {
+                    <tr>
+                        <td>
+                            <span class="form-id">#@form.Id</span>
+                        </td>
+                        <td>
+                            <span class="user-name">@(form.FilledBy?.UserName ?? "Unknown User")</span>
+                        </td>
+                        <td>
+                            <span class="date-badge">
+                                @form.FilledAt.ToString("MMM dd, yyyy 'at' HH:mm")
+                            </span>
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Details", "Form", new { id = form.Id })" class="view-form-btn">
+                                <i class="fas fa-eye"></i> View Details
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        @if (totalPages > 1)
+        {
+            <div class="pagination-container">
+                <div class="pagination-info">
+                    Showing @(((currentPage - 1) * pageSize) + 1) to @Math.Min(currentPage * pageSize, totalCount) of @totalCount responses
+                </div>
+                
+                <div class="pagination">
+                    @if (hasPreviousPage)
+                    {
+                        <a href="@Url.Action("TemplateFormResponses", new { templateId = template.Id, page = currentPage - 1 })" class="page-link">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="page-link disabled">
+                            <i class="fas fa-chevron-left"></i> Previous
+                        </span>
+                    }
+
+                    @{
+                        var startPage = Math.Max(1, currentPage - 2);
+                        var endPage = Math.Min(totalPages, currentPage + 2);
+                    }
+
+                    @for (int i = startPage; i <= endPage; i++)
+                    {
+                        if (i == currentPage)
+                        {
+                            <span class="page-link active">@i</span>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("TemplateFormResponses", new { templateId = template.Id, page = i })" class="page-link">@i</a>
+                        }
+                    }
+
+                    @if (hasNextPage)
+                    {
+                        <a href="@Url.Action("TemplateFormResponses", new { templateId = template.Id, page = currentPage + 1 })" class="page-link">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="page-link disabled">
+                            Next <i class="fas fa-chevron-right"></i>
+                        </span>
+                    }
+                </div>
+            </div>
+        }
+    }
+</div> 

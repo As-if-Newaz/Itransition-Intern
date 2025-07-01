@@ -16,7 +16,7 @@ namespace Iforms.BLL.DTOs
 
         public int? Number { get; set; }
 
-        public bool? SignleChoice { get; set; }
+        public int? SignleChoice { get; set; }
 
         public string? FileUrl { get; set; }
 
@@ -28,5 +28,7 @@ namespace Iforms.BLL.DTOs
         [Required]
         public int FormId { get; set; }
 
+        // Navigation property for details view
+        public virtual QuestionDTO? Question { get; set; }
     }
 }

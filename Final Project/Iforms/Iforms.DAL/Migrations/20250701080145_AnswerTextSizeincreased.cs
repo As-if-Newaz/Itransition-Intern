@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Iforms.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class ficx1 : Migration
+    public partial class AnswerTextSizeincreased : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -277,10 +277,10 @@ namespace Iforms.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Text = table.Column<string>(type: "VARCHAR", nullable: true),
+                    Text = table.Column<string>(type: "VARCHAR(512)", maxLength: 512, nullable: true),
                     Number = table.Column<int>(type: "int", nullable: true),
-                    SignleChoice = table.Column<bool>(type: "bit", nullable: true),
-                    FileUrl = table.Column<string>(type: "VARCHAR", nullable: true),
+                    SignleChoice = table.Column<int>(type: "int", nullable: true),
+                    FileUrl = table.Column<string>(type: "VARCHAR(512)", maxLength: 512, nullable: true),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: true),
                     QuestionId = table.Column<int>(type: "int", nullable: false),
                     FormId = table.Column<int>(type: "int", nullable: false)

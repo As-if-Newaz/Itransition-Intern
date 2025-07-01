@@ -53,6 +53,7 @@ builder.Services.AddScoped<CommentService>();
 builder.Services.AddScoped<FormService>();
 builder.Services.AddScoped<TagService>();
 builder.Services.AddScoped<QuestionService>();
+builder.Services.AddScoped<ImageService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -64,7 +65,9 @@ builder.Services.AddSession(options =>
 builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<IApplicationDBContext, ApplicationDBContext>(options =>
-    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Iforms.DAL")));
+    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Iforms.DAL"))
+           .EnableSensitiveDataLogging()
+           .LogTo(Console.WriteLine, LogLevel.Information));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
