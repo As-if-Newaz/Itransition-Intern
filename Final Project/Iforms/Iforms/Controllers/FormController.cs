@@ -1,11 +1,12 @@
 ﻿using Iforms.BLL.DTOs;
 using Iforms.BLL.Services;
+using Iforms.DAL.Entity_Framework.Table_Models;
 using Iforms.MVC.Authentication;
 using Iforms.MVC.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
 
 namespace Iforms.MVC.Controllers
 {
@@ -60,74 +61,48 @@ namespace Iforms.MVC.Controllers
             }
         }
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         [HttpGet("Form/Fill/{templateId}")]
         public IActionResult Fill(int templateId)
         {
             var currentUserId = GetCurrentUserId();
-            
-            // Debug logging
-            Console.WriteLine($"[FormController.Fill] TemplateId: {templateId}");
-            Console.WriteLine($"[FormController.Fill] CurrentUserId: {currentUserId}");
-            
             if (!templateService.CanUserAccessTemplate(templateId, currentUserId))
             {
-                Console.WriteLine($"[FormController.Fill] Access denied for template {templateId}");
                 return Forbid();
             }
-
             var template = templateService.GetTemplateDetailedById(templateId, currentUserId);
             if (template == null)
             {
-                Console.WriteLine($"[FormController.Fill] Template {templateId} not found");
                 return NotFound();
             }
-
-            Console.WriteLine($"[FormController.Fill] Template {templateId} found: {template.Title}, IsPublic: {template.IsPublic}");
-
             var questions = questionService.GetByTemplateId(templateId);
-
             var model = new FillFormModel
             {
                 Template = template,
                 Questions = questions.ToList()
             };
-
             return View(model);
         }
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         [HttpPost("Form/Submit")]
         public IActionResult Submit(FillFormModel model)
         {
-            Console.WriteLine($"[FormController.Submit] Starting form submission");
-            Console.WriteLine($"[FormController.Submit] ModelState.IsValid: {ModelState.IsValid}");
             var currentUserId = GetAuthenticatedUserId();
-            Console.WriteLine($"[FormController.Submit] CurrentUserId: {currentUserId}");
-            Console.WriteLine($"[FormController.Submit] TemplateId: {model.Template?.Id}");
-            Console.WriteLine($"[FormController.Submit] Answers count: {model.Answers?.Count ?? 0}");
-
             if (model.Template == null)
             {
-                Console.WriteLine($"[FormController.Submit] Template is null");
                 return BadRequest("Template is null");
             }
-
             if (!templateService.CanUserAccessTemplate(model.Template.Id, currentUserId))
             {
-                Console.WriteLine($"[FormController.Submit] Access denied for template {model.Template.Id}");
                 return Forbid();
             }
-
             if (model.Answers == null || !model.Answers.Any())
             {
-                Console.WriteLine($"[FormController.Submit] No answers provided");
                 return BadRequest("No answers provided");
             }
-
             // Get the list of questions for the template
             var questions = questionService.GetByTemplateId(model.Template.Id).ToList();
-
             // Handle file uploads for FileUpload questions
             for (int i = 0; i < model.Answers.Count; i++)
             {
@@ -144,7 +119,6 @@ namespace Iforms.MVC.Controllers
                     }
                 }
             }
-
             var createDto = new FormDTO
             {
                 TemplateId = model.Template.Id,
@@ -158,15 +132,11 @@ namespace Iforms.MVC.Controllers
                     Date = a.Date,
                 }).ToList()
             };
-
-            Console.WriteLine($"[FormController.Submit] Created FormDTO with {createDto.Answers.Count} answers");
-
             var form = formService.Create(createDto, currentUserId);
-            Console.WriteLine($"[FormController.Submit] Form created with ID: {form.Id}");
             return RedirectToAction("Details", new { id = form.Id });
         }
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         public IActionResult Details(int id)
         {
             var currentUserId = GetAuthenticatedUserId();
@@ -178,7 +148,7 @@ namespace Iforms.MVC.Controllers
             return View(form);
         }
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(FillFormModel model)
@@ -216,10 +186,10 @@ namespace Iforms.MVC.Controllers
             var success = formService.Update(formDto, currentUserId);
             if (!success)
                 return Forbid();
-            return RedirectToAction("UserSubmittedForms", "UserDashboard");
+            return RedirectToAction("Details", new { id = model.FormId });
         }
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -238,7 +208,7 @@ namespace Iforms.MVC.Controllers
             return View(model);
         }
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         [HttpPost]
         public IActionResult UploadAnswerImage(IFormFile image)
         {
@@ -257,7 +227,7 @@ namespace Iforms.MVC.Controllers
             }
         }
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         [HttpPost]
         public IActionResult DeleteAnswerImage(int id)
         {

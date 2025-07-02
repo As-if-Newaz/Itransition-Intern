@@ -23,23 +23,13 @@
         </div>  
     </div>  
 </nav>  
-
 <div class="button-bar">  
     <div class="container">  
         <ul class="navbar-nav flex-row">  
             <li class="nav-item">  
                 @{  
                     var role = HttpContextAccessor.HttpContext.Request.Cookies["Role"];  
-                    if (role == "Admin")  
-                    {  
-                        // Admin buttons  
-                        <a href="@Url.Action("Index", "Home")" class="btn btn-glass">Home</a>  
-                        <a href="@Url.Action("UserManagement", "AdminDashboard")" class="btn btn-glass">Manage Users</a>  
-                        <button class="btn btn-glass">Manage Templates</button>  
-                        <button class="btn btn-glass">Manage Admin Applications</button>  
-                        <button class="btn btn-glass">Manage Activity Logs</button>  
-                    }  
-                    else if (role == "User")  
+                    if (role != null)  
                     {  
                         // User buttons  
                         <a href="@Url.Action("Index", "Home")" class="btn btn-glass">Home</a>

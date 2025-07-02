@@ -156,9 +156,21 @@ namespace Iforms.BLL.Services
             return DA.UserData().UpdateUserStatus(userId, status);
         }
 
-        public bool UpdateUserRole(int userId, UserRole role)
+        public bool UpdateUserRole(int[] userIds , UserRole role)
         {
-            return DA.UserData().UpdateUserRole(userId, role);
+           foreach(var userId in userIds)
+            {
+                var user = DA.UserData().Get(userId);
+                if (user == null)
+                {
+                    return false;
+                }
+                if (!DA.UserData().UpdateUserRole(userId, role))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public bool UpdatePreferences(int userId, UserPreferencesDTO preferences)

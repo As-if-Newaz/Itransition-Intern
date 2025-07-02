@@ -15,5 +15,6 @@ namespace Iforms.DAL.Interfaces
         Form? GetFormWithDetails(int id);
         bool CanUserAccessForm(int formId, int userId);
         bool CanUserManageForm(int formId, int userId);
+        IEnumerable<Form> GetAll();
     }
 }

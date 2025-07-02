@@ -24,6 +24,7 @@ namespace Iforms.BLL.DTOs
         [Required]
         public int CreatedById { get; set; }
 
+        public UserDTO CreatedBy { get; set; }
         public string? CreatedByUserName { get; set; }
 
     }

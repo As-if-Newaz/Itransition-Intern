@@ -22,7 +22,7 @@ namespace Iforms.MVC.Controllers
             this.auditLogService = auditLogService;
         }
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         [HttpGet]
         public IActionResult UserTemplates(int page = 1)
         {
@@ -57,7 +57,7 @@ namespace Iforms.MVC.Controllers
             return View(viewModel);
         }
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         [HttpGet]
         public IActionResult UserTemplateResponses(int page = 1)
         {
@@ -92,7 +92,7 @@ namespace Iforms.MVC.Controllers
             return View(viewModel);
         }
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         [HttpGet]
         public IActionResult TemplateFormResponses(int templateId, int page = 1)
         {
@@ -139,7 +139,7 @@ namespace Iforms.MVC.Controllers
             return View();
         }
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser  ]
         [HttpGet]
         public IActionResult UserSubmittedForms(int page = 1)
         {

@@ -39,44 +39,6 @@ namespace Iforms.MVC.Controllers
 
             return View(model);
         }
-
-        //[HttpGet]
-        //public IActionResult Search(string q, string topic, string tags, int page = 1)
-        //{
-        //    var searchDto = new TemplateSearchDTO
-        //    {
-        //        SearchTerm = q,
-        //        Page = page,
-        //        PageSize = 10
-        //    };
-
-        //    if (topic != null)
-        //    {
-        //        searchDto.Topic = new TopicDTO();
-        //    }
-
-        //    if (!string.IsNullOrEmpty(tags))
-        //    {
-        //        searchDto.Tags = tags.Split(',').Select(t => t.Trim()).ToList();
-        //    }
-
-        //    var currentUserId = GetCurrentUserId();
-        //    var results = templateService.Search(searchDto, currentUserId);
-
-        //    ViewBag.SearchTerm = q;
-        //    ViewBag.Topic = topic;
-        //    ViewBag.Tags = tags;
-
-        //    return View(results);
-        //}
-
-        //[HttpGet]
-        //public IActionResult SearchTags(string term)
-        //{
-        //    var tags = tagService.SearchTags(term ?? "");
-        //    return Json(tags.Select(t => new { id = t.Id, name = t.Name }));
-        //}
-
         private int? GetCurrentUserId()
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

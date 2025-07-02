@@ -322,7 +322,7 @@
                                         <input 
                                             type="checkbox" 
                                             name="Answers[@questionIndex].MultipleChoiceOptions" 
-                                            value="@j"
+                                            value="@question.Options[j]"
                                             id="option_@question.Id@j" />
                                         <label class="option-label" for="option_@question.Id@j">
                                             @question.Options[j]
@@ -485,22 +485,43 @@
             
             // Form submission validation
             document.getElementById('fillForm').addEventListener('submit', function(e) {
+                // For each MultipleChoice question, update the hidden Text field
+                document.querySelectorAll('.question-card').forEach(function(questionCard) {
+                    const checkboxes = questionCard.querySelectorAll('input[type="checkbox"]');
+                    if (checkboxes.length > 0) {
+                        const checkedValues = [];
+                        checkboxes.forEach(function(cb) {
+                            if (cb.checked) checkedValues.push(cb.value);
+                        });
+                        // Find the hidden field
+                        const hiddenField = questionCard.querySelector('input[type="hidden"][name$=".Text"]');
+                        if (hiddenField) {
+                            hiddenField.value = checkedValues.join(',');
+                        }
+                    }
+                });
+                
                 const questions = document.querySelectorAll('.question-card');
                 let isValid = true;
                 
                 questions.forEach(question => {
-                    const inputs = question.querySelectorAll('input[required], textarea[required]');
                     let hasAnswer = false;
-                    
-                    inputs.forEach(input => {
-                        if (input.type === 'radio' || input.type === 'checkbox') {
-                            if (input.checked) hasAnswer = true;
-                        } else if (input.type === 'file') {
-                            if (input.files.length > 0) hasAnswer = true;
-                        } else {
-                            if (input.value.trim() !== '') hasAnswer = true;
-                        }
-                    });
+                    const checkboxes = question.querySelectorAll('input[type="checkbox"]');
+                    if (checkboxes.length > 0) {
+                        // MultipleChoice: at least one checked
+                        hasAnswer = Array.from(checkboxes).some(cb => cb.checked);
+                    } else {
+                        const inputs = question.querySelectorAll('input[required], textarea[required]');
+                        inputs.forEach(input => {
+                            if (input.type === 'radio') {
+                                if (input.checked) hasAnswer = true;
+                            } else if (input.type === 'file') {
+                                if (input.files.length > 0) hasAnswer = true;
+                            } else {
+                                if (input.value.trim() !== '') hasAnswer = true;
+                            }
+                        });
+                    }
                     
                     if (!hasAnswer) {
                         isValid = false;
@@ -514,7 +535,6 @@
                 
                 if (!isValid) {
                     e.preventDefault();
-                    alert('Please answer all required questions before submitting.');
                     return false;
                 }
             });

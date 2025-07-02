@@ -54,17 +54,29 @@ namespace Iforms.MVC.Controllers
             return View(template);
         }
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         [HttpGet]
         public IActionResult Create()
         {
             return View(new TemplateDTO());
         }
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         [HttpPost]
         public IActionResult Create(TemplateDTO model)
         {
+            var topicIdFromForm = Request.Form["Topic.Id"].ToString();
+            var topicTypeFromForm = Request.Form["Topic.TopicType"].ToString();
+            if ((model.Topic?.Id == 0 || string.IsNullOrEmpty(model.Topic?.TopicType)) && 
+                (!string.IsNullOrEmpty(topicIdFromForm) || !string.IsNullOrEmpty(topicTypeFromForm)))
+            {
+                if (model.Topic == null)
+                    model.Topic = new TopicDTO();
+                if (int.TryParse(topicIdFromForm, out var topicId))
+                    model.Topic.Id = topicId;
+                if (!string.IsNullOrEmpty(topicTypeFromForm))
+                    model.Topic.TopicType = topicTypeFromForm;
+            }
             var templateImage = Request.Form.Files["TemplateImage"];
             if (templateImage != null && templateImage.Length > 0)
             {
@@ -79,21 +91,6 @@ namespace Iforms.MVC.Controllers
                     return View(model);
                 }
             }
-            
-            // Debug information
-            Console.WriteLine($"Title: {model.Title}");
-            Console.WriteLine($"Description: {model.Description}");
-            Console.WriteLine($"ImageUrl: {model.ImageUrl}");
-            Console.WriteLine($"IsPublic: {model.IsPublic}");
-            Console.WriteLine($"Topic: {model.Topic?.Id} - {model.Topic?.TopicType}");
-            Console.WriteLine($"Questions Count: {model.Questions?.Count ?? 0}");
-            Console.WriteLine($"Template Tags Count: {model.TemplateTags?.Count ?? 0}");
-            if (model.TemplateTags?.Any() == true)
-            {
-                Console.WriteLine($"Template Tags: {string.Join(", ", model.TemplateTags.Select(t => t.Name))}");
-            }
-            
-            // Process template tags from form input if needed
             var templateTagsInput = Request.Form["TemplateTagsInput"].ToString();
             if (!string.IsNullOrWhiteSpace(templateTagsInput) && (model.TemplateTags == null || !model.TemplateTags.Any()))
             {
@@ -101,12 +98,8 @@ namespace Iforms.MVC.Controllers
                     .Select(t => t.Trim())
                     .Where(t => !string.IsNullOrWhiteSpace(t))
                     .ToList();
-                
                 model.TemplateTags = tagNames.Select(tagName => new TagDTO { Name = tagName }).ToList();
-                Console.WriteLine($"Processed template tags from input: {string.Join(", ", tagNames)}");
             }
-            
-            // Process selected user IDs from form input (for Create)
             var selectedUserIdsInput = Request.Form["SelectedUserIds"].ToString();
             if (!string.IsNullOrWhiteSpace(selectedUserIdsInput))
             {
@@ -115,8 +108,6 @@ namespace Iforms.MVC.Controllers
                     .Where(id => !string.IsNullOrWhiteSpace(id))
                     .Select(int.Parse)
                     .ToList();
-
-                // Fetch full user info for display in the view (for Create)
                 model.TemplateAccesses = userIds
                     .Select(userId => userService.GetById(userId))
                     .Where(u => u != null)
@@ -126,8 +117,6 @@ namespace Iforms.MVC.Controllers
             {
                 model.TemplateAccesses = new List<UserDTO>();
             }
-            
-            // Process questions from form input
             var questions = new List<QuestionDTO>();
             var questionIndex = 0;
             while (Request.Form.ContainsKey($"Questions[{questionIndex}].QuestionTitle"))
@@ -137,8 +126,6 @@ namespace Iforms.MVC.Controllers
                 var questionTypeStr = Request.Form[$"Questions[{questionIndex}].QuestionType"].ToString();
                 var questionOrder = int.Parse(Request.Form[$"Questions[{questionIndex}].QuestionOrder"].ToString());
                 var optionsJson = Request.Form[$"Questions[{questionIndex}].Options"].ToString();
-                
-                // Parse question type string to enum
                 if (Enum.TryParse<Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType>(questionTypeStr, out var questionType))
                 {
                     var questionDto = new QuestionDTO
@@ -158,42 +145,35 @@ namespace Iforms.MVC.Controllers
                 questionIndex++;
             }
             model.Questions = questions;
-            Console.WriteLine($"Processed {questions.Count} questions");
-            Console.WriteLine("Question titles being submitted: " + string.Join(", ", model.Questions.Select(q => q.QuestionTitle)));
-            
             if (!ModelState.IsValid)
             {
-                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
-                Console.WriteLine($"Model validation errors: {string.Join(", ", errors)}");
                 return View(model);
             }
-
             var currentUserId = GetCurrentUserId()!.Value;
-            
-            // Set required fields
             model.CreatedAt = DateTime.UtcNow;
             model.CreatedById = currentUserId;
-
+            var currentUser = userService.GetById(currentUserId);
+            if (currentUser != null)
+            {
+                model.CreatedBy = currentUser;
+            }
             try
             {
-                Console.WriteLine("Calling templateService.Create with questions: " + string.Join(", ", model.Questions.Select(q => q.QuestionTitle)));
                 var template = templateService.Create(model, currentUserId);
                 if (template != null)
                 {
                     return RedirectToAction("UserTemplates", "UserDashboard");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Console.WriteLine($"Error creating template: {ex.Message}");
                 ModelState.AddModelError("", "An error occurred while creating the template. Please try again.");
                 return View(model);
             }
-            
             return RedirectToAction("Index", "UserDashboard");
         }
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -206,42 +186,10 @@ namespace Iforms.MVC.Controllers
             if (template == null)
                 return NotFound();
 
-            // Debug logging for questions and options
-            if (template.Questions != null && template.Questions.Any())
-            {
-                Console.WriteLine($"Edit: Template {id} has {template.Questions.Count} questions");
-                foreach (var question in template.Questions)
-                {
-                    Console.WriteLine($"Question {question.Id}: {question.QuestionTitle}, Type: {question.QuestionType}");
-                    if (question.Options != null && question.Options.Any())
-                    {
-                        Console.WriteLine($"  Options: {string.Join(", ", question.Options)}");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"  No options found");
-                    }
-                }
-            }
-            else
-            {
-                Console.WriteLine($"Edit: Template {id} has no questions");
-            }
-
-            // Debug logging for shared users
-            Console.WriteLine($"TemplateAccesses count: {template.TemplateAccesses?.Count}");
-            if (template.TemplateAccesses != null)
-            {
-                foreach (var user in template.TemplateAccesses)
-                {
-                    Console.WriteLine($"User: {user.Id}, {user.UserName}, {user.UserEmail}");
-                }
-            }
-
             return View(template);
         }
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         [HttpPost]
         public IActionResult Edit(TemplateDTO model)
         {
@@ -260,19 +208,6 @@ namespace Iforms.MVC.Controllers
                 }
             }
             
-            // Debug information
-            Console.WriteLine($"Title: {model.Title}");
-            Console.WriteLine($"Description: {model.Description}");
-            Console.WriteLine($"ImageUrl: {model.ImageUrl}");
-            Console.WriteLine($"IsPublic: {model.IsPublic}");
-            Console.WriteLine($"Topic: {model.Topic?.Id} - {model.Topic?.TopicType}");
-            Console.WriteLine($"Questions Count: {model.Questions?.Count ?? 0}");
-            Console.WriteLine($"Template Tags Count: {model.TemplateTags?.Count ?? 0}");
-            if (model.TemplateTags?.Any() == true)
-            {
-                Console.WriteLine($"Template Tags: {string.Join(", ", model.TemplateTags.Select(t => t.Name))}");
-            }
-            
             // Process template tags from form input if needed
             var templateTagsInput = Request.Form["TemplateTagsInput"].ToString();
             if (!string.IsNullOrWhiteSpace(templateTagsInput) && (model.TemplateTags == null || !model.TemplateTags.Any()))
@@ -283,7 +218,6 @@ namespace Iforms.MVC.Controllers
                     .ToList();
                 
                 model.TemplateTags = tagNames.Select(tagName => new TagDTO { Name = tagName }).ToList();
-                Console.WriteLine($"Processed template tags from input: {string.Join(", ", tagNames)}");
             }
             
             // Process selected user IDs from form input
@@ -307,7 +241,6 @@ namespace Iforms.MVC.Controllers
                     UserStatus = UserStatus.Active, // Default value
                     CreatedAt = DateTime.UtcNow // Default value
                 }).ToList();
-                Console.WriteLine($"Processed selected user IDs: {string.Join(", ", userIds)}");
             }
             else
             {
@@ -345,12 +278,9 @@ namespace Iforms.MVC.Controllers
                 questionIndex++;
             }
             model.Questions = questions;
-            Console.WriteLine($"Processed {questions.Count} questions");
             
             if (!ModelState.IsValid)
             {
-                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
-                Console.WriteLine($"Model validation errors: {string.Join(", ", errors)}");
                 return View(model);
             }
 
@@ -363,7 +293,7 @@ namespace Iforms.MVC.Controllers
         }
 
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         [HttpPost]
         public async Task<IActionResult> ToggleLike(int id)
         {
@@ -380,7 +310,7 @@ namespace Iforms.MVC.Controllers
             return Json(new { isLiked });
         }
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         [HttpPost]
         public async Task<IActionResult> AddComment(int templateId, string content)
         {
@@ -415,7 +345,7 @@ namespace Iforms.MVC.Controllers
             return Json(commentWithUser);
         }
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         [HttpPost]
         public IActionResult DeleteComment(int id)
         {
@@ -426,7 +356,7 @@ namespace Iforms.MVC.Controllers
             return Ok();
         }
 
-        [AuthenticatedUser]
+        [AuthenticatedAdminorUser]
         [HttpPost]
         public IActionResult DeleteImage(int id)
         {
@@ -510,30 +440,12 @@ namespace Iforms.MVC.Controllers
         {
             var currentUserId = GetCurrentUserId();
             var accessibleTemplates = currentUserId.HasValue
-                ? templateService.DA.TemplateData().GetAccessibleTemplates(currentUserId.Value)
-                : templateService.DA.TemplateData().GetPublicTemplates();
-            var allTemplates = accessibleTemplates.GroupBy(t => t.Id).Select(g => g.First()).ToList();
-
-            // Debug output
-            Console.WriteLine($"[BrowseTemplates] CurrentUserId: {currentUserId}");
-            foreach (var t in allTemplates)
-            {
-                Console.WriteLine($"[BrowseTemplates] TemplateId: {t.Id}, Title: {t.Title}, IsPublic: {t.IsPublic}, CreatedById: {t.CreatedById}");
-            }
-
-            var templateDTOs = allTemplates.Select(t => new Iforms.BLL.DTOs.TemplateDTO {
-                Id = t.Id,
-                Title = t.Title,
-                Description = t.Description,
-                IsPublic = t.IsPublic,
-                CreatedAt = t.CreatedAt,
-                CreatedById = t.CreatedById,
-                IsLikedByCurrentUser = t.Likes != null && currentUserId.HasValue && t.Likes.Any(l => l.UserId == currentUserId.Value)
-            }).ToList();
-            // Get CreatedBy names
-            var createdByNames = allTemplates.ToDictionary(t => t.Id, t => t.CreatedBy?.UserName ?? "Unknown");
+                ? templateService.GetAccessibleTemplates(currentUserId.Value)
+                : templateService.GetPublicTemplates();
+            var templateDTOs = accessibleTemplates.GroupBy(t => t.Id).Select(g => g.First()).ToList();
+            var createdByNames = templateDTOs.ToDictionary(t => t.Id, t => t.CreatedBy?.UserName ?? "Unknown");
             // Get comments and likes count
-            var commentsDict = allTemplates.ToDictionary(
+            var commentsDict =templateDTOs.ToDictionary(
                 t => t.Id,
                 t => t.Comments != null
                     ? t.Comments.Select(c => new Iforms.BLL.DTOs.CommentDTO {
@@ -546,7 +458,7 @@ namespace Iforms.MVC.Controllers
                     }).ToList()
                     : new List<Iforms.BLL.DTOs.CommentDTO>()
             );
-            var likesDict = allTemplates.ToDictionary(t => t.Id, t => t.Likes?.Count ?? 0);
+            var likesDict = templateDTOs.ToDictionary(t => t.Id, t => t.Likes?.Count ?? 0);
             var viewModel = new Iforms.MVC.Models.BrowseTemplatesViewModel {
                 Templates = templateDTOs,
                 CreatedByNames = createdByNames,

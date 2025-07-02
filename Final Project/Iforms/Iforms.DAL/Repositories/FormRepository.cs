@@ -90,5 +90,15 @@ namespace Iforms.DAL.Repositories
 
             return form.FilledById == userId || form.Template.CreatedById == userId;
         }
+
+        public IEnumerable<Form> GetAll()
+        {
+            return db.Forms
+                .Include(f => f.FilledBy)
+                .Include(f => f.Template)
+                .Include(f => f.Answers)
+                .AsNoTracking()
+                .ToList();
+        }
     }
 }

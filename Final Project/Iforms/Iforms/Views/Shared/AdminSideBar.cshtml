@@ -1,0 +1,13 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@if (HttpContextAccessor.HttpContext.Request.Cookies["Role"] == "Admin")
+{
+    <div class="admin-sidebar">
+        <br>
+        <h5 style="text-align: center; color: white">Admin Controls</h5>
+        <br>
+        <a href="@Url.Action("UserManagement", "AdminDashboard")" class="btn btn-glass ">Manage Users</a>
+        <a href="@Url.Action("AllTemplates", "AdminDashboard")" class="btn btn-glass">Manage All Templates</a>
+        <a href="@Url.Action("AllForms", "AdminDashboard")" class="btn btn-glass">Manage All Forms</a>
+        <button class="btn btn-glass">Manage Activity Logs</button>
+    </div>
+}

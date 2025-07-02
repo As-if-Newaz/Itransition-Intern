@@ -23,97 +23,41 @@ namespace Iforms.BLL.Services
 
         static Mapper GetMapper()
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Template, TemplateDTO>()
-                    .ForMember(dest => dest.TemplateTags, opt => opt.MapFrom(src => src.TemplateTags.Select(tt => tt.Tag)))
-                    .ForMember(dest => dest.TemplateAccesses, opt => opt.MapFrom(src => src.TemplateAccesses.Select(ta => ta.User)))
-                    .ForMember(dest => dest.Topic, opt => opt.MapFrom(src => src.Topic));
-                cfg.CreateMap<TemplateDTO, Template>()
-                    .ForMember(dest => dest.TopicId, opt => opt.MapFrom(src => src.Topic.Id))
-                    .ForMember(dest => dest.Topic, opt => opt.Ignore())
-                    .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
-                    .ForMember(dest => dest.Questions, opt => opt.Ignore())
-                    .ForMember(dest => dest.Forms, opt => opt.Ignore())
-                    .ForMember(dest => dest.Comments, opt => opt.Ignore())
-                    .ForMember(dest => dest.Likes, opt => opt.Ignore())
-                    .ForMember(dest => dest.TemplateTags, opt => opt.Ignore())
-                    .ForMember(dest => dest.TemplateAccesses, opt => opt.Ignore());
-                cfg.CreateMap<TagDTO, Tag>();
-                cfg.CreateMap<Tag, TagDTO>();
-                cfg.CreateMap<TemplateTagDTO, TemplateTag>();
-                cfg.CreateMap<TemplateAccessDTO, TemplateAccess>(); 
-                cfg.CreateMap<TopicDTO, Topic>();
-                cfg.CreateMap<Topic, TopicDTO>();
-                cfg.CreateMap<User, UserDTO>();
-                cfg.CreateMap<QuestionDTO, Question>()
-                    .ForMember(dest => dest.Template, opt => opt.Ignore())
-                    .ForMember(dest => dest.Answers, opt => opt.Ignore())
-                    .ForMember(dest => dest.Options, opt => opt.MapFrom(src => src.Options ?? new List<string>()));
-                cfg.CreateMap<Question, QuestionDTO>()
-                    .ForMember(dest => dest.Options, opt => opt.MapFrom(src => src.Options != null ? src.Options.ToList() : new List<string>()));
-                
-                // Add missing mappings for Form, Comment, and Like
-                cfg.CreateMap<Form, FormDTO>()
-                    .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => src.Answers));
-                cfg.CreateMap<FormDTO, Form>()
-                    .ForMember(dest => dest.Template, opt => opt.Ignore())
-                    .ForMember(dest => dest.FilledBy, opt => opt.Ignore())
-                    .ForMember(dest => dest.Answers, opt => opt.Ignore());
-                
-                cfg.CreateMap<Comment, CommentDTO>()
-                    .ForMember(dest => dest.CreatedByUserName, opt => opt.MapFrom(src => src.CreatedBy != null ? src.CreatedBy.UserName : null));
-                cfg.CreateMap<CommentDTO, Comment>()
-                    .ForMember(dest => dest.Template, opt => opt.Ignore())
-                    .ForMember(dest => dest.CreatedBy, opt => opt.Ignore());
-                
-                cfg.CreateMap<Like, LikeDTO>();
-                cfg.CreateMap<LikeDTO, Like>()
-                    .ForMember(dest => dest.Template, opt => opt.Ignore())
-                    .ForMember(dest => dest.User, opt => opt.Ignore());
-                
-                // Add Answer mappings
-                cfg.CreateMap<Answer, AnswerDTO>();
-                cfg.CreateMap<AnswerDTO, Answer>()
-                    .ForMember(dest => dest.Form, opt => opt.Ignore())
-                    .ForMember(dest => dest.Question, opt => opt.Ignore());
-            });
-            return new Mapper(config);
+            return new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<TemplateProfile>()));
         }
 
         public Template? Create(TemplateDTO createTemplateDto, int createdById)
         {
             var data = GetMapper().Map<Template>(createTemplateDto);
+            
             var result = DA.TemplateData().Create(data);
-            if (result != null)
+            
+            if (result == null) throw new InvalidOperationException("Failed to create template");
+            
+            if (createTemplateDto.TemplateTags?.Any() == true)
             {
                 AddTagsToTemplate(result.Id, createTemplateDto.TemplateTags);
-
-                if (!createTemplateDto.IsPublic && createTemplateDto.TemplateAccesses.Any())
-                {
-                    AddAccessibleUsers(result.Id, createTemplateDto.TemplateAccesses);
-                }
-
-                // Create questions for the template
-                if (createTemplateDto.Questions != null && createTemplateDto.Questions.Any())
-                {
-                    CreateQuestionsForTemplate(result.Id, createTemplateDto.Questions, createdById);
-                }
-
-                return result;
             }
-
-            throw new InvalidOperationException("Failed to create template");
+            
+            if (!createTemplateDto.IsPublic && createTemplateDto.TemplateAccesses?.Any() == true)
+            {
+                AddAccessibleUsers(result.Id, createTemplateDto.TemplateAccesses);
+            }
+            
+            if (createTemplateDto.Questions?.Any() == true)
+            {
+                CreateQuestionsForTemplate(result.Id, createTemplateDto.Questions, createdById);
+            }
+            
+            return result;
         }
 
         public TemplateDTO? GetTemplateById(int id, int? currentUserId = null)
         {
             var template = DA.TemplateData().Get(id);
             if (template == null) return null;
-
             var templateDto = GetMapper().Map<TemplateDTO>(template);
-            templateDto.IsLikedByCurrentUser = currentUserId.HasValue && 
-                template.Likes.Any(l => l.UserId == currentUserId.Value);
+            templateDto.IsLikedByCurrentUser = currentUserId.HasValue && template.Likes.Any(l => l.UserId == currentUserId.Value);
             return templateDto;
         }
 
@@ -122,127 +66,64 @@ namespace Iforms.BLL.Services
             var template = DA.TemplateData().GetTemplateWithDetails(id);
             if (template == null) return null;
             var templateDto = GetMapper().Map<TemplateDTO>(template);
-            templateDto.IsLikedByCurrentUser = currentUserId.HasValue &&
-                template.Likes.Any(l => l.UserId == currentUserId.Value);
-
-            // Map shared users (TemplateAccesses) to UserDTOs
-            if (template.TemplateAccesses != null && template.TemplateAccesses.Any())
-            {
-                templateDto.TemplateAccesses = template.TemplateAccesses
-                    .Where(ta => ta.User != null)
-                    .Select(ta => new UserDTO
-                    {
-                        Id = ta.User.Id,
-                        UserName = ta.User.UserName,
-                        UserEmail = ta.User.UserEmail,
-                        UserRole = (Iforms.DAL.Entity_Framework.Table_Models.Enums.UserRole)ta.User.UserRole,
-                        UserStatus = (Iforms.DAL.Entity_Framework.Table_Models.Enums.UserStatus)ta.User.UserStatus,
-                        CreatedAt = ta.User.CreatedAt
-                    })
-                    .ToList();
-            }
-            else
-            {
-                templateDto.TemplateAccesses = new List<UserDTO>();
-            }
-
+            templateDto.IsLikedByCurrentUser = currentUserId.HasValue && template.Likes.Any(l => l.UserId == currentUserId.Value);
+            templateDto.TemplateAccesses = template.TemplateAccesses?.Where(ta => ta.User != null)
+                .Select(ta => new UserDTO
+                {
+                    Id = ta.User.Id,
+                    UserName = ta.User.UserName,
+                    UserEmail = ta.User.UserEmail,
+                    UserRole = (Iforms.DAL.Entity_Framework.Table_Models.Enums.UserRole)ta.User.UserRole,
+                    UserStatus = (Iforms.DAL.Entity_Framework.Table_Models.Enums.UserStatus)ta.User.UserStatus,
+                    CreatedAt = ta.User.CreatedAt
+                }).ToList() ?? new List<UserDTO>();
             return templateDto;
         }
+
         public bool DeleteTemplates(int[] templateIds)
         {
-            foreach (var templateId in templateIds)
+            return templateIds.All(templateId =>
             {
                 var template = DA.TemplateData().Get(templateId);
-                if (template == null)
-                {
-                    return false;
-                }
-                if (!DA.TemplateData().Delete(template))
-                {
-                    return false;
-                }
-            }
-            return true;
+                return template != null && DA.TemplateData().Delete(template);
+            });
         }
 
         public bool Update(int id, TemplateDTO updateTemplateDto, int currentUserId)
         {
-            if (!DA.TemplateData().CanUserManageTemplate(id, currentUserId))
-                return false;
-
+            if (!DA.TemplateData().CanUserManageTemplate(id, currentUserId)) return false;
             var existingTemplate = DA.TemplateData().Get(id);
             if (existingTemplate == null) return false;
-
-            // Update the existing template with new values
             existingTemplate.Title = updateTemplateDto.Title;
             existingTemplate.Description = updateTemplateDto.Description;
             existingTemplate.ImageUrl = updateTemplateDto.ImageUrl;
             existingTemplate.IsPublic = updateTemplateDto.IsPublic;
             existingTemplate.TopicId = updateTemplateDto.Topic.Id;
-
-            if (DA.TemplateData().Update(existingTemplate))
-            {
-                UpdateTemplateTags(id, updateTemplateDto.TemplateTags);
-                UpdateAccessibleUsers(id, updateTemplateDto.TemplateAccesses, updateTemplateDto.IsPublic);
-                
-                // Update questions for the template
-                if (updateTemplateDto.Questions != null && updateTemplateDto.Questions.Any())
-                {
-                    UpdateQuestionsForTemplate(id, updateTemplateDto.Questions, currentUserId);
-                }
-
-                return true;
-            }
-
-            return false;
+            if (!DA.TemplateData().Update(existingTemplate)) return false;
+            UpdateTemplateTags(id, updateTemplateDto.TemplateTags);
+            UpdateAccessibleUsers(id, updateTemplateDto.TemplateAccesses, updateTemplateDto.IsPublic);
+            if (updateTemplateDto.Questions?.Any() == true)
+                UpdateQuestionsForTemplate(id, updateTemplateDto.Questions, currentUserId);
+            return true;
         }
 
-        public bool CanUserAccessTemplate(int templateId, int? userId)
-        {
-            return DA.TemplateData().CanUserAccessTemplate(templateId, userId);
-        }
+        public bool CanUserAccessTemplate(int templateId, int? userId) => DA.TemplateData().CanUserAccessTemplate(templateId, userId);
+        public bool CanUserManageTemplate(int templateId, int userId) => DA.TemplateData().CanUserManageTemplate(templateId, userId);
 
-        public bool CanUserManageTemplate(int templateId, int userId)
-        {
-            return DA.TemplateData().CanUserManageTemplate(templateId, userId);
-        }
+        public IEnumerable<TemplateDTO> GetUserTemplates(int userId, int? currentUserId = null) =>
+            MapTemplatesWithLikes(DA.TemplateData().GetUserTemplates(userId), currentUserId);
+        public IEnumerable<TemplateDTO> GetLatestTemplates(int count = 10, int? currentUserId = null) =>
+            MapTemplatesWithLikes(DA.TemplateData().GetLatestTemplates(count), currentUserId);
+        public IEnumerable<TemplateDTO> GetMostPopularTemplates(int count = 5, int? currentUserId = null) =>
+            MapTemplatesWithLikes(DA.TemplateData().GetMostPopularTemplates(count), currentUserId);
 
-        public IEnumerable<TemplateDTO> GetUserTemplates(int userId, int? currentUserId = null)
-        {
-            var templates = DA.TemplateData().GetUserTemplates(userId);
-            return MapTemplatesWithLikes(templates, currentUserId);
-        }
-        //public IEnumerable<TemplateExtendedDTO> GetUserExtendedTemplates(int userId, int? currentUserId = null)
-        //{
-        //    var templates = DA.TemplateData().GetUserTemplates(userId);
-        //    return templates.Select(t =>
-        //    {
-        //        var dto = GetMapper().Map<TemplateExtendedDTO>(t);
-        //        dto.IsLikedByCurrentUser = currentUserId.HasValue && t.Likes.Any(l => l.UserId == currentUserId.Value);
-        //        return dto;
-        //    });
-        //}
-
-        public IEnumerable<TemplateDTO> GetLatestTemplates(int count = 10, int? currentUserId = null)
-        {
-            var templates = DA.TemplateData().GetLatestTemplates(count);
-            return MapTemplatesWithLikes(templates, currentUserId);
-        }
-
-        public IEnumerable<TemplateDTO> GetMostPopularTemplates(int count = 5, int? currentUserId = null)
-        {
-            var templates = DA.TemplateData().GetMostPopularTemplates(count);
-            return MapTemplatesWithLikes(templates, currentUserId);
-        }
-        private IEnumerable<TemplateDTO> MapTemplatesWithLikes(IEnumerable<Template> templates, int? currentUserId)
-        {
-            return templates.Select(t =>
+        private IEnumerable<TemplateDTO> MapTemplatesWithLikes(IEnumerable<Template> templates, int? currentUserId) =>
+            templates.Select(t =>
             {
                 var dto = GetMapper().Map<TemplateDTO>(t);
                 dto.IsLikedByCurrentUser = currentUserId.HasValue && t.Likes.Any(l => l.UserId == currentUserId.Value);
                 return dto;
             });
-        }
 
         private void AddTagsToTemplate(int templateId, List<TagDTO> tags)
         {
@@ -251,11 +132,7 @@ namespace Iforms.BLL.Services
                 var tag = DA.TagData().GetOrCreateTag(tago.Name);
                 if (tag != null)
                 {
-                    var templateTag = new TemplateTagDTO
-                    {
-                        TemplateId = templateId,
-                        TagId = tag.Id
-                    };
+                    var templateTag = new TemplateTagDTO { TemplateId = templateId, TagId = tag.Id };
                     var data = GetMapper().Map<TemplateTag>(templateTag);
                     DA.TemplateTagData().Create(data);
                 }
@@ -264,13 +141,8 @@ namespace Iforms.BLL.Services
 
         private void UpdateTemplateTags(int templateId, List<TagDTO> tags)
         {
-            // Remove existing tags
-            var existingTemplateTags = DA.TemplateTagData().Find(tt => tt.TemplateId == templateId);
-            foreach (var templateTag in existingTemplateTags)
-            {
+            foreach (var templateTag in DA.TemplateTagData().Find(tt => tt.TemplateId == templateId))
                 DA.TemplateTagData().Delete(templateTag);
-            }
-            // Add new tags
             AddTagsToTemplate(templateId, tags);
         }
 
@@ -278,30 +150,17 @@ namespace Iforms.BLL.Services
         {
             foreach (var user in users)
             {
-                var templateAccess = new TemplateAccessDTO
-                {
-                    TemplateId = templateId,
-                    UserId = user.Id,
-                };
+                var templateAccess = new TemplateAccessDTO { TemplateId = templateId, UserId = user.Id };
                 var data = GetMapper().Map<TemplateAccess>(templateAccess);
                 DA.TemplateAccessData().Create(data);
             }
         }
 
-
         private void UpdateAccessibleUsers(int templateId, List<UserDTO> users, bool isPublic)
         {
-            // Remove existing access
-            var existingAccess = DA.TemplateAccessData().Find(ta => ta.TemplateId == templateId);
-            foreach (var access in existingAccess)
-            {
+            foreach (var access in DA.TemplateAccessData().Find(ta => ta.TemplateId == templateId))
                 DA.TemplateAccessData().Delete(access);
-            }
-            // Add new access if not public
-            if (!isPublic && users.Any())
-            {
-                AddAccessibleUsers(templateId, users);
-            }
+            if (!isPublic && users.Any()) AddAccessibleUsers(templateId, users);
         }
 
         private void CreateQuestionsForTemplate(int templateId, List<QuestionDTO> questions, int createdById)
@@ -309,40 +168,26 @@ namespace Iforms.BLL.Services
             foreach (var questionDto in questions)
             {
                 questionDto.TemplateId = templateId;
-                Console.WriteLine($"Creating question: {questionDto.QuestionTitle}, Options: {string.Join(", ", questionDto.Options)}");
                 var question = GetMapper().Map<Question>(questionDto);
-                var result = DA.QuestionData().Create(question);
-                if (!result)
-                {
-                    Console.WriteLine($"Failed to create question: {questionDto.QuestionTitle}");
-                }
+                DA.QuestionData().Create(question);
             }
         }
 
         public List<TemplateDTO> Search(TemplateSearchDTO searchDto, int? currentUserId = null)
         {
             var templates = DA.TemplateData().SearchTemplates(searchDto.SearchTerm ?? "", GetMapper().Map<Topic>(searchDto.Topic), searchDto.Tags);
-
-            // Apply access control
             if (currentUserId.HasValue)
             {
                 var user = DA.UserData().Get(currentUserId.Value);
                 if (user?.UserRole != UserRole.Admin)
                 {
-                    templates = templates.Where(t =>
-                        t.IsPublic ||
-                        t.CreatedById == currentUserId.Value ||
-                        t.TemplateAccesses.Any(ta => ta.UserId == currentUserId.Value));
+                    templates = templates.Where(t => t.IsPublic || t.CreatedById == currentUserId.Value || t.TemplateAccesses.Any(ta => ta.UserId == currentUserId.Value));
                 }
             }
             else
             {
                 templates = templates.Where(t => t.IsPublic);
             }
-
-            var totalCount = templates.Count();
-
-            // sorted
             templates = searchDto.SortBy.ToLower() switch
             {
                 "title" => searchDto.SortDescending ? templates.OrderByDescending(t => t.Title) : templates.OrderBy(t => t.Title),
@@ -350,90 +195,41 @@ namespace Iforms.BLL.Services
                 "popularity" => searchDto.SortDescending ? templates.OrderByDescending(t => t.Forms.Count) : templates.OrderBy(t => t.Forms.Count),
                 _ => templates.OrderByDescending(t => t.CreatedAt)
             };
-
-            var pagedTemplates = templates
-                .Skip((searchDto.Page - 1) * searchDto.PageSize)
-                .Take(searchDto.PageSize)
-                .ToList();
-
-            var templateDtos = MapTemplatesWithLikes(pagedTemplates, currentUserId);
-
-            return templateDtos.ToList();
+            return MapTemplatesWithLikes(templates.Skip((searchDto.Page - 1) * searchDto.PageSize).Take(searchDto.PageSize), currentUserId).ToList();
         }
 
         public bool ToggleLike(int templateId, int userId)
         {
-            var existingLike = DA.LikeData().GetAll().FirstOrDefault(l =>
-                l.TemplateId == templateId && l.UserId == userId);
-
-            if (existingLike != null)
-            {
-                return DA.LikeData().Delete(existingLike);
-            }
-            else
-            {
-                var like = new Like
-                {
-                    TemplateId = templateId,
-                    UserId = userId,
-                    CreatedAt = DateTime.UtcNow
-                };
-                return DA.LikeData().Create(like);
-            }
+            var existingLike = DA.LikeData().GetAll().FirstOrDefault(l => l.TemplateId == templateId && l.UserId == userId);
+            if (existingLike != null) return DA.LikeData().Delete(existingLike);
+            return DA.LikeData().Create(new Like { TemplateId = templateId, UserId = userId, CreatedAt = DateTime.UtcNow });
         }
 
         public List<TopicDTO> GetAllTopics()
         {
             var topics = DA.TopicData().GetAll();
-            if (topics == null || !topics.Any())
-            {
-                return new List<TopicDTO>();
-            }
-            return GetMapper().Map<List<TopicDTO>>(topics);
+            return (topics == null || !topics.Any()) ? new List<TopicDTO>() : GetMapper().Map<List<TopicDTO>>(topics);
         }
 
         public List<TopicDTO> SearchTopics(string searchTerm)
         {
             var topics = DA.TopicData().GetAll();
-            if (topics == null || !topics.Any())
-            {
-                return new List<TopicDTO>();
-            }
-
-            var filteredTopics = topics.Where(t => 
-                t.TopicType.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
-            
-            return GetMapper().Map<List<TopicDTO>>(filteredTopics);
+            if (topics == null || !topics.Any()) return new List<TopicDTO>();
+            return GetMapper().Map<List<TopicDTO>>(topics.Where(t => t.TopicType.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList());
         }
 
-        public bool AddNewTopic(TopicDTO topicDto)
-        {
-            var topic = GetMapper().Map<Topic>(topicDto);
-            return DA.TopicData().Create(topic);
-        }
+        public bool AddNewTopic(TopicDTO topicDto) => DA.TopicData().Create(GetMapper().Map<Topic>(topicDto));
 
         private void UpdateQuestionsForTemplate(int templateId, List<QuestionDTO> questions, int currentUserId)
         {
-            // Get existing questions for this template
             var existingQuestions = DA.QuestionData().GetByTemplateId(templateId).ToList();
-            
-            // Remove questions that are no longer in the updated list
-            foreach (var existingQuestion in existingQuestions)
-            {
-                if (!questions.Any(q => q.Id == existingQuestion.Id))
-                {
-                    DA.QuestionData().Delete(existingQuestion);
-                }
-            }
-            
-            // Update or create questions
+            foreach (var existingQuestion in existingQuestions.Where(eq => !questions.Any(q => q.Id == eq.Id)))
+                DA.QuestionData().Delete(existingQuestion);
             foreach (var questionDto in questions)
             {
                 questionDto.TemplateId = templateId;
-                
                 if (questionDto.Id > 0)
                 {
-                    // Update existing question
                     var existingQuestion = existingQuestions.FirstOrDefault(q => q.Id == questionDto.Id);
                     if (existingQuestion != null)
                     {
@@ -447,14 +243,8 @@ namespace Iforms.BLL.Services
                 }
                 else
                 {
-                    // Create new question
-                    Console.WriteLine($"Creating question: {questionDto.QuestionTitle}, Options: {string.Join(", ", questionDto.Options)}");
                     var question = GetMapper().Map<Question>(questionDto);
-                    var result = DA.QuestionData().Create(question);
-                    if (!result)
-                    {
-                        Console.WriteLine($"Failed to create question: {questionDto.QuestionTitle}");
-                    }
+                    DA.QuestionData().Create(question);
                 }
             }
         }
@@ -462,17 +252,41 @@ namespace Iforms.BLL.Services
         public bool UpdateImageUrl(int templateId, string? imageUrl, int currentUserId)
         {
             var template = DA.TemplateData().Get(templateId);
-            if (template == null) return false;
-            if (!DA.TemplateData().CanUserManageTemplate(templateId, currentUserId)) return false;
+            if (template == null || !DA.TemplateData().CanUserManageTemplate(templateId, currentUserId)) return false;
             template.ImageUrl = imageUrl;
             return DA.TemplateData().Update(template);
         }
 
-        public IEnumerable<TemplateDTO> GetAllTemplates()
+        public IEnumerable<TemplateDTO> GetAllTemplates( int? currentUserId = null)
         {
-            var templates = DA.TemplateData().GetAll();
+            var templates = DA.TemplateData().GetAllTemplates();
+            return GetMapper().Map<List<TemplateDTO>>(templates)
+                .Select(t =>
+                {
+                    t.IsLikedByCurrentUser = currentUserId.HasValue && t.Likes.Any(l => l.UserId == currentUserId.Value);
+                    return t;
+                });
+        }
 
-            return GetMapper().Map<List<TemplateDTO>>(templates);
+        public IEnumerable<TemplateDTO> GetAccessibleTemplates(int userId, int? currentUserId = null)
+        {
+            var templates = DA.TemplateData().GetAccessibleTemplates(userId);
+            return GetMapper().Map<List<TemplateDTO>>(templates)
+                .Select(t =>
+                {
+                    t.IsLikedByCurrentUser = currentUserId.HasValue && t.Likes.Any(l => l.UserId == currentUserId.Value);
+                    return t;
+                });
+        }
+        public IEnumerable<TemplateDTO> GetPublicTemplates()
+        {   
+            var templates = DA.TemplateData().GetPublicTemplates();
+            return GetMapper().Map<List<TemplateDTO>>(templates)
+                .Select(t =>
+                {
+                    t.IsLikedByCurrentUser = false; // Public templates don't have likes by default
+                    return t;
+                });
         }
     }
 }

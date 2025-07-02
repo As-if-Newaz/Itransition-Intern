@@ -1,6 +1,9 @@
-﻿using Iforms.BLL.DTOs;
+﻿using Azure;
+using Iforms.BLL.DTOs;
 using Iforms.BLL.Services;
+using Iforms.DAL.Entity_Framework.Table_Models;
 using Iforms.MVC.Authentication;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using static Iforms.DAL.Entity_Framework.Table_Models.Enums;
@@ -14,13 +17,15 @@ namespace Iforms.MVC.Controllers
         private UserService userServices;
         private AuditLogService auditLogService;
         private TemplateService templateService;
+        private FormService formService;    
 
 
-        public AdminDashboardController(UserService userServices, AuditLogService auditLogService, TemplateService templateService)
+        public AdminDashboardController(UserService userServices, AuditLogService auditLogService, TemplateService templateService, FormService formService)
         {
             this.userServices = userServices;
             this.auditLogService = auditLogService;
             this.templateService = templateService;
+            this.formService = formService;
         }
         private int? GetCurrentUserId()
         {
@@ -111,9 +116,44 @@ namespace Iforms.MVC.Controllers
                 return Json(new { success = false, message = "Failed to Inactivate users." });
             }
         }
+            [HttpPost("UserManagement/AddAdminAccess")]
+            public JsonResult GiveAdminAccess([FromBody] int[] userIds)
+            {
+                if (userIds == null || userIds.Length == 0)
+                    return Json(new { success = false, message = "No users selected." });
+                var result = userServices.UpdateUserRole(userIds, UserRole.Admin);
+                if (result)
+                {
+                    auditLogService.RecordLog(int.Parse(HttpContext.Request.Cookies["LoggedId"]), "Added Admin Access", string.Join(", ", userIds));
+                    return Json(new { success = true, message = "Admin access granted successfully." });
+                }
+                else
+                {
+                    return Json(new { success = false, message = "Failed to grant admin access." });
+                }
+            }
+
+        [HttpPost("UserManagement/RemoveAdminAccess")]
+        public JsonResult RemoveAdminAccess([FromBody] int[] userIds)
+        {
+            if (userIds == null || userIds.Length == 0)
+                return Json(new { success = false, message = "No users selected." });
+            var result = userServices.UpdateUserRole(userIds, UserRole.User);
+            if (result)
+            {
+                auditLogService.RecordLog(int.Parse(HttpContext.Request.Cookies["LoggedId"]), "Removed Admin Access", string.Join(", ", userIds));
+                return Json(new { success = true, message = "Admin access removed successfully." });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to remove admin access." });
+            }
+        }
 
 
-        [HttpPost("UserManagement/Delete")]
+
+
+            [HttpPost("UserManagement/Delete")]
         public JsonResult Delete([FromBody] int[] userIds)
         {
             if (userIds == null || userIds.Length == 0)
@@ -158,98 +198,68 @@ namespace Iforms.MVC.Controllers
                 return Json(new { success = false, message = "Failed to update user" });
             }
         }
-
-        [HttpPost("UserManagement/UpdateRole")]
-        public JsonResult UpdateRole(int userId, UserRole role)
+        [AuthenticatedAdmin]
+        [HttpGet("AdminDashboard/AllTemplates")]
+        public IActionResult AllTemplates()
         {
-            var result = userServices.UpdateUserRole(userId, role);
-            if (result)
+            var currentUserId = GetCurrentUserId();
+            var templates = templateService.GetAllTemplates(currentUserId.Value);
+            var templateDTOs = templates.GroupBy(t => t.Id).Select(g => g.First()).ToList();
+            var createdByNames = templateDTOs.ToDictionary(t => t.Id, t => t.CreatedBy?.UserName ?? "Unknown");
+            // Get comments and likes count
+            var commentsDict = templateDTOs.ToDictionary(
+                t => t.Id,
+                t => t.Comments != null
+                    ? t.Comments.Select(c => new Iforms.BLL.DTOs.CommentDTO
+                    {
+                        Id = c.Id,
+                        Content = c.Content,
+                        CreatedAt = c.CreatedAt,
+                        TemplateId = c.TemplateId,
+                        CreatedById = c.CreatedById,
+                        CreatedByUserName = c.CreatedBy != null ? c.CreatedBy.UserName : null
+                    }).ToList()
+                    : new List<Iforms.BLL.DTOs.CommentDTO>()
+            );
+            var likesDict = templateDTOs.ToDictionary(t => t.Id, t => t.Likes?.Count ?? 0);
+            var viewModel = new Iforms.MVC.Models.BrowseTemplatesViewModel
             {
-                return Json(new { success = true, message = "User role updated successfully." });
-            }
-            else
-            {
-                return Json(new { success = false, message = "Failed to update user role." });
-            }
+                Templates = templateDTOs,
+                CreatedByNames = createdByNames,
+                Comments = commentsDict,
+                LikesCount = likesDict
+            };
+            ViewBag.CurrentUserId = currentUserId;
+            return View(viewModel);
         }
-        //[AuthenticatedAdmin]
-        //[HttpGet("AdminDashboard/AllTemplates")]
-        //public IActionResult AllTemplates()
-        //{
-        //    var currentUserId = GetCurrentUserId();
-        //    var templates = templateService.GetAllTemplates();
-
-        //    // Debug output
-        //    Console.WriteLine($"[BrowseTemplates] CurrentUserId: {currentUserId}");
-        //    foreach (var t in allTemplates)
-        //    {
-        //        Console.WriteLine($"[BrowseTemplates] TemplateId: {t.Id}, Title: {t.Title}, IsPublic: {t.IsPublic}, CreatedById: {t.CreatedById}");
-        //    }
-
-        //    var templateDTOs = allTemplates.Select(t => new Iforms.BLL.DTOs.TemplateDTO
-        //    {
-        //        Id = t.Id,
-        //        Title = t.Title,
-        //        Description = t.Description,
-        //        IsPublic = t.IsPublic,
-        //        CreatedAt = t.CreatedAt,
-        //        CreatedById = t.CreatedById,
-        //        IsLikedByCurrentUser = t.Likes != null && currentUserId.HasValue && t.Likes.Any(l => l.UserId == currentUserId.Value)
-        //    }).ToList();
-        //    // Get CreatedBy names
-        //    var createdByNames = allTemplates.ToDictionary(t => t.Id, t => t.CreatedBy?.UserName ?? "Unknown");
-        //    // Get comments and likes count
-        //    var commentsDict = allTemplates.ToDictionary(
-        //        t => t.Id,
-        //        t => t.Comments != null
-        //            ? t.Comments.Select(c => new Iforms.BLL.DTOs.CommentDTO
-        //            {
-        //                Id = c.Id,
-        //                Content = c.Content,
-        //                CreatedAt = c.CreatedAt,
-        //                TemplateId = c.TemplateId,
-        //                CreatedById = c.CreatedById,
-        //                CreatedByUserName = c.CreatedBy != null ? c.CreatedBy.UserName : null
-        //            }).ToList()
-        //            : new List<Iforms.BLL.DTOs.CommentDTO>()
-        //    );
-        //    var likesDict = allTemplates.ToDictionary(t => t.Id, t => t.Likes?.Count ?? 0);
-        //    var viewModel = new Iforms.MVC.Models.BrowseTemplatesViewModel
-        //    {
-        //        Templates = templateDTOs,
-        //        CreatedByNames = createdByNames,
-        //        Comments = commentsDict,
-        //        LikesCount = likesDict
-        //    };
-        //    ViewBag.CurrentUserId = currentUserId;
-        //    return View(viewModel);
-        //}
 
         [AuthenticatedAdmin]
-        [HttpPost("AdminDashboard/DeletefromAllTemplates")]
-        public JsonResult DeletefromAllTemplates([FromBody] int[] templateIds)
+        [HttpGet("AdminDashboard/AllForms")]
+        public IActionResult AllForms(int page = 1)
         {
-            if (templateIds == null || templateIds.Length == 0)
-                return Json(new { success = false, message = "No Templates selected." });
-            var result = templateService.DeleteTemplates(templateIds);
-            if (result)
-            {
-                auditLogService.RecordLog(int.Parse(HttpContext.Request.Cookies["LoggedId"]), "Deleted Templates", string.Join(", ", templateIds));
-                return Json(new { success = true, message = "Templates successfully." });
-            }
-            else
-            {
-                return Json(new { success = false, message = "Failed to delete Templates" });
-            }
-        }
+            var pageSize = 10;
+            var allForms = formService.GetAllForms()?.ToList() ?? new List<FormDTO>();
+            var totalCount = allForms.Count;
+            var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 
-        //[AuthenticatedAdmin]
-        //[HttpGet("AdminDashboard/AllForms")]
-        //public IActionResult AllForms()
-        //{
-        //    var forms = formService.GetAllForms();
-        //    return View(forms);
-        //}
+            // Ensure page is within valid range
+            page = Math.Max(1, Math.Min(page, totalPages > 0 ? totalPages : 1));
+
+            var forms = allForms
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            ViewBag.Forms = forms;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.TotalCount = totalCount;
+            ViewBag.PageSize = pageSize;
+            ViewBag.HasPreviousPage = page > 1;
+            ViewBag.HasNextPage = page < totalPages;
+
+            return View();
+        }
 
 
     }

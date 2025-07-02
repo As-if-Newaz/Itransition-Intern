@@ -24,40 +24,11 @@ namespace Iforms.BLL.Services
 
         static Mapper GetMapper()
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Form, FormDTO>()
-                    .ForMember(dest => dest.Template, opt => opt.MapFrom(src => src.Template))
-                    .ForMember(dest => dest.FilledBy, opt => opt.MapFrom(src => src.FilledBy))
-                    .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => src.Answers));
-                cfg.CreateMap<FormDTO, Form>();
-                cfg.CreateMap<Answer, AnswerDTO>()
-                    .ForMember(dest => dest.Question, opt => opt.MapFrom(src => src.Question));
-                cfg.CreateMap<AnswerDTO, Answer>();
-                cfg.CreateMap<User, UserDTO>();
-                cfg.CreateMap<UserDTO, User>();
-                cfg.CreateMap<Template, TemplateDTO>();
-                cfg.CreateMap<TemplateDTO, Template>();
-                cfg.CreateMap<Question, QuestionDTO>()
-                    .ForMember(dest => dest.Options, opt => opt.MapFrom(src => src.Options != null ? src.Options.ToList() : new List<string>()));
-                cfg.CreateMap<QuestionDTO, Question>()
-                    .ForMember(dest => dest.Options, opt => opt.MapFrom(src => src.Options ?? new List<string>()));
-                cfg.CreateMap<Comment, CommentDTO>();
-                cfg.CreateMap<CommentDTO, Comment>();
-                cfg.CreateMap<Like, LikeDTO>();
-                cfg.CreateMap<LikeDTO, Like>();
-                cfg.CreateMap<Tag, TagDTO>();
-                cfg.CreateMap<TagDTO, Tag>();
-                cfg.CreateMap<Topic, TopicDTO>();
-                cfg.CreateMap<TopicDTO, Topic>();
-            });
-            return new Mapper(config);
+            return new Mapper(new MapperConfiguration(cfg => cfg.AddProfile<TemplateProfile>()));
         }
 
         public FormDTO Create(FormDTO createFormDto, int filledById)
         {
-            Console.WriteLine($"[FormService.Create] Starting form creation for template {createFormDto.TemplateId} by user {filledById}");
-            
             if (!TemplateService.CanUserAccessTemplate(createFormDto.TemplateId, filledById))
                 throw new UnauthorizedAccessException("User cannot access this template");
 
@@ -69,18 +40,12 @@ namespace Iforms.BLL.Services
                 FilledAt = DateTime.UtcNow
             };
 
-            Console.WriteLine($"[FormService.Create] Creating form with TemplateId: {form.TemplateId}, FilledById: {form.FilledById}");
-
             var result = DA.FormData().Create(form);
             if (result != null)
             {
-                Console.WriteLine($"[FormService.Create] Form created successfully with ID: {result.Id}");
-                
                 // Create answers for the form
                 if (createFormDto.Answers != null)
                 {
-                    Console.WriteLine($"[FormService.Create] Creating {createFormDto.Answers.Count} answers");
-                    
                     foreach (var answerDto in createFormDto.Answers)
                     {
                         var answer = new Answer
@@ -93,26 +58,18 @@ namespace Iforms.BLL.Services
                             FileUrl = answerDto.FileUrl,
                             Date = answerDto.Date
                         };
-                        
-                        Console.WriteLine($"[FormService.Create] Creating answer for question {answerDto.QuestionId}, Text: {answerDto.Text}, Number: {answerDto.Number}, SingleChoice: {answerDto.SignleChoice}");
-                        
+
                         var answerResult = DA.AnswerData().Create(answer);
                         if (!answerResult)
                         {
-                            Console.WriteLine($"[FormService.Create] Failed to create answer for question {answerDto.QuestionId}");
                         }
                     }
-                }
-                else
-                {
-                    Console.WriteLine($"[FormService.Create] No answers to create");
                 }
 
                 // Return the created form as DTO
                 return GetMapper().Map<FormDTO>(result);
             }
 
-            Console.WriteLine($"[FormService.Create] Failed to create form");
             throw new InvalidOperationException("Failed to create form");
         }
 
@@ -231,6 +188,12 @@ namespace Iforms.BLL.Services
         public bool UpdateAnswer(Answer answer)
         {
             return DA.AnswerData().Update(answer);
+        }
+
+        public IEnumerable<FormDTO> GetAllForms()
+        {
+            var forms = DA.FormData().GetAll();
+            return GetMapper().Map<IEnumerable<FormDTO>>(forms);
         }
     }
 }

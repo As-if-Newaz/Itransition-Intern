@@ -5,8 +5,12 @@
 <h2>Manage Users</h2>
 <div class="navbar navbar-expand-lg navbar-light bg-secondary-subtle">
     <button data-action="Block" class="btn btn-outline-primary me-2"><i class="bi bi-lock-fill"></i> Block</button>
-    <button data-action="Unblock" class="btn btn-outline-primary me-2"><i class="bi bi-unlock-fill"></i></button>
-    <button data-action="Delete" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i></button>
+    <button data-action="Unblock" class="btn btn-outline-primary me-2"><i class="bi bi-unlock-fill"></i> Unblock</button>
+    <button data-action="Activate" class="btn btn-outline-success me-2"><i class="bi bi-person-check-fill"></i> Activate</button>
+    <button data-action="Inactivate" class="btn btn-outline-warning me-2"><i class="bi bi-person-x-fill"></i> Inactivate</button>
+    <button data-action="AddAdminAccess" class="btn btn-outline-info me-2"><i class="bi bi-person-badge-fill"></i> Give Admin Access</button>
+    <button data-action="RemoveAdminAccess" class="btn btn-outline-secondary me-2"><i class="bi bi-person-dash-fill"></i> Remove Admin Access</button>
+    <button data-action="Delete" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i> Delete</button>
 </div>
 
 <table class="table table-bordered">  
@@ -63,8 +67,12 @@
                        return;  
                    }  
 
+                   let endpointAction = action;
+                   if (action === 'AddAdminAccess') endpointAction = 'AddAdminAccess';
+                   if (action === 'RemoveAdminAccess') endpointAction = 'RemoveAdminAccess';
+
                    try {  
-                       const response = await fetch(`/AdminDashboard/UserManagement/${action}`, {  
+                       const response = await fetch(`/AdminDashboard/UserManagement/${endpointAction}`, {  
                            method: 'POST',  
                            headers: { 'Content-Type': 'application/json' },  
                            body: JSON.stringify(userIds)  

@@ -73,12 +73,10 @@ namespace Iforms.BLL.Services
                 };
 
                 var deleteResult = cloudinary.Destroy(deleteParams);
-                Console.WriteLine(deleteResult.Result);
                 return deleteResult.Result == "ok";
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error deleting image: {ex.Message}");
                 return false;
             }
         }

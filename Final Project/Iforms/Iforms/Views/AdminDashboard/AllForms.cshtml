@@ -43,7 +43,7 @@
                     <tr class="clickable-row" data-href="@Url.Action("Edit", "Form", new { id = form.Id })">
                         <td><input type="checkbox" class="select-form" value="@form.Id" onclick="event.stopPropagation();"></td>
                         <td class="form-id">@form.Id</td>
-                        <td>@form.Template?.Title</td>
+                        <td>@(form.Template != null ? form.Template.Title ?? "(No Title)" : "(No Template)")</td>
                         <td>@form.FilledAt.ToLocalTime().ToString("g")</td>
                     </tr>
                 }

@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -17,6 +17,7 @@
     @await Html.PartialAsync("NavBar")
     <div class = "content-area glass-effect">
         <div class = "container">
+            @await Html.PartialAsync("AdminSideBar")
             @RenderBody()
 
         </div>

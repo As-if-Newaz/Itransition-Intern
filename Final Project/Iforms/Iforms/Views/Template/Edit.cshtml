@@ -301,7 +301,6 @@
                 order = q.QuestionOrder
             })));
             questionId = questions.length > 0 ? Math.max(...questions.map(q => q.id)) : 0;
-            console.log('Questions loaded from model:', questions);
             // Ensure options are arrays, not JSON strings or arrays with a single JSON string
             questions.forEach(q => {
                 if (typeof q.options === 'string') {
@@ -335,7 +334,6 @@
         // SignalR setup
         const connection = new signalR.HubConnectionBuilder().withUrl("/questionHub").build();
         connection.start().catch(err => {
-            console.error('SignalR connection failed:', err);
         });
         connection.on("QuestionAdded", q => addQuestionUI(q, false));
         connection.on("QuestionOrderUpdated", qs => renderQuestions(qs, false));
@@ -369,7 +367,6 @@
                 topicSelect.appendChild(addNewOption);
                 
             } catch (error) {
-                console.error('Error loading topics:', error);
             }
         }
         
@@ -380,7 +377,6 @@
                 const selectedTopicType = document.getElementById('selectedTopicType');
                 const topicSelect = document.getElementById('topicSelect');
                 const currentTopicId = selectedTopicId.value;
-                console.log('currentTopicId:', currentTopicId, 'options:', Array.from(topicSelect.options).map(o => o.value));
                 if (currentTopicId) {
                     // Ensure both are strings for comparison
                     topicSelect.value = String(currentTopicId);
@@ -425,12 +421,8 @@
                             if (imageUrlInput) {
                                 imageUrlInput.value = '';
                             }
-                            alert('Image deleted successfully.');
-                        } else {
-                            alert(result.message || 'Failed to delete image.');
                         }
                     } catch (error) {
-                        console.error('Error deleting image:', error);
                         alert('An error occurred while deleting the image.');
                     }
                 });
@@ -447,10 +439,7 @@
                 })));
                 </text>
             }
-            console.log('Selected users on load:', selectedUsers);
             updateSelectedUsersDisplay();
-
-            // ... rest of your DOMContentLoaded code ...
         });
         
         function showTopicModal() {
@@ -547,7 +536,6 @@
                     alert(result.message || 'Failed to create topic');
                 }
             } catch (error) {
-                console.error('Error creating topic:', error);
                 alert('Error creating topic');
             }
         });
@@ -669,8 +657,6 @@
         templateForm.onsubmit = function(e) {
             e.preventDefault();
             
-            console.log('Form submission started');
-            
             // Validate topic selection
             if (!selectedTopicId.value || !selectedTopicType.value) {
                 const topicValidationMessage = document.getElementById('topicValidationMessage');
@@ -697,8 +683,6 @@
                     });
                 }
             });
-
-            console.log('Questions updated:', questions);
 
             // Create hidden inputs for questions
             questions.forEach((question, index) => {
@@ -751,14 +735,11 @@
                 templateForm.appendChild(showInResultsInput);
                 templateForm.appendChild(optionsInput);
             });
-
-            console.log('Form prepared for submission');
             
             try {
                 // Submit the form
                 templateForm.submit();
             } catch (error) {
-                console.error('Error submitting form:', error);
                 alert('Error submitting form. Please try again.');
             }
         };
@@ -831,7 +812,6 @@
                 const users = await response.json();
                 displaySuggestions(users);
             } catch (error) {
-                console.error('Error searching users:', error);
                 hideSuggestions();
             }
         }
@@ -926,16 +906,12 @@
         function removeUser(userId) {
             // Convert userId to number for proper comparison
             const userIdNum = parseInt(userId);
-            console.log('Removing user with ID:', userId, 'converted to:', userIdNum);
-            console.log('Selected users before removal:', selectedUsers);
             selectedUsers = selectedUsers.filter(user => user.id !== userIdNum);
-            console.log('Selected users after removal:', selectedUsers);
             updateSelectedUsersDisplay();
             updateSelectedUserIdsInput();
         }
         
         function updateSelectedUsersDisplay() {
-            console.log('Updating selected users display. Count:', selectedUsers.length);
             if (selectedUsers.length === 0) {
                 selectedUsersContainer.innerHTML = '<div class="no-users-message">No users selected for sharing</div>';
             } else {
@@ -946,7 +922,6 @@
                     </div>
                 `).join('');
             }
-            console.log('Display updated. HTML:', selectedUsersContainer.innerHTML);
         }
         
         function updateSelectedUserIdsInput() {

@@ -19,5 +19,6 @@ namespace Iforms.DAL.Interfaces
         IEnumerable<Template> SearchTemplates(string searchTerm, Topic topic, List<string> tags);
         bool CanUserAccessTemplate(int templateId, int? userId);
         bool CanUserManageTemplate(int templateId, int userId);
+        IEnumerable<Template> GetAllTemplates();
     }
 }

@@ -215,7 +215,7 @@
                                                     <em>— @(comment.CreatedByUserName ?? "User")</em>
                                                 </div>
                                             </div>
-                                            @if (comment.CreatedById == currentUserId && HttpContextAccessor.HttpContext.Request.Cookies["Role"] != null)
+                                            @if (comment.CreatedById == currentUserId || HttpContextAccessor.HttpContext.Request.Cookies["Role"] == "Admin")
                                             {
                                                 <button class="btn btn-sm btn-danger delete-comment-btn" data-comment-id="@comment.Id" data-template-id="@template.Id">
                                                     <i class="fas fa-trash"></i>
@@ -395,7 +395,6 @@
 
                 if (!templateIds.length) {
                     if (window.toastr) toastr.error('Please select at least one template.');
-                    else alert('Please select at least one template.');
                     return;
                 }
 
@@ -415,11 +414,9 @@
                         setTimeout(() => location.reload(), 1000);
                     } else {
                         if (window.toastr) toastr.error(result.message);
-                        else alert(result.message);
                     }
                 } catch {
                     if (window.toastr) toastr.error('Action failed. Please try again.');
-                    else alert('Action failed. Please try again.');
                 }
             });
         });

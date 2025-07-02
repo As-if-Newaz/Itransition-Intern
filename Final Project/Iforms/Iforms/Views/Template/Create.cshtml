@@ -294,11 +294,8 @@
             console.error('SignalR connection failed:', err);
         });
         connection.on("QuestionAdded", q => {
-            console.log('[SignalR] Received QuestionAdded:', q, 'my clientId:', clientId);
             if (q.clientId !== clientId) {
                 addQuestionUI(q, false);
-            } else {
-                console.log('[SignalR] Ignored own QuestionAdded event');
             }
         });
         connection.on("QuestionOrderUpdated", data => {
@@ -443,21 +440,18 @@
                     alert(result.message || 'Failed to create topic');
                 }
             } catch (error) {
-                console.error('Error creating topic:', error);
                 alert('Error creating topic');
             }
         });
 
         addQuestionBtn.onclick = function() {
             const q = { id: ++questionId, text: '', type: 'MultipleChoice', options: ['Option 1'], clientId };
-            console.log('[AddQuestionBtn] Adding question locally:', q);
             questions.push(q);
             addQuestionUI(q, true);
             connection.invoke("AddQuestion", q);
         };
 
         function addQuestionUI(q, local = true) {
-            console.log('[addQuestionUI] Called for question:', q, 'local:', local);
             const qDiv = document.createElement('div');
             qDiv.className = 'card mb-2 question-card';
             qDiv.setAttribute('data-id', q.id);
@@ -538,15 +532,9 @@
                     }
                 };
             });
-
-            // At the end of addQuestionUI, log the number of question cards
-            setTimeout(() => {
-                console.log('Number of .question-card elements:', document.querySelectorAll('.question-card').length);
-            }, 0);
         }
 
         function renderQuestions(qs, local = true) {
-            console.log('[renderQuestions] Called with', (qs || questions).length, 'questions. local:', local);
             questionsList.innerHTML = '';
             (qs || questions).forEach(q => addQuestionUI(q, false));
         }
@@ -569,8 +557,6 @@
         // Form submission
         templateForm.onsubmit = function(e) {
             e.preventDefault();
-            
-            console.log('Form submission started');
             
             // Validate topic selection
             if (!selectedTopicId.value || !selectedTopicType.value) {
@@ -598,8 +584,6 @@
                     });
                 }
             });
-
-            console.log('Questions updated:', questions);
 
             // Create hidden inputs for questions
             questions.forEach((question, index) => {
@@ -646,14 +630,11 @@
                 templateForm.appendChild(showInResultsInput);
                 templateForm.appendChild(optionsInput);
             });
-
-            console.log('Form prepared for submission');
             
             try {
                 // Submit the form
                 templateForm.submit();
             } catch (error) {
-                console.error('Error submitting form:', error);
                 alert('Error submitting form. Please try again.');
             }
         };
@@ -739,7 +720,6 @@
                 const users = await response.json();
                 displaySuggestions(users);
             } catch (error) {
-                console.error('Error searching users:', error);
                 hideSuggestions();
             }
         }

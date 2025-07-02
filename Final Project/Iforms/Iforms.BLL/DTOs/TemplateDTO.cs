@@ -12,6 +12,8 @@ namespace Iforms.BLL.DTOs
     {
         public TemplateDTO()
         {
+            Title = string.Empty;
+            Description = string.Empty;
             Topic = new TopicDTO();
             Questions = new List<QuestionDTO>();
             Forms = new List<FormDTO>();
@@ -40,13 +42,15 @@ namespace Iforms.BLL.DTOs
         [Required]
         public int CreatedById { get; set; }
 
+        public UserDTO? CreatedBy { get; set; }
+
         [Required]
         public int TopicId { get; set; }
 
         public bool IsLikedByCurrentUser { get; set; }
 
         // Topic and related collections from TemplateExtendedDTO
-        public TopicDTO Topic { get; set; }
+        public TopicDTO? Topic { get; set; }
         public List<QuestionDTO> Questions { get; set; }
         public List<FormDTO> Forms { get; set; }
         public List<CommentDTO> Comments { get; set; }

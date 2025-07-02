@@ -291,9 +291,9 @@
                                         <input 
                                             type="checkbox" 
                                             name="Answers[@questionIndex].MultipleChoiceOptions" 
-                                            value="@j"
+                                            value="@question.Options[j]"
                                             id="option_@question.Id@j"
-                                            @(selectedOptions.Contains(j.ToString()) ? "checked" : "") />
+                                            @(selectedOptions.Contains(question.Options[j]) ? "checked" : "") />
                                         <label class="option-label" for="option_@question.Id@j">
                                             @question.Options[j]
                                         </label>

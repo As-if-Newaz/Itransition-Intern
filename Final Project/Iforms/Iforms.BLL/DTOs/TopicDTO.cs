@@ -10,6 +10,11 @@ namespace Iforms.BLL.DTOs
 {
     public class TopicDTO
     {
+        public TopicDTO()
+        {
+            TopicType = string.Empty;
+        }
+        
         public int Id { get; set; }
         
         [Required]

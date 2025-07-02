@@ -80,7 +80,8 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100%;
+    overflow-x : hidden;
 }
 
 .glass-effect {
@@ -97,6 +98,7 @@ body {
     flex: 1 0 auto;
     padding-top: 2rem;
     padding-bottom: 2rem;
+/*    height:100%;*/
 }
 
 .admin-panel {
@@ -176,10 +178,30 @@ body {
     box-shadow: 0 4px 24px rgba(0,0,0,0.08);
     padding: 2rem;
     margin-bottom: 2rem;
+/*    height: 100%;*/
 }
 
 .search-bar-glass {
     background: rgba(30, 30, 30, 0.25) !important;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+}
+
+.admin-sidebar {
+    position: absolute;
+    top: -1px; 
+    left: -1px;
+    width: 290px;
+    height: 100%; /* or 100vh for full height */
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+/*    z-index: 1050;*/
+/*    padding: 24px 12px 12px 12px;*/
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.admin-sidebar .btn-glass {
+    /* margin: 0 0 12px 0; */
+    text-align: left;
+    /* border-radius: 8px; */
 } 
