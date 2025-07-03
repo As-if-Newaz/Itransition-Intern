@@ -297,8 +297,9 @@
                 id = q.Id > 0 ? q.Id : index + 1,
                 text = q.QuestionTitle,
                 type = q.QuestionType.ToString(),
-                options = q.Options ?? new List<string> { "Option 1" },
-                order = q.QuestionOrder
+                options = q.Options ?? new List<string> { "" },
+                order = q.QuestionOrder,
+                isMandatory = q.IsMandatory
             })));
             questionId = questions.length > 0 ? Math.max(...questions.map(q => q.id)) : 0;
             // Ensure options are arrays, not JSON strings or arrays with a single JSON string
@@ -323,11 +324,11 @@
 
         // QuestionType enum values
         const questionTypes = [
-            { value: 'Text', label: 'Text' },
-            { value: 'Number', label: 'Number' },
+            { value: 'Text', label: 'Single-line Text' },
+            { value: 'LongText', label: 'Multiple-line Text' },
+            { value: 'Number', label: 'Non-negative Integer' },
+            { value: 'Checkbox', label: 'Checkbox' },
             { value: 'Date', label: 'Date' },
-            { value: 'SingleChoice', label: 'Single Choice' },
-            { value: 'MultipleChoice', label: 'Multiple Choice' },
             { value: 'FileUpload', label: 'File Upload' }
         ];
 
@@ -541,7 +542,29 @@
         });
 
         addQuestionBtn.onclick = function() {
-            const q = { id: ++questionId, text: '', type: 'MultipleChoice', options: ['Option 1'] };
+            // Count current questions per type
+            const typeCounts = {
+                Text: questions.filter(q => q.type === 'Text').length,
+                LongText: questions.filter(q => q.type === 'LongText').length,
+                Number: questions.filter(q => q.type === 'Number').length,
+                Checkbox: questions.filter(q => q.type === 'Checkbox').length
+            };
+            // Default type for new question
+            const defaultType = 'Text';
+            // If the default type is at limit, pick the next available type
+            let selectedType = defaultType;
+            if (typeCounts[selectedType] >= 4) {
+                selectedType = Object.keys(typeCounts).find(type => typeCounts[type] < 4);
+                if (!selectedType) {
+                    alert('You have reached the maximum number of questions for all types (4 each).');
+                    return;
+                }
+            }
+            if (typeCounts[selectedType] >= 4) {
+                alert('You can only add up to 4 questions of this type.');
+                return;
+            }
+            const q = { id: ++questionId, text: '', type: selectedType, options: [''], isMandatory: true };
             questions.push(q);
             addQuestionUI(q, true);
             connection.invoke("AddQuestion", q);
@@ -568,9 +591,16 @@
                     <select class="form-select mb-2 question-type">
                         ${optionsHtml}
                     </select>
-                    <div class="options-list mb-2">
-                        ${optionsInputs}
-                        <button type="button" class="btn btn-sm btn-outline-secondary add-option-btn">+ Add option</button>
+                    <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input is-mandatory-checkbox" id="isMandatory${q.id}" ${q.isMandatory ? 'checked' : ''}>
+                        <label class="form-check-label" for="isMandatory${q.id}">Mandatory</label>
+                    </div>
+                    <div class="options-section" style="display: ${q.type === 'Checkbox' ? 'block' : 'none'};">
+                        <h5>Options:</h5>
+                        <div class="options-list mb-2">
+                            ${optionsInputs}
+                            <button type="button" class="btn btn-sm btn-outline-secondary add-option-btn">+ Add option</button>
+                        </div>
                     </div>
                     <button type="button" class="btn btn-danger btn-sm remove-question-btn">Delete</button>
                 </div>`;
@@ -582,17 +612,20 @@
             // Add option button functionality
             qDiv.querySelector('.add-option-btn').onclick = function() {
                 const optionsList = qDiv.querySelector('.options-list');
-                const newOptionIndex = qDiv.querySelectorAll('.option-input').length;
+                const currentOptions = qDiv.querySelectorAll('.option-input').length;
+                if (currentOptions >= 4) {
+                    alert('You can only add up to 4 options for a question.');
+                    return;
+                }
+                const newOptionIndex = currentOptions;
                 const newOptionInput = document.createElement('input');
                 newOptionInput.type = 'text';
                 newOptionInput.className = 'form-control mb-1 option-input';
                 newOptionInput.setAttribute('data-option-index', newOptionIndex);
                 newOptionInput.value = `Option ${newOptionIndex + 1}`;
-                
                 // Insert before the add button
                 const addButton = qDiv.querySelector('.add-option-btn');
                 optionsList.insertBefore(newOptionInput, addButton);
-                
                 // Update the question's options array
                 const questionIndex = questions.findIndex(question => question.id === q.id);
                 if (questionIndex !== -1) {
@@ -614,11 +647,52 @@
                 }
             };
 
-            qDiv.querySelector('.question-type').onchange = function() {
+            // Update question type dropdown to disable types at limit
+            const typeSelect = qDiv.querySelector('.question-type');
+            const optionsSection = qDiv.querySelector('.options-section');
+            function updateOptionsVisibility() {
+                optionsSection.style.display = typeSelect.value === 'Checkbox' ? 'block' : 'none';
+            }
+            updateOptionsVisibility();
+            typeSelect.addEventListener('change', updateOptionsVisibility);
+            typeSelect.querySelectorAll('option').forEach(option => {
+                const type = option.value;
+                const count = questions.filter(qq => qq.type === type).length;
+                if (type === q.type) {
+                    option.disabled = false;
+                } else if (['Text','LongText','Number','Checkbox'].includes(type) && count >= 4) {
+                    option.disabled = true;
+                } else {
+                    option.disabled = false;
+                }
+            });
+
+            // When type changes, enforce per-type limit
+            typeSelect.onchange = function() {
+                const newType = this.value;
+                const count = questions.filter(qq => qq.type === newType).length;
+                if (['Text','LongText','Number','Checkbox'].includes(newType) && count >= 4) {
+                    alert('You can only add up to 4 questions of this type.');
+                    this.value = q.type;
+                    return;
+                }
                 const questionIndex = questions.findIndex(question => question.id === q.id);
                 if (questionIndex !== -1) {
-                    questions[questionIndex].type = this.value;
+                    questions[questionIndex].type = newType;
                 }
+                // Update dropdown disables
+                typeSelect.querySelectorAll('option').forEach(option => {
+                    const type = option.value;
+                    const count = questions.filter(qq => qq.type === type).length;
+                    if (type === newType) {
+                        option.disabled = false;
+                    } else if (['Text','LongText','Number','Checkbox'].includes(type) && count >= 4) {
+                        option.disabled = true;
+                    } else {
+                        option.disabled = false;
+                    }
+                });
+                updateOptionsVisibility();
             };
 
             // Update options when option inputs change
@@ -631,6 +705,16 @@
                     }
                 };
             });
+
+            // Add event listener for isMandatory checkbox
+            const isMandatoryCheckbox = qDiv.querySelector('.is-mandatory-checkbox');
+            isMandatoryCheckbox.checked = q.isMandatory || false;
+            isMandatoryCheckbox.onchange = function() {
+                const questionIndex = questions.findIndex(question => question.id === q.id);
+                if (questionIndex !== -1) {
+                    questions[questionIndex].isMandatory = this.checked;
+                }
+            };
         }
 
         function renderQuestions(qs, local = true) {
@@ -721,6 +805,11 @@
                 showInResultsInput.name = `Questions[${index}].ShowInResultsTable`;
                 showInResultsInput.value = 'true';
 
+                const isMandatoryInput = document.createElement('input');
+                isMandatoryInput.type = 'hidden';
+                isMandatoryInput.name = `Questions[${index}].IsMandatory`;
+                isMandatoryInput.value = question.isMandatory ? 'true' : 'false';
+
                 // Add options as JSON string
                 const optionsInput = document.createElement('input');
                 optionsInput.type = 'hidden';
@@ -733,6 +822,7 @@
                 templateForm.appendChild(questionTypeInput);
                 templateForm.appendChild(questionOrderInput);
                 templateForm.appendChild(showInResultsInput);
+                templateForm.appendChild(isMandatoryInput);
                 templateForm.appendChild(optionsInput);
             });
             

@@ -34,11 +34,11 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
         }
         public enum QuestionType
         {
-            Text,
-            Number,
+            Text,         // single-line string
+            LongText,     // multiple-line text
+            Number,       // non-negative integer
+            Checkbox,     // checkbox
             Date,
-            SingleChoice,
-            MultipleChoice,
             FileUpload
         }
 

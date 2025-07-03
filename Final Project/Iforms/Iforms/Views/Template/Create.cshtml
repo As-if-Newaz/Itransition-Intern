@@ -280,11 +280,11 @@
 
         // QuestionType enum values
         const questionTypes = [
-            { value: 'Text', label: 'Text' },
-            { value: 'Number', label: 'Number' },
+            { value: 'Text', label: 'Single-line Text' },
+            { value: 'LongText', label: 'Multiple-line Text' },
+            { value: 'Number', label: 'Non-negative Integer' },
+            { value: 'Checkbox', label: 'Checkbox' },
             { value: 'Date', label: 'Date' },
-            { value: 'SingleChoice', label: 'Single Choice' },
-            { value: 'MultipleChoice', label: 'Multiple Choice' },
             { value: 'FileUpload', label: 'File Upload' }
         ];
 
@@ -445,7 +445,29 @@
         });
 
         addQuestionBtn.onclick = function() {
-            const q = { id: ++questionId, text: '', type: 'MultipleChoice', options: ['Option 1'], clientId };
+            // Count current questions per type
+            const typeCounts = {
+                Text: questions.filter(q => q.type === 'Text').length,
+                LongText: questions.filter(q => q.type === 'LongText').length,
+                Number: questions.filter(q => q.type === 'Number').length,
+                Checkbox: questions.filter(q => q.type === 'Checkbox').length
+            };
+            // Default type for new question
+            const defaultType = 'Text';
+            // If the default type is at limit, pick the next available type
+            let selectedType = defaultType;
+            if (typeCounts[selectedType] >= 4) {
+                selectedType = Object.keys(typeCounts).find(type => typeCounts[type] < 4);
+                if (!selectedType) {
+                    alert('You have reached the maximum number of questions for all types (4 each).');
+                    return;
+                }
+            }
+            if (typeCounts[selectedType] >= 4) {
+                alert('You can only add up to 4 questions of this type.');
+                return;
+            }
+            const q = { id: ++questionId, text: '', type: selectedType, options: [''], isMandatory: true };
             questions.push(q);
             addQuestionUI(q, true);
             connection.invoke("AddQuestion", q);
@@ -463,7 +485,7 @@
 
             // Generate options inputs
             const optionsInputs = q.options.map((option, index) => 
-                `<input type="text" class="form-control mb-1 option-input" value="${option}" data-option-index="${index}" />`
+                `<input type="text" placeholder = "Option" class="form-control mb-1 option-input" value="${option}" data-option-index="${index}" />`
             ).join('');
 
             qDiv.innerHTML = `
@@ -472,9 +494,17 @@
                     <select class="form-select mb-2 question-type">
                         ${optionsHtml}
                     </select>
-                    <div class="options-list mb-2">
-                        ${optionsInputs}
-                        <button type="button" class="btn btn-sm btn-outline-secondary add-option-btn">+ Add option</button>
+                    <div class="form-check mb-2">
+                        <input type="checkbox" class="form-check-input is-mandatory-checkbox" id="isMandatory${q.id}" ${q.isMandatory ? 'checked' : ''}>
+                        <label class="form-check-label" for="isMandatory${q.id}">Is Mandatory</label>
+                        <p>Note: Mandatory Questions are mandatory to answer and will appear on the Results Tab</p>
+                    </div>
+                    <div class="options-section" style="display: ${q.type === 'Checkbox' ? 'block' : 'none'};">
+                        <h5>Options:</h5>
+                        <div class="options-list mb-2">
+                            ${optionsInputs}
+                            <button type="button" class="btn btn-sm btn-outline-secondary add-option-btn">+ Add option</button>
+                        </div>
                     </div>
                     <button type="button" class="btn btn-danger btn-sm remove-question-btn">Delete</button>
                 </div>`;
@@ -483,17 +513,20 @@
             // Add option button functionality
             qDiv.querySelector('.add-option-btn').onclick = function() {
                 const optionsList = qDiv.querySelector('.options-list');
-                const newOptionIndex = qDiv.querySelectorAll('.option-input').length;
+                const currentOptions = qDiv.querySelectorAll('.option-input').length;
+                if (currentOptions >= 4) {
+                    alert('You can only add up to 4 options for a question.');
+                    return;
+                }
+                const newOptionIndex = currentOptions;
                 const newOptionInput = document.createElement('input');
                 newOptionInput.type = 'text';
                 newOptionInput.className = 'form-control mb-1 option-input';
                 newOptionInput.setAttribute('data-option-index', newOptionIndex);
                 newOptionInput.value = `Option ${newOptionIndex + 1}`;
-                
                 // Insert before the add button
                 const addButton = qDiv.querySelector('.add-option-btn');
                 optionsList.insertBefore(newOptionInput, addButton);
-                
                 // Update the question's options array
                 const questionIndex = questions.findIndex(question => question.id === q.id);
                 if (questionIndex !== -1) {
@@ -515,23 +548,64 @@
                 }
             };
 
-            qDiv.querySelector('.question-type').onchange = function() {
+            // Update question type dropdown to disable types at limit
+            const typeSelect = qDiv.querySelector('.question-type');
+            typeSelect.querySelectorAll('option').forEach(option => {
+                const type = option.value;
+                const count = questions.filter(qq => qq.type === type).length;
+                if (type === q.type) {
+                    option.disabled = false;
+                } else if (['Text','LongText','Number','Checkbox'].includes(type) && count >= 4) {
+                    option.disabled = true;
+                } else {
+                    option.disabled = false;
+                }
+            });
+
+            // When type changes, enforce per-type limit
+            typeSelect.onchange = function() {
+                const newType = this.value;
+                const count = questions.filter(qq => qq.type === newType).length;
+                if (['Text','LongText','Number','Checkbox'].includes(newType) && count >= 4) {
+                    alert('You can only add up to 4 questions of this type.');
+                    this.value = q.type;
+                    return;
+                }
                 const questionIndex = questions.findIndex(question => question.id === q.id);
                 if (questionIndex !== -1) {
-                    questions[questionIndex].type = this.value;
+                    questions[questionIndex].type = newType;
+                }
+                // Update dropdown disables
+                typeSelect.querySelectorAll('option').forEach(option => {
+                    const type = option.value;
+                    const count = questions.filter(qq => qq.type === type).length;
+                    if (type === newType) {
+                        option.disabled = false;
+                    } else if (['Text','LongText','Number','Checkbox'].includes(type) && count >= 4) {
+                        option.disabled = true;
+                    } else {
+                        option.disabled = false;
+                    }
+                });
+            };
+
+            // Add event listener for isMandatory checkbox
+            const isMandatoryCheckbox = qDiv.querySelector('.is-mandatory-checkbox');
+            isMandatoryCheckbox.checked = q.isMandatory || false;
+            isMandatoryCheckbox.onchange = function() {
+                const questionIndex = questions.findIndex(question => question.id === q.id);
+                if (questionIndex !== -1) {
+                    questions[questionIndex].isMandatory = this.checked;
                 }
             };
 
-            // Update options when option inputs change
-            qDiv.querySelectorAll('.option-input').forEach(input => {
-                input.oninput = function() {
-                    const questionIndex = questions.findIndex(question => question.id === q.id);
-                    if (questionIndex !== -1) {
-                        const optionIndex = parseInt(this.getAttribute('data-option-index'));
-                        questions[questionIndex].options[optionIndex] = this.value;
-                    }
-                };
-            });
+            // Show/hide options section based on type
+            const optionsSection = qDiv.querySelector('.options-section');
+            function updateOptionsVisibility() {
+                optionsSection.style.display = typeSelect.value === 'Checkbox' ? 'block' : 'none';
+            }
+            updateOptionsVisibility();
+            typeSelect.addEventListener('change', updateOptionsVisibility);
         }
 
         function renderQuestions(qs, local = true) {
@@ -574,61 +648,55 @@
             questions.forEach((question, index) => {
                 const questionDiv = questionsList.querySelector(`[data-id="${question.id}"]`);
                 if (questionDiv) {
-                    question.text = questionDiv.querySelector('.question-title').value;
-                    question.type = questionDiv.querySelector('.question-type').value;
-                    
-                    // Update options
-                    question.options = [];
-                    questionDiv.querySelectorAll('.option-input').forEach(input => {
-                        question.options.push(input.value);
-                    });
+                    // Remove existing hidden inputs for this question
+                    const existingInputs = questionDiv.querySelectorAll('input[type=hidden]');
+                    existingInputs.forEach(input => input.remove());
+
+                    // Create new hidden inputs
+                    const questionTitleInput = document.createElement('input');
+                    questionTitleInput.type = 'hidden';
+                    questionTitleInput.name = `Questions[${index}].QuestionTitle`;
+                    questionTitleInput.value = question.text;
+
+                    const questionDescInput = document.createElement('input');
+                    questionDescInput.type = 'hidden';
+                    questionDescInput.name = `Questions[${index}].QuestionDescription`;
+                    questionDescInput.value = question.text; // Using title as description for now
+
+                    const questionTypeInput = document.createElement('input');
+                    questionTypeInput.type = 'hidden';
+                    questionTypeInput.name = `Questions[${index}].QuestionType`;
+                    questionTypeInput.value = question.type;
+
+                    const questionOrderInput = document.createElement('input');
+                    questionOrderInput.type = 'hidden';
+                    questionOrderInput.name = `Questions[${index}].QuestionOrder`;
+                    questionOrderInput.value = index;
+
+                    const showInResultsInput = document.createElement('input');
+                    showInResultsInput.type = 'hidden';
+                    showInResultsInput.name = `Questions[${index}].ShowInResultsTable`;
+                    showInResultsInput.value = 'true';
+
+                    const isMandatoryInput = document.createElement('input');
+                    isMandatoryInput.type = 'hidden';
+                    isMandatoryInput.name = `Questions[${index}].IsMandatory`;
+                    isMandatoryInput.value = question.isMandatory ? 'true' : 'false';
+
+                    // Add options as JSON string
+                    const optionsInput = document.createElement('input');
+                    optionsInput.type = 'hidden';
+                    optionsInput.name = `Questions[${index}].Options`;
+                    optionsInput.value = JSON.stringify(question.options);
+
+                    questionDiv.appendChild(questionTitleInput);
+                    questionDiv.appendChild(questionDescInput);
+                    questionDiv.appendChild(questionTypeInput);
+                    questionDiv.appendChild(questionOrderInput);
+                    questionDiv.appendChild(showInResultsInput);
+                    questionDiv.appendChild(isMandatoryInput);
+                    questionDiv.appendChild(optionsInput);
                 }
-            });
-
-            // Create hidden inputs for questions
-            questions.forEach((question, index) => {
-                // Remove existing hidden inputs for this question
-                const existingInputs = templateForm.querySelectorAll(`[name^="Questions[${index}]"]`);
-                existingInputs.forEach(input => input.remove());
-
-                // Create new hidden inputs
-                const questionTitleInput = document.createElement('input');
-                questionTitleInput.type = 'hidden';
-                questionTitleInput.name = `Questions[${index}].QuestionTitle`;
-                questionTitleInput.value = question.text;
-
-                const questionDescInput = document.createElement('input');
-                questionDescInput.type = 'hidden';
-                questionDescInput.name = `Questions[${index}].QuestionDescription`;
-                questionDescInput.value = question.text; // Using title as description for now
-
-                const questionTypeInput = document.createElement('input');
-                questionTypeInput.type = 'hidden';
-                questionTypeInput.name = `Questions[${index}].QuestionType`;
-                questionTypeInput.value = question.type;
-
-                const questionOrderInput = document.createElement('input');
-                questionOrderInput.type = 'hidden';
-                questionOrderInput.name = `Questions[${index}].QuestionOrder`;
-                questionOrderInput.value = index;
-
-                const showInResultsInput = document.createElement('input');
-                showInResultsInput.type = 'hidden';
-                showInResultsInput.name = `Questions[${index}].ShowInResultsTable`;
-                showInResultsInput.value = 'true';
-
-                // Add options as JSON string
-                const optionsInput = document.createElement('input');
-                optionsInput.type = 'hidden';
-                optionsInput.name = `Questions[${index}].Options`;
-                optionsInput.value = JSON.stringify(question.options);
-
-                templateForm.appendChild(questionTitleInput);
-                templateForm.appendChild(questionDescInput);
-                templateForm.appendChild(questionTypeInput);
-                templateForm.appendChild(questionOrderInput);
-                templateForm.appendChild(showInResultsInput);
-                templateForm.appendChild(optionsInput);
             });
             
             try {

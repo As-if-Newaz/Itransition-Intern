@@ -138,6 +138,10 @@
                     {
                         <p class="answer-text">@answer.Text</p>
                     }
+                    @if (!string.IsNullOrEmpty(answer.LongText))
+                    {
+                        <p class="answer-text">@answer.LongText</p>
+                    }
                     @if (answer.Number.HasValue)
                     {
                         <p class="answer-number">@answer.Number.Value</p>
@@ -146,18 +150,24 @@
                     {
                         <p class="answer-date">@answer.Date.Value.ToString("MMM dd, yyyy")</p>
                     }
-                    @if (answer.SignleChoice.HasValue)
+                    @if (answer.Question?.QuestionType == Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType.Checkbox && answer.Question?.Options != null && answer.Question.Options.Count > 0)
                     {
-                        <p class="answer-text">
-                            @if (answer.Question?.Options != null && answer.Question.Options.Any())
-                            {
-                                var optionIndex = answer.SignleChoice.Value;
-                                if (optionIndex >= 0 && optionIndex < answer.Question.Options.Count)
-                                {
-                                    @answer.Question.Options[optionIndex]
-                                }
-                            }
-                        </p>
+                        var selectedOptions = (answer.Text ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToList();
+                        <ul style="list-style: none; padding-left: 0;">
+                        @for (int i = 0; i < answer.Question.Options.Count; i++)
+                        {
+                            var option = answer.Question.Options[i];
+                            var isChecked = selectedOptions.Contains(option);
+                            <li>
+                                <span style="font-size:1.2em; color:@(isChecked ? "#28a745" : "#dc3545")">@(isChecked ? "✔" : "✖")</span>
+                                <span class="answer-text">@option</span>
+                            </li>
+                        }
+                        </ul>
+                    }
+                    else if (answer.Checkbox.HasValue && answer.Question?.QuestionType == Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType.Checkbox && answer.Question.Options.Count == 1)
+                    {
+                        <p class="answer-text">@answer.Question.Options[0]: <strong>@(answer.Checkbox.Value ? "Checked" : "Unchecked")</strong></p>
                     }
                     @if (!string.IsNullOrEmpty(answer.FileUrl))
                     {

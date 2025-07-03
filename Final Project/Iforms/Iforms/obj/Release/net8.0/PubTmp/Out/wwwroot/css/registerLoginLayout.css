@@ -1,0 +1,140 @@
+﻿﻿html{
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #6a11cb, #2575fc) !important;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    max-width: 400px;
+    margin-top: 30px;
+    width: 100%;
+    padding: 40px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.form-container p {
+    color: #666;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.form-container h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #333;
+}
+
+.form-control {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    background-color: #f7f7f7;
+    color: #333;
+    border-color: #ddd;
+}
+
+    .form-control::placeholder {
+        color: #999;
+    }
+
+.form-check {
+    margin-bottom: 15px;
+}
+
+.form-check-label {
+    color: #fff;
+}
+
+.btn-primary {
+    background-color: #1DA1F2;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+    .btn-primary:hover {
+        background-color: #1a91da;
+    }
+
+.text-danger {
+    color: #dc3545;
+}
+
+.links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+    .links a, .form-container a {
+        color: #1DA1F2;
+        text-decoration: none;
+        font-size: 0.9em;
+    }
+
+        .links a:hover, .form-container a:hover {
+            text-decoration: underline;
+        }
+
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+        display: block;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+
+    .form-container {
+        margin-top: 20px;
+        padding: 0 10px;
+        text-align: center;
+    }
+
+    .form-container h2 {
+        font-size: 1.3em;
+        text-align: center;
+    }
+
+    .btn-primary {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .form-control {
+        padding: 12px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        padding: 0 5px;
+        text-align: center;
+    }
+
+    .form-container h2 {
+        font-size: 1.2em;
+        text-align: center;
+    }
+}

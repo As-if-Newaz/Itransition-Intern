@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Linq;
 
 namespace Iforms.MVC.Controllers
 {
@@ -88,6 +89,19 @@ namespace Iforms.MVC.Controllers
         [HttpPost("Form/Submit")]
         public IActionResult Submit(FillFormModel model)
         {
+            // Filter out empty answers
+            if (model.Answers != null)
+            {
+                model.Answers = model.Answers
+                    .Where(a =>
+                        !string.IsNullOrWhiteSpace(a.Text) ||
+                        !string.IsNullOrWhiteSpace(a.LongText) ||
+                        a.Number.HasValue ||
+                        a.Checkbox.HasValue ||
+                        !string.IsNullOrWhiteSpace(a.FileUrl) ||
+                        a.Date.HasValue
+                    ).ToList();
+            }
             var currentUserId = GetAuthenticatedUserId();
             if (model.Template == null)
             {
@@ -101,39 +115,29 @@ namespace Iforms.MVC.Controllers
             {
                 return BadRequest("No answers provided");
             }
-            // Get the list of questions for the template
-            var questions = questionService.GetByTemplateId(model.Template.Id).ToList();
-            // Handle file uploads for FileUpload questions
-            for (int i = 0; i < model.Answers.Count; i++)
+            try
             {
-                var answer = model.Answers[i];
-                var question = questions.FirstOrDefault(q => q.Id == answer.QuestionId);
-                if (question != null && question.QuestionType.ToString() == "FileUpload")
+                var createDto = new FormDTO
                 {
-                    // The file input name is Answers[i].FileUrl
-                    var file = Request.Form.Files[$"Answers[{i}].FileUrl"];
-                    if (file != null && file.Length > 0)
+                    TemplateId = model.Template.Id,
+                    Answers = model.Answers.Select(a => new AnswerDTO
                     {
-                        var url = ImageService.UploadAnswerImage(file);
-                        answer.FileUrl = url;
-                    }
-                }
+                        QuestionId = a.QuestionId,
+                        Text = a.Text,
+                        LongText = a.LongText,
+                        Number = a.Number,
+                        Checkbox = a.Checkbox,
+                        FileUrl = a.FileUrl,
+                        Date = a.Date,
+                    }).ToList()
+                };
+                var form = formService.Create(createDto, currentUserId);
+                return RedirectToAction("Details", new { id = form.Id });
             }
-            var createDto = new FormDTO
+            catch (Exception ex)
             {
-                TemplateId = model.Template.Id,
-                Answers = model.Answers.Select(a => new AnswerDTO
-                {
-                    QuestionId = a.QuestionId,
-                    Text = a.Text,
-                    Number = a.Number,
-                    SignleChoice = a.SignleChoice,
-                    FileUrl = a.FileUrl,
-                    Date = a.Date,
-                }).ToList()
-            };
-            var form = formService.Create(createDto, currentUserId);
-            return RedirectToAction("Details", new { id = form.Id });
+                throw;
+            }
         }
 
         [AuthenticatedAdminorUser]

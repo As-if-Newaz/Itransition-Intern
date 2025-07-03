@@ -16,13 +16,16 @@ namespace Iforms.BLL.DTOs
         [Required, StringLength(100)]
         public string QuestionTitle { get; set; }
 
-        [Required,StringLength(150)]
+        [Required,StringLength(500)]
         public string QuestionDescription { get; set; }
 
         public QuestionType QuestionType { get; set; }
 
         [Required]
         public int QuestionOrder { get; set; }
+
+        [Required]
+        public bool IsMandatory { get; set; }
 
         [Required]
         public int TemplateId { get; set; }

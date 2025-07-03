@@ -193,17 +193,23 @@
 
     @if (template != null)
     {
-        <div class="template-header">
-            <div class="template-title">@template.Title</div>
-            @if (!string.IsNullOrEmpty(template.Description))
-            {
-                <div class="template-description">@template.Description</div>
-            }
-            <div class="template-meta">
+        <div class="form-header" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; padding: 2rem; border-radius: 10px; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <h1 class="form-title">@template.Title</h1>
+            <div class="form-meta" style="display: flex; gap: 1rem; font-size: 0.9rem; opacity: 0.9;">
                 <span><i class="fas fa-calendar"></i> Created: @template.CreatedAt.ToString("MMM dd, yyyy")</span>
-                <span><i class="fas fa-users"></i> Total Responses: @totalCount</span>
+                <span><i class="fas fa-user"></i> Created by: @template.CreatedBy?.UserName</span>
                 <span><i class="fas fa-eye"></i> Status: @(template.IsPublic ? "Public" : "Private")</span>
             </div>
+            @if (!string.IsNullOrEmpty(template.Description))
+            {
+                <div class="template-description" style="font-size: 1.1rem; opacity: 0.9; margin-top: 1rem;">@template.Description</div>
+            }
+            @if (!string.IsNullOrEmpty(template.ImageUrl))
+            {
+                <div class="text-center my-4">
+                    <img src="@template.ImageUrl" alt="Template Image" style="max-width: 400px; max-height: 400px; display: inline-block; border-radius: 16px; box-shadow: 0 6px 24px rgba(0,0,0,0.16); margin-top: 1rem;" />
+                </div>
+            }
         </div>
     }
 

@@ -1,0 +1,207 @@
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.app-logo {
+    color: white;
+    margin-left: 50px;
+    font-size: 1.75rem;
+    font-weight: bold;
+}
+
+.navbar-gradient {
+    background: linear-gradient(135deg, #6a11cb, #2575fc) !important;
+    min-height: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.logout-btn {
+    margin-left: auto;
+}
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+a {
+    color: #0077cc;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(135deg, #6a11cb, #2575fc) !important;
+    color: white;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    overflow-x : hidden;
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.9);
+    color: black;
+    /* border-radius: 16px; */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.content-area {
+    flex: 1 0 auto;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+/*    height:100%;*/
+}
+
+.admin-panel {
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-glass {
+    background: transparent !important;
+    color: white !important;
+    border: none !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 0.9rem 1.8rem;
+    font-size: 1.2rem;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.btn-glass:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.btn-glass:last-child {
+    border-right: none !important;
+}
+
+.navbar .navbar-nav .btn-glass {
+    margin-left: 0;
+    margin-right: 10px;
+    margin-top: 12px;
+}
+
+.navbar .container-fluid {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    padding-top: 6px;
+    padding-bottom: 4px;
+}
+
+.app-logo {
+    align-self: flex-start;
+    margin-bottom: 0;
+    margin-top: 8px;
+    margin-left: 50px;
+    font-size: 1.75rem;
+    font-weight: bold;
+}
+
+.button-bar {
+    background: linear-gradient(135deg, #6a11cb, #2575fc) !important;
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    margin-bottom: 0;
+    margin-top: -12px;
+    border: none;
+    width: 100vw;
+    position: relative;
+    left: 0;
+    box-sizing: border-box;
+}
+
+.button-bar .btn-glass {
+    border-right: none !important;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+}
+
+.template-content-area {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 2rem;
+    margin-bottom: 2rem;
+/*    height: 100%;*/
+}
+
+.search-bar-glass {
+    background: rgba(30, 30, 30, 0.25) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.admin-sidebar {
+    position: absolute;
+    top: -1px; 
+    left: -1px;
+    width: 290px;
+    height: 100%; /* or 100vh for full height */
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+/*    z-index: 1050;*/
+/*    padding: 24px 12px 12px 12px;*/
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.admin-sidebar .btn-glass {
+    /* margin: 0 0 12px 0; */
+    text-align: left;
+    /* border-radius: 8px; */
+} 

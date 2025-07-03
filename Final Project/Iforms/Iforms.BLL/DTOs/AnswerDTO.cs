@@ -14,9 +14,11 @@ namespace Iforms.BLL.DTOs
 
         public string? Text { get; set; }
 
+        public string? LongText { get; set; }
+
         public int? Number { get; set; }
 
-        public int? SignleChoice { get; set; }
+        public bool? Checkbox { get; set; }
 
         public string? FileUrl { get; set; }
 

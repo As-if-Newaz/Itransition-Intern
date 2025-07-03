@@ -15,9 +15,12 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
         [Column(TypeName = "VARCHAR"), StringLength(512)]
         public string? Text { get; set; }
 
+        [Column(TypeName = "VARCHAR"), StringLength(1048)]
+        public string? LongText { get; set; }
+
         public int? Number { get; set; }
 
-        public int? SignleChoice { get; set; }
+        public bool? Checkbox { get; set; }
 
         [Column(TypeName = "VARCHAR(512)"), StringLength(512)]
         public string? FileUrl { get; set; }

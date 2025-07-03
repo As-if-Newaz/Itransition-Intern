@@ -38,21 +38,21 @@ namespace Iforms.MVC.Controllers
 
         }
 
-        public IActionResult Details(int id)
-        {
-            var currentUserId = GetCurrentUserId();
-            var template = templateService.GetTemplateDetailedById(id, currentUserId);
+        //public IActionResult Details(int id)
+        //{
+        //    var currentUserId = GetCurrentUserId();
+        //    var template = templateService.GetTemplateDetailedById(id, currentUserId);
 
-            if (template == null)
-                return NotFound();
+        //    if (template == null)
+        //        return NotFound();
 
-            if (!templateService.CanUserAccessTemplate(id, currentUserId))
-                return Forbid();
+        //    if (!templateService.CanUserAccessTemplate(id, currentUserId))
+        //        return Forbid();
 
-            var questions = questionService.GetByTemplateId(id);
-            var comments = commentService.GetTemplateComments(id);
-            return View(template);
-        }
+        //    var questions = questionService.GetByTemplateId(id);
+        //    var comments = commentService.GetTemplateComments(id);
+        //    return View(template);
+        //}
 
         [AuthenticatedAdminorUser]
         [HttpGet]
@@ -126,6 +126,7 @@ namespace Iforms.MVC.Controllers
                 var questionTypeStr = Request.Form[$"Questions[{questionIndex}].QuestionType"].ToString();
                 var questionOrder = int.Parse(Request.Form[$"Questions[{questionIndex}].QuestionOrder"].ToString());
                 var optionsJson = Request.Form[$"Questions[{questionIndex}].Options"].ToString();
+                var isMandatoryStr = Request.Form[$"Questions[{questionIndex}].IsMandatory"].ToString();
                 if (Enum.TryParse<Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType>(questionTypeStr, out var questionType))
                 {
                     var questionDto = new QuestionDTO
@@ -138,7 +139,8 @@ namespace Iforms.MVC.Controllers
                         TemplateId = model.Id,
                         Options = !string.IsNullOrEmpty(optionsJson) ? 
                             System.Text.Json.JsonSerializer.Deserialize<List<string>>(optionsJson) ?? new List<string>() : 
-                            new List<string>()
+                            new List<string>(),
+                        IsMandatory = isMandatoryStr == "true" || isMandatoryStr == "True"
                     };
                     questions.Add(questionDto);
                 }
@@ -289,7 +291,7 @@ namespace Iforms.MVC.Controllers
             var template = templateService.Update(model.Id, model, currentUserId);
             if (template == null)
                 return NotFound();
-            return RedirectToAction("Details", new { id = model.Id });
+            return RedirectToAction("Edit", new { id = model.Id });
         }
 
 

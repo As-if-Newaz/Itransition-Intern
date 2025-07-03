@@ -16,7 +16,7 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
         [Required, Column(TypeName = "VARCHAR"), StringLength(100)]
         public string QuestionTitle { get; set; }
 
-        [Required, Column(TypeName = "VARCHAR"), StringLength(150)]
+        [Required, Column(TypeName = "VARCHAR"), StringLength(500)]
         public string QuestionDescription { get; set; }
 
         public QuestionType QuestionType { get; set; }
@@ -24,10 +24,10 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
         [Required]
         public int QuestionOrder { get; set; }
 
-        [Required]
-        public bool ShowInResultsTable { get; set; }
+        public IEnumerable<string>? Options { get; set; }
 
-        public IEnumerable<string>? Options { get; set; } 
+        [Required]
+        public bool IsMandatory { get; set; }
 
         [Required]
         public int TemplateId { get; set; }

@@ -28,7 +28,7 @@ namespace Iforms.BLL.DTOs
         [Required, StringLength(150)]
         public string Title { get; set; }
 
-        [Required, StringLength(200)]
+        [Required, StringLength(500)]
         public string Description { get; set; }
 
         public string? ImageUrl { get; set; }

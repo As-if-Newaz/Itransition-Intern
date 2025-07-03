@@ -53,8 +53,9 @@ namespace Iforms.BLL.Services
                             FormId = result.Id,
                             QuestionId = answerDto.QuestionId,
                             Text = answerDto.Text,
+                            LongText = answerDto.LongText,
                             Number = answerDto.Number,
-                            SignleChoice = answerDto.SignleChoice,
+                            Checkbox = answerDto.Checkbox,
                             FileUrl = answerDto.FileUrl,
                             Date = answerDto.Date
                         };
@@ -145,8 +146,9 @@ namespace Iforms.BLL.Services
                 {
                     // Update existing answer
                     existing.Text = answerDto.Text;
+                    existing.LongText = answerDto.LongText;
                     existing.Number = answerDto.Number;
-                    existing.SignleChoice = answerDto.SignleChoice;
+                    existing.Checkbox = answerDto.Checkbox;
                     existing.FileUrl = answerDto.FileUrl;
                     existing.Date = answerDto.Date;
                     DA.AnswerData().Update(existing);
@@ -159,8 +161,9 @@ namespace Iforms.BLL.Services
                         FormId = form.Id,
                         QuestionId = answerDto.QuestionId,
                         Text = answerDto.Text,
+                        LongText = answerDto.LongText,
                         Number = answerDto.Number,
-                        SignleChoice = answerDto.SignleChoice,
+                        Checkbox = answerDto.Checkbox,
                         FileUrl = answerDto.FileUrl,
                         Date = answerDto.Date
                     };

@@ -30,6 +30,9 @@ namespace Iforms.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool?>("Checkbox")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
 
@@ -40,13 +43,14 @@ namespace Iforms.DAL.Migrations
                     b.Property<int>("FormId")
                         .HasColumnType("int");
 
+                    b.Property<string>("LongText")
+                        .HasMaxLength(1048)
+                        .HasColumnType("VARCHAR");
+
                     b.Property<int?>("Number")
                         .HasColumnType("int");
 
                     b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SignleChoice")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -183,12 +187,15 @@ namespace Iforms.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("IsMandatory")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Options")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QuestionDescription")
                         .IsRequired()
-                        .HasMaxLength(150)
+                        .HasMaxLength(500)
                         .HasColumnType("VARCHAR");
 
                     b.Property<int>("QuestionOrder")
@@ -201,9 +208,6 @@ namespace Iforms.DAL.Migrations
 
                     b.Property<int>("QuestionType")
                         .HasColumnType("int");
-
-                    b.Property<bool>("ShowInResultsTable")
-                        .HasColumnType("bit");
 
                     b.Property<int>("TemplateId")
                         .HasColumnType("int");
@@ -249,7 +253,7 @@ namespace Iforms.DAL.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(200)
+                        .HasMaxLength(500)
                         .HasColumnType("VARCHAR");
 
                     b.Property<string>("ImageUrl")
