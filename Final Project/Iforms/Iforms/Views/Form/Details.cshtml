@@ -134,7 +134,22 @@
                     @answer.Question?.QuestionTitle
                 </div>
                 <div class="answer-content">
-                    @if (!string.IsNullOrEmpty(answer.Text))
+                    @if (answer.Question?.QuestionType == Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType.Checkbox && answer.Question?.Options != null && answer.Question.Options.Count > 0)
+                    {
+                        var selectedOptions = (answer.Text ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).Distinct().ToList();
+                        if (selectedOptions.Any())
+                        {
+                            <ul style="list-style: none; padding-left: 0;">
+                            @foreach (var option in selectedOptions)
+                            {
+                                <li>
+                                    <span class="answer-text">@option</span>
+                                </li>
+                            }
+                            </ul>
+                        }
+                    }
+                    else if (!string.IsNullOrEmpty(answer.Text))
                     {
                         <p class="answer-text">@answer.Text</p>
                     }
@@ -150,28 +165,15 @@
                     {
                         <p class="answer-date">@answer.Date.Value.ToString("MMM dd, yyyy")</p>
                     }
-                    @if (answer.Question?.QuestionType == Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType.Checkbox && answer.Question?.Options != null && answer.Question.Options.Count > 0)
-                    {
-                        var selectedOptions = (answer.Text ?? "").Split(',', StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToList();
-                        <ul style="list-style: none; padding-left: 0;">
-                        @for (int i = 0; i < answer.Question.Options.Count; i++)
-                        {
-                            var option = answer.Question.Options[i];
-                            var isChecked = selectedOptions.Contains(option);
-                            <li>
-                                <span style="font-size:1.2em; color:@(isChecked ? "#28a745" : "#dc3545")">@(isChecked ? "✔" : "✖")</span>
-                                <span class="answer-text">@option</span>
-                            </li>
-                        }
-                        </ul>
-                    }
-                    else if (answer.Checkbox.HasValue && answer.Question?.QuestionType == Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType.Checkbox && answer.Question.Options.Count == 1)
+                    @if (answer.Question?.QuestionType == Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType.Checkbox && answer.Question?.Options != null && answer.Question.Options.Count == 1)
                     {
                         <p class="answer-text">@answer.Question.Options[0]: <strong>@(answer.Checkbox.Value ? "Checked" : "Unchecked")</strong></p>
                     }
                     @if (!string.IsNullOrEmpty(answer.FileUrl))
                     {
-                        <img src="@answer.FileUrl" alt="Uploaded Image" style="max-width: 300px; max-height: 300px; display: block; margin: 0.5rem 0; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);" />
+                        <div style="text-align:center;">
+                            <img src="@answer.FileUrl" alt="Uploaded Image" style="max-width: 300px; max-height: 300px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: inline-block; margin: 0.5rem 0;" />
+                        </div>
                     }
                 </div>
             </div>

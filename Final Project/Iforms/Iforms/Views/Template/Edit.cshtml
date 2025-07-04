@@ -759,7 +759,7 @@
                 if (questionDiv) {
                     question.text = questionDiv.querySelector('.question-title').value;
                     question.type = questionDiv.querySelector('.question-type').value;
-                    
+                    question.isMandatory = questionDiv.querySelector('.is-mandatory-checkbox').checked;
                     // Update options
                     question.options = [];
                     questionDiv.querySelectorAll('.option-input').forEach(input => {

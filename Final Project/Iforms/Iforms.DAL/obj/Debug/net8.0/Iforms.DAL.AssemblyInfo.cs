@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Iforms.DAL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9221378fd34d21b85be802ad5e5b391a7b850d60")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6161794c58c06ef9b4d91f05f6bfd50e929536b3")]
 [assembly: System.Reflection.AssemblyProductAttribute("Iforms.DAL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Iforms.DAL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

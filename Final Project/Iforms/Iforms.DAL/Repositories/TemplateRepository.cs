@@ -146,7 +146,7 @@ namespace Iforms.DAL.Repositories
 
             if (topic !=  null)
             {
-                query = query.Where(t => t.Topic == topic);
+                query = query.Where(t => t.TopicId == topic.Id);
             }
 
             if (tags.Any())

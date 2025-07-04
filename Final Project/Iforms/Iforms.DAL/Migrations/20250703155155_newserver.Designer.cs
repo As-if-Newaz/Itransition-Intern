@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Iforms.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250703083016_QuestionTypesUpdated2")]
-    partial class QuestionTypesUpdated2
+    [Migration("20250703155155_newserver")]
+    partial class newserver
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Iforms.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class QuestionTypesUpdated : Migration
+    public partial class newserver : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -238,6 +238,7 @@ namespace Iforms.BLL.Services
                         existingQuestion.QuestionType = questionDto.QuestionType;
                         existingQuestion.QuestionOrder = questionDto.QuestionOrder;
                         existingQuestion.Options = questionDto.Options?.ToList();
+                        existingQuestion.IsMandatory = questionDto.IsMandatory;
                         DA.QuestionData().Update(existingQuestion);
                     }
                 }

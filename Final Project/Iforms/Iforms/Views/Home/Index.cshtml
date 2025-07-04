@@ -85,7 +85,7 @@
     @foreach (var tag in Model.TagCloud)
     {
         <li style="display:inline-block; margin: 0 8px 8px 0; list-style:none;">
-            <a href="#" class="tag-button">
+            <a href="#" class="tag-button" data-tag="@tag.Name">
                 @tag.Name
             </a>
         </li>
@@ -185,6 +185,16 @@
                 }
             });
         }
+    });
+    // Tag button click handler: redirect to search by tag
+    document.querySelectorAll('.tag-button').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            var tag = btn.getAttribute('data-tag');
+            if (tag) {
+                window.location.href = '/Template/Search?tags=' + encodeURIComponent(tag);
+            }
+        });
     });
 </script>
 @section Scripts {

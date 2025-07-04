@@ -146,9 +146,12 @@
                 <td>@template.CreatedAt.ToString("MMM dd, yyyy")</td>
                 <td>@createdBy</td>
                 <td class="text-center">
-                    <button type="button" class="dropdown-toggle-arrow" onclick="toggleDetails(@i, event)" id="dropdown-btn-@i">
-                        <i class="fas fa-chevron-down"></i>
-                    </button>
+                    @if (HttpContextAccessor.HttpContext.Request.Cookies["Role"] != null)
+                    {
+                        <button type="button" class="dropdown-toggle-arrow" onclick="toggleDetails(@i, event)" id="dropdown-btn-@i">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    }
                 </td>
             </tr>
             <tr class="template-details-row" id="details-row-@i">
@@ -179,7 +182,7 @@
                         </div>
                     }
                     <div id="comments-list-@template.Id">
-                    @if (comments.Count > 0)
+                    @if (comments.Count > 0 && HttpContextAccessor.HttpContext.Request.Cookies["Role"] != null)
                     {
                         foreach (var comment in comments)
                         {
@@ -226,16 +229,23 @@
         }
     }
     // Make row clickable to go to details
-    document.querySelectorAll('.template-row').forEach(function(row) {
-        row.addEventListener('click', function(e) {
-            if (!e.target.classList.contains('dropdown-toggle-arrow')) {
-                var link = row.querySelector('.template-title-link');
-                if (link) {
-                    window.location = link.href;
+    if (document.cookie.includes('Role=')) {
+        document.querySelectorAll('.template-row').forEach(function(row) {
+            row.style.cursor = 'pointer';
+            row.addEventListener('click', function(e) {
+                if (!e.target.classList.contains('dropdown-toggle-arrow')) {
+                    var link = row.querySelector('.template-title-link');
+                    if (link) {
+                        window.location = link.href;
+                    }
                 }
-            }
+            });
         });
-    });
+    } else {
+        document.querySelectorAll('.template-row').forEach(function(row) {
+            row.style.cursor = 'default';
+        });
+    }
 </script>
 
 @section Scripts {

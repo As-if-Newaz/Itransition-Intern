@@ -8,5 +8,6 @@ namespace Iforms.MVC.Models
         public TemplateDTO Template { get; set; } = null!;
         public List<QuestionDTO> Questions { get; set; } = new();
         public List<AnswerDTO>? Answers { get; set; } = new();
+
     }
 }

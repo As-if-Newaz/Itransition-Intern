@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Iforms.DAL.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -30,7 +31,9 @@ namespace Iforms.BLL.DTOs
         [Required]
         public int FormId { get; set; }
 
-        // Navigation property for details view
         public virtual QuestionDTO? Question { get; set; }
+
+        // Used to signal image removal in edit form
+        public bool RemoveFile { get; set; }
     }
 }

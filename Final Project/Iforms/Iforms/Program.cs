@@ -65,12 +65,15 @@ builder.Services.AddSession(options =>
 builder.Services.AddSignalR();
 
 builder.Services.AddDbContext<IApplicationDBContext, ApplicationDBContext>(options =>
-    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Iforms.DAL"))
-           .EnableSensitiveDataLogging()
-           .LogTo(Console.WriteLine, LogLevel.Information));
+    options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Iforms.DAL")));
+           //.EnableSensitiveDataLogging() // Enables sensitive data logging for debugging
+           //.LogTo(Console.WriteLine, LogLevel.Information)); // Logs SQL queries to the console
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add this after builder is created, before app is built:
+builder.Logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
 
 var app = builder.Build();
 

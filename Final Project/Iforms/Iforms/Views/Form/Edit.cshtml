@@ -262,30 +262,26 @@
                             @(question.IsMandatory ? "required" : null) />
                         break;
                     case Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType.FileUpload:
-                        <div class="file-upload-area" onclick="document.getElementById('file_@question.Id').click()">
-                            <div class="file-upload-icon">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                            </div>
-                            <p>Click to upload an image or drag and drop</p>
-                            <p class="text-muted">Supported formats: JPG, PNG, JPEG, GIF</p>
+                        <div class="mb-3">
+                            @if (!string.IsNullOrEmpty(answer?.FileUrl))
+                            {
+                                <div id="existing-img-container-@questionIndex" style="text-align:center; margin-bottom:8px;">
+                                    <img src="@answer.FileUrl" id="existing-img-@questionIndex" style="max-width:320px;max-height:320px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.08);display:inline-block;" />
+                                    <button type="button" id="remove-existing-btn-@questionIndex" class="btn btn-sm btn-outline-danger" style="margin-left:8px;" onclick="removeExistingImage(@questionIndex)">Remove</button>
+                                </div>
+                                <input type="hidden" name="Answers[@questionIndex].RemoveFile" id="remove-file-flag-@questionIndex" value="false" />
+                            }
+                            <img id="img-preview-@questionIndex" style="display:none;max-width:120px;max-height:120px;margin-bottom:6px;border-radius:4px;" />
+                            <button type="button" id="remove-btn-@questionIndex" style="display:none;margin-bottom:6px;" onclick="removeImage('file_@question.Id', @questionIndex)">Remove</button>
+                            <label class="form-label">Upload Image</label>
                             <input 
                                 type="file" 
                                 id="file_@question.Id"
-                                name="Answers[@questionIndex].FileUrl" 
-                                class="d-none"
+                                name="AnswerFile_@questionIndex" 
+                                class="form-control"
                                 accept="image/*"
-                                @(question.IsMandatory ? "required" : null)
-                                onchange="handleImageSelect(this, @question.Id)" />
-                        </div>
-                        <div id="file-info-@question.Id" class="mt-2" style="display: @(answer != null && !string.IsNullOrEmpty(answer.FileUrl) ? "block" : "none")">
-                            <div class="alert alert-info d-flex align-items-center">
-                                <i class="fas fa-file-image me-2"></i>
-                                <span id="file-name-@question.Id">@(answer?.FileUrl != null ? System.IO.Path.GetFileName(answer.FileUrl) : "")</span>
-                                <img id="image-preview-@question.Id" src="@(answer?.FileUrl ?? "#")" alt="Image Preview" style="max-width: 100px; max-height: 100px; margin-left: 1rem; display: @(answer != null && !string.IsNullOrEmpty(answer.FileUrl) ? "inline-block" : "none");" />
-                                <button type="button" class="btn btn-sm btn-outline-danger ms-2" onclick="removeFile(@question.Id)">
-                                    Remove
-                                </button>
-                            </div>
+                                onchange="showImagePreview(this, @questionIndex)"
+                                @(question.IsMandatory ? "required" : null) />
                         </div>
                         break;
                     case Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType.Checkbox:
@@ -347,56 +343,34 @@
             const progressPercentage = totalQuestions > 0 ? (answeredQuestions / totalQuestions) * 100 : 0;
             document.getElementById('progressFill').style.width = progressPercentage + '%';
         }
-        function handleImageSelect(input, questionId) {
-            const file = input.files[0];
-            const fileNameSpan = document.getElementById('file-name-' + questionId);
-            const fileInfoDiv = document.getElementById('file-info-' + questionId);
-            const imagePreview = document.getElementById('image-preview-' + questionId);
-            if (file) {
-                fileNameSpan.textContent = file.name;
-                fileInfoDiv.style.display = 'block';
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        imagePreview.src = e.target.result;
-                        imagePreview.style.display = 'inline-block';
-                    };
-                    reader.readAsDataURL(file);
-                } else {
-                    imagePreview.style.display = 'none';
-                }
-                updateProgress();
+        function showImagePreview(input, qIdx) {
+            const img = document.getElementById('img-preview-' + qIdx);
+            const btn = document.getElementById('remove-btn-' + qIdx);
+            // Hide existing image if new file selected
+            var existingImgContainer = document.getElementById('existing-img-container-' + qIdx);
+            if (input.files && input.files[0]) {
+                img.src = URL.createObjectURL(input.files[0]);
+                img.style.display = '';
+                btn.style.display = '';
+                if (existingImgContainer) existingImgContainer.style.display = 'none';
+            } else {
+                img.style.display = 'none';
+                btn.style.display = 'none';
+                img.src = '';
+                if (existingImgContainer) existingImgContainer.style.display = '';
             }
         }
-        function removeFile(questionId) {
-            document.getElementById('file_' + questionId).value = '';
-            document.getElementById('file-info-' + questionId).style.display = 'none';
-            const imagePreview = document.getElementById('image-preview-' + questionId);
-            if (imagePreview) imagePreview.style.display = 'none';
-            updateProgress();
+        function removeImage(fileInputId, qIdx) {
+            const fileInput = document.getElementById(fileInputId);
+            fileInput.value = '';
+            showImagePreview(fileInput, qIdx);
         }
-        // Drag and drop for file upload
-        document.querySelectorAll('.file-upload-area').forEach(area => {
-            area.addEventListener('dragover', function(e) {
-                e.preventDefault();
-                this.classList.add('dragover');
-            });
-            area.addEventListener('dragleave', function(e) {
-                e.preventDefault();
-                this.classList.remove('dragover');
-            });
-            area.addEventListener('drop', function(e) {
-                e.preventDefault();
-                this.classList.remove('dragover');
-                const files = e.dataTransfer.files;
-                if (files.length > 0) {
-                    const questionId = this.querySelector('input[type="file"]').id.replace('file_', '');
-                    const fileInput = document.getElementById('file_' + questionId);
-                    fileInput.files = files;
-                    handleImageSelect(fileInput, questionId);
-                }
-            });
-        });
+        function removeExistingImage(qIdx) {
+            var existingImgContainer = document.getElementById('existing-img-container-' + qIdx);
+            if (existingImgContainer) existingImgContainer.style.display = 'none';
+            var removeFlag = document.getElementById('remove-file-flag-' + qIdx);
+            if (removeFlag) removeFlag.value = 'true';
+        }
         // Form validation and progress tracking
         document.addEventListener('DOMContentLoaded', function() {
             // Track progress on input changes

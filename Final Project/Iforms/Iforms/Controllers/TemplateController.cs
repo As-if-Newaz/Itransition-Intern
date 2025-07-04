@@ -38,22 +38,6 @@ namespace Iforms.MVC.Controllers
 
         }
 
-        //public IActionResult Details(int id)
-        //{
-        //    var currentUserId = GetCurrentUserId();
-        //    var template = templateService.GetTemplateDetailedById(id, currentUserId);
-
-        //    if (template == null)
-        //        return NotFound();
-
-        //    if (!templateService.CanUserAccessTemplate(id, currentUserId))
-        //        return Forbid();
-
-        //    var questions = questionService.GetByTemplateId(id);
-        //    var comments = commentService.GetTemplateComments(id);
-        //    return View(template);
-        //}
-
         [AuthenticatedAdminorUser]
         [HttpGet]
         public IActionResult Create()
@@ -65,107 +49,27 @@ namespace Iforms.MVC.Controllers
         [HttpPost]
         public IActionResult Create(TemplateDTO model)
         {
-            var topicIdFromForm = Request.Form["Topic.Id"].ToString();
-            var topicTypeFromForm = Request.Form["Topic.TopicType"].ToString();
-            if ((model.Topic?.Id == 0 || string.IsNullOrEmpty(model.Topic?.TopicType)) && 
-                (!string.IsNullOrEmpty(topicIdFromForm) || !string.IsNullOrEmpty(topicTypeFromForm)))
-            {
-                if (model.Topic == null)
-                    model.Topic = new TopicDTO();
-                if (int.TryParse(topicIdFromForm, out var topicId))
-                    model.Topic.Id = topicId;
-                if (!string.IsNullOrEmpty(topicTypeFromForm))
-                    model.Topic.TopicType = topicTypeFromForm;
-            }
-            var templateImage = Request.Form.Files["TemplateImage"];
-            if (templateImage != null && templateImage.Length > 0)
-            {
-                var imageUrl = ImageService.UploadTemplateImage(templateImage);
-                if (!string.IsNullOrEmpty(imageUrl))
-                {
-                    model.ImageUrl = imageUrl;
-                }
-                else
-                {
-                    ModelState.AddModelError("", "There was an error uploading the image. Please try again.");
-                    return View(model);
-                }
-            }
-            var templateTagsInput = Request.Form["TemplateTagsInput"].ToString();
-            if (!string.IsNullOrWhiteSpace(templateTagsInput) && (model.TemplateTags == null || !model.TemplateTags.Any()))
-            {
-                var tagNames = templateTagsInput.Split(',')
-                    .Select(t => t.Trim())
-                    .Where(t => !string.IsNullOrWhiteSpace(t))
-                    .ToList();
-                model.TemplateTags = tagNames.Select(tagName => new TagDTO { Name = tagName }).ToList();
-            }
-            var selectedUserIdsInput = Request.Form["SelectedUserIds"].ToString();
-            if (!string.IsNullOrWhiteSpace(selectedUserIdsInput))
-            {
-                var userIds = selectedUserIdsInput.Split(',')
-                    .Select(id => id.Trim())
-                    .Where(id => !string.IsNullOrWhiteSpace(id))
-                    .Select(int.Parse)
-                    .ToList();
-                model.TemplateAccesses = userIds
-                    .Select(userId => userService.GetById(userId))
-                    .Where(u => u != null)
-                    .ToList();
-            }
-            else
-            {
-                model.TemplateAccesses = new List<UserDTO>();
-            }
-            var questions = new List<QuestionDTO>();
-            var questionIndex = 0;
-            while (Request.Form.ContainsKey($"Questions[{questionIndex}].QuestionTitle"))
-            {
-                var questionIdStr = Request.Form[$"Questions[{questionIndex}].Id"].ToString();
-                var questionTitle = Request.Form[$"Questions[{questionIndex}].QuestionTitle"].ToString();
-                var questionTypeStr = Request.Form[$"Questions[{questionIndex}].QuestionType"].ToString();
-                var questionOrder = int.Parse(Request.Form[$"Questions[{questionIndex}].QuestionOrder"].ToString());
-                var optionsJson = Request.Form[$"Questions[{questionIndex}].Options"].ToString();
-                var isMandatoryStr = Request.Form[$"Questions[{questionIndex}].IsMandatory"].ToString();
-                if (Enum.TryParse<Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType>(questionTypeStr, out var questionType))
-                {
-                    var questionDto = new QuestionDTO
-                    {
-                        Id = int.TryParse(questionIdStr, out var id) ? id : 0,
-                        QuestionTitle = questionTitle,
-                        QuestionDescription = questionTitle, // Using title as description for now
-                        QuestionType = questionType,
-                        QuestionOrder = questionOrder,
-                        TemplateId = model.Id,
-                        Options = !string.IsNullOrEmpty(optionsJson) ? 
-                            System.Text.Json.JsonSerializer.Deserialize<List<string>>(optionsJson) ?? new List<string>() : 
-                            new List<string>(),
-                        IsMandatory = isMandatoryStr == "true" || isMandatoryStr == "True"
-                    };
-                    questions.Add(questionDto);
-                }
-                questionIndex++;
-            }
-            model.Questions = questions;
-            if (!ModelState.IsValid)
-            {
+            ExtractTopicFromForm(model);
+            if (!HandleImageUpload(model))
                 return View(model);
-            }
+            ExtractTagsFromForm(model);
+            ExtractUserAccessFromForm(model);
+            ExtractQuestionsFromForm(model);
+
+            if (!ModelState.IsValid)
+                return View(model);
+
             var currentUserId = GetCurrentUserId()!.Value;
             model.CreatedAt = DateTime.UtcNow;
             model.CreatedById = currentUserId;
             var currentUser = userService.GetById(currentUserId);
             if (currentUser != null)
-            {
                 model.CreatedBy = currentUser;
-            }
             try
             {
                 var template = templateService.Create(model, currentUserId);
                 if (template != null)
-                {
                     return RedirectToAction("UserTemplates", "UserDashboard");
-                }
             }
             catch (Exception)
             {
@@ -195,105 +99,21 @@ namespace Iforms.MVC.Controllers
         [HttpPost]
         public IActionResult Edit(TemplateDTO model)
         {
-            var templateImage = Request.Form.Files["TemplateImage"];
-            if (templateImage != null && templateImage.Length > 0)
-            {
-                var newImageUrl = ImageService.UploadTemplateImage(templateImage, model.ImageUrl);
-                if (!string.IsNullOrEmpty(newImageUrl))
-                {
-                    model.ImageUrl = newImageUrl;
-                }
-                else
-                {
-                    ModelState.AddModelError("", "There was an error uploading the new image. Please try again.");
-                    return View(model);
-                }
-            }
-            
-            // Process template tags from form input if needed
-            var templateTagsInput = Request.Form["TemplateTagsInput"].ToString();
-            if (!string.IsNullOrWhiteSpace(templateTagsInput) && (model.TemplateTags == null || !model.TemplateTags.Any()))
-            {
-                var tagNames = templateTagsInput.Split(',')
-                    .Select(t => t.Trim())
-                    .Where(t => !string.IsNullOrWhiteSpace(t))
-                    .ToList();
-                
-                model.TemplateTags = tagNames.Select(tagName => new TagDTO { Name = tagName }).ToList();
-            }
-            
-            // Process selected user IDs from form input
-            var selectedUserIdsInput = Request.Form["SelectedUserIds"].ToString();
-            if (!string.IsNullOrWhiteSpace(selectedUserIdsInput))
-            {
-                var userIds = selectedUserIdsInput.Split(',')
-                    .Select(id => id.Trim())
-                    .Where(id => !string.IsNullOrWhiteSpace(id))
-                    .Select(int.Parse)
-                    .ToList();
-                
-                // Create minimal UserDTO objects with only the Id property
-                model.TemplateAccesses = userIds.Select(userId => new UserDTO 
-                { 
-                    Id = userId,
-                    UserName = "", // Will be ignored by the service
-                    UserEmail = "", // Will be ignored by the service
-                    PasswordHash = "", // Will be ignored by the service
-                    UserRole = UserRole.User, // Default value
-                    UserStatus = UserStatus.Active, // Default value
-                    CreatedAt = DateTime.UtcNow // Default value
-                }).ToList();
-            }
-            else
-            {
-                model.TemplateAccesses = new List<UserDTO>();
-            }
-            
-            // Process questions from form input
-            var questions = new List<QuestionDTO>();
-            var questionIndex = 0;
-            while (Request.Form.ContainsKey($"Questions[{questionIndex}].QuestionTitle"))
-            {
-                var questionIdStr = Request.Form[$"Questions[{questionIndex}].Id"].ToString();
-                var questionTitle = Request.Form[$"Questions[{questionIndex}].QuestionTitle"].ToString();
-                var questionTypeStr = Request.Form[$"Questions[{questionIndex}].QuestionType"].ToString();
-                var questionOrder = int.Parse(Request.Form[$"Questions[{questionIndex}].QuestionOrder"].ToString());
-                var optionsJson = Request.Form[$"Questions[{questionIndex}].Options"].ToString();
-                
-                // Parse question type string to enum
-                if (Enum.TryParse<Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType>(questionTypeStr, out var questionType))
-                {
-                    var questionDto = new QuestionDTO
-                    {
-                        Id = int.TryParse(questionIdStr, out var id) ? id : 0,
-                        QuestionTitle = questionTitle,
-                        QuestionDescription = questionTitle, // Using title as description for now
-                        QuestionType = questionType,
-                        QuestionOrder = questionOrder,
-                        TemplateId = model.Id,
-                        Options = !string.IsNullOrEmpty(optionsJson) ? 
-                            System.Text.Json.JsonSerializer.Deserialize<List<string>>(optionsJson) ?? new List<string>() : 
-                            new List<string>()
-                    };
-                    questions.Add(questionDto);
-                }
-                questionIndex++;
-            }
-            model.Questions = questions;
-            
-            if (!ModelState.IsValid)
-            {
+            if (!HandleImageUploadEdit(model))
                 return View(model);
-            }
+            ExtractTagsFromForm(model);
+            ExtractUserAccessFromFormEdit(model);
+            ExtractQuestionsFromForm(model);
+
+            if (!ModelState.IsValid)
+                return View(model);
 
             var currentUserId = GetCurrentUserId()!.Value;
-
             var template = templateService.Update(model.Id, model, currentUserId);
             if (template == null)
                 return NotFound();
             return RedirectToAction("Edit", new { id = model.Id });
         }
-
 
         [AuthenticatedAdminorUser]
         [HttpPost]
@@ -532,5 +352,156 @@ namespace Iforms.MVC.Controllers
                 return Json(new { success = false, message = "Failed to delete Templates" });
             }
         }
+
+        // --- Helper Methods for Create/Edit ---
+        private void ExtractTopicFromForm(TemplateDTO model)
+        {
+            var topicIdFromForm = Request.Form["Topic.Id"].ToString();
+            var topicTypeFromForm = Request.Form["Topic.TopicType"].ToString();
+            if ((model.Topic?.Id == 0 || string.IsNullOrEmpty(model.Topic?.TopicType)) &&
+                (!string.IsNullOrEmpty(topicIdFromForm) || !string.IsNullOrEmpty(topicTypeFromForm)))
+            {
+                if (model.Topic == null)
+                    model.Topic = new TopicDTO();
+                if (int.TryParse(topicIdFromForm, out var topicId))
+                    model.Topic.Id = topicId;
+                if (!string.IsNullOrEmpty(topicTypeFromForm))
+                    model.Topic.TopicType = topicTypeFromForm;
+            }
+        }
+
+        private bool HandleImageUpload(TemplateDTO model)
+        {
+            var templateImage = Request.Form.Files["TemplateImage"];
+            if (templateImage != null && templateImage.Length > 0)
+            {
+                var imageUrl = ImageService.UploadTemplateImage(templateImage);
+                if (!string.IsNullOrEmpty(imageUrl))
+                {
+                    model.ImageUrl = imageUrl;
+                }
+                else
+                {
+                    ModelState.AddModelError("", "There was an error uploading the image. Please try again.");
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool HandleImageUploadEdit(TemplateDTO model)
+        {
+            var templateImage = Request.Form.Files["TemplateImage"];
+            if (templateImage != null && templateImage.Length > 0)
+            {
+                var newImageUrl = ImageService.UploadTemplateImage(templateImage, model.ImageUrl);
+                if (!string.IsNullOrEmpty(newImageUrl))
+                {
+                    model.ImageUrl = newImageUrl;
+                }
+                else
+                {
+                    ModelState.AddModelError("", "There was an error uploading the new image. Please try again.");
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private void ExtractTagsFromForm(TemplateDTO model)
+        {
+            var templateTagsInput = Request.Form["TemplateTagsInput"].ToString();
+            if (!string.IsNullOrWhiteSpace(templateTagsInput) && (model.TemplateTags == null || !model.TemplateTags.Any()))
+            {
+                var tagNames = templateTagsInput.Split(',')
+                    .Select(t => t.Trim())
+                    .Where(t => !string.IsNullOrWhiteSpace(t))
+                    .ToList();
+                model.TemplateTags = tagNames.Select(tagName => new TagDTO { Name = tagName }).ToList();
+            }
+        }
+
+        private void ExtractUserAccessFromForm(TemplateDTO model)
+        {
+            var selectedUserIdsInput = Request.Form["SelectedUserIds"].ToString();
+            if (!string.IsNullOrWhiteSpace(selectedUserIdsInput))
+            {
+                var userIds = selectedUserIdsInput.Split(',')
+                    .Select(id => id.Trim())
+                    .Where(id => !string.IsNullOrWhiteSpace(id))
+                    .Select(int.Parse)
+                    .ToList();
+                model.TemplateAccesses = userIds
+                    .Select(userId => userService.GetById(userId))
+                    .Where(u => u != null)
+                    .ToList();
+            }
+            else
+            {
+                model.TemplateAccesses = new List<UserDTO>();
+            }
+        }
+
+        private void ExtractUserAccessFromFormEdit(TemplateDTO model)
+        {
+            var selectedUserIdsInput = Request.Form["SelectedUserIds"].ToString();
+            if (!string.IsNullOrWhiteSpace(selectedUserIdsInput))
+            {
+                var userIds = selectedUserIdsInput.Split(',')
+                    .Select(id => id.Trim())
+                    .Where(id => !string.IsNullOrWhiteSpace(id))
+                    .Select(int.Parse)
+                    .ToList();
+                model.TemplateAccesses = userIds.Select(userId => new UserDTO
+                {
+                    Id = userId,
+                    UserName = "",
+                    UserEmail = "",
+                    PasswordHash = "",
+                    UserRole = UserRole.User,
+                    UserStatus = UserStatus.Active,
+                    CreatedAt = DateTime.UtcNow
+                }).ToList();
+            }
+            else
+            {
+                model.TemplateAccesses = new List<UserDTO>();
+            }
+        }
+
+        private void ExtractQuestionsFromForm(TemplateDTO model)
+        {
+            var questions = new List<QuestionDTO>();
+            var questionIndex = 0;
+            while (Request.Form.ContainsKey($"Questions[{questionIndex}].QuestionTitle"))
+            {
+                var questionIdStr = Request.Form[$"Questions[{questionIndex}].Id"].ToString();
+                var questionTitle = Request.Form[$"Questions[{questionIndex}].QuestionTitle"].ToString();
+                var questionTypeStr = Request.Form[$"Questions[{questionIndex}].QuestionType"].ToString();
+                var questionOrder = int.Parse(Request.Form[$"Questions[{questionIndex}].QuestionOrder"].ToString());
+                var optionsJson = Request.Form[$"Questions[{questionIndex}].Options"].ToString();
+                var isMandatoryStr = Request.Form[$"Questions[{questionIndex}].IsMandatory"].ToString();
+                if (Enum.TryParse<Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType>(questionTypeStr, out var questionType))
+                {
+                    var questionDto = new QuestionDTO
+                    {
+                        Id = int.TryParse(questionIdStr, out var id) ? id : 0,
+                        QuestionTitle = questionTitle,
+                        QuestionDescription = questionTitle, // Using title as description for now
+                        QuestionType = questionType,
+                        QuestionOrder = questionOrder,
+                        TemplateId = model.Id,
+                        Options = !string.IsNullOrEmpty(optionsJson) ?
+                            System.Text.Json.JsonSerializer.Deserialize<List<string>>(optionsJson) ?? new List<string>() :
+                            new List<string>(),
+                        IsMandatory = isMandatoryStr == "true" || isMandatoryStr == "True"
+                    };
+                    questions.Add(questionDto);
+                }
+                questionIndex++;
+            }
+            model.Questions = questions;
+        }
     }
 }
+

@@ -37,14 +37,15 @@
                         <a href="@Url.Action("Create", "Template")" class="btn btn-glass">Create Template</a>
                         <a href="@Url.Action("UserTemplates", "UserDashboard")" class="btn btn-glass">Manage Templates</a>
                         <a href="@Url.Action("UserTemplateResponses", "UserDashboard")" class="btn btn-glass">Template Responses</a>
-                        <a href="@Url.Action("UserSubmittedForms", "UserDashboard")" class="btn btn-glass">Submitted forms</a> 
-                    }  
-                    else  
-                    {  
-                        // Public buttons  
+                        <a href="@Url.Action("UserSubmittedForms", "UserDashboard")" class="btn btn-glass">Submitted forms</a>
+                    }
+                    else
+                    {
+                        // Public buttons
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-glass">Home</a>
+                        <a href="@Url.Action("BrowseTemplates", "Template")" class="btn btn-glass">Browse Templates</a>
                         <a href="@Url.Action("login", "Auth")" class="btn btn-glass">Login</a>  
-                        <a href="@Url.Action("register", "User")" class="btn btn-glass">Sign up</a>  
-                        <a href="@Url.Action("Privacy", "Home")" class="btn btn-glass">Privacy Policy</a>  
+                        <a href="@Url.Action("register", "User")" class="btn btn-glass">Sign up</a>    
                         <button class="btn btn-glass">About Us</button>  
                         <button class="btn btn-glass">Terms and Conditions</button>  
                     }  
