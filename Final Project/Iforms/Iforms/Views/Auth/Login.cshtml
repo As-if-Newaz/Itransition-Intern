@@ -5,16 +5,16 @@
 }
 <h1 class="app-logo">Iforms</h1>
 <div class="form-container">
-    <h2>Sign in to The App</h2>
+    <h2 data-i18n="login">Sign in to The App</h2>
     <form asp-action="Login">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="mb-3">
-            <label asp-for="UserEmail" class="form-label">Email</label>
+            <label asp-for="UserEmail" class="form-label" data-i18n="email">Email</label>
             <input asp-for="UserEmail" class="form-control" placeholder="Email" />
             <span asp-validation-for="UserEmail" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label asp-for="Password" class="form-label">Password</label>
+            <label asp-for="Password" class="form-label" data-i18n="password">Password</label>
             <input asp-for="Password" class="form-control" type="password" placeholder="password" />
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
@@ -22,10 +22,10 @@
             <a href="/register">Forgot password?</a>
         </div>
         <div class="mb-3">
-            <input type="submit" value="Login" class="btn btn-primary" />
+            <input type="submit" value="Login" class="btn btn-primary" data-i18n="login" />
         </div>
         <div class="mb-3">
-            <p class="text-start">Don't have an account? <a href="/register">Sign Up</a></p>
+            <p class="text-start">Don't have an account? <a href="/register" data-i18n="signup">Sign Up</a></p>
         </div>
     </form>
 </div>

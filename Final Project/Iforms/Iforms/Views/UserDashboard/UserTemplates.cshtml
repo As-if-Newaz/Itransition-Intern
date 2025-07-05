@@ -143,36 +143,36 @@
 
 <div class="user-templates-container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>My Templates</h2>
+        <h2 data-i18n="manage_templates">My Templates</h2>
         <a href="@Url.Action("Create", "Template")" class="create-template-btn">
-            <i class="fas fa-plus"></i> Create New Template
+            <i class="fas fa-plus"></i> <span data-i18n="create_template">Create New Template</span>
         </a>
     </div>
 
     @if (!Model.Templates.Any())
     {
         <div class="no-templates">
-            <h4>No templates found</h4>
-            <p>You haven't created any templates yet. Start by creating your first template!</p>
+            <h4 data-i18n="no_templates">No templates found</h4>
+            <p data-i18n="no_templates_desc">You haven't created any templates yet. Start by creating your first template!</p>
             <a href="@Url.Action("Create", "Template")" class="create-template-btn">
-                <i class="fas fa-plus"></i> Create Your First Template
+                <i class="fas fa-plus"></i> <span data-i18n="create_template">Create Your First Template</span>
             </a>
         </div>
     }
     else
     {
         <div class="navbar navbar-expand-lg navbar-light bg-secondary-subtle mb-3">
-            <button id="deleteTemplatesBtn" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+            <button id="deleteTemplatesBtn" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i> <span data-i18n="delete">Delete</span></button>
         </div>
 
         <table class="templates-table">
             <thead>
                 <tr>
                     <th><input type="checkbox" id="selectAllTemplates" title="Select/Deselect all"></th>
-                    <th>Title</th>
-                    <th>Created At</th>
-                    <th>Status</th>
-                    <th>Description</th>
+                    <th data-i18n="title">Title</th>
+                    <th data-i18n="created_at">Created At</th>
+                    <th data-i18n="status">Status</th>
+                    <th data-i18n="description">Description</th>
                 </tr>
             </thead>
             <tbody>
@@ -200,7 +200,7 @@
                             }
                             else
                             {
-                                <span class="text-muted">No description</span>
+                                <span class="text-muted" data-i18n="no_description">No Description</span>
                             }
                         </td>
                     </tr>
@@ -265,6 +265,9 @@
 </div>
 
 @section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
@@ -310,3 +313,4 @@
         });
     </script>
 }
+

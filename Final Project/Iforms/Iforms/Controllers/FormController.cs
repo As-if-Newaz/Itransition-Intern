@@ -345,42 +345,5 @@ namespace Iforms.MVC.Controllers
             }
         }
 
-        private bool HandleImageUpload(AnswerDTO model)
-        {
-            var templateImage = Request.Form.Files["AnswerImage"];
-            if (templateImage != null && templateImage.Length > 0)
-            {
-                var imageUrl = ImageService.UploadTemplateImage(templateImage);
-                if (!string.IsNullOrEmpty(imageUrl))
-                {
-                    model.FileUrl = imageUrl;
-                }
-                else
-                {
-                    ModelState.AddModelError("", "There was an error uploading the image. Please try again.");
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        private bool HandleImageUploadEdit(AnswerDTO model)
-        {
-            var templateImage = Request.Form.Files["AnswerImage"];
-            if (templateImage != null && templateImage.Length > 0)
-            {
-                var newImageUrl = ImageService.UploadAnswerImage(templateImage, model.FileUrl);
-                if (!string.IsNullOrEmpty(newImageUrl))
-                {
-                    model.FileUrl = newImageUrl;
-                }
-                else
-                {
-                    ModelState.AddModelError("", "There was an error uploading the new image. Please try again.");
-                    return false;
-                }
-            }
-            return true;
-        }
     }
 }

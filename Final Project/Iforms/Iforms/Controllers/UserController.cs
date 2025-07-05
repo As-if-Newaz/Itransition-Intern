@@ -90,52 +90,87 @@ namespace Iforms.MVC.Controllers
             return RedirectToAction("Login", "Auth");
         }
 
-        [HttpGet]
-        [Route("profile")]
-        public IActionResult Profile()
-        {
-            if (!User.Identity.IsAuthenticated)
-                return RedirectToAction("Login", "Auth");
+        //[HttpGet]
+        //[Route("profile")]
+        //public IActionResult Profile()
+        //{
+        //    if (!User.Identity.IsAuthenticated)
+        //        return RedirectToAction("Login", "Auth");
 
-            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
-            var user = userServices.GetById(userId);
+        //    var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
+        //    var user = userServices.GetById(userId);
 
-            if (user == null)
-                return NotFound();
+        //    if (user == null)
+        //        return NotFound();
 
-            var model = new UserPreferencesDTO
-            {
-                PreferredLanguage = (Language)user.PreferredLanguage,
-                PreferredTheme = (Theme)user.PreferredTheme
-            };
+        //    var model = new UserPreferencesDTO
+        //    {
+        //        PreferredLanguage = (Language)user.PreferredLanguage,
+        //        PreferredTheme = (Theme)user.PreferredTheme
+        //    };
 
-            return View(model);
-        }
+        //    return View(model);
+        //}
+
+        //[HttpPost]
+        //[Route("profile")]
+        //public IActionResult Profile(UserPreferencesDTO preferences)
+        //{
+        //    if (!User.Identity.IsAuthenticated)
+        //        return RedirectToAction("Login", "Auth");
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
+        //        var result = userServices.UpdatePreferences(userId, preferences);
+
+        //        if (result)
+        //        {
+        //            TempData["SuccessMsg"] = "Preferences updated successfully!";
+        //            return RedirectToAction("Profile");
+        //        }
+        //        else
+        //        {
+        //            TempData["ErrorMsg"] = "Failed to update preferences.";
+        //        }
+        //    }
+
+        //    return View(preferences);
+        //}
 
         [HttpPost]
-        [Route("profile")]
-        public IActionResult Profile(UserPreferencesDTO preferences)
+        public IActionResult UpdateThemePreference([FromBody] ThemePreferenceModel model)
         {
-            if (!User.Identity.IsAuthenticated)
-                return RedirectToAction("Login", "Auth");
+            if (model == null || model.UserId <= 0)
+                return Json(new { success = false, message = "Invalid data" });
 
-            if (ModelState.IsValid)
+            try
             {
-                var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
-                var result = userServices.UpdatePreferences(userId, preferences);
+                var user = userServices.GetById(model.UserId);
+                if (user == null)
+                    return Json(new { success = false, message = "User not found" });
 
-                if (result)
+                var theme = model.Theme == "Dark" ? Theme.Dark : Theme.Light;
+                var preferences = new UserPreferencesDTO
                 {
-                    TempData["SuccessMsg"] = "Preferences updated successfully!";
-                    return RedirectToAction("Profile");
-                }
-                else
-                {
-                    TempData["ErrorMsg"] = "Failed to update preferences.";
-                }
+                    UserId = model.UserId,
+                    PreferredLanguage = user.PreferredLanguage ?? Language.English,
+                    PreferredTheme = theme
+                };
+
+                var result = userServices.UpdatePreferences(model.UserId, preferences);
+                return Json(new { success = result });
             }
-
-            return View(preferences);
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Error updating theme preference" });
+            }
         }
+    }
+
+    public class ThemePreferenceModel
+    {
+        public int UserId { get; set; }
+        public string Theme { get; set; }
     }
 }

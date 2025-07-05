@@ -354,5 +354,7 @@ D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\Microsoft.A
 D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\Microsoft.AspNetCore.SignalR.Client.Core.dll
 D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\Newtonsoft.Json.dll
 D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\System.Net.WebSockets.WebSocketProtocol.dll
-D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\CloudinaryDotNet.dll
+D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\Microsoft.Extensions.Localization.dll
+D:\Projects\Itransition\Final Project\Iforms\Iforms\bin\Debug\net8.0\Microsoft.Extensions.Localization.Abstractions.dll
+D:\Projects\Itransition\Final Project\Iforms\Iforms\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

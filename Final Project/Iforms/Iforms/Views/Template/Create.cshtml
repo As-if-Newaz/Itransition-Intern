@@ -4,6 +4,7 @@
 }
 
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using Microsoft.AspNetCore.Mvc.Localization
 <style>
     /* Custom Modal Styles - No Backdrop */
     .custom-modal {
@@ -178,17 +179,17 @@
 <div class="container mt-4">  
     </br>
     <div class="template-content-area">
-        <h2>Create a New Template</h2>
+        <h2><span data-i18n="create">Create</span> a New Template</h2>
         <form id="templateForm" asp-action="Create" method="post" enctype="multipart/form-data">
             @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="mb-3">
-                <label asp-for="Title" class="form-label">Title</label>
+                <label asp-for="Title" class="form-label" data-i18n="title">Title</label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Description" class="form-label">Description</label>
+                <label asp-for="Description" class="form-label" data-i18n="description">Description</label>
                 <textarea asp-for="Description" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
@@ -199,7 +200,7 @@
             </div>
             <div class="mb-3 form-check">
                 <input asp-for="IsPublic" class="form-check-input" />
-                <label asp-for="IsPublic" class="form-check-label">Is Public</label>
+                <label asp-for="IsPublic" class="form-check-label">Is <span data-i18n="public">Public</span></label>
                 <span asp-validation-for="IsPublic" class="text-danger"></span>
             </div>
             <div class="mb-3">
@@ -244,7 +245,7 @@
     <div class="custom-modal-dialog">
         <div class="custom-modal-content">
             <div class="custom-modal-header">
-                <h5 class="custom-modal-title">Create New Topic</h5>
+                <h5 class="custom-modal-title"><span data-i18n="create">Create</span> New Topic</h5>
                 <button type="button" class="btn-close" id="closeTopicModal" aria-label="Close">&times;</button>
             </div>
             <div class="custom-modal-body">

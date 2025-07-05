@@ -1,7 +1,8 @@
-@{
+﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor  
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using Microsoft.AspNetCore.Mvc.Localization
 <h2>Manage Users</h2>
 <div class="navbar navbar-expand-lg navbar-light bg-secondary-subtle">
     <button data-action="Block" class="btn btn-outline-primary me-2"><i class="bi bi-lock-fill"></i> Block</button>
@@ -10,7 +11,7 @@
     <button data-action="Inactivate" class="btn btn-outline-warning me-2"><i class="bi bi-person-x-fill"></i> Inactivate</button>
     <button data-action="AddAdminAccess" class="btn btn-outline-info me-2"><i class="bi bi-person-badge-fill"></i> Give Admin Access</button>
     <button data-action="RemoveAdminAccess" class="btn btn-outline-secondary me-2"><i class="bi bi-person-dash-fill"></i> Remove Admin Access</button>
-    <button data-action="Delete" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i> Delete</button>
+    <button data-action="Delete" class="btn btn-outline-danger"><i class="bi bi-trash-fill"></i> <span data-i18n="delete">Delete</span></button>
 </div>
 
 <table class="table table-bordered">  
@@ -20,7 +21,7 @@
            <th>Name</th>  
            <th>Role</th>
            <th>Registered at</th>  
-           <th>Status</th>  
+           <th><span data-i18n="status">Status</span></th>  
        </tr>  
    </thead>  
    <tbody>  

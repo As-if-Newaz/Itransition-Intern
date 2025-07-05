@@ -181,7 +181,165 @@
         color: white;
         text-decoration: none;
     }
+
+    .question-card .dropdown-toggle-arrow {
+        color: #adb5bd;
+        transition: transform 0.2s;
+        font-size: 1.3rem;
+    }
+    .question-card .dropdown-toggle-arrow.open .fa-chevron-down {
+        transform: rotate(-180deg);
+    }
+    .question-card .dropdown-toggle-arrow .fa-chevron-down {
+        transition: transform 0.2s;
+    }
 </style>
+
+@if (template != null)
+{
+    <div class="form-header" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; padding: 2rem; border-radius: 10px; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+        <h1 class="form-title">@template.Title</h1>
+        <div class="form-meta" style="display: flex; gap: 1rem; font-size: 0.9rem; opacity: 0.9;">
+            <span><i class="fas fa-calendar"></i> Created: @template.CreatedAt.ToString("MMM dd, yyyy")</span>
+            <span><i class="fas fa-user"></i> Created by: @template.CreatedBy?.UserName</span>
+            <span><i class="fas fa-eye"></i> Status: @(template.IsPublic ? "Public" : "Private")</span>
+        </div>
+        @if (!string.IsNullOrEmpty(template.Description))
+        {
+            <div class="template-description" style="font-size: 1.1rem; opacity: 0.9; margin-top: 1rem;">@template.Description</div>
+        }
+        @if (!string.IsNullOrEmpty(template.ImageUrl))
+        {
+            <div class="text-center my-4">
+                <img src="@template.ImageUrl" alt="Template Image" style="max-width: 400px; max-height: 400px; display: inline-block; border-radius: 16px; box-shadow: 0 6px 24px rgba(0,0,0,0.16); margin-top: 1rem;" />
+            </div>
+        }
+    </div>
+
+    @if (template.Questions != null && template.Questions.Any())
+    {
+        <div class="questions-list mb-4" style="background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.08); margin: 20px 0;">
+            <h3 style="margin-bottom: 1rem; padding: 24px 24px 0 24px;">Questions</h3>
+            @for (int i = 0; i < template.Questions.Count; i++)
+            {
+                var q = template.Questions[i];
+                var isBarPlot = q.QuestionType.ToString() != "FileUpload" && q.QuestionType.ToString() != "Date";
+                var answerList = forms
+                    .Select(f => f.Answers?.FirstOrDefault(a => a.QuestionId == q.Id))
+                    .Where(a => a != null)
+                    .Select(a => !string.IsNullOrEmpty(a.Text) ? a.Text :
+                                 !string.IsNullOrEmpty(a.LongText) ? a.LongText :
+                                 a.Number.HasValue ? a.Number.Value.ToString() :
+                                 a.Checkbox.HasValue ? a.Checkbox.Value.ToString() : null)
+                    .Where(val => !string.IsNullOrEmpty(val))
+                    .ToList();
+            <div class="question-card mb-3" style="background: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.08); border: 1px solid #e9ecef;">
+                <div class="d-flex align-items-center justify-content-between" style="padding: 18px 24px; cursor: pointer;" onclick="toggleQuestionDetails(@i, event)">
+                    <span style="font-weight:600; font-size:1.1rem; color:#222;">@q.QuestionTitle</span>
+                    <button type="button" class="dropdown-toggle-arrow" id="dropdown-question-btn-@i" style="border:none; background:none; outline:none; margin-left:12px; display: flex; align-items: center;">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                @if (isBarPlot)
+                {
+                    <div class="bar-plot-container mt-4" style="max-width: 540px; margin: 0 auto;">
+                        <canvas id="barChart-@q.Id" width="520" height="180" style="background: #eee; border: 1px solid #ccc;"></canvas>
+                    </div>
+                    <script>
+                        window.barPlotData = window.barPlotData || {};
+                        window.barPlotData[@q.Id] = {
+                            answers: @Html.Raw(System.Text.Json.JsonSerializer.Serialize(answerList))
+                        };
+                    </script>
+                }
+                <div class="question-details-row" id="question-details-row-@i" style="display:none; background:#f9f9f9; border-top:1px solid #e9ecef; padding: 18px 32px; border-radius: 0 0 8px 8px;">
+                    <div style="margin-bottom: 6px;"><strong>Description:</strong> @q.QuestionDescription</div>
+                    <div style="margin-bottom: 6px;"><strong>Type:</strong> @q.QuestionType</div>
+                    <div><strong>Order:</strong> @q.QuestionOrder</div>
+                </div>
+            </div>
+            }
+        </div>
+        <style>
+            .dropdown-toggle-arrow {
+                transition: transform 0.2s;
+            }
+            .dropdown-toggle-arrow.open .fa-chevron-down {
+                transform: rotate(-180deg);
+            }
+            .dropdown-toggle-arrow .fa-chevron-down {
+                transition: transform 0.2s;
+            }
+        </style>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            function toggleQuestionDetails(index, event) {
+                event.stopPropagation();
+                var button = document.getElementById('dropdown-question-btn-' + index);
+                var detailsDiv = document.getElementById('question-details-row-' + index);
+                var isOpen = detailsDiv.style.display === 'block';
+                if (isOpen) {
+                    detailsDiv.style.display = 'none';
+                    button.classList.remove('open');
+                } else {
+                    detailsDiv.style.display = 'block';
+                    button.classList.add('open');
+                }
+            }
+            document.addEventListener('DOMContentLoaded', function() {
+                if (window.barPlotData) {
+                    Object.keys(window.barPlotData).forEach(function(qId) {
+                        var answers = window.barPlotData[qId].answers;
+                        var canvas = document.getElementById('barChart-' + qId);
+                        if (!canvas) return;
+                        try {
+                            if (window['barChart_' + qId]) window['barChart_' + qId].destroy();
+                            if (answers && answers.length > 0) {
+                                // Calculate frequencies
+                                var freq = {};
+                                answers.forEach(function(ans) {
+                                    if (ans in freq) freq[ans]++;
+                                    else freq[ans] = 1;
+                                });
+                                var labels = Object.keys(freq);
+                                var data = Object.values(freq);
+                                window['barChart_' + qId] = new Chart(canvas.getContext('2d'), {
+                                    type: 'bar',
+                                    data: {
+                                        labels: labels,
+                                        datasets: [{
+                                            label: 'Frequency',
+                                            data: data,
+                                            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                                            borderColor: 'rgba(54, 162, 235, 1)',
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        plugins: {
+                                            legend: { display: false },
+                                            title: { display: false }
+                                        },
+                                        scales: {
+                                            y: {
+                                                beginAtZero: true,
+                                                title: { display: true, text: 'Frequency' }
+                                            },
+                                            x: {
+                                                title: { display: true, text: 'Answer' }
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        } catch (e) {}
+                    });
+                }
+            });
+        </script>
+    }
+}
 
 <div class="form-responses-container">
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -190,28 +348,6 @@
             <i class="fas fa-arrow-left"></i> Back to Templates
         </a>
     </div>
-
-    @if (template != null)
-    {
-        <div class="form-header" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%); color: white; padding: 2rem; border-radius: 10px; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-            <h1 class="form-title">@template.Title</h1>
-            <div class="form-meta" style="display: flex; gap: 1rem; font-size: 0.9rem; opacity: 0.9;">
-                <span><i class="fas fa-calendar"></i> Created: @template.CreatedAt.ToString("MMM dd, yyyy")</span>
-                <span><i class="fas fa-user"></i> Created by: @template.CreatedBy?.UserName</span>
-                <span><i class="fas fa-eye"></i> Status: @(template.IsPublic ? "Public" : "Private")</span>
-            </div>
-            @if (!string.IsNullOrEmpty(template.Description))
-            {
-                <div class="template-description" style="font-size: 1.1rem; opacity: 0.9; margin-top: 1rem;">@template.Description</div>
-            }
-            @if (!string.IsNullOrEmpty(template.ImageUrl))
-            {
-                <div class="text-center my-4">
-                    <img src="@template.ImageUrl" alt="Template Image" style="max-width: 400px; max-height: 400px; display: inline-block; border-radius: 16px; box-shadow: 0 6px 24px rgba(0,0,0,0.16); margin-top: 1rem;" />
-                </div>
-            }
-        </div>
-    }
 
     @if (forms == null || !forms.Any())
     {
@@ -313,4 +449,24 @@
             </div>
         }
     }
-</div> 
+</div>
+
+<div style="background: #fff; margin: 2rem; padding: 2rem;">
+    <canvas id="testChart" width="400" height="200"></canvas>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var ctx = document.getElementById('testChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['A', 'B', 'C'],
+                datasets: [{
+                    label: 'Test',
+                    data: [5, 10, 3],
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                }]
+            }
+        });
+    });
+</script> 

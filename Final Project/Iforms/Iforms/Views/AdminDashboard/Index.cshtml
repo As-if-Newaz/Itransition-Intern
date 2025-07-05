@@ -1,11 +1,12 @@
-@{
+﻿@{
     ViewData["Title"] = "Admin Dashboard";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor  
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using Microsoft.AspNetCore.Mvc.Localization
 <br />  
 <h3>Hi, <b>@HttpContextAccessor.HttpContext.Request.Cookies["name"]?.ToString()</b> </h3>
 <br />
 
-<h2>Welcome to the Admin Dashboard</h2>
+<h2><span data-i18n="welcome">Welcome</span> to the Admin Dashboard</h2>

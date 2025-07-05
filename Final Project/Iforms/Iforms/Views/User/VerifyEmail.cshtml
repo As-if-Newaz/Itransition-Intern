@@ -1,21 +1,21 @@
-@{
+﻿@{
     ViewData["Title"] = "Verify Email";
     Layout = "~/Views/Shared/RegisterLoginLayout.cshtml";
     var email = ViewBag.Email as string;
 }
 <h1 class="app-logo">Iforms</h1>
 <div class="form-container">
-    <p>Just one more step</p>
-    <h2>Verify Your Email</h2>
-    <p>A code has been sent to your email address</p>
+    <p data-i18n="verify_step">Just one more step</p>
+    <h2 data-i18n="verify_email">Verify Your <span data-i18n="email">Email</span></h2>
+    <p data-i18n="verify_code_sent">A code has been sent to your email address</p>
     <form asp-action="VerifyEmail" asp-controller="User" method="post">
         <input type="hidden" name="email" value="@email" />
         <div class="mb-3">
-            <label for="code" class="form-label">Verification Code</label>
+            <label for="code" class="form-label" data-i18n="verification_code">Verification Code</label>
             <input type="text" class="form-control" id="code" name="code" required placeholder="Enter your code" />
         </div>
         <div class="mb-3">
-            <button type="submit" class="btn btn-primary w-100">Verify</button>
+            <button type="submit" class="btn btn-primary w-100" data-i18n="verify">Verify</button>
         </div>
     </form>
 </div>

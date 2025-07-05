@@ -24,7 +24,7 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
         public enum Language
         {
             English,
-            Polish
+            Bengali
         }
 
         public enum Theme
@@ -34,10 +34,10 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
         }
         public enum QuestionType
         {
-            Text,         // single-line string
-            LongText,     // multiple-line text
-            Number,       // non-negative integer
-            Checkbox,     // checkbox
+            Text,         
+            LongText,    
+            Number,       
+            Checkbox,     
             Date,
             FileUpload
         }

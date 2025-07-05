@@ -13,18 +13,18 @@
 
 <div class="submitted-forms-container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="mb-0">My Submitted Forms</h2>
-        <a href="@Url.Action("AllTemplates", "AdminDashboard")" class="btn btn-primary">Manage Templates</a>
+        <h2 class="mb-0" data-i18n="submitted_forms">My Submitted Forms</h2>
+        <a href="@Url.Action("AllTemplates", "AdminDashboard")" class="btn btn-primary" data-i18n="manage_templates">Manage Templates</a>
     </div>
 
     @* --- Add toolbar for bulk actions above the table --- *@
     <div class="navbar navbar-expand-lg navbar-light bg-secondary-subtle mb-3">
-        <button id="deleteFormsBtn" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+        <button id="deleteFormsBtn" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i> <span data-i18n="delete">Delete</span></button>
     </div>
 
     @if (forms == null || !forms.Any())
     {
-        <div class="no-forms">You have not submitted any forms yet.</div>
+        <div class="no-forms" data-i18n="no_forms">You have not submitted any forms yet.</div>
     }
     else
     {
@@ -32,9 +32,9 @@
             <thead>
                 <tr>
                     <th><input type="checkbox" id="selectAllForms" title="Select/Deselect all"></th>
-                    <th>Form ID</th>
-                    <th>Template</th>
-                    <th>Submitted At</th>
+                    <th data-i18n="form_id">Form ID</th>
+                    <th data-i18n="template">Template</th>
+                    <th data-i18n="submitted_at">Submitted At</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,8 +51,8 @@
         </table>
         <div class="pagination-container">
             <span class="pagination-info">Page @currentPage of @totalPages</span>
-            <a class="page-link @(hasPreviousPage ? "" : "disabled")" href="@Url.Action("UserSubmittedForms", new { page = currentPage - 1 })">Previous</a>
-            <a class="page-link @(hasNextPage ? "" : "disabled")" href="@Url.Action("UserSubmittedForms", new { page = currentPage + 1 })">Next</a>
+            <a class="page-link @(hasPreviousPage ? "" : "disabled")" href="@Url.Action("UserSubmittedForms", new { page = currentPage - 1 })" data-i18n="previous">Previous</a>
+            <a class="page-link @(hasNextPage ? "" : "disabled")" href="@Url.Action("UserSubmittedForms", new { page = currentPage + 1 })" data-i18n="next">Next</a>
         </div>
     }
 </div>

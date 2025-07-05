@@ -1,5 +1,6 @@
-@model Iforms.MVC.Models.BrowseTemplatesViewModel
+﻿@model Iforms.MVC.Models.BrowseTemplatesViewModel
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using Microsoft.AspNetCore.Mvc.Localization
 @{
     ViewData["Title"] = "Templates";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -116,11 +117,11 @@
     <table class="templates-table">
         <thead>
             <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Status</th>
-                <th>Created At</th>
-                <th>Created By</th>
+                <th data-i18n="title">Title</th>
+                <th data-i18n="description">Description</th>
+                <th data-i18n="status">Status</th>
+                <th data-i18n="created_at">Created At</th>
+                <th data-i18n="created_by">Created By</th>
                 <th></th>
             </tr>
         </thead>
@@ -191,7 +192,7 @@
                                     <div>
                                         <div>@comment.Content</div>
                                         <div class="text-muted mt-2" style="font-size: 0.95em;">
-                                            <em>— @(comment.CreatedByUserName ?? "User")</em>
+                                            <em>â€” @(comment.CreatedByUserName ?? "User")</em>
                                         </div>
                                     </div>
                                     @if (comment.CreatedById == currentUserId && HttpContextAccessor.HttpContext.Request.Cookies["Role"] != null)
@@ -271,7 +272,7 @@
                         <div>
                             <div>${comment.content}</div>
                             <div class=\"text-muted mt-2\" style=\"font-size: 0.95em;\">
-                                <em>— ${comment.createdByUserName || 'User'}</em>
+                                <em>â€” ${comment.createdByUserName || 'User'}</em>
                             </div>
                         </div>
                         ${deleteBtnHtml}

@@ -13,12 +13,23 @@
             {  
                 <h5 style="display:inline-block;">Hi, <b>@HttpContextAccessor.HttpContext.Request.Cookies["name"]?.ToString()</b></h5>  
                 <span>&nbsp;&nbsp;&nbsp;</span>  
+                <button id="btnTheme" class="btn btn-outline-light me-2" title="Toggle Theme">
+                    <i id="light-icon" class="bi bi-sun-fill" style="display: none;"></i>
+                    <i id="dark-icon" class="bi bi-moon-fill" style="display: none;"></i>
+                </button>
                 <form asp-controller="Auth" asp-action="Logout" method="post" class="d-inline">  
                     @Html.AntiForgeryToken()  
                     <button type="submit" class="btn btn-outline-light me-2">  
                         <i class="bi bi-box-arrow-right"></i> Logout  
                     </button>  
                 </form>  
+            }
+            else
+            {
+                <button id="btnTheme" class="btn btn-outline-light me-2" title="Toggle Theme">
+                    <i id="light-icon" class="bi bi-sun-fill" style="display: none;"></i>
+                    <i id="dark-icon" class="bi bi-moon-fill" style="display: none;"></i>
+                </button>
             }  
         </div>  
     </div>  

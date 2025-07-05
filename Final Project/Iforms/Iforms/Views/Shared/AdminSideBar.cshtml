@@ -1,4 +1,5 @@
 ﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using Microsoft.AspNetCore.Mvc.Localization
 @if (HttpContextAccessor.HttpContext.Request.Cookies["Role"] == "Admin")
 {
     <div class="admin-sidebar">

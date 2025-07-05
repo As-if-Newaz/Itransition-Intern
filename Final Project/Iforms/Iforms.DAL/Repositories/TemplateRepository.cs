@@ -119,6 +119,7 @@ namespace Iforms.DAL.Repositories
                 .Include(t => t.Comments)
                     .ThenInclude(c => c.CreatedBy)
                 .Include(t => t.Forms)
+                    .ThenInclude(f => f.Answers)
                 .Include(t => t.TemplateAccesses)
                     .ThenInclude(ta => ta.User)
                 .FirstOrDefault(t => t.Id == id);

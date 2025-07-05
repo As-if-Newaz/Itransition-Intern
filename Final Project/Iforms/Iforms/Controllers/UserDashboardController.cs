@@ -108,7 +108,7 @@ namespace Iforms.MVC.Controllers
                 return Forbid();
             }
 
-            var template = templateService.GetTemplateById(templateId, userId);
+            var template = templateService.GetTemplateDetailedById(templateId, userId);
             if (template == null)
             {
                 return NotFound();

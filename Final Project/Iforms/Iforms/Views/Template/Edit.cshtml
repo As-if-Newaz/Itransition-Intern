@@ -4,6 +4,7 @@
 }
 
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using Microsoft.AspNetCore.Mvc.Localization
 <style>
     /* Custom Modal Styles - No Backdrop */
     .custom-modal {
@@ -176,19 +177,19 @@
 @model Iforms.BLL.DTOs.TemplateDTO
 
 <div class="container mt-4">
-    <h2>Edit Template</h2>
+    <h2><span data-i18n="edit">Edit</span> Template</h2>
     <div class="template-content-area">
         <form id="templateForm" asp-action="Edit" method="post" enctype="multipart/form-data">
             @Html.AntiForgeryToken()
             <input type="hidden" asp-for="Id" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="mb-3">
-                <label asp-for="Title" class="form-label">Title</label>
+                <label asp-for="Title" class="form-label" data-i18n="title">Title</label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Description" class="form-label">Description</label>
+                <label asp-for="Description" class="form-label" data-i18n="description">Description</label>
                 <textarea asp-for="Description" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
@@ -199,7 +200,7 @@
                     <div id="image-container" class="text-center mb-2">
                         <img src="@Model.ImageUrl" alt="Template Image" style="max-width: 200px; max-height: 200px; display: inline-block;" />
                         <br />
-                        <button type="button" id="deleteImageBtn" class="btn btn-sm btn-danger mt-1">Delete Image</button>
+                        <button type="button" id="deleteImageBtn" class="btn btn-sm btn-danger mt-1"><span data-i18n="delete">Delete</span> Image</button>
                     </div>
                     <p class="form-text text-center">Current image. Upload a new one to replace it.</p>
                 }
@@ -209,7 +210,7 @@
             </div>
             <div class="mb-3 form-check">
                 <input asp-for="IsPublic" class="form-check-input" />
-                <label asp-for="IsPublic" class="form-check-label">Is Public</label>
+                <label asp-for="IsPublic" class="form-check-label">Is <span data-i18n="public">Public</span></label>
                 <span asp-validation-for="IsPublic" class="text-danger"></span>
             </div>
             <div class="mb-3">
@@ -246,8 +247,8 @@
                 <div id="selectedUsers" class="selected-users-container"></div>
                 <input type="hidden" id="selectedUserIds" name="SelectedUserIds" />
             </div>
-            <button type="submit" class="btn btn-success">Update Template</button>
-            <a href="@Url.Action("UserTemplates", "UserDashboard")" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-success"><span data-i18n="update">Update</span> Template</button>
+            <a href="@Url.Action("UserTemplates", "UserDashboard")" class="btn btn-secondary"><span data-i18n="cancel">Cancel</span></a>
         </form>
     </div>
 </div>
@@ -257,7 +258,7 @@
     <div class="custom-modal-dialog">
         <div class="custom-modal-content">
             <div class="custom-modal-header">
-                <h5 class="custom-modal-title">Create New Topic</h5>
+                <h5 class="custom-modal-title"><span data-i18n="create">Create</span> New Topic</h5>
                 <button type="button" class="btn-close" id="closeTopicModal" aria-label="Close">&times;</button>
             </div>
             <div class="custom-modal-body">
@@ -269,8 +270,8 @@
                 </form>
             </div>
             <div class="custom-modal-footer">
-                <button type="button" class="btn btn-secondary" id="cancelTopicBtn">Cancel</button>
-                <button type="button" class="btn btn-primary" id="createTopicBtn">Create Topic</button>
+                <button type="button" class="btn btn-secondary" id="cancelTopicBtn"><span data-i18n="cancel">Cancel</span></button>
+                <button type="button" class="btn btn-primary" id="createTopicBtn"><span data-i18n="create">Create</span> Topic</button>
             </div>
         </div>
     </div>
@@ -458,7 +459,7 @@
             // Clear the input
             document.getElementById('newTopicType').value = '';
         }
-        
+
         // Add event listeners for modal close buttons
         document.getElementById('closeTopicModal').addEventListener('click', hideTopicModal);
         document.getElementById('cancelTopicBtn').addEventListener('click', hideTopicModal);
@@ -602,7 +603,7 @@
                             <button type="button" class="btn btn-sm btn-outline-secondary add-option-btn">+ Add option</button>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-danger btn-sm remove-question-btn">Delete</button>
+                    <button type="button" class="btn btn-danger btn-sm remove-question-btn"><span data-i18n="delete">Delete</span></button>
                 </div>`;
             questionsList.appendChild(qDiv);
             if (local) {
@@ -1021,3 +1022,4 @@
     </script>
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }
+

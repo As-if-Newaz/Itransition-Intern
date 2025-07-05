@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "f6+914/L7Xw=",
+  "dgSpecHash": "6Kj7bCHV5io=",
   "success": true,
   "projectFilePath": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Iforms.MVC.csproj",
   "expectedPackageFiles": [
@@ -63,6 +63,8 @@
     "C:\\Users\\Asif Newaz\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\2.2.0\\microsoft.extensions.fileproviders.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Asif Newaz\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\2.2.0\\microsoft.extensions.hosting.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Asif Newaz\\.nuget\\packages\\microsoft.extensions.identity.core\\9.0.6\\microsoft.extensions.identity.core.9.0.6.nupkg.sha512",
+    "C:\\Users\\Asif Newaz\\.nuget\\packages\\microsoft.extensions.localization\\9.0.6\\microsoft.extensions.localization.9.0.6.nupkg.sha512",
+    "C:\\Users\\Asif Newaz\\.nuget\\packages\\microsoft.extensions.localization.abstractions\\9.0.6\\microsoft.extensions.localization.abstractions.9.0.6.nupkg.sha512",
     "C:\\Users\\Asif Newaz\\.nuget\\packages\\microsoft.extensions.logging\\9.0.6\\microsoft.extensions.logging.9.0.6.nupkg.sha512",
     "C:\\Users\\Asif Newaz\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\9.0.6\\microsoft.extensions.logging.abstractions.9.0.6.nupkg.sha512",
     "C:\\Users\\Asif Newaz\\.nuget\\packages\\microsoft.extensions.objectpool\\2.2.0\\microsoft.extensions.objectpool.2.2.0.nupkg.sha512",

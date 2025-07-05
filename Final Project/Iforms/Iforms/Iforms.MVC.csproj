@@ -22,4 +22,8 @@
     <ProjectReference Include="..\Iforms.BLL\Iforms.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Language\" />
+  </ItemGroup>
+
 </Project>
