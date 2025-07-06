@@ -194,7 +194,6 @@ namespace Iforms.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QuestionDescription")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("VARCHAR");
 

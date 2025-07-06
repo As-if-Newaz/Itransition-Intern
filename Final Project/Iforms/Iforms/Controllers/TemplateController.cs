@@ -149,19 +149,13 @@ namespace Iforms.MVC.Controllers
             };
 
             var commentCreated = commentService.Create(createDto);
-
-            // Fetch the comment with user info from DB and return as DTO
             var commentWithUser = commentService.GetTemplateComments(templateId)
                 .LastOrDefault(c => c.CreatedById == currentUserId && c.Content == content);
-
-            // Ensure CreatedByUserName is set
             if (commentWithUser != null && string.IsNullOrEmpty(commentWithUser.CreatedByUserName))
             {
                 var user = userService.GetById(currentUserId);
                 commentWithUser.CreatedByUserName = user?.UserName ?? "User";
             }
-
-            // Broadcast the new comment to all clients
             await hubContext.Clients.All.SendAsync("ReceiveComment", templateId, commentWithUser);
 
             return Json(commentWithUser);
@@ -337,9 +331,9 @@ namespace Iforms.MVC.Controllers
 
         [AuthenticatedAdminorUser]
         [HttpPost("Template/DeleteTemplates")]
-        public JsonResult DeleteTemplates([FromBody] int[] templateIds)
+        public JsonResult DeleteTemplates([FromBody] List<int> templateIds)
         {
-            if (templateIds == null || templateIds.Length == 0)
+            if (templateIds == null || templateIds.Count == 0)
                 return Json(new { success = false, message = "No Templates selected." });
             var result = templateService.DeleteTemplates(templateIds);
             if (result)
@@ -352,8 +346,6 @@ namespace Iforms.MVC.Controllers
                 return Json(new { success = false, message = "Failed to delete Templates" });
             }
         }
-
-        // --- Helper Methods for Create/Edit ---
         private void ExtractTopicFromForm(TemplateDTO model)
         {
             var topicIdFromForm = Request.Form["Topic.Id"].ToString();
@@ -368,7 +360,7 @@ namespace Iforms.MVC.Controllers
                 if (!string.IsNullOrEmpty(topicTypeFromForm))
                     model.Topic.TopicType = topicTypeFromForm;
             }
-        }
+        } 
 
         private bool HandleImageUpload(TemplateDTO model)
         {
@@ -477,6 +469,7 @@ namespace Iforms.MVC.Controllers
             {
                 var questionIdStr = Request.Form[$"Questions[{questionIndex}].Id"].ToString();
                 var questionTitle = Request.Form[$"Questions[{questionIndex}].QuestionTitle"].ToString();
+                var questionDescription = Request.Form[$"Questions[{questionIndex}].QuestionDescription"].ToString();
                 var questionTypeStr = Request.Form[$"Questions[{questionIndex}].QuestionType"].ToString();
                 var questionOrder = int.Parse(Request.Form[$"Questions[{questionIndex}].QuestionOrder"].ToString());
                 var optionsJson = Request.Form[$"Questions[{questionIndex}].Options"].ToString();
@@ -487,7 +480,7 @@ namespace Iforms.MVC.Controllers
                     {
                         Id = int.TryParse(questionIdStr, out var id) ? id : 0,
                         QuestionTitle = questionTitle,
-                        QuestionDescription = questionTitle, // Using title as description for now
+                        QuestionDescription = questionDescription,
                         QuestionType = questionType,
                         QuestionOrder = questionOrder,
                         TemplateId = model.Id,

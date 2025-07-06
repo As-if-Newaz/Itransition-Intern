@@ -16,8 +16,8 @@ namespace Iforms.DAL.Entity_Framework.Table_Models
         [Required, Column(TypeName = "VARCHAR"), StringLength(100)]
         public string QuestionTitle { get; set; }
 
-        [Required, Column(TypeName = "VARCHAR"), StringLength(500)]
-        public string QuestionDescription { get; set; }
+        [Column(TypeName = "VARCHAR"), StringLength(500)]
+        public string? QuestionDescription { get; set; }
 
         public QuestionType QuestionType { get; set; }
 

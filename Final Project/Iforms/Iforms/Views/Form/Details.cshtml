@@ -133,6 +133,12 @@
                 <div class="question-title">
                     @answer.Question?.QuestionTitle
                 </div>
+                @if (!string.IsNullOrEmpty(answer.Question?.QuestionDescription) && answer.Question?.QuestionDescription != answer.Question?.QuestionTitle)
+                {
+                    <div class="question-description" style="color: #6c757d; font-size: 0.95rem; margin-bottom: 1rem; font-style: italic;">
+                        @answer.Question.QuestionDescription
+                    </div>
+                }
                 <div class="answer-content">
                     @if (answer.Question?.QuestionType == Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType.Checkbox && answer.Question?.Options != null && answer.Question.Options.Count > 0)
                     {

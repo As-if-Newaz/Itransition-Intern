@@ -76,7 +76,7 @@ namespace Iforms.BLL.Services
             return GetMapper().Map<UserDTO>(user);
         }
 
-        public bool BlockUsers(int[] userIds)
+        public bool BlockUsers(List<int> userIds)
         {
             foreach (var userId in userIds)
             {
@@ -88,7 +88,7 @@ namespace Iforms.BLL.Services
             return true;
         }
 
-        public bool UnblockUsers(int[] userIds)
+        public bool UnblockUsers(List<int> userIds)
         {
             foreach (var userId in userIds)
             {
@@ -100,7 +100,7 @@ namespace Iforms.BLL.Services
             return true;
         }
 
-        public bool ActivateUsers(int[] userIds)
+        public bool ActivateUsers(List<int> userIds)
         {
             foreach (var userId in userIds)
             {
@@ -112,7 +112,7 @@ namespace Iforms.BLL.Services
             return true;
         }
 
-        public bool InactivateUsers(int[] userIds)
+        public bool InactivateUsers(List<int> userIds)
         {
             foreach (var userId in userIds)
             {
@@ -124,7 +124,7 @@ namespace Iforms.BLL.Services
             return true;
         }
 
-        public bool DeleteUsers(int[] userIds)
+        public bool DeleteUsers(List<int> userIds)
         {
             foreach (var userId in userIds)
             {
@@ -156,7 +156,7 @@ namespace Iforms.BLL.Services
             return DA.UserData().UpdateUserStatus(userId, status);
         }
 
-        public bool UpdateUserRole(int[] userIds , UserRole role)
+        public bool UpdateUserRole(List<int> userIds , UserRole role)
         {
            foreach(var userId in userIds)
             {

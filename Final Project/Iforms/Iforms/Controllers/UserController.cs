@@ -1,5 +1,6 @@
 ﻿using Iforms.BLL.DTOs;
 using Iforms.BLL.Services;
+using Iforms.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using static Iforms.DAL.Entity_Framework.Table_Models.Enums;
@@ -90,56 +91,8 @@ namespace Iforms.MVC.Controllers
             return RedirectToAction("Login", "Auth");
         }
 
-        //[HttpGet]
-        //[Route("profile")]
-        //public IActionResult Profile()
-        //{
-        //    if (!User.Identity.IsAuthenticated)
-        //        return RedirectToAction("Login", "Auth");
-
-        //    var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
-        //    var user = userServices.GetById(userId);
-
-        //    if (user == null)
-        //        return NotFound();
-
-        //    var model = new UserPreferencesDTO
-        //    {
-        //        PreferredLanguage = (Language)user.PreferredLanguage,
-        //        PreferredTheme = (Theme)user.PreferredTheme
-        //    };
-
-        //    return View(model);
-        //}
-
-        //[HttpPost]
-        //[Route("profile")]
-        //public IActionResult Profile(UserPreferencesDTO preferences)
-        //{
-        //    if (!User.Identity.IsAuthenticated)
-        //        return RedirectToAction("Login", "Auth");
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
-        //        var result = userServices.UpdatePreferences(userId, preferences);
-
-        //        if (result)
-        //        {
-        //            TempData["SuccessMsg"] = "Preferences updated successfully!";
-        //            return RedirectToAction("Profile");
-        //        }
-        //        else
-        //        {
-        //            TempData["ErrorMsg"] = "Failed to update preferences.";
-        //        }
-        //    }
-
-        //    return View(preferences);
-        //}
-
         [HttpPost]
-        public IActionResult UpdateThemePreference([FromBody] ThemePreferenceModel model)
+        public IActionResult UpdateThemePreference([FromBody] ThemePreference model)
         {
             if (model == null || model.UserId <= 0)
                 return Json(new { success = false, message = "Invalid data" });
@@ -166,11 +119,5 @@ namespace Iforms.MVC.Controllers
                 return Json(new { success = false, message = "Error updating theme preference" });
             }
         }
-    }
-
-    public class ThemePreferenceModel
-    {
-        public int UserId { get; set; }
-        public string Theme { get; set; }
     }
 }

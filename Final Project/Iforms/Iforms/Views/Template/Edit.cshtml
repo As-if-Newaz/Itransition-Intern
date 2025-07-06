@@ -297,6 +297,7 @@
             questions = @Html.Raw(Json.Serialize(Model.Questions.Select((q, index) => new {
                 id = q.Id > 0 ? q.Id : index + 1,
                 text = q.QuestionTitle,
+                description = q.QuestionDescription,
                 type = q.QuestionType.ToString(),
                 options = q.Options ?? new List<string> { "" },
                 order = q.QuestionOrder,
@@ -565,7 +566,7 @@
                 alert('You can only add up to 4 questions of this type.');
                 return;
             }
-            const q = { id: ++questionId, text: '', type: selectedType, options: [''], isMandatory: true };
+            const q = { id: ++questionId, text: '', description: '', type: selectedType, options: [''], isMandatory: true };
             questions.push(q);
             addQuestionUI(q, true);
             connection.invoke("AddQuestion", q);
@@ -588,7 +589,8 @@
 
             qDiv.innerHTML = `
                 <div class="card-body">
-                    <input type="text" class="form-control mb-2 question-title" placeholder="Untitled Question" value="${q.text || ''}" />
+                    <input type="text" class="form-control mb-2 question-title" placeholder="Question Title" value="${q.text || ''}" />
+                    <textarea class="form-control mb-2 question-description" placeholder="Question Description (optional)" rows="2">${q.description || ''}</textarea>
                     <select class="form-select mb-2 question-type">
                         ${optionsHtml}
                     </select>
@@ -645,6 +647,14 @@
                 const questionIndex = questions.findIndex(question => question.id === q.id);
                 if (questionIndex !== -1) {
                     questions[questionIndex].text = this.value;
+                }
+            };
+
+            // Update question description when input changes
+            qDiv.querySelector('.question-description').oninput = function() {
+                const questionIndex = questions.findIndex(question => question.id === q.id);
+                if (questionIndex !== -1) {
+                    questions[questionIndex].description = this.value;
                 }
             };
 
@@ -759,6 +769,7 @@
                 const questionDiv = questionsList.querySelector(`[data-id="${question.id}"]`);
                 if (questionDiv) {
                     question.text = questionDiv.querySelector('.question-title').value;
+                    question.description = questionDiv.querySelector('.question-description').value;
                     question.type = questionDiv.querySelector('.question-type').value;
                     question.isMandatory = questionDiv.querySelector('.is-mandatory-checkbox').checked;
                     // Update options
@@ -789,7 +800,7 @@
                 const questionDescInput = document.createElement('input');
                 questionDescInput.type = 'hidden';
                 questionDescInput.name = `Questions[${index}].QuestionDescription`;
-                questionDescInput.value = question.text; // Using title as description for now
+                questionDescInput.value = question.description || '';
 
                 const questionTypeInput = document.createElement('input');
                 questionTypeInput.type = 'hidden';

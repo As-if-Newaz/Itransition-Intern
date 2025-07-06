@@ -52,14 +52,14 @@ namespace Iforms.BLL.Services
             return result;
         }
 
-        public TemplateDTO? GetTemplateById(int id, int? currentUserId = null)
-        {
-            var template = DA.TemplateData().Get(id);
-            if (template == null) return null;
-            var templateDto = GetMapper().Map<TemplateDTO>(template);
-            templateDto.IsLikedByCurrentUser = currentUserId.HasValue && template.Likes.Any(l => l.UserId == currentUserId.Value);
-            return templateDto;
-        }
+        //public TemplateDTO? GetTemplateById(int id, int? currentUserId = null)
+        //{
+        //    var template = DA.TemplateData().Get(id);
+        //    if (template == null) return null;
+        //    var templateDto = GetMapper().Map<TemplateDTO>(template);
+        //    templateDto.IsLikedByCurrentUser = currentUserId.HasValue && template.Likes.Any(l => l.UserId == currentUserId.Value);
+        //    return templateDto;
+        //}
 
         public TemplateDTO? GetTemplateDetailedById(int id, int? currentUserId = null)
         {
@@ -80,7 +80,7 @@ namespace Iforms.BLL.Services
             return templateDto;
         }
 
-        public bool DeleteTemplates(int[] templateIds)
+        public bool DeleteTemplates(List<int> templateIds)
         {
             return templateIds.All(templateId =>
             {
@@ -107,11 +107,17 @@ namespace Iforms.BLL.Services
             return true;
         }
 
-        public bool CanUserAccessTemplate(int templateId, int? userId) => DA.TemplateData().CanUserAccessTemplate(templateId, userId);
-        public bool CanUserManageTemplate(int templateId, int userId) => DA.TemplateData().CanUserManageTemplate(templateId, userId);
+        public bool CanUserAccessTemplate(int templateId, int? userId)
+        {
+            return DA.TemplateData().CanUserAccessTemplate(templateId, userId);
+        }
+        public bool CanUserManageTemplate(int templateId, int userId)
+        { return DA.TemplateData().CanUserManageTemplate(templateId, userId); }
 
-        public IEnumerable<TemplateDTO> GetUserTemplates(int userId, int? currentUserId = null) =>
-            MapTemplatesWithLikes(DA.TemplateData().GetUserTemplates(userId), currentUserId);
+        public IEnumerable<TemplateDTO> GetUserTemplates(int userId, int? currentUserId = null)
+        {
+            return MapTemplatesWithLikes(DA.TemplateData().GetUserTemplates(userId), currentUserId);
+        }
         public IEnumerable<TemplateDTO> GetLatestTemplates(int count = 10, int? currentUserId = null) =>
             MapTemplatesWithLikes(DA.TemplateData().GetLatestTemplates(count), currentUserId);
         public IEnumerable<TemplateDTO> GetMostPopularTemplates(int count = 5, int? currentUserId = null) =>
@@ -285,7 +291,7 @@ namespace Iforms.BLL.Services
             return GetMapper().Map<List<TemplateDTO>>(templates)
                 .Select(t =>
                 {
-                    t.IsLikedByCurrentUser = false; // Public templates don't have likes by default
+                    t.IsLikedByCurrentUser = false; 
                     return t;
                 });
         }

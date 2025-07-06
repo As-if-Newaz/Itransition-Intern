@@ -32,7 +32,6 @@ namespace Iforms.BLL.Services
             if (!TemplateService.CanUserAccessTemplate(createFormDto.TemplateId, filledById))
                 throw new UnauthorizedAccessException("User cannot access this template");
 
-            // Create the Form entity
             var form = new Form
             {
                 TemplateId = createFormDto.TemplateId,
@@ -43,31 +42,17 @@ namespace Iforms.BLL.Services
             var result = DA.FormData().Create(form);
             if (result != null)
             {
-                // Create answers for the form
                 if (createFormDto.Answers != null)
                 {
                     foreach (var answerDto in createFormDto.Answers)
                     {
-                        var answer = new Answer
-                        {
-                            FormId = result.Id,
-                            QuestionId = answerDto.QuestionId,
-                            Text = answerDto.Text,
-                            LongText = answerDto.LongText,
-                            Number = answerDto.Number,
-                            Checkbox = answerDto.Checkbox,
-                            FileUrl = answerDto.FileUrl,
-                            Date = answerDto.Date
-                        };
-
+                        var answer = CreateNewAnswer(form.Id, answerDto);
                         var answerResult = DA.AnswerData().Create(answer);
                         if (!answerResult)
                         {
                         }
                     }
                 }
-
-                // Return the created form as DTO
                 return GetMapper().Map<FormDTO>(result);
             }
 
@@ -97,7 +82,7 @@ namespace Iforms.BLL.Services
             return GetMapper().Map<List<FormDTO>>(forms);
         }
 
-        public bool DeleteForms(int[] formIds)
+        public bool DeleteForms(List<int> formIds)
         {
             foreach (var formId in formIds)
             {
@@ -126,7 +111,6 @@ namespace Iforms.BLL.Services
 
         public bool Update(FormDTO formDto, int currentUserId)
         {
-            // Check access
             if (!CanUserAccessForm(formDto.Id, currentUserId))
                 return false;
 
@@ -134,53 +118,77 @@ namespace Iforms.BLL.Services
             if (form == null)
                 return false;
 
-            // Update answers
-            var existingAnswers = form.Answers.ToList();
             var submittedAnswers = formDto.Answers ?? new List<AnswerDTO>();
+            var existingAnswers = form.Answers.ToList();
 
-            // Update or create answers
+            UpdateExistingAnswers(existingAnswers, submittedAnswers);
+            AddNewAnswers(form.Id, existingAnswers, submittedAnswers);
+            RemoveDeletedAnswers(existingAnswers, submittedAnswers);
+
+            return true;
+        }
+
+        private void UpdateExistingAnswers(List<Answer> existingAnswers, List<AnswerDTO> submittedAnswers)
+        {
             foreach (var answerDto in submittedAnswers)
             {
                 var existing = existingAnswers.FirstOrDefault(a => a.QuestionId == answerDto.QuestionId);
                 if (existing != null)
                 {
-                    // Update existing answer
-                    existing.Text = answerDto.Text;
-                    existing.LongText = answerDto.LongText;
-                    existing.Number = answerDto.Number;
-                    existing.Checkbox = answerDto.Checkbox;
-                    existing.FileUrl = answerDto.FileUrl;
-                    existing.Date = answerDto.Date;
+                    UpdateAnswerProperties(existing, answerDto);
                     DA.AnswerData().Update(existing);
                 }
-                else
+            }
+        }
+
+        private void UpdateAnswerProperties(Answer existing, AnswerDTO answerDto)
+        {
+            existing.Text = answerDto.Text;
+            existing.LongText = answerDto.LongText;
+            existing.Number = answerDto.Number;
+            existing.Checkbox = answerDto.Checkbox;
+            existing.FileUrl = answerDto.FileUrl;
+            existing.Date = answerDto.Date;
+        }
+
+        private void AddNewAnswers(int formId, List<Answer> existingAnswers, List<AnswerDTO> submittedAnswers)
+        {
+            foreach (var answerDto in submittedAnswers)
+            {
+                var isNewAnswer = !existingAnswers.Any(a => a.QuestionId == answerDto.QuestionId);
+                if (isNewAnswer)
                 {
-                    // Create new answer
-                    var newAnswer = new Iforms.DAL.Entity_Framework.Table_Models.Answer
-                    {
-                        FormId = form.Id,
-                        QuestionId = answerDto.QuestionId,
-                        Text = answerDto.Text,
-                        LongText = answerDto.LongText,
-                        Number = answerDto.Number,
-                        Checkbox = answerDto.Checkbox,
-                        FileUrl = answerDto.FileUrl,
-                        Date = answerDto.Date
-                    };
+                    var newAnswer = CreateNewAnswer(formId, answerDto);
                     DA.AnswerData().Create(newAnswer);
                 }
             }
+        }
 
-            // Delete removed answers
+        private Answer CreateNewAnswer(int formId, AnswerDTO answerDto)
+        {
+            return new Answer
+            {
+                FormId = formId,
+                QuestionId = answerDto.QuestionId,
+                Text = answerDto.Text,
+                LongText = answerDto.LongText,
+                Number = answerDto.Number,
+                Checkbox = answerDto.Checkbox,
+                FileUrl = answerDto.FileUrl,
+                Date = answerDto.Date
+            };
+        }
+
+        private void RemoveDeletedAnswers(List<Answer> existingAnswers, List<AnswerDTO> submittedAnswers)
+        {
             foreach (var existing in existingAnswers)
             {
-                if (!submittedAnswers.Any(a => a.QuestionId == existing.QuestionId))
+                var shouldDelete = !submittedAnswers.Any(a => a.QuestionId == existing.QuestionId);
+                if (shouldDelete)
                 {
                     DA.AnswerData().Delete(existing);
                 }
             }
-
-            return true;
         }
 
         public Answer? GetAnswerById(int id)

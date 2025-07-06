@@ -38,7 +38,6 @@ namespace Iforms.MVC.Controllers
         {
             try
             {
-                // Get all templates
                 var allTemplates = templateService.DA.TemplateData().GetAll();
                 var publicTemplates = templateService.DA.TemplateData().GetPublicTemplates();
                 
@@ -96,89 +95,107 @@ namespace Iforms.MVC.Controllers
         [HttpPost("Form/Submit")]
         public IActionResult Submit(FillFormModel model)
         {
-            // DEBUG: Log all received files
-            foreach (var file in Request.Form.Files)
-            {
-                System.Diagnostics.Debug.WriteLine($"File field: {file.Name}, length: {file.Length}");
-            }
+            var validationResult = ValidateFormSubmission(model);
+            if (validationResult != null)
+                return validationResult;
 
-            // Filter out empty answers
-            if (model.Answers != null)
-            {
-                var questionss = questionService.GetByTemplateId(model.Template.Id).ToList();
-                model.Answers = model.Answers
-                    .Where(a =>
-                    {
-                        var question = questionss.FirstOrDefault(q => q.Id == a.QuestionId);
-                        return question != null && (
-                            question.QuestionType == Enums.QuestionType.FileUpload || // Keep file upload answers
-                            !string.IsNullOrWhiteSpace(a.Text) ||
-                            !string.IsNullOrWhiteSpace(a.LongText) ||
-                            a.Number.HasValue ||
-                            a.Checkbox.HasValue ||
-                            !string.IsNullOrWhiteSpace(a.FileUrl) ||
-                            a.Date.HasValue
-                        );
-                    }).ToList();
-            }
             var currentUserId = GetAuthenticatedUserId();
-            if (model.Template == null)
-            {
-                return BadRequest("Template is null");
-            }
-            if (!templateService.CanUserAccessTemplate(model.Template.Id, currentUserId))
-            {
-                return Forbid();
-            }
-            if (model.Answers == null || !model.Answers.Any())
-            {
-                return BadRequest("No answers provided");
-            }
+            FilterEmptyAnswers(model);
 
-            // Handle file uploads for FileUpload questions (mirroring Edit action)
-            var questions = questionService.GetByTemplateId(model.Template.Id).ToList();
-            Console.WriteLine(model.Answers.Count);
-            for (int i = 0; i < model.Answers.Count; i++)
-            {
-                var answer = model.Answers[i];
-                var question = questions.FirstOrDefault(q => q.Id == answer.QuestionId);
-                //Console.WriteLine(questions.Count);
-                Console.WriteLine(i);
-                if (question != null && question.QuestionType == Enums.QuestionType.FileUpload)
-                {
-                    Console.WriteLine("FLAG");
-                    var file = Request.Form.Files[$"AnswerFile_{i}"];
-                    if (file != null && file.Length > 0)
-                    {
-                        var url = ImageService.UploadAnswerImage(file);
-                        answer.FileUrl = url;
-                    }
-                }
-            }
-
+            ProcessFileUploads(model);
             try
             {
-                var createDto = new FormDTO
-                {
-                    TemplateId = model.Template.Id,
-                    Answers = model.Answers.Select(a => new AnswerDTO
-                    {
-                        QuestionId = a.QuestionId,
-                        Text = a.Text,
-                        LongText = a.LongText,
-                        Number = a.Number,
-                        Checkbox = a.Checkbox,
-                        FileUrl = a.FileUrl,
-                        Date = a.Date,
-                    }).ToList()
-                };
-                var form = formService.Create(createDto, currentUserId);
+                var formDto = CreateFormDto(model);
+                var form = formService.Create(formDto, currentUserId);
                 return RedirectToAction("Details", new { id = form.Id });
             }
             catch (Exception ex)
             {
                 throw;
             }
+        }
+
+        private IActionResult? ValidateFormSubmission(FillFormModel model)
+        {
+            if (model.Template == null)
+                return BadRequest("Template is null");
+
+            if (model.Answers == null || !model.Answers.Any())
+                return BadRequest("No answers provided");
+
+            var currentUserId = GetAuthenticatedUserId();
+            if (!templateService.CanUserAccessTemplate(model.Template.Id, currentUserId))
+                return Forbid();
+
+            return null;
+        }
+
+        private void FilterEmptyAnswers(FillFormModel model)
+        {
+            if (model.Answers == null) return;
+
+            var questions = questionService.GetByTemplateId(model.Template.Id).ToList();
+            model.Answers = model.Answers
+                .Where(answer => IsAnswerNotEmpty(answer, questions))
+                .ToList();
+        }
+
+        private bool IsAnswerNotEmpty(AnswerDTO answer, List<QuestionDTO> questions)
+        {
+            var question = questions.FirstOrDefault(q => q.Id == answer.QuestionId);
+            if (question == null) return false;
+
+            return question.QuestionType == Enums.QuestionType.FileUpload || 
+                   !string.IsNullOrWhiteSpace(answer.Text) ||
+                   !string.IsNullOrWhiteSpace(answer.LongText) ||
+                   answer.Number.HasValue ||
+                   answer.Checkbox.HasValue ||
+                   !string.IsNullOrWhiteSpace(answer.FileUrl) ||
+                   answer.Date.HasValue;
+        }
+
+        private void ProcessFileUploads(FillFormModel model)
+        {
+            var questions = questionService.GetByTemplateId(model.Template.Id).ToList();
+            
+            for (int i = 0; i < model.Answers.Count; i++)
+            {
+                var answer = model.Answers[i];
+                var question = questions.FirstOrDefault(q => q.Id == answer.QuestionId);
+                
+                if (question?.QuestionType == Enums.QuestionType.FileUpload)
+                {
+                    ProcessFileUpload(answer, i);
+                }
+            }
+        }
+
+        private void ProcessFileUpload(AnswerDTO answer, int answerIndex)
+        {
+            var file = Request.Form.Files[$"AnswerFile_{answerIndex}"];
+            if (file != null && file.Length > 0)
+            {
+                var url = ImageService.UploadAnswerImage(file);
+                answer.FileUrl = url;
+            }
+        }
+
+        private FormDTO CreateFormDto(FillFormModel model)
+        {
+            return new FormDTO
+            {
+                TemplateId = model.Template.Id,
+                Answers = model.Answers.Select(answer => new AnswerDTO
+                {
+                    QuestionId = answer.QuestionId,
+                    Text = answer.Text,
+                    LongText = answer.LongText,
+                    Number = answer.Number,
+                    Checkbox = answer.Checkbox,
+                    FileUrl = answer.FileUrl,
+                    Date = answer.Date,
+                }).ToList()
+            };
         }
 
         [AuthenticatedAdminorUser]
@@ -198,46 +215,64 @@ namespace Iforms.MVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(FillFormModel model)
         {
-            var currentUserId = GetAuthenticatedUserId();
-            if (model.Template == null || model.Answers == null)
-                return BadRequest();
+            var validationResult = ValidateFormSubmission(model);
+            if (validationResult != null)
+                return validationResult;
 
-            // Get the list of questions for the template
+            var currentUserId = GetAuthenticatedUserId();
+
+            ProcessEditFileUploads(model);
+
+            try
+            {
+                var formDto = CreateEditFormDto(model);
+                var success = formService.Update(formDto, currentUserId);
+                
+                if (!success)
+                    return Forbid();
+                    
+                return RedirectToAction("Details", new { id = model.FormId });
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private void ProcessEditFileUploads(FillFormModel model)
+        {
             var questions = questionService.GetByTemplateId(model.Template.Id).ToList();
 
-            // Handle file uploads for FileUpload questions (same as Submit)
             for (int i = 0; i < model.Answers.Count; i++)
             {
                 var answer = model.Answers[i];
                 var question = questions.FirstOrDefault(q => q.Id == answer.QuestionId);
-                if (question != null && question.QuestionType == Enums.QuestionType.FileUpload)
+                
+                if (question?.QuestionType == Enums.QuestionType.FileUpload)
                 {
-                    // Remove image if requested
-                    if (answer.RemoveFile && !string.IsNullOrEmpty(answer.FileUrl))
-                    {
-                        ImageService.DeleteImage(answer.FileUrl);
-                        answer.FileUrl = null;
-                    }
-                    var file = Request.Form.Files[$"AnswerFile_{i}"];
-                    if (file != null && file.Length > 0)
-                    {
-                        var url = ImageService.UploadAnswerImage(file);
-                        answer.FileUrl = url;
-                    }
+                    ProcessEditFileUpload(answer, i);
                 }
             }
+        }
 
-            var formDto = new FormDTO
+        private void ProcessEditFileUpload(AnswerDTO answer, int answerIndex)
+        {
+            // Handle file deletion if requested
+            if (answer.RemoveFile && !string.IsNullOrEmpty(answer.FileUrl))
             {
-                Id = model.FormId,
-                TemplateId = model.Template.Id,
-                Answers = model.Answers
-            };
+                ImageService.DeleteImage(answer.FileUrl);
+                answer.FileUrl = null;
+            }
 
-            var success = formService.Update(formDto, currentUserId);
-            if (!success)
-                return Forbid();
-            return RedirectToAction("Details", new { id = model.FormId });
+            // Handle new file upload using existing method
+            ProcessFileUpload(answer, answerIndex);
+        }
+
+        private FormDTO CreateEditFormDto(FillFormModel model)
+        {
+            var formDto = CreateFormDto(model);
+            formDto.Id = model.FormId; // Add the form ID for editing
+            return formDto;
         }
 
         [AuthenticatedAdminorUser]
@@ -285,13 +320,10 @@ namespace Iforms.MVC.Controllers
             var currentUserId = GetCurrentUserId();
             if (currentUserId == null)
                 return Unauthorized();
-
-            // Find the answer by id (use questionService or formService as appropriate)
             var answer = formService.GetAnswerById(id);
             if (answer == null)
                 return NotFound(new { success = false, message = "Answer not found." });
 
-            // Check if the user can manage the form this answer belongs to
             var form = formService.GetAnswerById(answer.FormId);
             if (form == null || !formService.CanUserManageForm(form.Id, currentUserId.Value))
                 return Forbid();
@@ -305,8 +337,6 @@ namespace Iforms.MVC.Controllers
             {
                 return Json(new { success = false, message = "Failed to delete image from storage. Please try again." });
             }
-
-            // Optionally clear the FileUrl in the answer (if you want to persist this change)
             answer.FileUrl = null;
             formService.UpdateAnswer(answer);
 
@@ -329,9 +359,9 @@ namespace Iforms.MVC.Controllers
 
         [AuthenticatedAdminorUser]
         [HttpPost("Form/DeleteForms")]
-        public JsonResult DeleteForms([FromBody] int[] formIds)
+        public JsonResult DeleteForms([FromBody] List<int> formIds)
         {
-            if (formIds == null || formIds.Length == 0)
+            if (formIds == null || formIds.Count == 0)
                 return Json(new { success = false, message = "No forms selected." });
             var result = formService.DeleteForms(formIds);
             if (result)

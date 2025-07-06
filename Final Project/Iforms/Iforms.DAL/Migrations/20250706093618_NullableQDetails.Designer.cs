@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Iforms.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250703155155_newserver")]
-    partial class newserver
+    [Migration("20250706093618_NullableQDetails")]
+    partial class NullableQDetails
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -197,7 +197,6 @@ namespace Iforms.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QuestionDescription")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("VARCHAR");
 

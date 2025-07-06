@@ -16,7 +16,7 @@ namespace Iforms.BLL.DTOs
         [Required, StringLength(100)]
         public string QuestionTitle { get; set; }
 
-        [Required,StringLength(500)]
+        [StringLength(500)]
         public string QuestionDescription { get; set; }
 
         public QuestionType QuestionType { get; set; }

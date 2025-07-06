@@ -3,7 +3,7 @@
     ViewData["Title"] = "Log In";
     Layout = "~/Views/Shared/RegisterLoginLayout.cshtml";
 }
-<h1 class="app-logo">Iforms</h1>
+<a class="navbar-brand app-logo" href="@Url.Action("Index", "Home")" style="text-decoration: none;">Iforms</a>
 <div class="form-container">
     <h2 data-i18n="login">Sign in to The App</h2>
     <form asp-action="Login">

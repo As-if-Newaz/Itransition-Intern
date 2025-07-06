@@ -50,9 +50,9 @@ namespace Iforms.MVC.Controllers
 
         
         [HttpPost("UserManagement/Block")]
-        public JsonResult Block([FromBody] int[] userIds)
+        public JsonResult Block([FromBody] List<int> userIds)
         {
-            if (userIds == null || userIds.Length == 0)
+            if (userIds == null || userIds.Count == 0)
                 return Json(new { success = false, message = "No users selected." });
             var result = userServices.BlockUsers(userIds);
             if (result)
@@ -68,9 +68,9 @@ namespace Iforms.MVC.Controllers
 
         
         [HttpPost("UserManagement/Unblock")]
-        public JsonResult Unblock([FromBody] int[] userIds)
+        public JsonResult Unblock([FromBody] List<int> userIds)
         {
-            if (userIds == null || userIds.Length == 0)
+            if (userIds == null || userIds.Count == 0)
                 return Json(new { success = false, message = "No users selected." });
             var result = userServices.UnblockUsers(userIds);
             if (result)
@@ -85,9 +85,9 @@ namespace Iforms.MVC.Controllers
         }
 
         [HttpPost("UserManagement/Activate")]
-        public JsonResult Activate([FromBody] int[] userIds)
+        public JsonResult Activate([FromBody] List<int> userIds)
         {
-            if (userIds == null || userIds.Length == 0)
+            if (userIds == null || userIds.Count == 0)
                 return Json(new { success = false, message = "No users selected." });
             var result = userServices.ActivateUsers(userIds);
             if (result)
@@ -101,9 +101,9 @@ namespace Iforms.MVC.Controllers
             }
         }
         [HttpPost("UserManagement/Inactivate")]
-        public JsonResult Inactivate([FromBody] int[] userIds)
+        public JsonResult Inactivate([FromBody] List<int> userIds)
         {
-            if (userIds == null || userIds.Length == 0)
+            if (userIds == null || userIds.Count == 0)
                 return Json(new { success = false, message = "No users selected." });
             var result = userServices.InactivateUsers(userIds);
             if (result)
@@ -117,9 +117,9 @@ namespace Iforms.MVC.Controllers
             }
         }
             [HttpPost("UserManagement/AddAdminAccess")]
-            public JsonResult GiveAdminAccess([FromBody] int[] userIds)
+            public JsonResult GiveAdminAccess([FromBody] List<int> userIds)
             {
-                if (userIds == null || userIds.Length == 0)
+                if (userIds == null || userIds.Count == 0)
                     return Json(new { success = false, message = "No users selected." });
                 var result = userServices.UpdateUserRole(userIds, UserRole.Admin);
                 if (result)
@@ -134,9 +134,9 @@ namespace Iforms.MVC.Controllers
             }
 
         [HttpPost("UserManagement/RemoveAdminAccess")]
-        public JsonResult RemoveAdminAccess([FromBody] int[] userIds)
+        public JsonResult RemoveAdminAccess([FromBody] List<int> userIds)
         {
-            if (userIds == null || userIds.Length == 0)
+            if (userIds == null || userIds.Count == 0)
                 return Json(new { success = false, message = "No users selected." });
             var result = userServices.UpdateUserRole(userIds, UserRole.User);
             if (result)
@@ -154,9 +154,9 @@ namespace Iforms.MVC.Controllers
 
 
             [HttpPost("UserManagement/Delete")]
-        public JsonResult Delete([FromBody] int[] userIds)
+        public JsonResult Delete([FromBody] List<int> userIds)
         {
-            if (userIds == null || userIds.Length == 0)
+            if (userIds == null || userIds.Count == 0)
                 return Json(new { success = false, message = "No users selected." });
             var result = userServices.DeleteUsers(userIds);
             if (result)

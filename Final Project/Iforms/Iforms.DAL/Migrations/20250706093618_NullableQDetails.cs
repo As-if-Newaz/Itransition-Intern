@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Iforms.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class newserver : Migration
+    public partial class NullableQDetails : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -201,7 +201,7 @@ namespace Iforms.DAL.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     QuestionTitle = table.Column<string>(type: "VARCHAR(100)", maxLength: 100, nullable: false),
-                    QuestionDescription = table.Column<string>(type: "VARCHAR(500)", maxLength: 500, nullable: false),
+                    QuestionDescription = table.Column<string>(type: "VARCHAR(500)", maxLength: 500, nullable: true),
                     QuestionType = table.Column<int>(type: "int", nullable: false),
                     QuestionOrder = table.Column<int>(type: "int", nullable: false),
                     Options = table.Column<string>(type: "nvarchar(max)", nullable: true),

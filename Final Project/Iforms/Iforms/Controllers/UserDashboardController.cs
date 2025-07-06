@@ -36,8 +36,6 @@ namespace Iforms.MVC.Controllers
             var allTemplates = templateService.GetUserTemplates(userId, userId).ToList();
             var totalCount = allTemplates.Count;
             var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
-            
-            // Ensure page is within valid range
             page = Math.Max(1, Math.Min(page, totalPages > 0 ? totalPages : 1));
             
             var templates = allTemplates
