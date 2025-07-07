@@ -1,6 +1,6 @@
 ﻿#toast-container {
     position: fixed;
-    top: 5%;
+    top: 1rem;
     left: 50%;
     transform: translateX(-50%);
     z-index: 99999;
@@ -53,7 +53,7 @@
 }
 
 .toast-center {
-    top: 7% !important;
+    top: 1rem !important;
     left: 50% !important;
     bottom: auto !important;
     right: auto !important;

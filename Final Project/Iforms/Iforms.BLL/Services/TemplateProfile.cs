@@ -41,7 +41,8 @@ namespace Iforms.BLL.Services
                 .ForMember(dest => dest.Template, opt => opt.Ignore())
                 .ForMember(dest => dest.Answers, opt => opt.Ignore())
                 .ForMember(dest => dest.Options, opt => opt.MapFrom(src => src.Options ?? new List<string>()))
-                .ForMember(dest => dest.IsMandatory, opt => opt.MapFrom(src => src.IsMandatory));
+                .ForMember(dest => dest.IsMandatory, opt => opt.MapFrom(src => src.IsMandatory))
+                .ForMember(dest => dest.QuestionDescription, opt => opt.MapFrom(src => src.QuestionDescription ?? string.Empty));
 
             CreateMap<Form, FormDTO>()
                 .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => src.Answers))
