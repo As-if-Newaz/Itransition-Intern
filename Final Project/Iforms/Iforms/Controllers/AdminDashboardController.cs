@@ -170,34 +170,34 @@ namespace Iforms.MVC.Controllers
             }
         }
         
-        [HttpGet("UserManagement/Edit/{id}")]
-        public IActionResult Edit(int id)
-        {
-            var user = userServices.GetById(id);
-            if (user == null)
-            {
-                TempData["ErrorMsg"] = "User not found.";
-                return RedirectToAction("Dashboard");
-            }
-            return View(user);
-        }
+        //[HttpGet("UserManagement/Edit/{id}")]
+        //public IActionResult Edit(int id)
+        //{
+        //    var user = userServices.GetById(id);
+        //    if (user == null)
+        //    {
+        //        TempData["ErrorMsg"] = "User not found.";
+        //        return RedirectToAction("Dashboard");
+        //    }
+        //    return View(user);
+        //}
 
-        [HttpPost("UserManagement/Update")]
-        public JsonResult Update([FromBody] UserDTO userDto)
-        {
-            if (userDto == null || userDto.Id <= 0)
-                return Json(new { success = false, message = "Invalid user data." });
-            var result = userServices.UpdateUser(userDto);
-            if (result)
-            {
-                auditLogService.RecordLog(int.Parse(HttpContext.Request.Cookies["LoggedId"]), "Updated User", userDto.Id.ToString());
-                return Json(new { success = true, message = "User updated successfully." });
-            }
-            else
-            {
-                return Json(new { success = false, message = "Failed to update user" });
-            }
-        }
+        //[HttpPost("UserManagement/Update")]
+        //public JsonResult Update([FromBody] UserDTO userDto)
+        //{
+        //    if (userDto == null || userDto.Id <= 0)
+        //        return Json(new { success = false, message = "Invalid user data." });
+        //    var result = userServices.UpdateUser(userDto);
+        //    if (result)
+        //    {
+        //        auditLogService.RecordLog(int.Parse(HttpContext.Request.Cookies["LoggedId"]), "Updated User", userDto.Id.ToString());
+        //        return Json(new { success = true, message = "User updated successfully." });
+        //    }
+        //    else
+        //    {
+        //        return Json(new { success = false, message = "Failed to update user" });
+        //    }
+        //}
         [AuthenticatedAdmin]
         [HttpGet("AdminDashboard/AllTemplates")]
         public IActionResult AllTemplates()

@@ -27,7 +27,7 @@
    <tbody>  
        @foreach (var user in Model)  
        {  
-           <tr>  
+           <tr class="user-row" data-user-id="@user.Id" style="cursor:pointer;">  
                <td><input type="checkbox" class="select-user" value="@user.Id"></td>  
                <td>  
                    <div>@user.UserName</div>  
@@ -52,6 +52,17 @@
            selectAll.addEventListener('change', () => {  
                userCheckboxes.forEach(cb => cb.checked = selectAll.checked);  
            });  
+
+           // Make user rows clickable except when clicking on a checkbox
+           document.querySelectorAll('.user-row').forEach(row => {
+               row.addEventListener('click', function(e) {
+                   if (e.target.tagName.toLowerCase() === 'input') return;
+                   const userId = this.getAttribute('data-user-id');
+                   if (userId) {
+                       window.location.href = `/User/Edit/${userId}`;
+                   }
+               });
+           });
 
            document.querySelectorAll('[data-action]').forEach(btn => {  
                btn.addEventListener('click', async () => {  

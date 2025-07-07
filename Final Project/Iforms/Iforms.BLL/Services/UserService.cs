@@ -26,8 +26,9 @@ namespace Iforms.BLL.Services
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<User, UserDTO>();
-                cfg.CreateMap<UserDTO, User>();
+                cfg.CreateMap<User, UserDTO>().ReverseMap();
+                cfg.CreateMap<UserUpdateDTO, User>().ReverseMap();
+                cfg.CreateMap<UserDTO, UserUpdateDTO>().ReverseMap();
 
             });
             return new Mapper(config);
@@ -66,14 +67,14 @@ namespace Iforms.BLL.Services
             return GetMapper().Map<List<UserDTO>>(data);
         }
 
-        public UserDTO? GetUserByEmail(string email)
+        public UserUpdateDTO? GetUserByEmail(string email)
         {
             var user = DA.UserData().GetByEmail(email);
             if (user == null)
             {
                 return null;
             }
-            return GetMapper().Map<UserDTO>(user);
+            return GetMapper().Map<UserUpdateDTO>(user);
         }
 
         public bool BlockUsers(List<int> userIds)
@@ -141,14 +142,19 @@ namespace Iforms.BLL.Services
             return true;
         }
 
-        public bool UpdateUser(UserDTO obj)
+        public bool UpdateUser(UserUpdateDTO obj)
         {
-            var data = GetMapper().Map<User>(obj);
-            if (data == null)
+            var user = DA.UserData().Get(obj.Id);
+            if (user == null)
             {
                 return false;
             }
-            return DA.UserData().Update(data);
+            user.UserName = obj.UserName;
+            user.UserEmail = obj.UserEmail;
+            user.UserStatus = obj.UserStatus ?? user.UserStatus;
+            user.EmailVerificationCode = obj.EmailVerificationCode;
+            user.EmailVerificationExpiry = obj.EmailVerificationExpiry;
+            return DA.UserData().Update(user);
         }
 
         public bool UpdateUserStatus(int userId, UserStatus status)

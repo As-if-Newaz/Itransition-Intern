@@ -1,9 +1,13 @@
-﻿using Iforms.BLL.DTOs;
+﻿using AutoMapper;
+using Iforms.BLL.DTOs;
 using Iforms.BLL.Services;
+using Iforms.MVC.Authentication;
 using Iforms.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Security.Claims;
 using static Iforms.DAL.Entity_Framework.Table_Models.Enums;
+using System.Linq;
 
 namespace Iforms.MVC.Controllers
 {
@@ -15,6 +19,15 @@ namespace Iforms.MVC.Controllers
         {
             this.userServices = userServices;
             this.emailService = emailService;
+        }
+        static Mapper GetMapper()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<UserDTO, UserUpdateDTO>().ReverseMap();
+
+            });
+            return new Mapper(config);
         }
 
         [Route("register")]
@@ -91,14 +104,12 @@ namespace Iforms.MVC.Controllers
             return RedirectToAction("Login", "Auth");
         }
 
+        [AuthenticatedAdminorUser]
         [HttpPost]
         public IActionResult UpdateThemePreference([FromBody] ThemePreference model)
         {
             if (model == null || model.UserId <= 0)
                 return Json(new { success = false, message = "Invalid data" });
-
-            try
-            {
                 var user = userServices.GetById(model.UserId);
                 if (user == null)
                     return Json(new { success = false, message = "User not found" });
@@ -113,11 +124,42 @@ namespace Iforms.MVC.Controllers
 
                 var result = userServices.UpdatePreferences(model.UserId, preferences);
                 return Json(new { success = result });
-            }
-            catch (Exception ex)
+        }
+
+        [AuthenticatedAdminorUser]
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var role = HttpContext.Request.Cookies["Role"];
+            var loggedId = HttpContext.Request.Cookies["LoggedId"];
+            if (role != "Admin" && loggedId != null && id.ToString() != loggedId)
             {
-                return Json(new { success = false, message = "Error updating theme preference" });
+                return RedirectToAction("Index", "Home");
             }
+            var user = userServices.GetById(id);
+            var data = GetMapper().Map<UserUpdateDTO>(user);
+            return View(data);
+        }
+        [AuthenticatedAdminorUser]
+        [HttpPost]
+        public JsonResult Edit([FromBody] UserUpdateDTO obj)
+        {
+           if(ModelState.IsValid)
+            {
+                Console.WriteLine(obj.Id);
+                if(userServices.GetById(obj.Id) != null)
+                {
+                    var data = userServices.UpdateUser(obj);
+                    return Json(new { success = true, message = "User updated successfully." });
+                }
+                return Json(new { success = false, message = "Invalid User" });
+            }
+            // Return detailed errors for debugging
+            var errors = ModelState
+                .Where(x => x.Value.Errors.Count > 0)
+                .Select(x => new { x.Key, Errors = x.Value.Errors.Select(e => e.ErrorMessage).ToList() })
+                .ToArray();
+            return Json(new { success = false, message = "Invalid User Data", errors });
         }
     }
 }
