@@ -3,12 +3,6 @@
     ViewData["Title"] = "My Submitted Forms";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var forms = ViewBag.Forms as List<FormDTO>;
-    var currentPage = (int)ViewBag.CurrentPage;
-    var totalPages = (int)ViewBag.TotalPages;
-    var totalCount = (int)ViewBag.TotalCount;
-    var pageSize = (int)ViewBag.PageSize;
-    var hasPreviousPage = (bool)ViewBag.HasPreviousPage;
-    var hasNextPage = (bool)ViewBag.HasNextPage;
 }
 
 <div class="submitted-forms-container">
@@ -49,11 +43,6 @@
             }
             </tbody>
         </table>
-        <div class="pagination-container">
-            <span class="pagination-info">Page @currentPage of @totalPages</span>
-            <a class="page-link @(hasPreviousPage ? "" : "disabled")" href="@Url.Action("UserSubmittedForms", new { page = currentPage - 1 })" data-i18n="previous">Previous</a>
-            <a class="page-link @(hasNextPage ? "" : "disabled")" href="@Url.Action("UserSubmittedForms", new { page = currentPage + 1 })" data-i18n="next">Next</a>
-        </div>
     }
 </div>
 
@@ -141,40 +130,6 @@
     .form-id {
         font-weight: 500;
         color: #007bff;
-    }
-    .pagination-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 30px;
-        gap: 10px;
-    }
-    .pagination-info {
-        color: #6c757d;
-        font-size: 14px;
-    }
-    .page-link {
-        display: inline-block;
-        padding: 8px 12px;
-        margin: 0 2px;
-        border: 1px solid #dee2e6;
-        border-radius: 4px;
-        text-decoration: none;
-        color: #007bff;
-        background-color: white;
-        transition: all 0.2s ease;
-    }
-    .page-link:hover {
-        background-color: #e9ecef;
-        border-color: #adb5bd;
-        text-decoration: none;
-        color: #0056b3;
-    }
-    .page-link.disabled {
-        color: #6c757d;
-        pointer-events: none;
-        background-color: #e9ecef;
-        border-color: #dee2e6;
     }
     .no-forms {
         text-align: center;

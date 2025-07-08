@@ -4,12 +4,6 @@
     
     var template = ViewBag.Template as Iforms.BLL.DTOs.TemplateDTO;
     var forms = ViewBag.Forms as List<Iforms.BLL.DTOs.FormDTO>;
-    var currentPage = (int)ViewBag.CurrentPage;
-    var totalPages = (int)ViewBag.TotalPages;
-    var totalCount = (int)ViewBag.TotalCount;
-    var pageSize = (int)ViewBag.PageSize;
-    var hasPreviousPage = (bool)ViewBag.HasPreviousPage;
-    var hasNextPage = (bool)ViewBag.HasNextPage;
 }
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
@@ -394,79 +388,5 @@
                 }
             </tbody>
         </table>
-
-        @if (totalPages > 1)
-        {
-            <div class="pagination-container">
-                <div class="pagination-info">
-                    Showing @(((currentPage - 1) * pageSize) + 1) to @Math.Min(currentPage * pageSize, totalCount) of @totalCount responses
-                </div>
-                
-                <div class="pagination">
-                    @if (hasPreviousPage)
-                    {
-                        <a href="@Url.Action("TemplateFormResponses", new { templateId = template.Id, page = currentPage - 1 })" class="page-link">
-                            <i class="fas fa-chevron-left"></i> Previous
-                        </a>
-                    }
-                    else
-                    {
-                        <span class="page-link disabled">
-                            <i class="fas fa-chevron-left"></i> Previous
-                        </span>
-                    }
-
-                    @{
-                        var startPage = Math.Max(1, currentPage - 2);
-                        var endPage = Math.Min(totalPages, currentPage + 2);
-                    }
-
-                    @for (int i = startPage; i <= endPage; i++)
-                    {
-                        if (i == currentPage)
-                        {
-                            <span class="page-link active">@i</span>
-                        }
-                        else
-                        {
-                            <a href="@Url.Action("TemplateFormResponses", new { templateId = template.Id, page = i })" class="page-link">@i</a>
-                        }
-                    }
-
-                    @if (hasNextPage)
-                    {
-                        <a href="@Url.Action("TemplateFormResponses", new { templateId = template.Id, page = currentPage + 1 })" class="page-link">
-                            Next <i class="fas fa-chevron-right"></i>
-                        </a>
-                    }
-                    else
-                    {
-                        <span class="page-link disabled">
-                            Next <i class="fas fa-chevron-right"></i>
-                        </span>
-                    }
-                </div>
-            </div>
-        }
     }
 </div>
-
-<div style="background: #fff; margin: 2rem; padding: 2rem;">
-    <canvas id="testChart" width="400" height="200"></canvas>
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var ctx = document.getElementById('testChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['A', 'B', 'C'],
-                datasets: [{
-                    label: 'Test',
-                    data: [5, 10, 3],
-                    backgroundColor: 'rgba(54, 162, 235, 0.6)'
-                }]
-            }
-        });
-    });
-</script> 

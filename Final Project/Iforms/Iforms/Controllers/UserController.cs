@@ -154,12 +154,8 @@ namespace Iforms.MVC.Controllers
                 }
                 return Json(new { success = false, message = "Invalid User" });
             }
-            // Return detailed errors for debugging
-            var errors = ModelState
-                .Where(x => x.Value.Errors.Count > 0)
-                .Select(x => new { x.Key, Errors = x.Value.Errors.Select(e => e.ErrorMessage).ToList() })
-                .ToArray();
-            return Json(new { success = false, message = "Invalid User Data", errors });
+ 
+            return Json(new { success = false, message = "Invalid User Data" });
         }
     }
 }

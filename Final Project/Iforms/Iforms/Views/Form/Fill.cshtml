@@ -258,7 +258,14 @@
                             placeholder="Enter your answer here..."
                             @(question.IsMandatory ? "required" : null)></textarea>
                         break;
-                        
+                    case Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType.LongText:
+                        <textarea 
+                            name="Answers[@questionIndex].LongText" 
+                            class="form-control" 
+                            rows="6" 
+                            placeholder="Enter your detailed answer here..."
+                            @(question.IsMandatory ? "required" : null)></textarea>
+                        break;
                     case Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType.Number:
                         <input 
                             type="number" 
@@ -325,33 +332,40 @@
 
 @section Scripts {
     <script>
-        // Form validation and progress tracking
         document.addEventListener('DOMContentLoaded', function() {
-            // Track progress on input changes
-            document.querySelectorAll('input, textarea').forEach(input => {
-                input.addEventListener('input', updateProgress);
-                input.addEventListener('change', updateProgress);
-            });
-            
-            // Form submission validation
-            document.getElementById('fillForm').addEventListener('submit', function(e) {
-                const questions = document.querySelectorAll('.question-card');
+            const form = document.getElementById('fillForm');
+            form.addEventListener('submit', function(e) {
                 let isValid = true;
+                const questions = document.querySelectorAll('.question-card');
+
+                // Always update hidden input for all checkbox questions before validation
+                questions.forEach(question => {
+                    const checkboxes = question.querySelectorAll('input[type="checkbox"]');
+                    if (checkboxes.length > 0) {
+                        const cbAnswer = question.querySelector('input[type="hidden"][id^="cb_answer_"]');
+                        if (cbAnswer) {
+                            cbAnswer.value = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value).join(',');
+                        }
+                    }
+                });
 
                 questions.forEach(question => {
                     const isMandatory = question.getAttribute('data-mandatory') === 'true';
-                    if (!isMandatory) {
-                        // Not required, skip validation
-                        question.style.borderColor = '#e9ecef';
-                        question.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
-                        return;
-                    }
                     let hasAnswer = false;
-                    // Check for checkboxes
                     const checkboxes = question.querySelectorAll('input[type="checkbox"]');
                     if (checkboxes.length > 0) {
-                        hasAnswer = Array.from(checkboxes).some(cb => cb.checked);
-                    } else {
+                        // For mandatory checkbox questions, require the hidden input to be non-empty
+                        const cbAnswer = question.querySelector('input[type="hidden"][id^="cb_answer_"]');
+                        hasAnswer = cbAnswer && cbAnswer.value.trim() !== '';
+                        if (isMandatory && !hasAnswer) {
+                            isValid = false;
+                            question.style.borderColor = '#dc3545';
+                            question.style.boxShadow = '0 0 0 0.2rem rgba(220, 53, 69, 0.25)';
+                        } else {
+                            question.style.borderColor = '#e9ecef';
+                            question.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                        }
+                    } else if (isMandatory) {
                         // For other types, check all visible inputs and textareas
                         const inputs = question.querySelectorAll('input, textarea');
                         inputs.forEach(input => {
@@ -365,19 +379,20 @@
                                 if (input.value && input.value.trim() !== '') hasAnswer = true;
                             }
                         });
-                    }
-                    if (!hasAnswer) {
-                        isValid = false;
-                        question.style.borderColor = '#dc3545';
-                        question.style.boxShadow = '0 0 0 0.2rem rgba(220, 53, 69, 0.25)';
-                    } else {
-                        question.style.borderColor = '#e9ecef';
-                        question.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                        if (!hasAnswer) {
+                            isValid = false;
+                            question.style.borderColor = '#dc3545';
+                            question.style.boxShadow = '0 0 0 0.2rem rgba(220, 53, 69, 0.25)';
+                        } else {
+                            question.style.borderColor = '#e9ecef';
+                            question.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
+                        }
                     }
                 });
 
                 if (!isValid) {
                     e.preventDefault();
+                    console.log('Form blocked: mandatory checkbox question not answered');
                     return false;
                 }
             });

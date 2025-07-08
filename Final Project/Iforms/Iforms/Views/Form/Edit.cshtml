@@ -244,6 +244,14 @@
                             placeholder="Enter your answer here..."
                             @(question.IsMandatory ? "required" : null)>@(answer?.Text ?? "")</textarea>
                         break;
+                    case Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType.LongText:
+                        <textarea 
+                            name="Answers[@questionIndex].LongText" 
+                            class="form-control" 
+                            rows="6" 
+                            placeholder="Enter your detailed answer here..."
+                            @(question.IsMandatory ? "required" : null)>@(answer?.LongText ?? "")</textarea>
+                        break;
                     case Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType.Number:
                         <input 
                             type="number" 
@@ -388,7 +396,6 @@
             questions.forEach(question => {
                 const isMandatory = question.getAttribute('data-mandatory') === 'true';
                 if (!isMandatory) {
-                    // Not required, skip validation
                     question.style.borderColor = '#e9ecef';
                     question.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.05)';
                     return;
@@ -396,7 +403,7 @@
                 let hasAnswer = false;
                 const checkboxes = question.querySelectorAll('input[type="checkbox"]');
                 if (checkboxes.length > 0) {
-                    // MultipleChoice: at least one checked
+                    // For mandatory checkbox questions, require at least one checked
                     hasAnswer = Array.from(checkboxes).some(cb => cb.checked);
                 } else {
                     const inputs = question.querySelectorAll('input[required], textarea[required]');

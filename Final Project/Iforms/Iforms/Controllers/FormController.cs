@@ -33,34 +33,6 @@ namespace Iforms.MVC.Controllers
             this.imageService = imageService;
             this.auditLogService = auditLogService;
         }
-        [HttpGet]
-        public IActionResult DebugTemplates()
-        {
-            try
-            {
-                var allTemplates = templateService.DA.TemplateData().GetAll();
-                var publicTemplates = templateService.DA.TemplateData().GetPublicTemplates();
-                
-                var result = new
-                {
-                    TotalTemplates = allTemplates.Count(),
-                    PublicTemplates = publicTemplates.Count(),
-                    TemplateList = allTemplates.Select(t => new
-                    {
-                        Id = t.Id,
-                        Title = t.Title,
-                        IsPublic = t.IsPublic,
-                        CreatedById = t.CreatedById
-                    }).ToList()
-                };
-                
-                return Json(result);
-            }
-            catch (Exception ex)
-            {
-                return Json(new { Error = ex.Message, StackTrace = ex.StackTrace });
-            }
-        }
 
         [AuthenticatedAdminorUser]
         [HttpGet("Form/Fill/{templateId}")]
@@ -100,9 +72,9 @@ namespace Iforms.MVC.Controllers
                 return validationResult;
 
             var currentUserId = GetAuthenticatedUserId();
+            ProcessFileUploads(model);
             FilterEmptyAnswers(model);
 
-            ProcessFileUploads(model);
             try
             {
                 var formDto = CreateFormDto(model);

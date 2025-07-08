@@ -29,7 +29,7 @@ namespace Iforms.MVC.Controllers
             var templateIdstring = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(templateIdstring) || !int.TryParse(templateIdstring, out var userId))
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Login", "Auth");
             }
 
             var pageSize = 10;
@@ -62,7 +62,7 @@ namespace Iforms.MVC.Controllers
             var templateIdstring = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(templateIdstring) || !int.TryParse(templateIdstring, out var userId))
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Login", "Auth");
             }
 
             var pageSize = 10;
@@ -92,15 +92,14 @@ namespace Iforms.MVC.Controllers
 
         [AuthenticatedAdminorUser]
         [HttpGet]
-        public IActionResult TemplateFormResponses(int templateId, int page = 1)
+        public IActionResult TemplateFormResponses(int templateId)
         {
             var templateIdstring = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(templateIdstring) || !int.TryParse(templateIdstring, out var userId))
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Login", "Auth");
             }
 
-            // Check if user can manage this template
             if (!templateService.CanUserManageTemplate(templateId, userId))
             {
                 return Forbid();
@@ -112,62 +111,24 @@ namespace Iforms.MVC.Controllers
                 return NotFound();
             }
 
-            var pageSize = 10;
-            var allForms = formService.GetTemplateForms(templateId, userId);
-            var totalCount = allForms.Count;
-            var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
-            
-            // Ensure page is within valid range
-            page = Math.Max(1, Math.Min(page, totalPages > 0 ? totalPages : 1));
-            
-            var forms = allForms
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
-
+            var forms = formService.GetTemplateForms(templateId, userId);
             ViewBag.Template = template;
             ViewBag.Forms = forms;
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
-            ViewBag.TotalCount = totalCount;
-            ViewBag.PageSize = pageSize;
-            ViewBag.HasPreviousPage = page > 1;
-            ViewBag.HasNextPage = page < totalPages;
-
             return View();
         }
 
         [AuthenticatedAdminorUser  ]
         [HttpGet]
-        public IActionResult UserSubmittedForms(int page = 1)
+        public IActionResult UserSubmittedForms()
         {
             var templateIdstring = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (string.IsNullOrEmpty(templateIdstring) || !int.TryParse(templateIdstring, out var userId))
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("Login", "Auth");
             }
 
-            var pageSize = 10;
-            var allForms = formService.GetUserForms(userId);
-            var totalCount = allForms.Count;
-            var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
-
-            // Ensure page is within valid range
-            page = Math.Max(1, Math.Min(page, totalPages > 0 ? totalPages : 1));
-
-            var forms = allForms
-                .Skip((page - 1) * pageSize)
-                .Take(pageSize)
-                .ToList();
-
+            var forms = formService.GetUserForms(userId);
             ViewBag.Forms = forms;
-            ViewBag.CurrentPage = page;
-            ViewBag.TotalPages = totalPages;
-            ViewBag.TotalCount = totalCount;
-            ViewBag.PageSize = pageSize;
-            ViewBag.HasPreviousPage = page > 1;
-            ViewBag.HasNextPage = page < totalPages;
-
             return View();
         }
 
