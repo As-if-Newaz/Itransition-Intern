@@ -1,0 +1,60 @@
+@model IEnumerable<Iforms.BLL.DTOs.ApiTokenDTO>
+@{
+    ViewBag.Title = "API Tokens";
+}
+<h2>API Tokens</h2>
+<div class="mb-3">
+    <form asp-action="Create" method="post" class="d-inline">
+        <input type="text" name="name" placeholder="Token name (optional)" class="form-control d-inline" style="width: 250px; display: inline-block;" />
+        <button type="submit" class="btn btn-primary">Generate New Token</button>
+    </form>
+</div>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Token</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var token in Model)
+        {
+            <tr>
+                <td>@token.Name</td>
+                <td>
+                    @if (!token.IsRevoked)
+                    {
+                        <span style="font-family:monospace;">@token.Key</span>
+                    }
+                    else
+                    {
+                        <span class="text-muted">(revoked)</span>
+                    }
+                </td>
+                <td>
+                    @if (token.IsRevoked)
+                    {
+                        <span class="badge bg-danger">Revoked</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-success">Active</span>
+                    }
+                </td>
+                <td>@token.CreatedAt.ToString("g")</td>
+                <td>
+                    @if (!token.IsRevoked)
+                    {
+                        <form asp-action="Revoke" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@token.Id" />
+                            <button type="submit" class="btn btn-warning btn-sm">Revoke</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table> 

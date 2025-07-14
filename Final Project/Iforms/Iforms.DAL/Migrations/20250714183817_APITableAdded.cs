@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Iforms.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class NullableQDetails : Migration
+    public partial class APITableAdded : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,6 +57,29 @@ namespace Iforms.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ApiTokens",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Key = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsRevoked = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApiTokens", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ApiTokens_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -314,6 +337,18 @@ namespace Iforms.DAL.Migrations
                 column: "QuestionId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ApiTokens_Key",
+                table: "ApiTokens",
+                column: "Key",
+                unique: true,
+                filter: "[Key] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ApiTokens_UserId",
+                table: "ApiTokens",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AuditLogs_PerformedById",
                 table: "AuditLogs",
                 column: "PerformedById");
@@ -395,6 +430,9 @@ namespace Iforms.DAL.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Answers");
+
+            migrationBuilder.DropTable(
+                name: "ApiTokens");
 
             migrationBuilder.DropTable(
                 name: "AuditLogs");

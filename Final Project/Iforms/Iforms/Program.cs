@@ -8,11 +8,13 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Iforms.BLL.DTOs;
 using Iforms.MVC.Controllers;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("Default");
 builder.Services.AddControllersWithViews();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -54,6 +56,7 @@ builder.Services.AddScoped<FormService>();
 builder.Services.AddScoped<TagService>();
 builder.Services.AddScoped<QuestionService>();
 builder.Services.AddScoped<ImageService>();
+builder.Services.AddScoped<ApiTokenService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
@@ -63,6 +66,31 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 builder.Services.AddSignalR();
+
+builder.Services.AddHttpClient<SalesforceService>((sp, client) =>
+{
+    var config = sp.GetRequiredService<IConfiguration>().GetSection("Salesforce");
+    var clientId = config["ClientId"];
+    var clientSecret = config["ClientSecret"];
+    var username = config["Username"];
+    var password = config["Password"];
+    var tokenEndpoint = config["TokenEndpoint"];
+    var apiBaseUrl = config["ApiBaseUrl"];
+    // The SalesforceService constructor will be called by DI below
+});
+builder.Services.AddScoped<SalesforceService>(sp =>
+{
+    var config = sp.GetRequiredService<IConfiguration>().GetSection("Salesforce");
+    var clientId = config["ClientId"];
+    var clientSecret = config["ClientSecret"];
+    var username = config["Username"];
+    var password = config["Password"];
+    var tokenEndpoint = config["TokenEndpoint"];
+    var apiBaseUrl = config["ApiBaseUrl"];
+    var httpClientFactory = sp.GetRequiredService<IHttpClientFactory>();
+    var httpClient = httpClientFactory.CreateClient(nameof(SalesforceService));
+    return new SalesforceService(httpClient, clientId, clientSecret, username, password, tokenEndpoint, apiBaseUrl);
+});
 
 builder.Services.AddDbContext<IApplicationDBContext, ApplicationDBContext>(options =>
     options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Iforms.DAL")));

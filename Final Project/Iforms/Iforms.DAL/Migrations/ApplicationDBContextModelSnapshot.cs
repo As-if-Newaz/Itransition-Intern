@@ -66,6 +66,40 @@ namespace Iforms.DAL.Migrations
                     b.ToTable("Answers");
                 });
 
+            modelBuilder.Entity("Iforms.DAL.Entity_Framework.Table_Models.ApiToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRevoked")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Key")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Key")
+                        .IsUnique()
+                        .HasFilter("[Key] IS NOT NULL");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ApiTokens");
+                });
+
             modelBuilder.Entity("Iforms.DAL.Entity_Framework.Table_Models.AuditLog", b =>
                 {
                     b.Property<int>("Id")
@@ -411,6 +445,17 @@ namespace Iforms.DAL.Migrations
                     b.Navigation("Form");
 
                     b.Navigation("Question");
+                });
+
+            modelBuilder.Entity("Iforms.DAL.Entity_Framework.Table_Models.ApiToken", b =>
+                {
+                    b.HasOne("Iforms.DAL.Entity_Framework.Table_Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Iforms.DAL.Entity_Framework.Table_Models.AuditLog", b =>

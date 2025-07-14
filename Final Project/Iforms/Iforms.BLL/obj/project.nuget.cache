@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "OAncYOjE2r0=",
+  "dgSpecHash": "n+uTbWx6PT0=",
   "success": true,
   "projectFilePath": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.BLL\\Iforms.BLL.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Asif Newaz\\.nuget\\packages\\automapper\\10.0.0\\automapper.10.0.0.nupkg.sha512",
+    "C:\\Users\\Asif Newaz\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\Asif Newaz\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Asif Newaz\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
     "C:\\Users\\Asif Newaz\\.nuget\\packages\\cloudinarydotnet\\1.27.6\\cloudinarydotnet.1.27.6.nupkg.sha512",
@@ -86,7 +86,6 @@
     "C:\\Users\\Asif Newaz\\.nuget\\packages\\system.net.primitives\\4.3.0\\system.net.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\Asif Newaz\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\Asif Newaz\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
-    "C:\\Users\\Asif Newaz\\.nuget\\packages\\system.reflection.emit\\4.7.0\\system.reflection.emit.4.7.0.nupkg.sha512",
     "C:\\Users\\Asif Newaz\\.nuget\\packages\\system.reflection.primitives\\4.3.0\\system.reflection.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\Asif Newaz\\.nuget\\packages\\system.resources.resourcemanager\\4.3.0\\system.resources.resourcemanager.4.3.0.nupkg.sha512",
     "C:\\Users\\Asif Newaz\\.nuget\\packages\\system.runtime\\4.3.1\\system.runtime.4.3.1.nupkg.sha512",

@@ -1,0 +1,45 @@
+@model (Iforms.MVC.Models.SalesforceAccountViewModel AccountModel, Iforms.MVC.Models.SalesforceContactViewModel ContactModel)
+@{
+    ViewData["Title"] = "Sync to Salesforce";
+}
+<h2>Sync Your Profile to Salesforce</h2>
+
+@if (!string.IsNullOrEmpty(Model.AccountModel.ResultMessage))
+{
+    <div class="alert @(Model.AccountModel.ResultMessage.Contains("success", System.StringComparison.OrdinalIgnoreCase) ? "alert-success" : "alert-danger")">
+        @Model.AccountModel.ResultMessage
+    </div>
+}
+@if (!string.IsNullOrEmpty(Model.ContactModel.ResultMessage))
+{
+    <div class="alert @(Model.ContactModel.ResultMessage.Contains("success", System.StringComparison.OrdinalIgnoreCase) ? "alert-success" : "alert-danger")">
+        @Model.ContactModel.ResultMessage
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3>Create Salesforce Account</h3>
+            </div>
+            <div class="card-body">
+                @await Html.PartialAsync("_SalesforceAccountForm", Model.AccountModel)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3>Create Salesforce Contact</h3>
+            </div>
+            <div class="card-body">
+                @await Html.PartialAsync("_SalesforceContactForm", Model.ContactModel)
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} 

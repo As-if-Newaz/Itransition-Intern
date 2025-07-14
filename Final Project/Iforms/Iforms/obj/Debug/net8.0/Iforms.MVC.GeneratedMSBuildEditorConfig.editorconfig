@@ -44,6 +44,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5EYXNoYm9hcmRcVXNlck1hbmFnZW1lbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Projects/Itransition/Final Project/Iforms/Iforms/Views/ApiToken/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBpVG9rZW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Projects/Itransition/Final Project/Iforms/Iforms/Views/Auth/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -108,6 +112,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVtcGxhdGVcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Projects/Itransition/Final Project/Iforms/Iforms/Views/UserDashboard/SyncToSalesforce.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckRhc2hib2FyZFxTeW5jVG9TYWxlc2ZvcmNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Projects/Itransition/Final Project/Iforms/Iforms/Views/UserDashboard/TemplateFormResponses.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckRhc2hib2FyZFxUZW1wbGF0ZUZvcm1SZXNwb25zZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -122,6 +130,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Projects/Itransition/Final Project/Iforms/Iforms/Views/UserDashboard/UserTemplates.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckRhc2hib2FyZFxVc2VyVGVtcGxhdGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Itransition/Final Project/Iforms/Iforms/Views/UserDashboard/_SalesforceAccountForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckRhc2hib2FyZFxfU2FsZXNmb3JjZUFjY291bnRGb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/Itransition/Final Project/Iforms/Iforms/Views/UserDashboard/_SalesforceContactForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlckRhc2hib2FyZFxfU2FsZXNmb3JjZUNvbnRhY3RGb3JtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Projects/Itransition/Final Project/Iforms/Iforms/Views/User/Edit.cshtml]

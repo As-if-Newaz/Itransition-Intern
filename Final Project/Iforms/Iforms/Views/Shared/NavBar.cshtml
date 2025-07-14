@@ -11,7 +11,22 @@
             </div>  
             @if (HttpContextAccessor.HttpContext.Request.Cookies["Role"] != null)  
             {  
-                <h5 style="display:inline-block;">Hi, <b>@HttpContextAccessor.HttpContext.Request.Cookies["name"]?.ToString()</b></h5>  
+                <div class="dropdown d-inline-block">
+                    <h5 style="display:inline-block; margin-bottom:0; cursor:pointer;" class="dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Hi, <b>@HttpContextAccessor.HttpContext.Request.Cookies["name"]?.ToString()</b>
+                    </h5>
+                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                        <li>
+                            <a class="dropdown-item" href="@Url.Action("Edit", "User", new { id = HttpContextAccessor.HttpContext.Request.Cookies["LoggedId"] })">Edit</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="@Url.Action("SyncToSalesforce", "UserDashboard")">Salesforce</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="@Url.Action("Index", "ApiToken")">API Tokens</a>
+                        </li>
+                    </ul>
+                </div>
                 <span>&nbsp;&nbsp;&nbsp;</span>  
                 <button id="btnTheme" class="btn btn-outline-light me-2" title="Toggle Theme">
                     <i id="light-icon" class="bi bi-sun-fill" style="display: none;"></i>
@@ -36,36 +51,31 @@
 </nav>  
 <div class="button-bar">  
     <div class="container">  
-        <ul class="navbar-nav flex-row">  
-            <li class="nav-item">  
-                @{  
-                    var role = HttpContextAccessor.HttpContext.Request.Cookies["Role"];  
-                    if (role != null)  
-                    {  
-                        // User buttons  
-                        <a href="@Url.Action("Index", "Home")" class="btn btn-glass">Home</a>
-                        <a href="@Url.Action("BrowseTemplates", "Template")" class="btn btn-glass">Browse Templates</a>
-                        <a href="@Url.Action("Create", "Template")" class="btn btn-glass">Create Template</a>
-                        <a href="@Url.Action("UserTemplates", "UserDashboard")" class="btn btn-glass">Manage Templates</a>
-                        <a href="@Url.Action("UserTemplateResponses", "UserDashboard")" class="btn btn-glass">Template Responses</a>
-                        <a href="@Url.Action("UserSubmittedForms", "UserDashboard")" class="btn btn-glass">Submitted forms</a>
-                        <a href="@Url.Action("Edit", "User", new { id = HttpContextAccessor.HttpContext.Request.Cookies["LoggedId"] })" class="btn btn-glass">Profile</a>
-
-
-                    }
-                    else
-                    {
-                        // Public buttons
-                        <a href="@Url.Action("Index", "Home")" class="btn btn-glass">Home</a>
-                        <a href="@Url.Action("BrowseTemplates", "Template")" class="btn btn-glass">Browse Templates</a>
-                        <a href="@Url.Action("login", "Auth")" class="btn btn-glass">Login</a>  
-                        <a href="@Url.Action("register", "User")" class="btn btn-glass">Sign up</a>    
-                        <button class="btn btn-glass">About Us</button>  
-                        <button class="btn btn-glass">Terms and Conditions</button>  
-                    }  
+        <div class="button-bar-flex">  
+            @{  
+                var role = HttpContextAccessor.HttpContext.Request.Cookies["Role"];  
+                if (role != null)  
+                {  
+                    // User buttons  
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-glass">Home</a>
+                    <a href="@Url.Action("BrowseTemplates", "Template")" class="btn btn-glass">Browse Templates</a>
+                    <a href="@Url.Action("Create", "Template")" class="btn btn-glass">Create Template</a>
+                    <a href="@Url.Action("UserTemplates", "UserDashboard")" class="btn btn-glass">Manage Templates</a>
+                    <a href="@Url.Action("UserTemplateResponses", "UserDashboard")" class="btn btn-glass">Template Responses</a>
+                    <a href="@Url.Action("UserSubmittedForms", "UserDashboard")" class="btn btn-glass">Submitted forms</a>
+                }
+                else
+                {
+                    // Public buttons
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-glass">Home</a>
+                    <a href="@Url.Action("BrowseTemplates", "Template")" class="btn btn-glass">Browse Templates</a>
+                    <a href="@Url.Action("login", "Auth")" class="btn btn-glass">Login</a>  
+                    <a href="@Url.Action("register", "User")" class="btn btn-glass">Sign up</a>    
+                    <button class="btn btn-glass">About Us</button>  
+                    <button class="btn btn-glass">Terms and Conditions</button>  
                 }  
-            </li>  
-        </ul>  
+            }  
+        </div>  
     </div>  
 </div>
 

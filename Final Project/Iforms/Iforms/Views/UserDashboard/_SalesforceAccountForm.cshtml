@@ -1,0 +1,20 @@
+@model Iforms.MVC.Models.SalesforceAccountViewModel
+<form asp-action="CreateSalesforceAccount" method="post">
+    <div class="form-group">
+        <label asp-for="AccountName"></label>
+        <input asp-for="AccountName" class="form-control" />
+        <span asp-validation-for="AccountName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AccountPhone"></label>
+        <input asp-for="AccountPhone" class="form-control" />
+        <span asp-validation-for="AccountPhone" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="AccountWebsite"></label>
+        <input asp-for="AccountWebsite" class="form-control" />
+        <span asp-validation-for="AccountWebsite" class="text-danger"></span>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Create Account</button>
+</form> 

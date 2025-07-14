@@ -77,5 +77,10 @@ namespace Iforms.DAL
             return new TopicRepository(db);
         }
 
+        public IApiToken ApiTokenData()
+        {
+            return new ApiTokenRepository(db);
+        }
+
     }
 }

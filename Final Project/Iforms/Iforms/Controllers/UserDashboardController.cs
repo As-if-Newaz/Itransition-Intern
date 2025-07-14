@@ -13,13 +13,17 @@ namespace Iforms.MVC.Controllers
         private readonly TagService tagService;
         private readonly FormService formService;
         private readonly AuditLogService auditLogService;
+        private readonly SalesforceService salesforceService;
+        private readonly UserService userService;
 
-        public UserDashboardController(TemplateService templateService, TagService tagService, FormService formService, AuditLogService auditLogService)
+        public UserDashboardController(TemplateService templateService, TagService tagService, FormService formService, AuditLogService auditLogService, SalesforceService salesforceService, UserService userService)
         {
             this.templateService = templateService;
             this.tagService = tagService;
             this.formService = formService;
             this.auditLogService = auditLogService;
+            this.salesforceService = salesforceService;
+            this.userService = userService;
         }
 
         [AuthenticatedAdminorUser]
@@ -132,5 +136,93 @@ namespace Iforms.MVC.Controllers
             return View();
         }
 
+        [AuthenticatedAdminorUser]
+        [HttpGet]
+        public IActionResult SyncToSalesforce()
+        {
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdStr) || !int.TryParse(userIdStr, out var userId))
+                return RedirectToAction("Login", "Auth");
+
+            var user = userService.GetById(userId);
+            var accountModel = new SalesforceAccountViewModel();
+            var contactModel = new SalesforceContactViewModel
+            {
+                ContactFirstName = user?.UserName,
+                ContactEmail = user?.UserEmail
+            };
+            return View((accountModel, contactModel));
+        }
+
+        [AuthenticatedAdminorUser]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateSalesforceAccount(SalesforceAccountViewModel model)
+        {
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdStr) || !int.TryParse(userIdStr, out var userId))
+                return RedirectToAction("Login", "Auth");
+
+            var contactModel = new SalesforceContactViewModel();
+            if (!ModelState.IsValid)
+                return View("SyncToSalesforce", (model, contactModel));
+
+            try
+            {
+                var token = await salesforceService.AuthenticateAsync();
+                var accountDto = new SalesforceAccountDTO
+                {
+                    Name = model.AccountName,
+                    Phone = model.AccountPhone,
+                    Website = model.AccountWebsite
+                };
+                var accountId = await salesforceService.CreateAccountAsync(accountDto, token);
+                model.ResultMessage = $"Successfully created Salesforce account";
+            }
+            catch (Exception ex)
+            {
+                var errorMsg = ex.Message;
+                if (ex.InnerException != null)
+                    errorMsg += " | Inner: " + ex.InnerException.Message;
+                model.ResultMessage = $"Error creating Salesforce account: {errorMsg}";
+            }
+            return View("SyncToSalesforce", (model, contactModel));
+        }
+
+        [AuthenticatedAdminorUser]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateSalesforceContact(SalesforceContactViewModel model)
+        {
+            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdStr) || !int.TryParse(userIdStr, out var userId))
+                return RedirectToAction("Login", "Auth");
+
+            var accountModel = new SalesforceAccountViewModel();
+            if (!ModelState.IsValid)
+                return View("SyncToSalesforce", (accountModel, model));
+
+            try
+            {
+                var token = await salesforceService.AuthenticateAsync();
+                var contactDto = new SalesforceContactDTO
+                {
+                    FirstName = model.ContactFirstName,
+                    LastName = model.ContactLastName,
+                    Email = model.ContactEmail,
+                    AccountId = null
+                };
+                var contactId = await salesforceService.CreateContactAsync(contactDto, token);
+                model.ResultMessage = $"Successfully created Salesforce contact";
+            }
+            catch (Exception ex)
+            {
+                var errorMsg = ex.Message;
+                if (ex.InnerException != null)
+                    errorMsg += " | Inner: " + ex.InnerException.Message;
+                model.ResultMessage = $"Error creating Salesforce contact: {errorMsg}";
+            }
+            return View("SyncToSalesforce", (accountModel, model));
+        }
     }
 }

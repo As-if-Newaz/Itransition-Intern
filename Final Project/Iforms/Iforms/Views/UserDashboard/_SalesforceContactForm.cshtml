@@ -1,0 +1,20 @@
+@model Iforms.MVC.Models.SalesforceContactViewModel
+<form asp-action="CreateSalesforceContact" method="post">
+    <div class="form-group">
+        <label asp-for="ContactFirstName"></label>
+        <input asp-for="ContactFirstName" class="form-control" />
+        <span asp-validation-for="ContactFirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ContactLastName"></label>
+        <input asp-for="ContactLastName" class="form-control" />
+        <span asp-validation-for="ContactLastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ContactEmail"></label>
+        <input asp-for="ContactEmail" class="form-control" />
+        <span asp-validation-for="ContactEmail" class="text-danger"></span>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-success">Add Contact</button>
+</form> 

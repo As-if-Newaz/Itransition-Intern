@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "ContainingType": "Iforms.MVC.Controllers.AggregatedResultsApiController",
+    "Method": "GetAggregatedResults",
+    "RelativePath": "api/aggregated-results",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "templateId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

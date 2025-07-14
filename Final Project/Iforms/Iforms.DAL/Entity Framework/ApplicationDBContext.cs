@@ -24,6 +24,7 @@ namespace Iforms.DAL.Entity_Framework
         public DbSet<TemplateAccess> TemplateAccesses { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<AuditLog> AuditLogs { get; set; }
+        public DbSet<ApiToken> ApiTokens { get; set; }
 
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
         {
@@ -31,7 +32,6 @@ namespace Iforms.DAL.Entity_Framework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure Question Options as JSON
             modelBuilder.Entity<Question>()
                 .Property(q => q.Options)
                 .HasConversion(
@@ -43,7 +43,6 @@ namespace Iforms.DAL.Entity_Framework
                     c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
                     c => c.ToList()));
 
-            // Forms: Cascade on Template, Restrict on User
             modelBuilder.Entity<Form>()
                 .HasOne(f => f.Template)
                 .WithMany(t => t.Forms)
@@ -56,7 +55,6 @@ namespace Iforms.DAL.Entity_Framework
                 .HasForeignKey(f => f.FilledById)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Comments: Cascade on Template, Restrict on User
             modelBuilder.Entity<Comment>()
                 .HasOne(c => c.Template)
                 .WithMany(t => t.Comments)
@@ -69,7 +67,7 @@ namespace Iforms.DAL.Entity_Framework
                 .HasForeignKey(c => c.CreatedById)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Likes: Cascade on Template, Restrict on User
+
             modelBuilder.Entity<Like>()
                 .HasOne(l => l.Template)
                 .WithMany(t => t.Likes)
@@ -82,7 +80,7 @@ namespace Iforms.DAL.Entity_Framework
                 .HasForeignKey(l => l.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // TemplateAccesses: Cascade on Template, Restrict on User
+
             modelBuilder.Entity<TemplateAccess>()
                 .HasOne(ta => ta.Template)
                 .WithMany(t => t.TemplateAccesses)
@@ -95,7 +93,6 @@ namespace Iforms.DAL.Entity_Framework
                 .HasForeignKey(ta => ta.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Answers: Cascade on Form, Restrict on Question
             modelBuilder.Entity<Answer>()
             .HasOne(a => a.Form)
             .WithMany(f => f.Answers)
@@ -107,6 +104,7 @@ namespace Iforms.DAL.Entity_Framework
                 .WithMany(q => q.Answers)
                 .HasForeignKey(a => a.QuestionId)
                 .OnDelete(DeleteBehavior.Restrict);
+
 
         }
     }
