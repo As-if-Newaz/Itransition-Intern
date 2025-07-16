@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Question Form View -->
+    <record id="question_form_view" model="ir.ui.view">
+        <field name="name">template.viewer.question.form</field>
+        <field name="model">template.viewer.question</field>
+        <field name="arch" type="xml">
+            <form string="Question" create="false" edit="false">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="title" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="question_id"/>
+                            <field name="question_type"/>
+                            <field name="answer_count"/>
+                            <field name="template_id"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Number Statistics -->
+                    <group string="Number Statistics" invisible="question_type != 'number'">
+                        <group>
+                            <field name="number_average"/>
+                            <field name="number_min"/>
+                            <field name="number_max"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Text Statistics -->
+                    <group string="Text Statistics" invisible="question_type not in ['text', 'longtext']">
+                        <field name="most_popular_answers" nolabel="1"/>
+                    </group>
+                    
+                    <!-- Checkbox Statistics -->
+                    <group string="Checkbox Statistics" invisible="question_type != 'checkbox'">
+                        <group>
+                            <field name="checkbox_true_count"/>
+                            <field name="checkbox_false_count"/>
+                        </group>
+                        <group>
+                            <field name="checkbox_true_percentage"/>
+                            <field name="checkbox_false_percentage"/>
+                        </group>
+                    </group>
+                    
+                    <!-- Date Statistics -->
+                    <group string="Date Statistics" invisible="question_type != 'date'">
+                        <group>
+                            <field name="date_min"/>
+                            <field name="date_max"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Question List View -->
+    <record id="question_list_view" model="ir.ui.view">
+        <field name="name">template.viewer.question.list</field>
+        <field name="model">template.viewer.question</field>
+        <field name="arch" type="xml">
+            <list string="Questions" decoration-info="question_type == 'number'" decoration-success="question_type == 'checkbox'" decoration-warning="question_type in ['text', 'longtext']">
+                <field name="title"/>
+                <field name="question_type"/>
+                <field name="answer_count"/>
+                <field name="number_average"/>
+                <field name="number_min"/>
+                <field name="number_max"/>
+                <field name="most_popular_answers"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Question Action -->
+    <record id="question_action" model="ir.actions.act_window">
+        <field name="name">Questions</field>
+        <field name="res_model">template.viewer.question</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

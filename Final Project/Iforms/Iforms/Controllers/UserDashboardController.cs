@@ -180,11 +180,11 @@ namespace Iforms.MVC.Controllers
                 var accountId = await salesforceService.CreateAccountAsync(accountDto, token);
                 model.ResultMessage = $"Successfully created Salesforce account";
 
-                // Automatically create contact after account creation
+
                 var user = userService.GetById(userId);
                 var contactDto = new SalesforceContactDTO
                 {
-                    LastName = model.Name, // Use Name as LastName since it's required
+                    LastName = model.Name, 
                     Email = model.Email,
                     Phone = model.Phone,
                     AccountId = accountId

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Template List View -->
+    <record id="template_list_view" model="ir.ui.view">
+        <field name="name">template.viewer.template.list</field>
+        <field name="model">template.viewer.template</field>
+        <field name="arch" type="xml">
+            <list string="Templates" decoration-info="is_public" decoration-muted="not is_public">
+                <field name="name"/>
+                <field name="author_name"/>
+                <field name="question_count"/>
+                <field name="is_public"/>
+                <field name="created_at"/>
+                <field name="imported_at"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Template Form View -->
+    <record id="template_form_view" model="ir.ui.view">
+        <field name="name">template.viewer.template.form</field>
+        <field name="model">template.viewer.template</field>
+        <field name="arch" type="xml">
+            <form string="Template" create="false" edit="false">
+                <header>
+                    <button name="action_refresh_data" string="Refresh Data" type="object" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="template_id"/>
+                            <field name="author_name"/>
+                            <field name="author_id"/>
+                            <field name="is_public"/>
+                        </group>
+                        <group>
+                            <field name="created_at"/>
+                            <field name="imported_at"/>
+                            <field name="question_count"/>
+                        </group>
+                    </group>
+                    <group string="Description" invisible="not description">
+                        <field name="description" nolabel="1"/>
+                    </group>
+                    <notebook>
+                        <page string="Questions" name="questions">
+                            <field name="question_ids" readonly="1">
+                                <list string="Questions" decoration-info="question_type == 'number'" decoration-success="question_type == 'checkbox'" decoration-warning="question_type in ['text', 'longtext']">
+                                    <field name="title"/>
+                                    <field name="question_type"/>
+                                    <field name="answer_count"/>
+                                    <field name="number_average"/>
+                                    <field name="number_min"/>
+                                    <field name="number_max"/>
+                                    <field name="most_popular_answers"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Template Kanban View -->
+    <record id="template_kanban_view" model="ir.ui.view">
+        <field name="name">template.viewer.template.kanban</field>
+        <field name="model">template.viewer.template</field>
+        <field name="arch" type="xml">
+            <kanban string="Templates" class="o_kanban_mobile">
+                <field name="name"/>
+                <field name="author_name"/>
+                <field name="question_count"/>
+                <field name="is_public"/>
+                <field name="created_at"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="o_kanban_record_top">
+                                <div class="o_kanban_record_headings">
+                                    <strong class="o_kanban_record_title">
+                                        <field name="name"/>
+                                    </strong>
+                                    <div class="text-muted">
+                                        by <field name="author_name"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="o_kanban_record_body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <field name="question_count"/> Questions
+                                    </div>
+                                    <div class="col-6">
+                                        <span t-if="record.is_public.raw_value" class="badge badge-success">Public</span>
+                                        <span t-else="" class="badge badge-secondary">Private</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="o_kanban_record_bottom">
+                                <div class="text-muted">
+                                    <field name="created_at"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Template Action -->
+    <record id="template_action" model="ir.actions.act_window">
+        <field name="name">Templates</field>
+        <field name="res_model">template.viewer.template</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No templates found!
+            </p>
+            <p>
+                Use the Import button to import templates from your course project.
+            </p>
+        </field>
+    </record>
+</odoo>

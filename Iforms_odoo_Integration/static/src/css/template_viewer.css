@@ -1,0 +1,45 @@
+.o_kanban_card {
+    min-height: 120px;
+}
+
+.o_kanban_record_title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.o_kanban_record_body {
+    margin: 8px 0;
+}
+
+.o_kanban_record_bottom {
+    margin-top: 8px;
+}
+
+.badge {
+    font-size: 11px;
+    padding: 2px 6px;
+}
+
+.badge-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.badge-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Question type indicators */
+.o_data_row[data-decoration-info="True"] {
+    background-color: #e3f2fd !important;
+}
+
+.o_data_row[data-decoration-success="True"] {
+    background-color: #e8f5e8 !important;
+}
+
+.o_data_row[data-decoration-warning="True"] {
+    background-color: #fff3cd !important;
+}

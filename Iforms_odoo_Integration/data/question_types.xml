@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- System parameters -->
+        <record id="api_base_url_param" model="ir.config_parameter">
+            <field name="key">template_viewer.api_base_url</field>
+            <field name="value">https://itransition-iforms.runasp.net</field>
+        </record>
+    </data>
+</odoo>

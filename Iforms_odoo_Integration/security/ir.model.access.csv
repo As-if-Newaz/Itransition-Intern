@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_template_viewer_template_user,Template Viewer Template User,model_template_viewer_template,base.group_user,1,1,1,0
+access_template_viewer_question_user,Template Viewer Question User,model_template_viewer_question,base.group_user,1,1,1,1
+access_template_viewer_import_wizard_user,Template Viewer Import Wizard User,model_template_viewer_import_wizard,base.group_user,1,1,1,1

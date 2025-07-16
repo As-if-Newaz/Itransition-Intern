@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root Menu -->
+    <menuitem id="template_viewer_menu_root" name="Template Viewer" sequence="10"/>
+    
+    <!-- Templates Menu -->
+    <menuitem id="template_viewer_templates_menu" name="Templates" parent="template_viewer_menu_root" action="template_action" sequence="10"/>
+    
+    <!-- Questions Menu -->
+    <menuitem id="template_viewer_questions_menu" name="Questions" parent="template_viewer_menu_root" action="question_action" sequence="20"/>
+    
+    <!-- Import Menu -->
+    <menuitem id="template_viewer_import_menu" name="Import Templates" parent="template_viewer_menu_root" action="import_wizard_action" sequence="30"/>
+</odoo>
