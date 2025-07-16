@@ -148,8 +148,8 @@ namespace Iforms.MVC.Controllers
             var accountModel = new SalesforceAccountViewModel();
             var contactModel = new SalesforceContactViewModel
             {
-                ContactFirstName = user?.UserName,
-                ContactEmail = user?.UserEmail
+                FirstName = user?.UserName,
+                Email = user?.UserEmail
             };
             return View((accountModel, contactModel));
         }
@@ -172,9 +172,12 @@ namespace Iforms.MVC.Controllers
                 var token = await salesforceService.AuthenticateAsync();
                 var accountDto = new SalesforceAccountDTO
                 {
-                    Name = model.AccountName,
-                    Phone = model.AccountPhone,
-                    Website = model.AccountWebsite
+                    Name = model.Name,
+                    Phone = model.Phone,
+                    Website = model.Website,
+                    Address = model.Address,
+                    City = model.City,
+                    Country = model.Country
                 };
                 var accountId = await salesforceService.CreateAccountAsync(accountDto, token);
                 model.ResultMessage = $"Successfully created Salesforce account";
@@ -207,9 +210,9 @@ namespace Iforms.MVC.Controllers
                 var token = await salesforceService.AuthenticateAsync();
                 var contactDto = new SalesforceContactDTO
                 {
-                    FirstName = model.ContactFirstName,
-                    LastName = model.ContactLastName,
-                    Email = model.ContactEmail,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Email = model.Email,
                     AccountId = null
                 };
                 var contactId = await salesforceService.CreateContactAsync(contactDto, token);

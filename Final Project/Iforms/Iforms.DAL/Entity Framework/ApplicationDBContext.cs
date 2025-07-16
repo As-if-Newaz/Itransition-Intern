@@ -104,8 +104,6 @@ namespace Iforms.DAL.Entity_Framework
                 .WithMany(q => q.Answers)
                 .HasForeignKey(a => a.QuestionId)
                 .OnDelete(DeleteBehavior.Restrict);
-
-
         }
     }
 }

@@ -5,12 +5,12 @@ namespace Iforms.MVC.Models
     public class SalesforceContactViewModel
     {
         [Required]
-        public string ContactFirstName { get; set; }
+        public string FirstName { get; set; }
         [Required]
-        public string ContactLastName { get; set; }
+        public string LastName { get; set; }
         [Required]
         [EmailAddress]
-        public string ContactEmail { get; set; }
+        public string Email { get; set; }
         public string? ResultMessage { get; set; }
     }
 } 

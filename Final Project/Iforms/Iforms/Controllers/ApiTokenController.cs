@@ -63,5 +63,21 @@ namespace Iforms.MVC.Controllers
             }
             return Json(new { success = true, message = "Selected tokens revoked successfully." });
         }
+
+        [HttpPost]
+        public JsonResult DeleteBatch([FromBody] List<int> tokenIds)
+        {
+            var userId = GetCurrentUserId();
+            if (tokenIds == null || tokenIds.Count == 0)
+                return Json(new { success = false, message = "No tokens selected." });
+            var tokens = apiTokenService.GetByUserId(userId).Where(t => tokenIds.Contains(t.Id)).ToList();
+            if (tokens.Count != tokenIds.Count)
+                return Json(new { success = false, message = "Some tokens do not belong to you or do not exist." });
+            foreach (var token in tokens)
+            {
+                apiTokenService.Delete(token.Id);
+            }
+            return Json(new { success = true, message = "Selected tokens deleted successfully." });
+        }
     }
 } 

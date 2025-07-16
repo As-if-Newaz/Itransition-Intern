@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\Projects\\Itransition\\Final Project\\Iforms\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\entity framework\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\entity framework\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{AD3DAB51-39B4-4F2F-8492-C7094E6BA4DE}|Iforms\\Iforms.MVC.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{AD3DAB51-39B4-4F2F-8492-C7094E6BA4DE}|Iforms\\Iforms.MVC.csproj|solutionrelative:iforms\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -73,10 +77,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{5C5647BF-ACEF-4E7D-A5B6-ECEC0C6C9107}|Iforms.BLL\\Iforms.BLL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.bll\\dtos\\apitokendto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5C5647BF-ACEF-4E7D-A5B6-ECEC0C6C9107}|Iforms.BLL\\Iforms.BLL.csproj|solutionrelative:iforms.bll\\dtos\\apitokendto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\entity framework\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|solutionrelative:iforms.dal\\entity framework\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6F6B3BAE-7FEE-4481-BBE1-3EE8B9F7931F}|Iforms.DAL\\Iforms.DAL.csproj|d:\\projects\\itransition\\final project\\iforms\\iforms.dal\\entity framework\\table models\\apitoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -626,48 +626,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Views\\ApiToken\\Index.cshtml",
-              "RelativeDocumentMoniker": "Iforms\\Views\\ApiToken\\Index.cshtml",
-              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Views\\ApiToken\\Index.cshtml",
-              "RelativeToolTip": "Iforms\\Views\\ApiToken\\Index.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-16T07:44:30.666Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\appsettings.json",
               "RelativeDocumentMoniker": "Iforms\\appsettings.json",
               "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\appsettings.json",
               "RelativeToolTip": "Iforms\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-07-03T01:55:19.122Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "TemplateProfile.cs",
-              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.BLL\\Services\\TemplateProfile.cs",
-              "RelativeDocumentMoniker": "Iforms.BLL\\Services\\TemplateProfile.cs",
-              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.BLL\\Services\\TemplateProfile.cs",
-              "RelativeToolTip": "Iforms.BLL\\Services\\TemplateProfile.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-05T14:52:47.891Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "ApplicationDBContextModelSnapshot.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Migrations\\ApplicationDBContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "Iforms.DAL\\Migrations\\ApplicationDBContextModelSnapshot.cs",
@@ -679,7 +655,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "AggregatedResultsApiController.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Controllers\\AggregatedResultsApiController.cs",
               "RelativeDocumentMoniker": "Iforms\\Controllers\\AggregatedResultsApiController.cs",
@@ -687,11 +663,12 @@
               "RelativeToolTip": "Iforms\\Controllers\\AggregatedResultsApiController.cs",
               "ViewState": "AgIAAHcAAAAAAAAAAAAuwIcAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-14T20:36:08.356Z"
+              "WhenOpened": "2025-07-14T20:36:08.356Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "Fill.cshtml",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Views\\Form\\Fill.cshtml",
               "RelativeDocumentMoniker": "Iforms\\Views\\Form\\Fill.cshtml",
@@ -703,7 +680,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "ApiTokenService.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.BLL\\Services\\ApiTokenService.cs",
               "RelativeDocumentMoniker": "Iforms.BLL\\Services\\ApiTokenService.cs",
@@ -715,7 +692,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "ApiTokenRepository.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Repositories\\ApiTokenRepository.cs",
               "RelativeDocumentMoniker": "Iforms.DAL\\Repositories\\ApiTokenRepository.cs",
@@ -727,7 +704,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Program.cs",
               "RelativeDocumentMoniker": "Iforms\\Program.cs",
@@ -739,12 +716,45 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ApplicationDBContext.cs",
+              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Entity Framework\\ApplicationDBContext.cs",
+              "RelativeDocumentMoniker": "Iforms.DAL\\Entity Framework\\ApplicationDBContext.cs",
+              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Entity Framework\\ApplicationDBContext.cs",
+              "RelativeToolTip": "Iforms.DAL\\Entity Framework\\ApplicationDBContext.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAnwGkAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-14T17:31:15.856Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 14,
+              "Title": "TemplateProfile.cs",
+              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.BLL\\Services\\TemplateProfile.cs",
+              "RelativeDocumentMoniker": "Iforms.BLL\\Services\\TemplateProfile.cs",
+              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.BLL\\Services\\TemplateProfile.cs",
+              "RelativeToolTip": "Iforms.BLL\\Services\\TemplateProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-05T14:52:47.891Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Views\\ApiToken\\Index.cshtml",
+              "RelativeDocumentMoniker": "Iforms\\Views\\ApiToken\\Index.cshtml",
+              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Views\\ApiToken\\Index.cshtml",
+              "RelativeToolTip": "Iforms\\Views\\ApiToken\\Index.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-16T07:44:30.666Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "AdminDashboardController.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Controllers\\AdminDashboardController.cs",
               "RelativeDocumentMoniker": "Iforms\\Controllers\\AdminDashboardController.cs",
@@ -752,11 +762,12 @@
               "RelativeToolTip": "Iforms\\Controllers\\AdminDashboardController.cs",
               "ViewState": "AgIAAK4AAAAAAAAAAAAcwLYAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-25T19:51:55.905Z"
+              "WhenOpened": "2025-06-25T19:51:55.905Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "ApiTokenController.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Controllers\\ApiTokenController.cs",
               "RelativeDocumentMoniker": "Iforms\\Controllers\\ApiTokenController.cs",
@@ -768,7 +779,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "20250714183817_APITableAdded.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Migrations\\20250714183817_APITableAdded.cs",
               "RelativeDocumentMoniker": "Iforms.DAL\\Migrations\\20250714183817_APITableAdded.cs",
@@ -780,7 +791,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Views\\Form\\Edit.cshtml",
               "RelativeDocumentMoniker": "Iforms\\Views\\Form\\Edit.cshtml",
@@ -792,7 +803,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "DataAccess.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\DataAccess.cs",
               "RelativeDocumentMoniker": "Iforms.DAL\\DataAccess.cs",
@@ -804,7 +815,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "Enums.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Entity Framework\\Table Models\\Enums.cs",
               "RelativeDocumentMoniker": "Iforms.DAL\\Entity Framework\\Table Models\\Enums.cs",
@@ -816,7 +827,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "TemplateDTO.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.BLL\\DTOs\\TemplateDTO.cs",
               "RelativeDocumentMoniker": "Iforms.BLL\\DTOs\\TemplateDTO.cs",
@@ -828,7 +839,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "ApiTokenDTO.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.BLL\\DTOs\\ApiTokenDTO.cs",
               "RelativeDocumentMoniker": "Iforms.BLL\\DTOs\\ApiTokenDTO.cs",
@@ -837,18 +848,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-14T18:41:40.921Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "ApplicationDBContext.cs",
-              "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Entity Framework\\ApplicationDBContext.cs",
-              "RelativeDocumentMoniker": "Iforms.DAL\\Entity Framework\\ApplicationDBContext.cs",
-              "ToolTip": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms.DAL\\Entity Framework\\ApplicationDBContext.cs",
-              "RelativeToolTip": "Iforms.DAL\\Entity Framework\\ApplicationDBContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-14T17:31:15.856Z"
             },
             {
               "$type": "Document",
@@ -876,7 +875,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "AuthController.cs",
               "DocumentMoniker": "D:\\Projects\\Itransition\\Final Project\\Iforms\\Iforms\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Iforms\\Controllers\\AuthController.cs",
@@ -884,7 +883,8 @@
               "RelativeToolTip": "Iforms\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAEAAAAAAAAAAAAAAAEUAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-25T19:50:15.015Z"
+              "WhenOpened": "2025-06-25T19:50:15.015Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -932,7 +932,8 @@
               "RelativeToolTip": "Iforms\\Views\\UserDashboard\\TemplateFormResponses.cshtml",
               "ViewState": "AgIAAIUBAAAAAAAAAIBJwBMBAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-03T07:05:34.675Z"
+              "WhenOpened": "2025-07-03T07:05:34.675Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -968,7 +969,8 @@
               "RelativeToolTip": "Iforms\\Controllers\\UserDashboardController.cs",
               "ViewState": "AgIAAL8AAAAAAAAAAAAAAMMAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-25T19:52:00.209Z"
+              "WhenOpened": "2025-06-25T19:52:00.209Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -1028,7 +1030,8 @@
               "RelativeToolTip": "Iforms\\Models\\SalesforceProfileViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-12T07:14:40.011Z"
+              "WhenOpened": "2025-07-12T07:14:40.011Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -1052,7 +1055,8 @@
               "RelativeToolTip": "Iforms\\Views\\Form\\Details.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAKcAAABJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-29T19:59:12.018Z"
+              "WhenOpened": "2025-06-29T19:59:12.018Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -1076,7 +1080,8 @@
               "RelativeToolTip": "Iforms\\Views\\AdminDashboard\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-27T14:28:14.321Z"
+              "WhenOpened": "2025-06-27T14:28:14.321Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -1088,7 +1093,8 @@
               "RelativeToolTip": "Iforms\\Views\\AdminDashboard\\AllTemplates.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAN4AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-02T06:03:28.654Z"
+              "WhenOpened": "2025-07-02T06:03:28.654Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -1100,7 +1106,8 @@
               "RelativeToolTip": "Iforms\\Views\\Template\\BrowseTemplates.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAIgAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-29T10:36:35.232Z"
+              "WhenOpened": "2025-06-29T10:36:35.232Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -1268,7 +1275,8 @@
               "RelativeToolTip": "Iforms\\Controllers\\FormController.cs",
               "ViewState": "AgIAACMAAAAAAAAAAAAUwFoAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T13:46:04.597Z"
+              "WhenOpened": "2025-06-29T13:46:04.597Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -1388,7 +1396,8 @@
               "RelativeToolTip": "Iforms\\Views\\User\\Edit.cshtml",
               "ViewState": "AgIAAAYAAAAAAAAAAIBJwBoAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-07T15:00:05.93Z"
+              "WhenOpened": "2025-07-07T15:00:05.93Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -1400,7 +1409,8 @@
               "RelativeToolTip": "Iforms\\Views\\Shared\\AdminSideBar.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-02T09:42:26.916Z"
+              "WhenOpened": "2025-07-02T09:42:26.916Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -1436,7 +1446,8 @@
               "RelativeToolTip": "Iforms\\Controllers\\TemplateController.cs",
               "ViewState": "AgIAAJYBAAAAAAAAAAAmwKkBAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-27T13:12:15.292Z"
+              "WhenOpened": "2025-06-27T13:12:15.292Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -1460,7 +1471,8 @@
               "RelativeToolTip": "Iforms\\Views\\Shared\\NavBar.cshtml",
               "ViewState": "AgIAAB4AAAAAAAAAAIBJwDUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-27T18:15:44.083Z"
+              "WhenOpened": "2025-06-27T18:15:44.083Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -1580,7 +1592,8 @@
               "RelativeToolTip": "Iforms\\Views\\Home\\Index.cshtml",
               "ViewState": "AgIAABsAAAAAAAAAAIBJwHgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-27T15:55:27.925Z"
+              "WhenOpened": "2025-06-27T15:55:27.925Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -1747,7 +1760,8 @@
               "RelativeToolTip": "Iforms\\Controllers\\HomeController.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAgwCgAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T19:59:12.96Z"
+              "WhenOpened": "2025-06-26T19:59:12.96Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -1771,7 +1785,8 @@
               "RelativeToolTip": "Iforms\\Models\\ThemePreference.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-05T11:30:33.692Z"
+              "WhenOpened": "2025-07-05T11:30:33.692Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -2078,7 +2093,8 @@
               "RelativeToolTip": "Iforms\\Models\\BrowseTemplatesViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-29T13:55:05.41Z"
+              "WhenOpened": "2025-06-29T13:55:05.41Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -2314,7 +2330,8 @@
               "RelativeToolTip": "Iforms\\Models\\HomeViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-26T20:00:27.748Z"
+              "WhenOpened": "2025-06-26T20:00:27.748Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -2469,6 +2486,10 @@
               "ViewState": "AgIAAAAAAAAAAAAAAIBZwBQAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-23T12:18:25.754Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
             }
           ]
         }

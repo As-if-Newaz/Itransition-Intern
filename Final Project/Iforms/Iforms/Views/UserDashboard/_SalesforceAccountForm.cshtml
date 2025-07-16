@@ -1,19 +1,34 @@
 @model Iforms.MVC.Models.SalesforceAccountViewModel
 <form asp-action="CreateSalesforceAccount" method="post">
     <div class="form-group">
-        <label asp-for="AccountName"></label>
-        <input asp-for="AccountName" class="form-control" />
-        <span asp-validation-for="AccountName" class="text-danger"></span>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="AccountPhone"></label>
-        <input asp-for="AccountPhone" class="form-control" />
-        <span asp-validation-for="AccountPhone" class="text-danger"></span>
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="AccountWebsite"></label>
-        <input asp-for="AccountWebsite" class="form-control" />
-        <span asp-validation-for="AccountWebsite" class="text-danger"></span>
+        <label asp-for="Website"></label>
+        <input asp-for="Website" class="form-control" />
+        <span asp-validation-for="Website" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="City"></label>
+        <input asp-for="City" class="form-control" />
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Country"></label>
+        <input asp-for="Country" class="form-control" />
+        <span asp-validation-for="Country" class="text-danger"></span>
     </div>
     <br />
     <button type="submit" class="btn btn-primary">Create Account</button>

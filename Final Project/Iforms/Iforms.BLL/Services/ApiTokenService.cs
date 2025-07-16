@@ -67,6 +67,13 @@ namespace Iforms.BLL.Services
             return DA.ApiTokenData().Update(token);
         }
 
+        public bool Delete(int id)
+        {
+            var token = DA.ApiTokenData().Get(id);
+            if (token == null) return false;
+            return DA.ApiTokenData().Delete(token);
+        }
+
         private string GenerateTokenKey()
         {
             var bytes = new byte[32];
