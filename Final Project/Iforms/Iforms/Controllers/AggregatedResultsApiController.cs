@@ -126,7 +126,6 @@ namespace Iforms.MVC.Controllers
 
         private object AggregateCheckbox(QuestionDTO question, List<AnswerDTO> answers)
         {
-            // Collect all selected options from comma-separated Text values
             var allSelectedOptions = answers
                 .Where(a => !string.IsNullOrWhiteSpace(a.Text))
                 .SelectMany(a => a.Text.Split(',', System.StringSplitOptions.RemoveEmptyEntries | System.StringSplitOptions.TrimEntries))
