@@ -1,0 +1,19 @@
+
+Run1:
+Test Loss: 0.0273
+Test Accuracy: 0.9922
+Digit counts: [1232, 1530, 938, 1298, 1215, 1290, 1209, 764, 987, 1537]
+-------------------------------------------------------------------------------
+
+Run2:
+Test Loss: 0.0298
+Test Accuracy: 0.9915
+Processed 12000 digit images.
+Digit counts: [1235, 1547, 949, 1286, 1223, 1281, 1225, 747, 1012, 1495]
+
+
+Run3:
+Test Loss: 0.0198
+Test Accuracy: 0.9931
+Processed 12000 digit images.
+Digit counts: [1236, 1529, 940, 1296, 1233, 1275, 1237, 761, 986, 1507]
