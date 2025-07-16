@@ -5,6 +5,7 @@ namespace Iforms.BLL.DTOs
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public string Phone { get; set; }
         public string AccountId { get; set; }
         // Add other Contact fields as needed
     }

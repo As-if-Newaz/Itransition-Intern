@@ -145,13 +145,12 @@ namespace Iforms.MVC.Controllers
                 return RedirectToAction("Login", "Auth");
 
             var user = userService.GetById(userId);
-            var accountModel = new SalesforceAccountViewModel();
-            var contactModel = new SalesforceContactViewModel
+            var accountModel = new SalesforceAccountViewModel
             {
-                FirstName = user?.UserName,
+                Name = user?.UserName,
                 Email = user?.UserEmail
             };
-            return View((accountModel, contactModel));
+            return View(accountModel);
         }
 
         [AuthenticatedAdminorUser]
@@ -163,9 +162,8 @@ namespace Iforms.MVC.Controllers
             if (string.IsNullOrEmpty(userIdStr) || !int.TryParse(userIdStr, out var userId))
                 return RedirectToAction("Login", "Auth");
 
-            var contactModel = new SalesforceContactViewModel();
             if (!ModelState.IsValid)
-                return View("SyncToSalesforce", (model, contactModel));
+                return View("SyncToSalesforce", model);
 
             try
             {
@@ -181,51 +179,27 @@ namespace Iforms.MVC.Controllers
                 };
                 var accountId = await salesforceService.CreateAccountAsync(accountDto, token);
                 model.ResultMessage = $"Successfully created Salesforce account";
-            }
-            catch (Exception ex)
-            {
-                var errorMsg = ex.Message;
-                if (ex.InnerException != null)
-                    errorMsg += " | Inner: " + ex.InnerException.Message;
-                model.ResultMessage = $"Error creating Salesforce account: {errorMsg}";
-            }
-            return View("SyncToSalesforce", (model, contactModel));
-        }
 
-        [AuthenticatedAdminorUser]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateSalesforceContact(SalesforceContactViewModel model)
-        {
-            var userIdStr = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (string.IsNullOrEmpty(userIdStr) || !int.TryParse(userIdStr, out var userId))
-                return RedirectToAction("Login", "Auth");
-
-            var accountModel = new SalesforceAccountViewModel();
-            if (!ModelState.IsValid)
-                return View("SyncToSalesforce", (accountModel, model));
-
-            try
-            {
-                var token = await salesforceService.AuthenticateAsync();
+                // Automatically create contact after account creation
+                var user = userService.GetById(userId);
                 var contactDto = new SalesforceContactDTO
                 {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
+                    LastName = model.Name, // Use Name as LastName since it's required
                     Email = model.Email,
-                    AccountId = null
+                    Phone = model.Phone,
+                    AccountId = accountId
                 };
-                var contactId = await salesforceService.CreateContactAsync(contactDto, token);
-                model.ResultMessage = $"Successfully created Salesforce contact";
+                await salesforceService.CreateContactAsync(contactDto, token);
+                model.ResultMessage += " and contact.";
             }
             catch (Exception ex)
             {
                 var errorMsg = ex.Message;
                 if (ex.InnerException != null)
                     errorMsg += " | Inner: " + ex.InnerException.Message;
-                model.ResultMessage = $"Error creating Salesforce contact: {errorMsg}";
+                model.ResultMessage = $"Error creating Salesforce account/contact: {errorMsg}";
             }
-            return View("SyncToSalesforce", (accountModel, model));
+            return View("SyncToSalesforce", model);
         }
     }
 }
