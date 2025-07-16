@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using Iforms.BLL.DTOs;
 using static Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType;
 using static Iforms.DAL.Entity_Framework.Table_Models.Enums;
+using Microsoft.AspNetCore.Cors;
 
 namespace Iforms.MVC.Controllers
 {
+    [EnableCors("AllowAllOrigins")]
     [ApiController]
     [Route("api/aggregated-results")]
     public class AggregatedResultsApiController : ControllerBase
@@ -47,6 +49,24 @@ namespace Iforms.MVC.Controllers
             });
         }
 
+        [HttpGet("templates")]
+        public IActionResult GetUserTemplates()
+        {
+            var userId = GetUserIdFromToken();
+            if (userId == null)
+                return Unauthorized(new { error = "Invalid or missing API token" });
+            var templates = templateService.GetUserTemplates(userId.Value);
+            var result = templates.Select(t => new {
+                t.Id,
+                t.Title,
+                t.Description,
+                t.IsPublic,
+                t.CreatedAt,
+                t.CreatedBy
+            }).ToList();
+            return Ok(new { templates = result });
+        }
+
         private int? GetUserIdFromToken()
         {
             var header = Request.Headers["Authorization"].FirstOrDefault();
@@ -55,26 +75,91 @@ namespace Iforms.MVC.Controllers
             return (token == null || token.IsRevoked) ? null : token.UserId;
         }
 
-        private object Aggregate(QuestionDTO q, List<FormDTO> forms)
+        private object Aggregate(QuestionDTO question, List<FormDTO> forms)
         {
-            var answers = forms.SelectMany(f => f.Answers ?? new List<AnswerDTO>()).Where(a => a.QuestionId == q.Id).ToList();
-            bool IsType(QuestionType t) => q.QuestionType == t;
+            var answers = forms
+                .SelectMany(f => f.Answers ?? new List<AnswerDTO>())
+                .Where(a => a.QuestionId == question.Id)
+                .ToList();
+
+            return question.QuestionType switch
+            {
+                QuestionType.Number => AggregateNumber(question, answers),
+                QuestionType.Text or QuestionType.LongText => AggregateText(question, answers),
+                QuestionType.Checkbox => AggregateCheckbox(question, answers),
+                QuestionType.FileUpload or QuestionType.Date => AggregateMetaOnly(question),
+                _ => AggregateMetaOnly(question)
+            };
+        }
+
+        private object AggregateNumber(QuestionDTO question, List<AnswerDTO> answers)
+        {
+            var numberAnswers = answers
+                .Where(a => a.Number.HasValue)
+                .Select(a => a.Number.Value)
+                .ToList();
             return new
             {
-                QuestionId = q.Id,
-                QuestionTitle = q.QuestionTitle,
-                QuestionType = q.QuestionType.ToString(),
-                AnswerCount = answers.Count,
-                NumberAverage = IsType(Number) && answers.Any(a => a.Number.HasValue) ? (double?)answers.Where(a => a.Number.HasValue).Average(a => a.Number.Value) : null,
-                NumberMin = IsType(Number) && answers.Any(a => a.Number.HasValue) ? (int?)answers.Where(a => a.Number.HasValue).Min(a => a.Number.Value) : null,
-                NumberMax = IsType(Number) && answers.Any(a => a.Number.HasValue) ? (int?)answers.Where(a => a.Number.HasValue).Max(a => a.Number.Value) : null,
-                MostPopularAnswers = (IsType(Text) || IsType(LongText)) ? answers.Select(a => a.Text ?? a.LongText)
-                .Where(s => !string.IsNullOrWhiteSpace(s)).GroupBy(t => t).OrderByDescending(g => g.Count()).Take(3).Select(g => new { Answer = g.Key, Count = g.Count() }).ToList() : null,
-                CheckboxTrueCount = IsType(Checkbox) ? (int?)answers.Count(a => a.Checkbox == true) : null,
-                CheckboxFalseCount = IsType(Checkbox) ? (int?)answers.Count(a => a.Checkbox == false) : null,
-                DateMin = IsType(Date) && answers.Any(a => a.Date.HasValue) ? (System.DateTime?)answers.Where(a => a.Date.HasValue).Min(a => a.Date.Value) : null,
-                DateMax = IsType(Date) && answers.Any(a => a.Date.HasValue) ? (System.DateTime?)answers.Where(a => a.Date.HasValue).Max(a => a.Date.Value) : null
+                QuestionId = question.Id,
+                QuestionTitle = question.QuestionTitle,
+                QuestionType = question.QuestionType.ToString(),
+                AnswerCount = numberAnswers.Count,
+                NumberAverage = numberAnswers.Any() ? (double?)numberAnswers.Average() : null,
+                NumberMin = numberAnswers.Any() ? (int?)numberAnswers.Min() : null,
+                NumberMax = numberAnswers.Any() ? (int?)numberAnswers.Max() : null
             };
+        }
+
+        private object AggregateText(QuestionDTO question, List<AnswerDTO> answers)
+        {
+            var textAnswers = answers
+                .Select(a => a.Text ?? a.LongText)
+                .Where(s => !string.IsNullOrWhiteSpace(s));
+            return new
+            {
+                QuestionId = question.Id,
+                QuestionTitle = question.QuestionTitle,
+                QuestionType = question.QuestionType.ToString(),
+                MostPopularAnswers = GetMostPopularAnswers(textAnswers)
+            };
+        }
+
+        private object AggregateCheckbox(QuestionDTO question, List<AnswerDTO> answers)
+        {
+            // Collect all selected options from comma-separated Text values
+            var allSelectedOptions = answers
+                .Where(a => !string.IsNullOrWhiteSpace(a.Text))
+                .SelectMany(a => a.Text.Split(',', System.StringSplitOptions.RemoveEmptyEntries | System.StringSplitOptions.TrimEntries))
+                .ToList();
+
+            return new
+            {
+                QuestionId = question.Id,
+                QuestionTitle = question.QuestionTitle,
+                QuestionType = question.QuestionType.ToString(),
+                MostPopularAnswers = GetMostPopularAnswers(allSelectedOptions)
+            };
+        }
+
+        private object AggregateMetaOnly(QuestionDTO question)
+        {
+            return new
+            {
+                QuestionId = question.Id,
+                QuestionTitle = question.QuestionTitle,
+                QuestionType = question.QuestionType.ToString(),
+            };
+        }
+
+        private List<object> GetMostPopularAnswers(IEnumerable<string> answerStrings)
+        {
+            return answerStrings
+                .GroupBy(ans => ans)
+                .OrderByDescending(g => g.Count())
+                .Take(3)
+                .Select(g => new { Answer = g.Key, Count = g.Count() })
+                .Cast<object>()
+                .ToList();
         }
     }
 } 

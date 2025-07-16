@@ -251,12 +251,12 @@
                 @switch (question.QuestionType)
                 {
                     case Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType.Text:
-                        <textarea 
+                        <input 
                             name="Answers[@questionIndex].Text" 
-                            class="form-control" 
-                            rows="4" 
+                            class="form-control"
+                            type="text"
                             placeholder="Enter your answer here..."
-                            @(question.IsMandatory ? "required" : null)></textarea>
+                            @(question.IsMandatory ? "required" : null)></input>
                         break;
                     case Iforms.DAL.Entity_Framework.Table_Models.Enums.QuestionType.LongText:
                         <textarea 

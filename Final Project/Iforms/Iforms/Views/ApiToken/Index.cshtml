@@ -3,58 +3,84 @@
     ViewBag.Title = "API Tokens";
 }
 <h2>API Tokens</h2>
-<div class="mb-3">
-    <form asp-action="Create" method="post" class="d-inline">
-        <input type="text" name="name" placeholder="Token name (optional)" class="form-control d-inline" style="width: 250px; display: inline-block;" />
-        <button type="submit" class="btn btn-primary">Generate New Token</button>
-    </form>
+<div class="navbar navbar-expand-lg navbar-light bg-secondary-subtle mb-3">
+    <button id="revokeSelected" class="btn btn-outline-danger"><i class="bi bi-x-circle-fill"></i> Revoke</button>
 </div>
-<table class="table table-bordered table-striped">
+<form id="tokenListForm">
+<table class="table table-bordered">
     <thead>
         <tr>
+            <th><input type="checkbox" id="selectAll" title="Select/Deselect all"></th>
             <th>Name</th>
             <th>Token</th>
             <th>Status</th>
             <th>Created At</th>
-            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var token in Model)
         {
-            <tr>
+            <tr class="token-row" data-token-id="@token.Id" style="cursor:pointer;">
+                <td><input type="checkbox" class="select-token" value="@token.Id"></td>
                 <td>@token.Name</td>
                 <td>
-                    @if (!token.IsRevoked)
-                    {
-                        <span style="font-family:monospace;">@token.Key</span>
-                    }
-                    else
-                    {
-                        <span class="text-muted">(revoked)</span>
-                    }
+                    <span style="font-family:monospace;">@token.Key</span>
                 </td>
                 <td>
                     @if (token.IsRevoked)
                     {
-                        <span class="badge bg-danger">Revoked</span>
+                        <span>Revoked</span>
                     }
                     else
                     {
-                        <span class="badge bg-success">Active</span>
+                        <span>Active</span>
                     }
                 </td>
                 <td>@token.CreatedAt.ToString("g")</td>
-                <td>
-                    @if (!token.IsRevoked)
-                    {
-                        <form asp-action="Revoke" method="post" style="display:inline;">
-                            <input type="hidden" name="id" value="@token.Id" />
-                            <button type="submit" class="btn btn-warning btn-sm">Revoke</button>
-                        </form>
-                    }
-                </td>
             </tr>
         }
     </tbody>
-</table> 
+</table>
+</form>
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectAll = document.getElementById('selectAll');
+            const tokenCheckboxes = document.querySelectorAll('.select-token');
+
+            selectAll.addEventListener('change', () => {
+                tokenCheckboxes.forEach(cb => cb.checked = selectAll.checked);
+            });
+
+            document.getElementById('revokeSelected').addEventListener('click', async () => {
+                const tokenIds = [...document.querySelectorAll('.select-token:checked')]
+                    .map(el => parseInt(el.value));
+                if (!tokenIds.length) {
+                    toastr.error('Please select at least one token.');
+                    return;
+                }
+                if (!confirm('Are you sure you want to revoke the selected tokens?')) {
+                    return;
+                }
+                try {
+                    const response = await fetch('/ApiToken/RevokeBatch', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(tokenIds)
+                    });
+                    const result = await response.json();
+                    if (result.success) {
+                        toastr.success(result.message);
+                        setTimeout(() => location.reload(), 1000);
+                    } else {
+                        toastr.error(result.message);
+                    }
+                } catch {
+                    toastr.error('Action failed. Please try again.');
+                }
+            });
+        });
+    </script>
+} 
