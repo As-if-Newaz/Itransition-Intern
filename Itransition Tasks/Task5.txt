@@ -1,0 +1,90 @@
+OK, here is a task #5 for you
+
+For every group: use your language.
+
+Implement a Web-application that can help to test book store application testing. In general, you need to geerate fake book information. Here is what you need to implement.
+
+The single app page allows to:
+select language and region (at least 3 different), for example, English (USA), German (Germany), Japanese (Japan), or anything you prefer;
+set you own seed value and ability to generate a random seed;
+specify the average number of likes per book (slider with the range from 0 to 10 with possibly fractional values, e.g., 3.7);
+specify the average number of reviews per book (number field with possibly fractional values, e.g., 4.7).
+p.lebedev
+ pinned a message to this channel. See all pinned messages. — 5/26/2025 11:23 AM
+p.lebedev — 5/26/2025 11:23 AM
+If the user changes anything, the table below automatically (dynamically) updates (20 records are -re-generated, updated books are shown from the first).
+
+It's necessary to support infinite scrolling in the table (you show 20 records and if the user scroll down, you add next 10 records below — add new so called "page" = "batch of books"). Infinite scrolling is not paging.
+
+The table show contain the following fields:
+Index (1, 2, 3, ...);
+Random ISBN;
+Random title;
+Random author or authors;
+Random publisher.
+
+Language of the title, author, review, etc. should be related to the selected language/region. You need to generate random data that looks somehow realistically in corresponding language. 
+
+What is fractional number of review or likes? The end user specify number of likes and review PER SINGLE BOOK. If reviews = 0, there are no reviews at all. If reviews = 0.5, every book contains a single review with probability 0.5 (one review per two books). 10 reviews results in 10 reviews in every record.
+
+All 4 parameters (region, seed, likes, reviews) are independent, when user change one of them, other stay the same, but, of course, corresponding content changes (changing likes/reatings only changes like/rating amount; changing seed or region changes titles, authors, ISBNs, etc.). 
+Each record should be expandable, when user clicks on it, the detailed information is shown, for example, random book cover image (with proper title and author rendered over some random backgroud), review texts and authors, etc.
+
+About seed.
+
+Of course, you do not store RANDOM data on the server.  Вut you have to generate data on the server, not in the browser. Browser connect to the single server that provides the single page or batch of data generated in memory. You don't need a database at all (well, you theoretically may use database for lookup tables, but you definitely don't have to, it's not a good approach in this case :)). 
+
+When the user change seed, you have to change generated data. It's important that the seed passed to RNG algorithm is combination of the user seed and batch-page number (so, you don't re-generate pages 1..9 when the user requests page 10 with the same settings). How do you combine entered seed and page number? It's not really important, some kind of sum should be enough. IMPORTANT: if I enter the same seed tomorrow I have to get the same data as today on all pages.
+
+Note, that changing seed changes the data, but the same seed values should result in the same data. Changing like and rating amount don't change "books", titles and authors stay the same (in other words, titles and authors depends only on seed value and record number).
+
+In case, if you don't use a 3rd-party libary (BUT IT'S HIGHLY RECOMMENDED TO USE SOME) you will need to use large enough lookup tables (much much more than 2 names and 10 titles), let's say hundreds of names, thousands of surnames, ~10000 titles, etc. 
+
+And again: data should look like as realistic as possible, but there is no need to make them sensible. 
+Application should work WITHOUT registration or/and authentication. Please, note that "looking nice and real" titles and covers will be graded higher (let's say that "Lorem ipsum" isn't cool enough)
+
+Optional requirements: 
+Add Export to CSV button (generate the number of pages which is displayed to user currently). You have to use ready CSV-formatter (DO NOT concatenate string by hands — e.g. titles easily can contain comma and semicolon of anything).
+Add alternative "Gallery View" (not instead of the table, but as an option).
+
+ABOUT TASK #5 
+
+About likes. Number of likes is always integer; it's the number of clicks on the hypothetical [Like] button. So, if users specify 1.2, they will get either 1 or 2 likes in each book (but 1 will be used four times as often).
+
+It may seem that you need to generate likes and reviews after all the books to preserve the books titles and authors when users changes the amount of likes or review. But here is the new very difficult concept for you: you can use multiple generators, and even seed them one from another.
+
+Please, note that the following code is structured wrongly, because two nested loops make this method too large, but I needed to compactify the example for the Discord post. Also note that this is only an illustration of the idea, not the solution for the task (e.g., reviewAmount in this example is the maximum review amount, not the average specified in the tasks). In other words, you cannot apply this code for your solution:
+var bookAmount = 3;
+var reviewAmount = 4; 
+var books = new Random(42); // Don't do that.
+foreach (var _ in Range(0, bookAmount)) {
+    Console.WriteLine("Book: {0}", books.Next());
+    var reviews = new Random(books.Next());
+    foreach (var i in Range(0, reviews.Next(reviewAmount))) {
+        Console.WriteLine("    Review #{0}: {1}", i, reviews.Next());
+    }
+}
+
+This way you get:
+Book: 1434747710
+    Review #0: 1594340376
+Book: 269548474
+    Review #0: 1279614100
+Book: 361709742
+    Review #0: 828178641
+    Review #1: 344652014
+But after changing reviewAmount to 8:
+Book: 1434747710
+    Review #0: 1594340376
+    Review #1: 1963118076
+Book: 269548474
+    Review #0: 1279614100
+    Review #1: 1312294264
+    Review #2: 128030795
+Book: 361709742
+    Review #0: 828178641
+    Review #1: 344652014
+    Review #2: 1014098444
+    Review #3: 175232726
+
+Note that you get the same "books" and even the reviews are only added, not totally changed.
